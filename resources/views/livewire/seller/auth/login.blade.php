@@ -3,12 +3,12 @@
         <aside class="c-new-login__sidebar c-new-login__sidebar--xs">
             <div class="c-new-login__sidebar-content">
                 <header class="c-new-login__sidebar-header">
-                    <a href="/seller/registration/" class="c-new-login__logo">
+                    {{-- <a href="/seller/registration/" class="c-new-login__logo">
                         <img src="https://seller.digikala.com/static/files/9eb66c4d.svg"
                              alt="Digikala marketplace seller center logo">
-                    </a>
+                    </a> --}}
 
-                    <h1 class="c-new-login__header">به مرکز فروشندگان دیجی‌کالا <br> خوش آمدید!</h1>
+                    <h1 class="c-new-login__header">به مرکز فروشندگان آتی یار <br> خوش آمدید!</h1>
                 </header>
 
                 <div class="c-new-login__sidebar-center">
@@ -30,7 +30,7 @@
                              alt="Digikala marketplace seller center logo">
                     </a>
 
-                    <h1 class="c-new-login__header">به مرکز فروشندگان دیجی‌کالا <br> خوش آمدید!</h1>
+                    <h1 class="c-new-login__header">به مرکز فروشندگان آتی یار <br> خوش آمدید!</h1>
                 </header>
             </div>
         </aside>
@@ -45,7 +45,7 @@
                     <a target="_blank" href="/fbs-courier/">ثبت رسید سفارش</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
-                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی دیجی‌کالا</a>
+                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی آتی یار</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
                     <a target="_blank" href="https://selleracademy.digikala.com/">مرکز آموزش فروشندگان</a>

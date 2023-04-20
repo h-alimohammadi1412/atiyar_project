@@ -6,7 +6,7 @@
 
                         </span>
         <input type="text" name="q"
-               placeholder="جستجو در دیجی‌کالا …"
+               placeholder="جستجو در آتی یار …"
                class="js-search-input"
                autocomplete="off"
                value=""

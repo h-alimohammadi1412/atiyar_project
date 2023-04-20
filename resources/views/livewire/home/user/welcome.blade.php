@@ -19,10 +19,10 @@
                         <img alt="DIGIKALA.COM" src="https://www.digikala.com/static/files/02371b3f.svg">
                     </div>
                     <div class="c-login__email-info-header">
-                        به دیجی کالا خوش آمدید
+                        به آتی یار خوش آمدید
                     </div>
                     <p class="c-login__email-info-text">
-                        حساب کاربری شما در دیجی کالا ساخته شد. از خرید از میان بیش از ۲٬۰۰۰٬۰۰۰ تنوع کالا لذت ببرید
+                        حساب کاربری شما در آتی یار ساخته شد. از خرید از میان بیش از ۲٬۰۰۰٬۰۰۰ تنوع کالا لذت ببرید
                     </p>
                     <a href="/" class="o-btn js-user-register-confirmed o-btn--full-width o-btn--outlined-red-lg c-login__form-action">
                         ادامه

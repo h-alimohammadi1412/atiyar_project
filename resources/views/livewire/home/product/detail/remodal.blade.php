@@ -127,7 +127,7 @@
                 <div class="c-question__modal-action-desc">
                     ثبت پرسش به معنی موافقت با
                     <a href="/page/comments-rules/" target="_blank" class="o-link o-link--no-border o-link--sm">قوانین
-                        انتشار دیجی‌کالا</a> است.
+                        انتشار آتی یار</a> است.
                 </div>
                 <button type="submit" class="o-btn o-btn--contained-red-md js-add-question-submit ">ثبت پرسش
                 </button>

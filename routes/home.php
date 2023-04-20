@@ -162,3 +162,20 @@ Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
 //seller Login
 Route::get('/seller/account/forgotpassword/',App\Http\Livewire\Seller\Auth\Password::class)
     ->name('seller.password');
+
+
+//marketer register
+Route::get('/marketer/registration',App\Http\Livewire\Marketer\Auth\Register::class)
+    ->name('marketer.register');
+Route::get('/marketer/registration/email/{marketer}',App\Http\Livewire\Marketer\Auth\Register\Email::class)
+    ->name('marketer.register.email');
+
+Route::get('/marketer/registration/business-details/{marketer}',App\Http\Livewire\Marketer\Auth\Register\Detail::class)
+    ->name('marketer.register.detail');
+
+//marketer Login
+Route::get('/marketer/account/login',App\Http\Livewire\Marketer\Auth\Login::class)
+    ->name('marketer.login');
+//marketer Login
+Route::get('/marketer/account/forgotpassword/',App\Http\Livewire\Marketer\Auth\Password::class)
+    ->name('marketer.password');

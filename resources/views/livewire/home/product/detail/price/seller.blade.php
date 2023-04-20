@@ -53,7 +53,7 @@
                 class="c-seller-rating__title c-seller-rating__title--inBuyBox">
                 <div
                     class="js-sellerName c-product-info-box__dk-title-logo">
-                    دیجی‌کالا
+                    آتی یار
                 </div>
             </div>
             <div
@@ -176,7 +176,7 @@
                         class="c-seller-rating__title c-seller-rating__title--inBuyBox">
                         <div
                             class="js-sellerName c-product-info-box__dk-title-logo">
-                            دیجی‌کالا
+                            آتی یار
                         </div>
                         <a class="js-sellerUrl u-hidden"
                            href="/seller/۵a۵۲n/">صفحه فروشنده</a>

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('admin')->default(0);
             $table->string('staff')->default(0);
             $table->string('seller')->default(0);
+            $table->string('marketer')->default(0);
             $table->string('name')->nullable();
             $table->string('mobile')->nullable();
             $table->string('national_code')->nullable();

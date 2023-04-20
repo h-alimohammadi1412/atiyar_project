@@ -18,7 +18,7 @@ class PaymentController extends Controller
             alert()->message('شما قبلا این سفارش را خریداری کرده اید.');
             return back();
         }
-        $description ="خرید از سایت دیجی کالا - تست";
+        $description ="خرید از سایت آتی یار - تست";
         $callbackUrl ='http://127.0.0.1:8000/payment/zarrinpal/callback';
 //        $client = new SoapClient("https://www.zarinpal.com/pg/services/WebGate/wsdl", ['encoding' => 'UTF-8']);
         $MerchantID 	= "69a09ffa-8521-11ea-8c16-000c295eb8fc";

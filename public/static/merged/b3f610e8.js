@@ -2547,7 +2547,7 @@ var IndexAction = {
             messages: {
                 'feedback_survey[6]': {
                     'required': 'فیلد الزامی است',
-                    'dK_product': 'لطفا آدرس یا کد محصول دیجی‌کالا را وارد نمایید'
+                    'dK_product': 'لطفا آدرس یا کد محصول آتی یار را وارد نمایید'
                 },
             }
         });

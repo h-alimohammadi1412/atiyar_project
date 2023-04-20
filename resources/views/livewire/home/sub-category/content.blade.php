@@ -7,7 +7,7 @@
                     <li property="itemListElement" typeof="ListItem"><a property="item"
                                                                         typeof="WebPage"
                                                                         href="https://www.digikala.com"><span
-                                property="name">فروشگاه اینترنتی دیجی‌کالا</span></a>
+                                property="name">فروشگاه اینترنتی آتی یار</span></a>
                         <meta property="position" content="1">
                     </li>
                     <li property="itemListElement" typeof="ListItem">

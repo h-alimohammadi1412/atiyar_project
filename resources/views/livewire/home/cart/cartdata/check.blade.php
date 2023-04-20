@@ -47,18 +47,18 @@
                     @if($cart->productSeller->anbar ==1)
                         موجود در انبار فروشنده
                     @else
-                        موجود در انبار دیجی‌کالا
+                        موجود در انبار آتی یار
                     @endif
                     @if ($cart->productSeller->time == 0)
                         <span class="c-cart-item__product-sender-row"><span class="c-cart-item__product-sender-item
                                  c-cart-item__product-sender-item--digikala-no-leadtime">
-                        ارسال دیجی‌کالا
+                        ارسال آتی یار
                     </span></span>
                     @else
                         <span class="c-cart-item__product-sender-row">
                         <span class="c-cart-item__product-sender-item
                                  c-cart-item__product-sender-item--digikala-leadtime">
-                        ارسال دیجی‌کالا از
+                        ارسال آتی یار از
                             {{\App\Models\PersianNumber::translate($cart->productSeller->time)}}
                             روز کاری دیگر
                     </span>

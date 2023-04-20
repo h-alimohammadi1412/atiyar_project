@@ -1,7 +1,7 @@
 <div class="remodal c-remodal-account" data-remodal-id="login" role="dialog" aria-labelledby="modal1Title"
      aria-describedby="modal1Desc">
     <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
-    <div class="c-remodal-account__headline">ورود به دیجی‌کالا</div>
+    <div class="c-remodal-account__headline">ورود به آتی یار</div>
     <div class="c-remodal-account__content">
         <form class="c-form-account" id="loginFormModal">
             <div class="c-message-light c-message-light--info" id="login-form-msg"></div>
@@ -23,7 +23,7 @@
                     باش</label></div>
             <div class="c-form-account__row c-form-account__row--submit">
                 <div class="c-form-account__col">
-                    <button class="btn-login login-button-js">ورود به دیجی‌کالا</button>
+                    <button class="btn-login login-button-js">ورود به آتی یار</button>
                 </div>
             </div>
             <div class="c-form-account__link"><a data-snt-event="dkLoginClick"
@@ -40,7 +40,7 @@
             data-snt-params='{"type":"signup","site":"login-modal"}'
             href="users/login-register/index0f4c.html?_back=https://www.digikala.com/"
             class="btn-link-spoiler">ثبت‌نام
-            در دیجی‌کالا</a></div>
+            در آتی یار</a></div>
 </div>
 <div class="remodal c-remodal-loader" data-remodal-id="loader"
      data-remodal-options="hashTracking: false, closeOnOutsideClick: false" role="dialog"

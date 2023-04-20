@@ -1,6 +1,6 @@
 @yield('topcss')
 @if(Request::routeIs('home.index'))
-    <title></title>@else<title>@yield('title')| فروشگاه اینترنتی دیجی‌کالا</title>@endif
+    <title></title>@else<title>@yield('title')| فروشگاه اینترنتی آتی یار</title>@endif
 @include('layouts.modules')
 {!! SEO::generate() !!}
 @include('layouts.home.css')

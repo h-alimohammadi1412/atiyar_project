@@ -8,7 +8,7 @@
 {{--@endif--}}
                         </span>
                 <input type="text" name="q"
-                       placeholder="جستجو در دیجی‌کالا …"
+                       placeholder="جستجو در آتی یار …"
                        class="js-search-input"
                        autocomplete="off" wire:model.debounce.300ms="search">
                 <div class="c-search__results js-search-results">

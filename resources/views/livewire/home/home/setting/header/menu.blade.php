@@ -170,10 +170,10 @@ $header_7 = \App\Models\SiteHeader::get()[6];
                     <li class="c-navi-new-list__sublist-option c-navi-new-list__sublist-option--has-icon c-navi-new-list__sublist-option--gift-card">
                         <a href="search/category-dk-ds-gift-card/index.html"
                            class=" c-navi-new__big-display-title">
-                            کارت هدیه خرید از دیجی‌کالا
+                            کارت هدیه خرید از آتی یار
                         </a><a href="search/category-dk-ds-gift-card/index.html"
                                class=" c-navi-new__medium-display-title">
-                            کارت هدیه خرید از دیجی‌کالا
+                            کارت هدیه خرید از آتی یار
                         </a></li>
                     <li class="c-navi-new-list__sublist-option c-navi-new-list__sublist-option--has-icon c-navi-new-list__sublist-option--new-seller-product">
                         <a href="promotion-center/new-sellers-products/index.html"

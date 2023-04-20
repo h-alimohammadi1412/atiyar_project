@@ -231,7 +231,7 @@ return [
             'mode' => 'normal', // can be normal, sandbox, zaringate
             'merchantId' => env('MERCHECNT_ID_ZARRINPAL'),
             'callbackUrl' => env('ZARRINPAL_CALLBACK'),
-            'description' => 'خرید از سایت دیجی کالا',
+            'description' => 'خرید از سایت آتی یار',
         ],
         'zibal' => [
             /* normal api */

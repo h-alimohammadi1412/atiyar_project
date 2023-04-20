@@ -116,7 +116,7 @@
         <div class="c-question__empty-bar">
             <div class="c-question__terms">ثبت پرسش به معنی موافقت با <a href="/page/comments-rules/"
                     class="o-link o-link--sm o-link--no-border">قوانین
-                    انتشار دیجی‌کالا</a> است.
+                    انتشار آتی یار</a> است.
             </div>
             <div>
                 <button type="button" class="o-btn o-btn--outlined-red-md js-cancel-add-answer">انصراف</button>
@@ -149,7 +149,7 @@
                 <div class="c-question__modal-action-desc">
                     ثبت پرسش به معنی موافقت با
                     <a href="/page/comments-rules/" target="_blank" class="o-link o-link--no-border o-link--sm">قوانین
-                        انتشار دیجی‌کالا</a> است.
+                        انتشار آتی یار</a> است.
                 </div>
                 <button type="submit" class="o-btn o-btn--contained-red-md js-add-question-submit disabled">ثبت پرسش
                 </button>

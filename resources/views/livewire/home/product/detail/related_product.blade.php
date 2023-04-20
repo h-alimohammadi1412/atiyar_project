@@ -569,7 +569,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A10s SM-A107F/DS دو سیم کارت
@@ -624,7 +624,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A20s SM-A207F/DS دو سیم کارت
@@ -679,7 +679,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A12 SM-A125F/DS دو سیم کارت ظرفیت
@@ -734,7 +734,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A11 SM-A115F/DS دو سیم کارت ظرفیت
@@ -789,7 +789,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy S20 FE SM-G780 دو سیم کارت ظرفیت
@@ -844,7 +844,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A01 SM-A015F/DS دو سیم کارت ظرفیت
@@ -899,7 +899,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A02s SM-A025F/DS دو سیم کارت
@@ -954,7 +954,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A02s SM-A025F/DS دو سیم کارت
@@ -1009,7 +1009,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy S21 Ultra 5G SM-G998B/DS دو سیم
@@ -1064,7 +1064,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A11 SM-A115F/DS دو سیم کارت ظرفیت
@@ -1119,7 +1119,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل شیائومی مدل POCO M3 M2010J19CG دو سیم‌ کارت ظرفیت 64
@@ -1173,7 +1173,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل شیائومی مدل POCO X3 M2007J20CG دو سیم‌ کارت ظرفیت
@@ -1228,7 +1228,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A02 SM-A022F/DS دو سیم کارت ظرفیت

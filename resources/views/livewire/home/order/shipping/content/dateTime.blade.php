@@ -41,7 +41,7 @@
                     {{\App\Models\PersianNumber::translate($orders->count())}}
                     کالا
                  </span><span class="c-checkout-time-table__shipping-lead-time">
-                                            موجود در انبار دیجی‌کالا
+                                            موجود در انبار آتی یار
                                     </span></div>
                 </div>
                 <div class="c-checkout-pack__sub-header ">

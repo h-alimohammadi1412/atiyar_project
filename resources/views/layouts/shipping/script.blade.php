@@ -96,12 +96,12 @@
 
 
                     <div class="c-cart-item__product-data c-cart-item__product-data--seller">
-                        دیجی‌کالا
+                        آتی یار
                     </div>
 
                     <div class="c-cart-item__product-data
                 c-cart-item__product-data--lead-time">
-                        موجود در انبار دیجی‌کالا
+                        موجود در انبار آتی یار
                         <span class="c-cart-item__product-sender-row">
                             </span>
                     </div>
@@ -163,7 +163,7 @@
 
                     <div class="c-cart-item__product-data
                 c-cart-item__product-data--lead-time">
-                        موجود در انبار دیجی‌کالا
+                        موجود در انبار آتی یار
                         <span class="c-cart-item__product-sender-row">
                             </span>
                     </div>
@@ -349,7 +349,7 @@
     <div class="remodal c-remodal-account remodal-is-initialized remodal-is-closed" data-remodal-id="login"
          role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc" tabindex="-1">
         <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
-        <div class="c-remodal-account__headline">ورود به دیجی‌کالا</div>
+        <div class="c-remodal-account__headline">ورود به آتی یار</div>
         <div class="c-remodal-account__content">
             <form class="c-form-account" id="loginFormModal" novalidate="novalidate">
                 <div class="c-message-light c-message-light--info" id="login-form-msg"></div>
@@ -371,7 +371,7 @@
                         باش</label></div>
                 <div class="c-form-account__row c-form-account__row--submit">
                     <div class="c-form-account__col">
-                        <button class="btn-login login-button-js">ورود به دیجی‌کالا</button>
+                        <button class="btn-login login-button-js">ورود به آتی یار</button>
                     </div>
                 </div>
                 <div class="c-form-account__link"><a data-snt-event="dkLoginClick"
@@ -387,7 +387,7 @@
                 data-snt-event="dkLoginClick"
                 data-snt-params="{&quot;type&quot;:&quot;signup&quot;,&quot;site&quot;:&quot;login-modal&quot;}"
                 href="/users/login-register/?_back=https://www.digikala.com/shipping/" class="btn-link-spoiler">ثبت‌نام
-                در دیجی‌کالا</a></div>
+                در آتی یار</a></div>
     </div>
 </div>
 <div class="remodal-wrapper remodal-is-closed" style="display: none;">

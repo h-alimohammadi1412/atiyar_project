@@ -48,7 +48,7 @@ class IndexUpdate extends Component
                 'user_email' =>$seller->email,
                 'user_mobile' =>$seller->mobile,
                 'title' =>'سفارش محصول شما تحویل داده شد',
-                'text' =>'سفارش محصولی در سایت دیجی کالا تحویل داده شد',
+                'text' =>'سفارش محصولی در سایت آتی یار تحویل داده شد',
                 'code' =>'سفارش با موفقیت تحویل داده شد',
             ]);
 
@@ -59,7 +59,7 @@ class IndexUpdate extends Component
                 'user_email' =>$this->order->user->email,
                 'user_mobile' =>$this->order->user->mobile,
                 'title' =>'سفارش محصول شما تحویل داده شد',
-                'text' =>'سفارش محصولی در سایت دیجی کالا تحویل داده شد',
+                'text' =>'سفارش محصولی در سایت آتی یار تحویل داده شد',
                 'code' =>'سفارش با موفقیت تحویل داده شد',
             ]);
 

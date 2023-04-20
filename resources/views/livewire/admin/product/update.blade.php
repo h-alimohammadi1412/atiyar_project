@@ -170,7 +170,7 @@
                                     <input id="option10" type="checkbox" wire:model.lazy="product.shipment"
                                            name="shipment"
                                            class="form-control">
-                                    <label for="option10">موجود در انبار دیجی کالا:</label>
+                                    <label for="option10">موجود در انبار آتی یار:</label>
                                 </div>
                             </div>
                         </div>

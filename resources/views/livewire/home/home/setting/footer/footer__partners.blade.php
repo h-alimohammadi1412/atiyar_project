@@ -8,7 +8,7 @@
                data-event="footer_links" data-event-category="footer_section"
                data-event-label="link: {{$page->link}} - current_page: /"><img
                     data-src="/storage/{{$page->img}}" loading="lazy"
-                    alt="مجله اینترنتی دیجی‌کالا مگ"
+                    alt="مجله اینترنتی آتی یار مگ"
                     src="/storage/{{$page->img}}"></a></li>
         @endforeach
         @endforeach

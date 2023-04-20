@@ -169,7 +169,7 @@ class Index extends Component
             'user_email' => $pro->user->email,
             'user_mobile' => $pro->user->mobile,
             'title' => 'محصول ارسالی شما پذیرفته شد',
-            'text' => 'محصول ارسالی شما در دیجی کالا پذیرفته شد',
+            'text' => 'محصول ارسالی شما در آتی یار پذیرفته شد',
             'code' => 'محصول شما پذیرفته  شد',
         ]);
 

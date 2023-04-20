@@ -13,6 +13,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected $namespaceAdmin = '';
     protected $namespaceSeller = '';
+    protected $namespaceMarketer = '';
     /**
      * The path to the "home" route for your application.
      *
@@ -59,6 +60,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('seller')
                 ->namespace($this->namespaceSeller)
                 ->group(base_path('routes/seller.php'));
+            Route::middleware(['web'])
+                ->prefix('marketer')
+                ->namespace($this->namespaceMarketer)
+                ->group(base_path('routes/marketer.php'));
+            // Route::group([],base_path('routes/marketer.php'));    
         });
     }
 

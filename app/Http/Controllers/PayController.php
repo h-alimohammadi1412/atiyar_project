@@ -105,7 +105,7 @@ class PayController extends Controller
                 $code = random_int(10000, 99999);
                 $client = new KavenegarApi(env('KAVENEGAR_CLIENT_API'));
                 $client->send(env('SENDER_MOBILE'), $seller->mobile,
-                    "  سفارش محصولی در سایت دیجی کالا برای شما ثبت شد");
+                    "  سفارش محصولی در سایت آتی یار برای شما ثبت شد");
 
                 SMS::create([
                     'code' => $code,
@@ -118,7 +118,7 @@ class PayController extends Controller
                 $code = random_int(10000, 99999);
                 $client = new KavenegarApi(env('KAVENEGAR_CLIENT_API'));
                 $client->send(env('SENDER_MOBILE'), $Admin->mobile,
-                    "  سفارش محصولی در سایت دیجی کالا برای شما ثبت شد");
+                    "  سفارش محصولی در سایت آتی یار برای شما ثبت شد");
 
                 SMS::create([
                     'code' => $code,
@@ -132,7 +132,7 @@ class PayController extends Controller
                     'user_email' =>$seller->email,
                     'user_mobile' =>$seller->mobile,
                     'title' =>'سفارش محصولی در سایت  برای شما ثبت شد',
-                    'text' =>'سفارش محصولی در سایت دیجی کالا برای شما ثبت شد',
+                    'text' =>'سفارش محصولی در سایت آتی یار برای شما ثبت شد',
                     'code' =>'سفارش با موفقیت پرداخت شد',
                 ]);
 

@@ -41,7 +41,7 @@
                                                                      id="incredible-notification-param-2"><span
                                             class="c-ui-checkbox__check"></span></label></li>
                                 <li><label class="c-form-notification__label" for="incredible-notification-param-3">سیستم
-                                        پیام شخصی دیجی‌کالا</label><label class="c-ui-checkbox"><input type="checkbox"
+                                        پیام شخصی آتی یار</label><label class="c-ui-checkbox"><input type="checkbox"
                                                                                                        value="1"
                                                                                                        name="observed[notification]"
                                                                                                        checked="checked"

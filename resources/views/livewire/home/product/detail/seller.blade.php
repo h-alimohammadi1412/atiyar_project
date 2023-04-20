@@ -47,7 +47,7 @@
                             <div class="c-table-suppliers__seller-wrapper"><p
                                     class="c-table-suppliers__seller-name"><a
                                         data-snt-event="dkProductPageClick"
-                                        data-snt-params="{&quot;item&quot;:&quot;seller-in-list&quot;,&quot;item_option&quot;:&quot;دیجی‌کالا&quot;}"
+                                        data-snt-params="{&quot;item&quot;:&quot;seller-in-list&quot;,&quot;item_option&quot;:&quot;آتی یار&quot;}"
                                         href="/seller/5a52n/">
                                         {{$vendor_name->name  ?? 'None'}}
                                     </a></p>
@@ -182,7 +182,7 @@
                             <div
                                 class="c-table-suppliers__sender c-table-suppliers__sender--digikala no-lead-time">
                                 @if($seller->time ==0)
-                                    ارسال از انبار دیجی کالا
+                                    ارسال از انبار آتی یار
                                 @else
                                     {{\App\Models\PersianNumber::translate($seller->time)}}
                                     روز کاری
@@ -223,7 +223,7 @@
                             <div class="c-table-suppliers__seller-wrapper"><p
                                     class="c-table-suppliers__seller-name"><a
                                         data-snt-event="dkProductPageClick"
-                                        data-snt-params="{&quot;item&quot;:&quot;seller-in-list&quot;,&quot;item_option&quot;:&quot;دیجی‌کالا&quot;}"
+                                        data-snt-params="{&quot;item&quot;:&quot;seller-in-list&quot;,&quot;item_option&quot;:&quot;آتی یار&quot;}"
                                         href="/seller/5a52n/">
                                         {{$vendor_name->name  ?? 'None'}}
                                     </a></p>
@@ -358,7 +358,7 @@
                             <div
                                 class="c-table-suppliers__sender c-table-suppliers__sender--digikala no-lead-time">
                                 @if($seller->time ==0)
-                                    ارسال از انبار دیجی کالا
+                                    ارسال از انبار آتی یار
                                 @else
                                     {{\App\Models\PersianNumber::translate($seller->time)}}
                                     روز کاری

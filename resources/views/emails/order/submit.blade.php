@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>مرکز فروشندگان دیجی‌کالا - ثبت سفارش
+    <title>مرکز فروشندگان آتی یار - ثبت سفارش
     </title>
 </head>
 <body>
@@ -175,7 +175,7 @@
                     <span>در وب‌سایت مراجعه کنید.</span>
                 </div>
                 <div style="font-size:12px;margin-bottom:8px;" class="yiv5106906908c-invoice-email__extra-text">
-                    <span> در صورت نياز ميتوانيد راهنماي استفاده از سرويس خدمات پس از فروش دیجی‌کالا را از </span>
+                    <span> در صورت نياز ميتوانيد راهنماي استفاده از سرويس خدمات پس از فروش آتی یار را از </span>
                     <a rel="nofollow noopener noreferrer" target="_blank"
                        href="https://admin.digikala.com/static/files/0ad4aff8.pdf"><span
                             style="text-decoration:underline;color:#00bfd6;"

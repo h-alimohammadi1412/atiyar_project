@@ -127,7 +127,7 @@ where('parent',0)->get() as $review)
                         <span class="c-comments__detail">
                         {{\App\Models\PersianNumber::translate(jdate($review->created_at)->format(' %d %B %Y'))}}
                         </span>
-                        <span class="c-comments__detail">کاربر دیجی‌کالا</span>
+                        <span class="c-comments__detail">کاربر آتی یار</span>
                     </div>
                     <div class="c-comments__separator c-comments__separator--half"></div>
                     <div class="c-comments__row">

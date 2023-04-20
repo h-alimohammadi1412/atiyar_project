@@ -297,7 +297,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 محافظ صفحه نمایش مدل ce_r مناسب برای گوشی موبایل سامسونگ Galaxy
@@ -350,7 +350,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 کاور 360 درجه جی کی کی مدل GK-A21S-21S مناسب برای گوشی موبایل
@@ -403,7 +403,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 کاور مدل HF مناسب برای گوشی موبایل سامسونگ Galaxy A21s
@@ -455,7 +455,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 کاور مدل DEF02 مناسب برای گوشی موبایل سامسونگ Galaxy A21s
@@ -507,7 +507,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A01 Core SM-A013G/DS دو سیم کارت
@@ -561,7 +561,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 محافظ صفحه نمایش سرامیکی سومگ مدل Ruby-9 مناسب برای گوشی موبایل
@@ -614,7 +614,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 کاور مدل DC211 مناسب برای گوشی موبایل سامسونگ Galaxy A21s
@@ -666,7 +666,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 کاور مدل Sil-0021s مناسب برای گوشی موبایل سامسونگ Galaxy A21s
@@ -718,7 +718,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A12 SM-A125F/DS دو سیم کارت ظرفیت
@@ -773,7 +773,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 محافظ لنز دوربین مدل SM21s مناسب برای گوشی موبایل سامسونگ Galaxy
@@ -826,7 +826,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 محافظ لنز دوربین اسپایدر مدل SDS-001 مناسب برای گوشی موبایل
@@ -885,7 +885,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 کاور مدل ME-001 مناسب برای گوشی موبایل سامسونگ Galaxy A21s
@@ -937,7 +937,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 محافظ پشت گوشی مدل GL-005 مناسب برای گوشی موبایل سامسونگ Galaxy
@@ -995,7 +995,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 کاور مدل CO508 طرح گوزن مناسب برای گوشی موبایل سامسونگ Galaxy
@@ -1048,7 +1048,7 @@
                             <div
                                 class="u-hidden c-product-box__title c-product-box__title--app-incredible js-ab-app-incredible-product u-hidden"><span
                                     class="c-product-box__title-special-sub">
-                    مشاهده و خرید این کالا تنها با اپلیکیشن دیجی‌کالا امکان‌پذیر می‌باشد
+                    مشاهده و خرید این کالا تنها با اپلیکیشن آتی یار امکان‌پذیر می‌باشد
                 </span></div>
                             <div class="c-product-box__title  js-ab-not-app-incredible-product">
                                 گوشی موبایل سامسونگ مدل Galaxy A71 SM-A715F/DS دو سیم‌کارت ظرفیت

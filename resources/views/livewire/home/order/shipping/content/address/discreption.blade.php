@@ -62,7 +62,7 @@
         <div class="c-checkout-contact__dropoff-address-action-container"><p>
                 با انتخاب یکی از آدرس‌های دریافت حضوری می‌توانید کالاهای این سفارش
                 را به
-                صورت حضوری از مراکز دیجی‌کالا دریافت نمایید.
+                صورت حضوری از مراکز آتی یار دریافت نمایید.
             </p>
             <button type="button" class="o-link o-link--sm o-link--has-arrow"
                     id="change-to-dropoff-address">

@@ -48,14 +48,14 @@
 
                         </div>
                         <button type="submit" class="o-btn o-btn--contained-red-lg c-login__form-action">
-                            ورود به دیجی‌کالا
+                            ورود به آتی یار
                         </button>
                         <p class="c-login__footer">
-                            با ورود و یا ثبت نام در دیجی‌کالا شما
+                            با ورود و یا ثبت نام در آتی یار شما
                             <a href="/page/terms/" target="_blank">
                                 شرایط و قوانین
                             </a>
-                            استفاده از سرویس های سایت دیجی‌کالا و
+                            استفاده از سرویس های سایت آتی یار و
                             <a href="/page/privacy/" target="_blank">
                                 قوانین حریم خصوصی
                             </a>

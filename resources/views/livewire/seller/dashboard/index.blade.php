@@ -7,10 +7,10 @@
                     <h5 class="bold">سیستم گزارش گیری تخلف</h5>
                     <div class="c-modal--report-modal-content c-ui-modal__text-content">
                         <p class="c-ui--px-60 c-ui--mb-15">
-                            دیجی کالا همواره خواهان برقراری شفافیت کامل و رعایت اصول و استانداردهای اخلاقی در محیط کسب و کار خود بوده است. در این راستا، قصد داریم تا با پیاده‌سازی سیستم گزارشگری تخلف، گامی بلند در شفافیت هر چه بیشتر عملیات شرکت برداریم.
+                            آتی یار همواره خواهان برقراری شفافیت کامل و رعایت اصول و استانداردهای اخلاقی در محیط کسب و کار خود بوده است. در این راستا، قصد داریم تا با پیاده‌سازی سیستم گزارشگری تخلف، گامی بلند در شفافیت هر چه بیشتر عملیات شرکت برداریم.
                         </p>
                         <p class="c-ui--px-60 c-ui--mb-15">
-                            سیستم گزارشگری تخلف این امکان را برای شما فراهم می‌کند تا هرگونه تخلف یا تخطی از اصول و ضوابط کاری و اخلاقی که در عملیات دیجی‌کالا مشاهده می‌کنید، به شرکت گزارش کنید. گزارش شما می‌تواند بدون نام و به صورت ناشناس ارسال گردد، اما حتما می‌بایست حاوی اسناد و مدارک معتبر، جهت انجام رسیدگی باشد.
+                            سیستم گزارشگری تخلف این امکان را برای شما فراهم می‌کند تا هرگونه تخلف یا تخطی از اصول و ضوابط کاری و اخلاقی که در عملیات آتی یار مشاهده می‌کنید، به شرکت گزارش کنید. گزارش شما می‌تواند بدون نام و به صورت ناشناس ارسال گردد، اما حتما می‌بایست حاوی اسناد و مدارک معتبر، جهت انجام رسیدگی باشد.
                             توجه داشته باشید که فقط گزارشاتی که حاوی یک تخلف بوده و مدارک معتبر داشته باشد، مورد رسیدگی قرار خواهند گرفت.
                         </p>
                         <p class="c-ui--px-60 c-ui--mb-30">
@@ -422,7 +422,7 @@
                                         <div class="c-interactive-status__message uk-hidden">
                                             <div class="c-interactive-status__message-fade"></div>
                                             <div class="c-interactive-status__message-box">
-                                                <div class="c-interactive-status__message-description">شما باید در دوره آموزشی پنل فروشندگان دیجی‌کالا شرکت کنید</div>
+                                                <div class="c-interactive-status__message-description">شما باید در دوره آموزشی پنل فروشندگان آتی یار شرکت کنید</div>
                                                 <a class="c-interactive-status__message-action" href="/profile/new/display/" data-target="training-sign-up">ثبت نام</a>
                                             </div>
                                         </div>
@@ -575,7 +575,7 @@
                                         <div class="c-rating-chart c-rating-chart--condensed">
                                             <a href="/inventory/" class="c-rating-chart__details-bar">
                                                 <div class="c-rating-chart__description c-rating-chart__description--bar c-card__stat-description uk-inline">
-                                                    کالاهای فروش نرفته در انبار دیجی‌کالا
+                                                    کالاهای فروش نرفته در انبار آتی یار
                                                 </div>
                                                 <div class="c-rating-chart__details-value c-rating-chart__details-value--large">
                                                     ۰
@@ -753,7 +753,7 @@
                                         <a href="" class="c-rating-chart c-rating-chart--condensed">
                                             <div class="c-rating-chart__details-bar">
                                                 <div class="c-rating-chart__description c-rating-chart__description--bar c-card__stat-description uk-inline">
-                                                    کالاهای فروش رفته توسط سیستم تبلیغ در دیجی‌کالا
+                                                    کالاهای فروش رفته توسط سیستم تبلیغ در آتی یار
                                                 </div>
                                                 <div class="c-rating-chart__details-value c-rating-chart__details-value--large">
                                                     ۰

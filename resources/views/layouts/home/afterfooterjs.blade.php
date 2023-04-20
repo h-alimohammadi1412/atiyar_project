@@ -10,11 +10,11 @@
                     </button></form></div><div class="c-cro__bot-wrapper c-cro__bot-wrapper--with-pattern js-chat-bot u-hidden"><div class="c-cro__bot-header">
                     پشتیبانی آنلاین
                 </div><div class="c-cro__support-status-bar"><p>
-                        پیشتیبان هوش مصنوعی دیجی‌کالا
+                        پیشتیبان هوش مصنوعی آتی یار
                     </p><a class="c-wiki__trigger c-wiki c-wiki__holder js-dk-wiki-trigger"><div class="c-wiki__container js-dk-wiki is-right  "><div class="c-wiki__arrow"></div><p class="c-wiki__text">
-                                من ربات هوشمند گفت و گوی آنلاین دیجی‌کالا هستم و در حال حاضر در حال آموزش دیدن برای پاسخگویی بهتر و انتقال پیام شما به پاسخگوی مرتبط با مشکلتان هستم.
+                                من ربات هوشمند گفت و گوی آنلاین آتی یار هستم و در حال حاضر در حال آموزش دیدن برای پاسخگویی بهتر و انتقال پیام شما به پاسخگوی مرتبط با مشکلتان هستم.
                             </p></div></a></div><div class="c-cro__chat-body"><div class="js-chatbot-body"><div class="c-cro__chat-message c-cro__chat-message--dk"><p>
-                                به پشتیبانی هوشمند دیجی‌کالا خوش آمدید. لطفا سوال خود را بپرسید.
+                                به پشتیبانی هوشمند آتی یار خوش آمدید. لطفا سوال خود را بپرسید.
                             </p><span>
                                     پشتیبان هوش مصنوعی
                                 </span></div></div><div class="c-cro__feedback-section js-chatbot-feedback u-hidden"><p data-icon="Icon-Action-Question">آیا پاسخی که گرفتید مناسب بود؟</p><button type="button" class="js-chatbot-feedback-button" data-rate="1">بله</button><button type="button" class="js-chatbot-feedback-button" data-rate="-1">خیر</button></div></div><div class="c-cro__send-message"><textarea rows="2" class="js-chat-bot-text-area" placeholder="متن پیام خود را بنویسید ..."></textarea><button type="button" class="js-chat-bot-send-msg disabled">
@@ -25,7 +25,7 @@
                 {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Digikala - دیجی کالا",
+    "name": "Digikala - آتی یار",
     "image": "https://template.digi-kala.com/digikala/Image/Public/vtwo/pixel-perfect-final-v02-01.png",
     "@id": "https://www.digikala.com",
     "url": "https://www.digikala.com",

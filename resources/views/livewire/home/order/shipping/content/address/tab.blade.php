@@ -10,6 +10,6 @@
         آدرس‌های شما
     </div>
     <div class="o-box__tab js-ui-tab-pill" data-tab-pill-id="dropOff">
-        آدرس‌های مراکز دریافت دیجی‌کالا
+        آدرس‌های مراکز دریافت آتی یار
     </div>
 </div>

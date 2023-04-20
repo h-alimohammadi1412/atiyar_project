@@ -386,7 +386,7 @@
                                     نظر” موافقت خود را با <a href="/page/comments-rules/"
                                                              class="btn-link-spoiler"
                                                              target="_blank">قوانین
-                                        انتشار نظرات</a> در دیجی‌کالا اعلام می‌کنم.</p></div>
+                                        انتشار نظرات</a> در آتی یار اعلام می‌کنم.</p></div>
                             <div class="c-form-comment__col c-form-comment__col--cancellation"><a
                                     href="/product/dkp-{{$product->id}}/{{$product->link}}"
                                     class="btn-link-spoiler">انصراف و بازگشت »</a></div>
@@ -443,7 +443,7 @@
                                     href="https://www.digikala.com/page/comments-rules/"><span
                                         style="color:#2980b9">این صفحه</span></a></u><span
                                 style="color:#2980b9"> مطالعه کنید.</span></strong></p>
-                    <p>هرگونه نقد و نظر در خصوص سایت دیجی‌کالا،&nbsp;مشکلات&nbsp;دریافت خدمات و
+                    <p>هرگونه نقد و نظر در خصوص سایت آتی یار،&nbsp;مشکلات&nbsp;دریافت خدمات و
                         درخواست
                         کالا&nbsp;و نیز گزارش تخلف فروش (نظیر گزارش کالای غیراصل یا مغایر)&nbsp;را
                         با

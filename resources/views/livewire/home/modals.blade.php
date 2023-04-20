@@ -46,7 +46,7 @@
                                         <span
                                             class="c-ui-checkbox__check"></span></label></li>
                                 <li><label class="c-form-notification__label" for="notification-param-3">سیستم پیام شخصی
-                                        دیجی‌کالا</label><label class="c-ui-checkbox">
+                                        آتی یار</label><label class="c-ui-checkbox">
                                         <input type="checkbox" value="1"
                                                name="system"
                                                wire:model.defer="notification.system"

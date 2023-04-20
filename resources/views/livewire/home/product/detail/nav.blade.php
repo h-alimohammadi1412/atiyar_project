@@ -2,7 +2,7 @@
     <ul vocab="https://schema.org/" typeof="BreadcrumbList" class="c-breadcrumb">
         <li property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage"
                                                             href="/"><span
-                    property="name">دیجی‌کالا</span></a>
+                    property="name">آتی یار</span></a>
             <meta property="position" content="1">
         </li>
         <li property="itemListElement" typeof="ListItem">
@@ -40,7 +40,7 @@
         data-snt-event="dkProductPageClick"
         data-snt-params="{&quot;item&quot;:&quot;seller-registration&quot;,&quot;item_option&quot;:null}"
         data-event="seller_reg_link" data-event-category="product_page"
-        data-event-label="dkp: 3048126 - current_seller: دیجی‌کالا"
-        title="کالای خود را در دیجی‌کالا بفروشید" target="_blank">کالای خود را در دیجی‌کالا
+        data-event-label="dkp: 3048126 - current_seller: آتی یار"
+        title="کالای خود را در آتی یار بفروشید" target="_blank">کالای خود را در آتی یار
         بفروشید</a></div>
 </div>

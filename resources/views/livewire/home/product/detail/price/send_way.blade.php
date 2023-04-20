@@ -2,11 +2,11 @@
     <div
         class="c-product__seller-row-main c-product__seller-row-main--arrow-left">
                                                         <span
-                                                            class="c-product__delivery-warehouse js-provider-main-title c-product__delivery-warehouse--no-lead-time">موجود در انبار دیجی‌کالا</span>
+                                                            class="c-product__delivery-warehouse js-provider-main-title c-product__delivery-warehouse--no-lead-time">موجود در انبار آتی یار</span>
     </div>
     <ul class="c-line-bullet-list c-product__sender-list js-provider-list">
         <li class=""><span
-                class="c-line-bullet-list__item  c-line-bullet-list__item--digikala no-lead-time">ارسال دیجی‌کالا</span><span
+                class="c-line-bullet-list__item  c-line-bullet-list__item--digikala no-lead-time">ارسال آتی یار</span><span
                 class="js-ab-shipment-free-badge u-hidden free-badge">رایگان</span>
         </li>
     </ul>
@@ -22,15 +22,15 @@
             <div
                 class="c-shipment-info-box__row js-shipment-info-main-container">
                 <div class="c-shipment-info-box__row--title">
-                    ارسال توسط دیجی‌کالا
+                    ارسال توسط آتی یار
                     <span
                         class="js-ab-shipment-free-badge u-hidden">رایگان</span>
                 </div>
                 <div class="c-shipment-info-box__row--content">
                     این کالا پس از مدت زمان مشخص شده توسط فروشنده در
-                    انبار دیجی‌کالا تامین و آماده پردازش می‌گردد و
+                    انبار آتی یار تامین و آماده پردازش می‌گردد و
                     توسط
-                    پیک دیجی‌کالا در بازه انتخابی ارسال خواهد شد.
+                    پیک آتی یار در بازه انتخابی ارسال خواهد شد.
                     <p class="free-badge js-ab-shipment-free-badge u-hidden">
                         کالا‌هایی با قیمت بیش از ۳۰۰ هزار تومان به
                         صورت

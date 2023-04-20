@@ -24,7 +24,7 @@
     </div>
     <div
         class="c-mini-buy-box__row c-mini-buy-box__seller-digikala js-mini-digikala-seller">
-        دیجی‌کالا
+        آتی یار
     </div>
     <div
         class="c-mini-buy-box__row c-mini-buy-box__seller u-hidden js-mini-not-digikala-seller">
@@ -36,7 +36,7 @@
         گارانتی ۱۸ ماهه داریا همراه پایتخت
     </div>
     <div class="c-mini-buy-box__row c-mini-buy-box__stock ">
-        موجود در انبار دیجی‌کالا
+        موجود در انبار آتی یار
     </div>
     @if($productSeller_max_price_first != null)
     @if ($priceDate_min_price_first->discount_price == $productSeller_max_price_first->discount_price ?? $this->vendor_new->discount_price )
@@ -71,16 +71,16 @@
             class="o-btn o-btn--contained-red-lg c-product__add-to-cart-btn js-add-to-cart js-btn-add-to-cart js-mini-add-to-cart js-ab-product-action"
             data-product-id="3048126" data-variant="9832233" href="/cart/add/9832233/1/"
             data-event="add_to_cart" data-event-category="ecommerce"
-            data-event-label="price: 40980000 - seller: marketplace - seller_name: دیجی‌کالا - seller_rating: 0 - multiple_configs: True - position: 0">
+            data-event-label="price: 40980000 - seller: marketplace - seller_name: آتی یار - seller_rating: 0 - multiple_configs: True - position: 0">
             افزودن به سبد خرید
         </a>
         <div class="u-w-full js-ab-app-incredible-pdp-action u-hidden"><span
-                class=" c-product-gallery__application-only-user-label">تنها برای کاربران اپلیکیشن دیجی‌کالا</span><a
+                class=" c-product-gallery__application-only-user-label">تنها برای کاربران اپلیکیشن آتی یار</span><a
                 href="/landings/new-app/" target="_blank"
                 class="btn-add-to-cart btn-add-to-cart--outline btn-add-to-cart--full-width btn-add-to-cart--cta-icon btn-add-to-cart--navigate-to-application  js-app-incredible"
                 data-android="https://cafebazaar.ir/app/com.digikala/?l=fa"
                 data-ios="https://sibapp.com/applications/digikala" data-id="3048126">
-                مشاهده در اپلیکیشن دیجی‌کالا
+                مشاهده در اپلیکیشن آتی یار
             </a></div>
     </div>
 </div>
