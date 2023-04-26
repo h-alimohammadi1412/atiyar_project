@@ -107,7 +107,7 @@ return [
     | Example: for Laravel Vapor, it would be "/tmp/storage/bootstrap/cache/livewire-components.php".
     |
     */
-
+ 
     'manifest_path' => null,
 
 ];

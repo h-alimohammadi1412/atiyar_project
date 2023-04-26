@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Home\Home;
 use App\Models\FooterLinkTitle;
 use App\Models\NewsLetter;
 use App\Models\Notification;
+use App\Models\SMS;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -19,7 +20,6 @@ class Index extends Component
 
     public function render()
     {
-
         auth()->loginUsingId(1);
 
         $ip = Request::ip();

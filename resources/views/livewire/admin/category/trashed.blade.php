@@ -2,18 +2,7 @@
 <div>
     <div class="main-content" wire:init="loadCategory">
         <div class="tab__box">
-            <div class="tab__items">
-                <a class="tab__item is-active" href="/admin/category">دسته
-                    ها</a>
-                <a class="tab__item {{Request::routeIs('subcategory.index') ? 'is-active': '' }}"
-                   href="/admin/subcategory">زیر دسته ها</a>
-                <a class="tab__item {{Request::routeIs('childcategory.index') ? 'is-active': '' }}"
-                   href="/admin/childcategory">دسته های کودک</a>
-                <a class="tab__item {{Request::routeIs('categorylevel4.index') ? 'is-active': '' }}"
-                   href="/admin/categorylevel4">دسته های سطح 4 </a>
-                |
-                <a class="tab__item">جستجو: </a>
-
+            <div class="tab__items">    
                 <a class="t-header-search">
                     <form action="" onclick="event.preventDefault();">
                         <input wire:model.debounce.1000="search"
@@ -35,7 +24,7 @@
 
                         <thead role="rowgroup">
                         <tr role="row" class="title-row">
-                            <th>آیدی</th>
+                            <th>شناسه</th>
                             <th>تصویر دسته</th>
                             <th>عنوان دسته</th>
                             <th>نام دسته</th>
@@ -52,7 +41,7 @@
                                         <img src="/storage/{{$category->img}}" alt="img" width="100px">
                                     </td>
                                     <td><a href="">{{$category->title}}</a></td>
-                                    <td><a href="">{{$category->name}}</a></td>
+                                    <td><a href="">{{$category->en_name}}</a></td>
 
                                     <td>
                                         <a wire:click="deleteCategory({{$category->id}})" type="submit"

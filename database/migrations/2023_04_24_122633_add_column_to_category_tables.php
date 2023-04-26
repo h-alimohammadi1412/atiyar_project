@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('marketers', function (Blueprint $table) {
-            $table->string('seller')->default(0);
+        Schema::table('categories', function (Blueprint $table) {
+            $table->integer('parent_id');            
+            $table->string('search_url');            
+            $table->tinyInteger('notShow')->default(0);            
         });
     }
 
@@ -25,8 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('seller')->default(0);
+        Schema::table('category', function (Blueprint $table) {
+            //
         });
     }
 };

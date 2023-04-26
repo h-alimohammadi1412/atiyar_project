@@ -14,12 +14,13 @@ class Update extends Component
     public $status = null;
     protected $rules = [
         'category.title' => 'required|min:3',
-        'category.icon' => 'nullable',
-        'category.name' => 'required',
+        'category.img' => 'nullable',
+        'category.en_name' => 'required',
         'category.link' => 'required',
-        'category.description' => 'nullable',
-        'category.body' => 'nullable',
+        'category.description' => 'required',
         'category.status' => 'nullable',
+        'category.notShow' => 'nullable',
+        'category.parent_id' => 'required',
     ];
     public function categoryForm()
     {

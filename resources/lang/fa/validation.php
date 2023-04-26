@@ -145,6 +145,7 @@ return [
 
     'attributes' => [
         'name'                  => 'نام',
+        'en_name'                  => 'نام لاتین',
         'link'                  => 'لینک',
         'img'                  => 'تصویر',
         'username'              => 'نام کاربری',

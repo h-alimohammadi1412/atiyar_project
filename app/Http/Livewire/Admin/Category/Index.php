@@ -22,63 +22,65 @@ class Index extends Component
     protected $queryString = ['search'];
     public $readyToLoad = false;
     public Category $category;
+    public $category_id;
+
+
     public function mount()
     {
+        $id = request()->get('category_id');
+        $id === null ? $this->category_id = 0 : $this->category_id = $id;
         $this->category = new Category();
+        $this->category->parent_id = 0;
     }
+
     protected $rules = [
         'category.title' => 'required|min:3',
-        'category.icon' => 'nullable',
-        'category.name' => 'required',
+        'category.img' => 'nullable',
+        'category.en_name' => 'required',
         'category.link' => 'required',
         'category.description' => 'required',
-        'category.body' => 'required',
         'category.status' => 'nullable',
+        'category.notShow' => 'nullable',
+        'category.parent_id' => 'required',
+
     ];
 
-    public function updated($title)
-    {
-        $this->validateOnly($title);
-    }
     public function categoryForm()
     {
 
         $this->validate();
-
-        $category =  Category::query()->create([
+        $category = Category::create([
             'title' => $this->category->title,
-            'icon' => $this->category->icon,
-            'name' => $this->category->name,
+            'img' => $this->category->img,
+            'parent_id' => $this->category->parent_id,
+            'en_name' => $this->category->en_name,
             'link' => $this->category->link,
             'description' => $this->category->description,
-            'body' => $this->category->body,
-            'status' => $this->category->status ? true:false ,
+            'status' => $this->category->status ? true : false,
+            'notShow' => $this->category->status ? true : false,
         ]);
 
-        if ($this->img){
+        if ($this->img) {
             $category->update([
                 'img' => $this->uploadImage()
             ]);
         }
 
         $this->category->title = "";
-        $this->category->icon = "";
         $this->category->description = "";
-        $this->category->body = "";
-        $this->category->name = "";
+        $this->category->en_name = "";
         $this->category->link = "";
         $this->category->status = false;
         $this->img = null;
 
         Log::create([
-           'user_id' => auth()->user()->id,
-            'url' => 'افزودن دسته' .'-'. $this->category->title,
+            'user_id' => auth()->user()->id,
+            'url' => 'افزودن دسته' . '-' . $this->category->title,
             'actionType' => 'ایجاد'
         ]);
         $this->emit('toast', 'success', ' دسته با موفقیت ایجاد شد.');
 
     }
-
     public function uploadImage()
     {
         $year = now()->year;
@@ -92,48 +94,43 @@ class Index extends Component
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryDisable($id)
-    {
-        $category = Category::find($id);
-        $category->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت دسته' .'-'. $category->title,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت دسته با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
+    public function updateCategoryStatus($id)
     {
         $category = Category::find($id);
-        $category->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت دسته' .'-'. $category->title,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت دسته با موفقیت فعال شد.');
+        if ($category->status == 0) {
+            $category->update(['status' => 1]);
+            Log::create([
+                'user_id' => auth()->user()->id,
+                'url' => 'فعال کردن وضعیت دسته' . '-' . $category->title,
+                'actionType' => 'فعال'
+            ]);
+            $this->emit('toast', 'success', 'وضعیت دسته با موفقیت فعال شد.');
+        } else {
+            $category->update(['status' => 0]);
+            Log::create([
+                'user_id' => auth()->user()->id,
+                'url' => 'غیرفعال کردن وضعیت دسته' . '-' . $category->title,
+                'actionType' => 'غیرفعال'
+            ]);
+            $this->emit('toast', 'success', 'وضعیت دسته با موفقیت غیرفعال شد.');
+        }
+
     }
 
     public function deleteCategory($id)
     {
         $category = Category::find($id);
-        $subCategory = SubCategory::where('parent',$id)->first();
-        if ($subCategory == null){
+        $subCategory = SubCategory::where('parent', $id)->first();
+        if ($subCategory == null) {
             $category->delete();
             Log::create([
                 'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن دسته' .'-'. $category->title,
+                'url' => 'حذف کردن دسته' . '-' . $category->title,
                 'actionType' => 'حذف'
             ]);
             $this->emit('toast', 'success', ' دسته با موفقیت حذف شد.');
-        }else
-        {
+        } else {
             $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا زیردسته دارد!');
         }
 
@@ -141,12 +138,17 @@ class Index extends Component
     public function render()
     {
 
-        $categories = $this->readyToLoad ? Category::where('title', 'LIKE', "%{$this->search}%")->
-        orWhere('name', 'LIKE', "%{$this->search}%")->
-        orWhere('link', 'LIKE', "%{$this->search}%")->
-        orWhere('id', $this->search)->
-        latest()->paginate(15) : [];
+        $categories = $this->readyToLoad ? Category::with('getChild.getChild')
+        ->where('parent_id', $this->category_id)
+            ->where('title', 'LIKE', "%{$this->search}%")
+            ->where('en_name', 'LIKE', "%{$this->search}%")
+            ->latest()->paginate(15) : [];
 
+        // dd(Category::with('getChild.getChild')->where('title', 'LIKE', "%{$this->search}%")->
+        // orWhere('en_name', 'LIKE', "%{$this->search}%")->
+        // orWhere('link', 'LIKE', "%{$this->search}%")->
+        // orWhere('id', $this->search)->
+        // latest()->paginate(15)[9]->getChild[0]->name);
         return view('livewire.admin.category.index', compact('categories'));
     }
 }

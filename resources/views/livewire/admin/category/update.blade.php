@@ -11,47 +11,48 @@
 
                     @include('errors.error')
                     <div class="form-group">
-                        <input type="text" wire:model.lazy="category.icon" placeholder="آیکون دسته "
-                               class="form-control">
+                        <input type="text" wire:model.lazy="category.title" placeholder="عنوان دسته "
+                            class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" wire:model.lazy="category.title" placeholder="نام دسته "
-                               class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" wire:model.lazy="category.name" placeholder="نام انگلیسی دسته "
-                               class="form-control">
+                        <input type="text" wire:model.lazy="category.en_name" placeholder="نام لاتین دسته "
+                            class="form-control">
                     </div>
 
                     <div class="form-group">
                         <input type="text" wire:model.lazy="category.link" placeholder="لینک دسته "
-                               class="form-control">
+                            class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" wire:model.lazy="category.description" placeholder="توضیحات "
-                               class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <textarea wire:model.lazy="category.body"  class="form-control" placeholder="متن دسته ">
+                        <textarea wire:model.lazy="category.description" class="form-control" placeholder=" توضیحات دسته ">
 
-                        </textarea>
+                    </textarea>
+                    </div>
+                    <div class="form-group">
+                        <select wire:model.lazy="category.parent_id" class="form-control" placeholder=" توضیحات دسته ">
+                            @foreach (App\Models\Category::getCategories() as $id => $category)
+                                <option value="{{ $id }}">{{ $category }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <div class="notificationGroup">
-
-                            <input id="option4" type="checkbox"
-                                   wire:model.lazy="category.status"  name="status"
-                                   class="form-control">
-
+                            <input id="option4" type="checkbox" wire:model.lazy="category.status" name="status"
+                                class="form-control">
                             <label for="option4">نمایش در دسته اصلی:</label>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <div class="notificationGroup">
+                            <input id="option5" type="checkbox" wire:model.lazy="category.notShow" name="notShow"
+                                class="form-control">
+                            <label for="option5">نمایش در لیست ها :</label>
+                        </div>
+                    </div>
 
                     <div class="form-group">
-                        <input type="file" wire:model.lazy="img" class="form-control">
+                        <input type="file" wire:model.lazy="img" id="{{ rand() }}" class="form-control">
                         <span class="mt-2 text-danger" wire:loading wire:target="img">در حال آپلود ...</span>
 
                         <div wire:ignore class="progress mt-2" id="progressbar" style="display: none">
@@ -59,8 +60,9 @@
                         </div>
                     </div>
                     <div>
-                        @if($img)
-                            <img style="    width: 200px;" class="form-control mt-3 mb-3" width="400" src="{{$img->temporaryUrl()}}" alt="">
+                        @if ($img)
+                            <img class="form-control mt-3 mb-3" width="400" src="{{ $img->temporaryUrl() }}"
+                                alt="">
                         @endif
                     </div>
 

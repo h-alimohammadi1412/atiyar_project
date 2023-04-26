@@ -121,7 +121,7 @@
                                           data-snt-params='{"item":"account","item_option":null}'
                                           class="c-header__btn-login o-tooltip"
                                           href="/users/login-register">
-                    ورود به حساب کاربری
+                    ورود / ثبت نام
 
 
                 </a>
