@@ -5956,7 +5956,7 @@ const ProfileAction = {
         function rejectElectronicContract(e) {
             e.preventDefault();
             UIkit.modal($econtractModal).hide();
-            Services.commonModalNotification('<span class="c-modal-notification__danger-text">توجه!</span>', "فروشنده عزیز، عدم توافق با مفاد قرارداد همکاری به منزله عدم تمایل شما به همکاری با آتی یار تلقی شده و فرایند ثبت نام متوقف خواهد شد. در صورت تمایل به لغو ثبت نام روی دکمه توقف فرآیند ثبت نام و در غیر اینصورت روی دکمه بازگشت به فرم قرارداد کلیک کنید.", false, [
+            Services.commonModalNotification('<span class="c-modal-notification__danger-text">توجه!</span>', "فروشنده عزیز، عدم توافق با مفاد قرارداد همکاری به منزله عدم تمایل شما به همکاری با دیجی‌کالا تلقی شده و فرایند ثبت نام متوقف خواهد شد. در صورت تمایل به لغو ثبت نام روی دکمه توقف فرآیند ثبت نام و در غیر اینصورت روی دکمه بازگشت به فرم قرارداد کلیک کنید.", false, [
                 {
                     text: "توقف فرآیند ثبت نام",
                     classes: ["secondary"],
