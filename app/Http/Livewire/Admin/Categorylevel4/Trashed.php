@@ -32,8 +32,9 @@ class Trashed extends Component
     public function deleteCategory($id)
     {
         $category = CategoryLevel4::withTrashed()->findOrFail($id);
-        Storage::disk('public')->delete("storage",$category->img);
-        $category->forceDelete();
+        if ($category->img) {
+            Storage::disk('public')->delete("storage", $category->img);
+        }$category->forceDelete();
         $this->emit('toast', 'success', ' دسته سطح چهارم به صورت کامل با موفقیت حذف شد.');
     }
     public function trashedCategory($id)

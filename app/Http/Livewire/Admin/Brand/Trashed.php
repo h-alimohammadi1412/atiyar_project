@@ -31,7 +31,7 @@ class Trashed extends Component
     public function deleteCategory($id)
     {
         $brand = Brand::withTrashed()->findOrFail($id);
-        Storage::disk('public')->delete("storage",$brand->img);
+        if ($brand->img) {Storage::disk('public')->delete("storage",$brand->img);}
         $brand->forceDelete();
         $this->emit('toast', 'success', ' برند به صورت کامل از دیتابیس حذف شد.');
     }

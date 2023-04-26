@@ -86,8 +86,9 @@ class Banner extends Component
 //        $banner = DB::connection('mysql-vehicle')->table('category_vehicle_banner')
         $banner = DB::table('category_vehicle_banner')
             ->where('id',$id)->limit($id);
-        Storage::disk('public')->delete("storage", $banner2->img);
-        $banner->delete();
+        if ($banner->img) {
+            Storage::disk('public')->delete("storage", $banner2->img);
+        } $banner->delete();
 
         Log::create([
             'user_id' => auth()->user()->id,

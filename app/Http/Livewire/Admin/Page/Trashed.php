@@ -31,8 +31,9 @@ class Trashed extends Component
     public function deleteCategory($id)
     {
         $page = Page::withTrashed()->findOrFail($id);
-        Storage::disk('public')->delete("storage",$page->img);
-        $page->forceDelete();
+        if ($page->img) {
+            Storage::disk('public')->delete("storage", $page->img);
+        }$page->forceDelete();
         $this->emit('toast', 'success', ' صفحه سایت به صورت کامل از دیتابیس حذف شد.');
     }
 

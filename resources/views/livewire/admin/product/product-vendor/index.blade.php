@@ -1,12 +1,17 @@
 @section('title','تنوع قیمت محصولات')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
+
                 <a class="tab__item " href="/admin/product">محصولات</a>
-                <a class="tab__item is-active" href="/admin/productVendor"> تنوع قیمت محصول و محصولات در انتظار تایید</a>
+                <a class="tab__item is-active" href="/admin/productVendor"> تنوع قیمت محصول</a>
+
+            <div class="d-none d-lg-inline-block">
 
                 |
+
+            </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -16,16 +21,19 @@
                     </form>
                 </a>
 
-                <a class="tab__item btn btn-danger"
-                   href="{{route('productVendor.trashed')}}"
-                   style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
-                    ({{\App\Models\ProductSeller::onlyTrashed()->count()}})
-                </a>
-                <a class="tab__item btn btn-success"
-                   href="{{route('productVendor.create')}}"
-                   style="color: white;float: left;margin-top: 10px;margin-left: 10px">افزودن تنوع قیمت
-                </a>
+
             </div>
+        <div class="tab__items">
+            <a class="tab__item btn btn-danger"
+               href="{{route('productVendor.trashed')}}"
+               style="color: white;margin-left: 10px">سطل زباله
+                ({{\App\Models\ProductSeller::onlyTrashed()->count()}})
+            </a>
+            <a class="tab__item btn btn-success"
+               href="{{route('productVendor.create')}}"
+               style="color: white;margin-left: 10px">افزودن تنوع قیمت
+            </a>
+        </div>
         </div>
         <div class="row">
             <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
@@ -45,7 +53,6 @@
                             <th>قیمت تخفیف خورده</th>
                             <th>زمان ارسال</th>
                             <th>وضعیت تنوع قیمت</th>
-                            <th>موجود در انبار فروشنده</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -97,20 +104,6 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if($productSeller->anbar == 1)
-                                            <button wire:click="updateAnbarDisable({{$productSeller->id}})"
-                                                    type="submit" class="badge-success badge"
-                                                    style="background-color: green">موجود
-                                            </button>
-                                        @else
-                                            <button wire:click="updateAnbarEnable({{$productSeller->id}})"
-                                                    type="submit" class="badge-danger badge"
-                                                    style="background-color: red">
-                                                ناموجود
-                                            </button>
-                                        @endif
-                                    </td>
-                                    <td>
                                         <a wire:click="deleteCategory({{$productSeller->id}})" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                         <a href="{{route('productSeller.update',$productSeller)}}
@@ -139,70 +132,7 @@
 
             </div>
         </div>
-        <div class="tab__box">
-            <div class="tab__items">
-                <a class="tab__item " >محصولات فروشندگان تایید نشده</a>
 
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
-
-                <div class="table__box">
-                    <table class="table">
-
-                        <thead role="rowgroup">
-                        <tr role="row" class="title-row">
-                            <th>آیدی</th>
-                            <th>نام محصول</th>
-                            <th>نام فروشنده</th>
-                            <th>محصول جدید</th>
-
-                        </tr>
-                        </thead>
-
-
-                            <tbody>
-                            @foreach($productTest as $productSeller)
-                                <tr role="row">
-                                    <td><a href="">{{$productSeller->id}}</a></td>
-                                    <td>
-
-                                            {{$productSeller->title}}
-
-                                    </td>
-                                    <td>
-                                        @foreach(\App\Models\User::where('id',$productSeller->user_id)->get() as $user)
-                                            {{$user->name}}
-                                        @endforeach
-                                    </td>
-
-                                    <td>
-
-                                            <button wire:click="OkNewProduct({{$productSeller->id}})"
-                                                    type="submit" class="badge-success badge"
-                                                    style="background-color: green">تایید
-                                            </button>
-
-
-                                    </td>
-
-
-
-                                </tr>
-                            @endforeach
-
-                            </tbody>
-
-
-
-                    </table>
-                </div>
-
-
-            </div>
-        </div>
 
     </div>
 </div>

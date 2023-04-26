@@ -30,7 +30,7 @@ class Trashed extends Component
     public function deleteCategory($id)
     {
         $product = Product::withTrashed()->findOrFail($id);
-        Storage::disk('public')->delete("storage",$product->img);
+        if ($product->img) {Storage::disk('public')->delete("storage",$product->img);}
         $product->forceDelete();
         $this->emit('toast', 'success', ' محصول به صورت کامل با موفقیت حذف شد.');
     }

@@ -1,19 +1,20 @@
 @section('title','سطل زباله مقدار مشخصات کالا ')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex" style="padding-bottom: 20px;">
+            <div class="tab__items grow-1">
                 <a class="tab__item " href="/admin/attribute">مشخصات کالا
                     ها</a>
                 <a class="tab__item " href="/admin/attributeValue">مقدار مشخصات کالا
                 </a>
 
-
-                <a class="tab__item btn btn-danger"
-                   href="{{route('attributeValue.trashed')}}" style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
-                    ({{\App\Models\AttributeValue::onlyTrashed()->count()}})
-                </a>
             </div>
+        <div class="tab__items">
+            <a class="tab__item btn btn-danger"
+               href="{{route('attributeValue.trashed')}}" style="color: white;margin-left: 10px">سطل زباله
+                ({{\App\Models\AttributeValue::onlyTrashed()->count()}})
+            </a>
+        </div>
         </div>
         <div class="row">
             <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">

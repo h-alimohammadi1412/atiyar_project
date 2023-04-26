@@ -3660,7 +3660,7 @@ const ProfileAction = {
         $($tabInfo)
             .find(elementName)
             .each(function () {
-                
+
                 let that = $(this);
                 let accessElem = $(this).data("noAccess");
                 let beDisable = false;
@@ -3853,7 +3853,7 @@ const ProfileAction = {
             let contentName = $(this).data("content") || name;
             if (tabsHistory !== contentName) {
                 self.formReadMode("", tabsHistory, tabClone[tabsHistory]);
-            } 
+            }
             tabsHistory = contentName;
             navBar.each(function() {
                 let $that = $(this);
@@ -3886,12 +3886,12 @@ const ProfileAction = {
                                 $("#" + contentName + " .js-profile-business-info-form-section").empty();
                                 $("#" + contentName + " .js-profile-business-info-form-section").append(profileUtils.etta(formScope, self.currentSectionData.data, 0));
                                 self.currentSectionData.data.logo ? $("#" + contentName + " .js-profile-business-info-logo-preview").removeClass("uk-hidden").attr("src", self.currentSectionData.data.logo) : "";
-                              
+
                                 self.currentSectionData.data.subjectedToVatDocument && self.currentSectionData.data.subjectedToVatDocument.isExpireAtUnlimited ? $("#" + contentName + " .js-unlimited-expiration-date").attr("checked" , true) : "";
                                 if(self.currentSectionData.data.subjectedToVatDocument && self.currentSectionData.data.subjectedToVatDocument.image) {
                                     $("#" + contentName + " .js-profile-business-info-vat-logo-preview").removeClass("uk-hidden")
                                     $("#" + contentName + " .js-profile-business-info-vat-logo-preview").attr("src", self.currentSectionData.data.subjectedToVatDocument.image)
-                                } 
+                                }
                                 self.currentSectionData.data.subjectedToVatDocument
                                     ? $("#" + contentName + " .js-profile-business-info-vat-logo")
                                           .parent()
@@ -3961,15 +3961,15 @@ const ProfileAction = {
                                             timeout: 5000
                                         });
                                     }
-                                delete ProfileAction.currentSectionData.data.id 
-                                
+                                delete ProfileAction.currentSectionData.data.id
+
                                 let docScope = $("#" + contentName + " .js-profile-business-info-docs-section").html();
                                 $("#" + contentName + " .js-profile-business-info-docs-section").empty();
                                 $.each(self.currentSectionData.data.documents, function(index, docs) {
                                     $("#" + contentName + " .js-profile-business-info-docs-section").append(profileUtils.etta(docScope, docs, index));
                                     docs.image ? $("#" + contentName + " .js-profile-info-docs-images-" + index).attr("src", docs.image) : "";
                                     self.visibilityFormHook(contentName,".js-profile-business-info-docs-section div[data-index='" + index + "']",docs);
-                                   
+
                                 });
                                 profileUtils.setter.tabClone = $("#" + contentName)
                                     .children()
@@ -4051,7 +4051,7 @@ const ProfileAction = {
                                     $("#" + contentName + " .js-profile-business-info-logo-preview").siblings().css("cursor","default");
                                     $("#" + contentName + " .js-profile-business-info-logo-preview").siblings().css("background-color","#ffffff");
                                     $("#" + contentName + " .js-profile-business-info-logo-preview").siblings().css("color","#4fcce9");
-                                    
+
                                     self.formReadMode(e, contentName, profileUtils.setter.getTabClone);
                                 });
                                 $("#" + contentName).on("click", ".js-profile-submit-changes", function(e) {
@@ -4092,7 +4092,7 @@ const ProfileAction = {
                                         .hide();
                                         })
                                     }
-                                   
+
                                     vatModel.document_id == 20
                                     ? $("#" + contentName + " .js-unlimited-expiration-date")
                                     .parent()
@@ -4152,7 +4152,7 @@ const ProfileAction = {
                                                 self.formReadMode(e, contentName, tabClone[contentName]);
                                                 goToSection("businessInfo");
                                             });
-                                           
+
                                         });
                                     });
                                     $("#training-enrollment").on("change", ".js-profile-business-training-day", function(e) {
@@ -4162,29 +4162,29 @@ const ProfileAction = {
                                     });
                                 });
 
-                            
-                                
+
+
 
                                 self.uploadDocument(contentName, ".js-profile-business-info-vat-logo", "#vat-upload-input" , ".js-profile-business-info-vat-logo-preview" , "js-profile-content-spinner");
 
-                               
+
                                 $("#" + contentName).on("click",".js-profile-business-info-vat-logo-preview",function() {
-                                    
+
                                     $(".js-profile-business-info-vat-logo").trigger("click");
                                 });
 
-                                
+
                                 self.uploadDocument(contentName, ".js-profile-business-info-logo", "#logo-upload-input" , ".js-profile-business-info-logo-preview" , "js-profile-content-spinner");
-                                
+
                                 $("#" + contentName).on("click" , ".js-profile-business-info-logo-preview" ,function() {
                                     $(".js-profile-business-info-logo").trigger("click");
                                 });
 
-                               
-            
+
+
                                 $("#profile-form").validate(self.getValidationObject(contentName))
 
-                               
+
                                 self.initDatePicker(".js-profile-business-info-birth-date");
                                 self.initDatePicker(".js-profile-business-info-vat-date");
                                 $that.css( 'pointer-events', 'none' );
@@ -4197,7 +4197,7 @@ const ProfileAction = {
                             tabClone[contentName] = $("#" + contentName)
                                 .children()
                                 .clone(true, true);
-                                
+
                                 self.getBankInfo(function(cb) {
                                 profileUtils.useSpinner(false, "js-profile-page");
                                 let elementScope = $("#" + contentName + " .js-profile-bank-info-form").html();
@@ -4209,15 +4209,15 @@ const ProfileAction = {
                                 self.currentSectionData.data.isVerified ? $(".js-vrified-sheba-num").removeClass("uk-hidden") : ''
                                 self.currentSectionData.data.status == "new" ? $(".js-new-sheba-num").removeClass("uk-hidden") : ''
                                 self.currentSectionData.data.status == "rejected" ? $(".js-conflict-sheba-num").removeClass("uk-hidden") : ''
-                                
-                                
+
+
                                 profileUtils.setter.tabClone = $("#" + contentName)
                                     .children()
                                     .clone();
                                 $("#" + contentName).on("click", ".js-profile-edit-form", function(e) {
                                     self.formEditMode.apply(this, [e, contentName]);
                                 });
-                                
+
 
                                 $("#" + contentName).on("click", ".js-profile-cancel-edit-form", function(e) {
                                     self.formReadMode(e, contentName, profileUtils.setter.getTabClone);
@@ -4229,12 +4229,12 @@ const ProfileAction = {
                                     profileUtils.useSpinner(true, "js-profile-content-spinner");
                                     e.preventDefault();
 
-                                    
-                                    self.formGatherData(e, contentName, '', function(params) {
-                                       
-                                        params.shabaNumber ? self.currentSectionData.data.shabaNumber = params.shabaNumber : '' 
 
-                                        
+                                    self.formGatherData(e, contentName, '', function(params) {
+
+                                        params.shabaNumber ? self.currentSectionData.data.shabaNumber = params.shabaNumber : ''
+
+
                                     });
                                     self.checkBankInfo("check_iban", self.currentSectionData.data.shabaNumber,function (type,data) {
                                        if(data.status) {
@@ -4273,7 +4273,7 @@ const ProfileAction = {
                                             }
                                         }
                                        }
-                                    }) 
+                                    })
 
                                     $("#approve-bank-info").on("click" , ".js-profile-bank-info-iban-verify" , function(e) {
                                     e.stopImmediatePropagation();
@@ -4292,8 +4292,8 @@ const ProfileAction = {
                                     })
 
                                     })
-                                    
-                                    
+
+
                                 });
                                 self.initInputMask();
                                 let validator = $("#profile-form").validate(self.getValidationObject(contentName))
@@ -4311,14 +4311,14 @@ const ProfileAction = {
                                 .clone(true, true);
                                 self.getWarehouseDataPage(function(cb) {
                                     profileUtils.useSpinner(false, "js-profile-page");
-                                    
+
                                     self.currentSectionData = cb;
-                                    
+
                                 let validator;
                                 let warehouseFormScope = `#${contentName} .js-profile-warehouse-form`;
                                 let contactFormScope = `#${contentName} .js-profile-contact-form`;
                                 let warehouseReturnButtonClass = "js-profile-warehouse-retrun-button";
-    
+
                                 !profileUtils.setter.getWarehousesTable ? (profileUtils.setter.warehousesForm = $(warehouseFormScope).html()) : "";
                                 !profileUtils.setter.getContactTable ? (profileUtils.setter.contactForm = $(contactFormScope).html()) : "";
                                 !profileUtils.setter.getContactDeleteModal ? (profileUtils.setter.contactDeleteModal = $("#" + contentName + " #profile-warehouse-delete").html()) : "";
@@ -4354,7 +4354,7 @@ const ProfileAction = {
                                     selectCity($(`.js-profile-warehouse-city-select-${index}`), item.state.id);
                                 });
 
-                               
+
                                 profileUtils.setter.tabClone = $("#" + contentName)
                                     .children()
                                     .clone();
@@ -4378,12 +4378,12 @@ const ProfileAction = {
                                     $(contactFormScope)
                                         .find(".js-profile-contact-address-tootip")
                                         .removeClass("uk-hidden")
-                                    } 
+                                    }
                                     $(".js-profile-contact-state-select")
                                     .select2()
                                     .val(self.currentSectionData.data.address.state.id);
                                     self.destroySelect2(contentName,".js-profile-contact-state-select")
-    
+
                                 $(".js-profile-contact-state-select")
                                     .select2()
                                     .data("select2")
@@ -4393,26 +4393,26 @@ const ProfileAction = {
                                 selectCity($(`.js-profile-contact-city-select`), self.currentSectionData.data.address.state.id);
                                 self.destroySelect2(contentName,`.js-profile-contact-city-select`)
 
-                                $("#" + contentName).find(".js-warehouse-form .js-profile-edit-form").parent().hide()                                    
+                                $("#" + contentName).find(".js-warehouse-form .js-profile-edit-form").parent().hide()
                                 self.formEditMode.apply(this, [e, contentName,".js-profile-contact-form"]);
                                 });
-                                
-                                
+
+
                                 $("#" + contentName).on("click", ".js-profile-contact-address-change", function(e) {
                                     e.preventDefault();
                                     let href = $(this).attr("href");
                                     self.formReadMode(e, contentName, tabClone[contentName]);
                                     window.open(href,"_self");
                                     goToSection("docUpload");
-                                    
+
                                 });
 
                                 $("#" + contentName).on("click", ".js-profile-contact-form .js-profile-cancel-edit-form", function(e) {
                                     $("#" + contentName).find(".js-warehouse-form .js-profile-edit-form").parent().show()
-                                    
+
                                     self.formReadMode(e, contentName, profileUtils.setter.getTabClone);
                                 });
-    
+
                                 $("#" + contentName).on("click", ".js-profile-contact-form .js-profile-submit-changes", function(e) {
                                     e.stopImmediatePropagation();
                                     e.preventDefault()
@@ -4427,7 +4427,7 @@ const ProfileAction = {
 
                                 $("#" + contentName).on("click", ".js-warehouse-form .js-profile-edit-form", function(e) {
                                     $("#" + contentName).find(".js-profile-contact-form .js-profile-edit-form").parent().hide()
-                                    
+
                                     $("#" + contentName)
                                         .find(".js-profile-contact-warehouse-add")
                                         .parent()
@@ -4440,12 +4440,12 @@ const ProfileAction = {
                                                 .parent()
                                                 .removeClass("uk-hidden");
                                         });
-                                        
+
                                         $.each(self.currentSectionData.data.warehouses, function(index, item) {
                                             $(".js-profile-warehouse-state-select-" + index)
                                                 .select2()
                                                 .val(item.state.id);
-        
+
                                             $(".js-profile-warehouse-state-select-" + index)
                                                 .select2()
                                                 .data("select2")
@@ -4455,7 +4455,7 @@ const ProfileAction = {
                                             selectCity($(`.js-profile-warehouse-city-select-${index}`), item.state.id);
                                             self.destroySelect2(contentName,`.js-profile-warehouse-city-select-${index}`)
 
-                                            
+
                                         });
 
                                     $("#profile-form").validate().destroy();
@@ -4481,8 +4481,8 @@ const ProfileAction = {
                                                 .parent()
                                                 .addClass("uk-hidden");
                                         });
-                                        
-                                        
+
+
                                     warehouseCount = $(profileUtils.setter.getTabClone).find('[data-contacts-validation]').length
                                     if(warehouseCount != self.currentSectionData.data.warehouses.length) {
                                         self.currentSectionData.data.warehouses.splice(warehouseCount);
@@ -4507,16 +4507,16 @@ const ProfileAction = {
                                         });
                                     });
                                 });
-                                
+
                                 $("#" + contentName).on("click", ".js-profile-delete-warehouse", function(e) {
                                     e.stopImmediatePropagation();
                                     e.preventDefault();
                                     let wareHouseRow = $(this).data("row");
                                     let name = { title: $(this).data("name") || `انبار شماره ${wareHouseRow}` };
-                                    
+
                                     $("#profile-warehouse-delete").empty();
                                     $("#profile-warehouse-delete").append(profileUtils.etta(profileUtils.setter.getContactDeleteModal, name, 0));
-                                   
+
                                     profileUtils.setter.cache = wareHouseRow
                                     UIkit.modal("#profile-warehouse-delete").show();
                                 });
@@ -4547,8 +4547,8 @@ const ProfileAction = {
 
                                     self.formGatherData(e, contentName , '' , function(params){
                                     ProfileAction.currentSectionData.data.warehouses = profileUtils.removeDuplicates(ProfileAction.currentSectionData.data.warehouses,"row");
-                                       
-                                    
+
+
                                     if(self.currentSectionData.data.warehouses.length > 0) {
 
                                         self.currentSectionData.data.warehouses.push(self.currentSectionData.data.warehouses[self.currentSectionData.data.warehouses.length - 1]);
@@ -4583,7 +4583,7 @@ const ProfileAction = {
                                         if(item.city_id){
                                             item.city = {};
                                             item.city.id = item.city_id
-                                        } 
+                                        }
                                         $(warehouseFormScope).append(profileUtils.etta(profileUtils.setter.getWarehousesTable, item, index));
                                         item.title ? $(`.js-profile-contact-warehouse-title-${index}`).text(item.title) : "";
                                         let value = 'true';
@@ -4592,7 +4592,7 @@ const ProfileAction = {
                                         $(".js-profile-warehouse-state-select-" + index)
                                             .select2()
                                             .val(item.state_id);
-    
+
                                         $(".js-profile-warehouse-state-select-" + index)
                                             .select2()
                                             .data("select2")
@@ -4607,7 +4607,7 @@ const ProfileAction = {
                                         });
                                         validator.destroy();
                                         validator = $("#profile-form").validate(self.getValidationObject(contentName))
-                                        
+
 
                                         self.formEditMode.apply(this, [e, contentName,".js-warehouse-form"]);
                                     });
@@ -4623,8 +4623,8 @@ const ProfileAction = {
                                     self.inputMaskWarehousePhone(provinceCode,index);
                                     selectCity($(`.js-profile-warehouse-city-select-${index}`), stateId);
                                 });
-                                
-                                
+
+
                                 $("#" + contentName).on("change", "select[class*='js-profile-contact-state-select']", function(e) {
                                     e.preventDefault();
                                     let provinceCode = $(this).children("option:selected").data("code");
@@ -4632,7 +4632,7 @@ const ProfileAction = {
                                     self.inputMaskContactPhone(provinceCode);
                                     selectCity($(`.js-profile-contact-city-select`), stateId);
                                 });
-                                
+
 
                                 validator = $("#profile-form").validate(self.getValidationObject(contentName))
                                 Main.initOnlyDigits()
@@ -5119,7 +5119,7 @@ const ProfileAction = {
                                         $(".js-profile-workdays-table").empty();
                                         const shipmentTitleByType = {
                                             ship_by_seller: '(ارسال توسط فروشنده)',
-                                            ship_by_digikala: '(ارسال توسط دیجیکالا)'
+                                            ship_by_digikala: '(ارسال توسط آتی یار)'
                                         };
 
                                         $.each(self.currentSectionData.workdaysData.items, function(index, item) {
@@ -5336,7 +5336,7 @@ const ProfileAction = {
                                 let selectDate = new Date($(this).data("date"));
                                 let today = new Date(ProfileAction.currentSectionData.data.calendarInfo.today)
                                 let diffDays = (selectDate.getTime() - today.getTime()) / (1000 * 3600 * 24);
-                               
+
                                 if(diffDays >= 2) {
                                     $(".js-profile-holiday-delete-notice").hide()
                                 } else {
@@ -5411,26 +5411,26 @@ const ProfileAction = {
                                     $(dropdownBox).mouseover(function() {
                                         clearTimeout( hideTimer );
                                     });
-                                    
+
                                     // set a timer to hide the DIV
                                     $(dropdownBox).mouseout(function() {
                                         hideTimer = setTimeout(function(){
                                             $(dropdownBox).addClass("uk-hidden");
                                         }, 333 );
                                     });
-                          
+
                             });
-                            
-                            
+
+
                             $("#" + contentName).on("click", ".js-calendar-select-month", function(e) {
-                               
+
                                 let month = $(this).data("month");
                                 let year = $(this).data("year");
                                 $(this).parent().hide()
                                 getWorkCalendar(month,year, true);
-                                
+
                             });
-                            
+
 
                             // profileUtils.useSpinner(false, "js-profile-page");
                             // $that.children("div").show();
@@ -5463,7 +5463,7 @@ const ProfileAction = {
                 }
             });
 
-            
+
         }
 
         function showMonthTootip(e) {
@@ -5472,7 +5472,7 @@ const ProfileAction = {
             const boxHalfMaxWidth = 235 / 2;
             const targetHalfWidth = target.offsetWidth / 2;
             const targetPosition = target.getBoundingClientRect();
-           
+
             $(dropdownBox).removeClass("uk-hidden");
 
             if (targetPosition.left + boxHalfMaxWidth + targetHalfWidth >= document.body.clientWidth) {
@@ -5490,10 +5490,10 @@ const ProfileAction = {
 
             dropdownBox.css("left", targetPosition.left + target.offsetWidth / 2 + "px");
             dropdownBox.css("opacity", 1);
-            
-           
-           
-    
+
+
+
+
         }
 
         function fillCalendar(el, calenderHTML, calendarRow, data, tabId)
@@ -5751,7 +5751,7 @@ const ProfileAction = {
                 .data("select2")
                 .$dropdown.addClass("c-ui-select__dropdown");
         }
-        
+
         function selectHours(hourSelect, value) {
             hourSelect.html("");
             hourSelect.append("<option></option>");
@@ -5836,7 +5836,7 @@ const ProfileAction = {
     },
 
     enrollTraining: function(model,cb) {
-      
+
         try {
             $.ajax({
                 url: "/ajax/profile/new/update/training-data/",
@@ -6179,11 +6179,11 @@ const ProfileAction = {
         } catch (error) {
         }
     },
-    
+
     submitContactData: function(action, index, cb) {
-       
+
         let model;
-  
+
             ProfileAction.currentSectionData.data.action = action;
             let contact = ProfileAction.currentSectionData.data;
             if(contact.legal_coordinates){
@@ -6192,7 +6192,7 @@ const ProfileAction = {
                 contact.longitude = latLNG[1];
             }
                 contact.phone = contact.phone.indexOf("-") > -1 ? contact.phone.split("-")[1] : contact.phone;
-               
+
             model = JSON.parse(JSON.stringify(ProfileAction.currentSectionData.data));
             model.action = action;
             delete model.warehouses;
@@ -6437,9 +6437,9 @@ const ProfileAction = {
             });
         } catch (error) {}
     },
-    
-    
-    
+
+
+
     checkBankInfo: function(type ,sheba, cb) {
         try {
             if(type === "check_iban") {
@@ -6448,7 +6448,7 @@ const ProfileAction = {
                         cb && cb(type,res);
                     } else if(res.status && res.data.id) {
                         cb && cb("verify_iban",res);
-                        
+
                     } else {
                         cb && cb("verify_iban",res);
                         $.each(res.data, function(key, item) {
@@ -6463,7 +6463,7 @@ const ProfileAction = {
             } else {
                 saveBankInfo(type)
             }
-            
+
         } catch (error) {}
 
         function saveBankInfo(type,callback) {
@@ -6510,7 +6510,7 @@ const ProfileAction = {
             });
         }
     },
-    
+
     getBankInfo: function (cb) {
         try {
             $.ajax({
@@ -6821,20 +6821,20 @@ const ProfileAction = {
 
         }
     },
-    
+
     inputMaskContactPhone: function(code) {
         const phoneField = $("input[name='contactInfo[phone]']");
-        
+
       if(window.Inputmask && phoneField.length > 0) {
 
             window.Inputmask(`${code}-99999999`).mask(phoneField);
 
         }
     },
-    
+
     inputMaskDocUploadPhone: function(code) {
         const phoneField = $("input[name='docUpload[phone]']");
-        
+
       if(window.Inputmask && phoneField.length > 0) {
 
             window.Inputmask(`${code || 999}-99999999`).mask(phoneField);
@@ -7778,7 +7778,7 @@ $(function() {
         {
           return this.substring(0, index) + string + this.substring(index, this.length);
         }
-      
+
         return string + this;
       };
 

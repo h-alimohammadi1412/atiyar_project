@@ -1,18 +1,20 @@
 @section('title','سطل زباله دسته ها')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
                 <a class="tab__item " href="/admin/category">دسته
                     ها</a>
                 <a class="tab__item is-active"
                    href="/admin/subcategory">زیر دسته ها</a>
                 <a class="tab__item {{Request::routeIs('childcategory.index') ? 'is-active': '' }}"
                    href="/admin/childcategory">دسته های کودک</a>
-                <a class="tab__item {{Request::routeIs('categorylevel4.index') ? 'is-active': '' }}"
-                   href="/admin/categorylevel4">دسته های سطح 4 </a>
-                |
-                <a class="tab__item">جستجو: </a>
+
+                |                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>        <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
                     <form action="" onclick="event.preventDefault();">
@@ -21,18 +23,24 @@
                     </form>
                 </a>
 
+            </div>
+
+            <div class="tab__items">
                 <a class="tab__item btn btn-danger"
-                   href="{{route('subcategory.trashed')}}" style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
+                   href="{{route('subcategory.trashed')}}
+                       " style="color: white;fmargin-left: 10px">سطل زباله
                     ({{\App\Models\SubCategory::onlyTrashed()->count()}})
                 </a>
-            </div>
+
+        </div>
         </div>
         <div class="row">
             <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
+                @if($readyToLoad)
 
                 <div class="table__box">
-                    <table class="table">
 
+                    <table class="table">
                         <thead role="rowgroup">
                         <tr role="row" class="title-row">
                             <th>آیدی</th>
@@ -43,7 +51,6 @@
                         </tr>
                         </thead>
 
-                        @if($readyToLoad)
                             <tbody>
                             @foreach($categories as $category)
                                 <tr role="row">
@@ -64,7 +71,10 @@
                             @endforeach
 
                             </tbody>
-                            {{$categories->render()}}
+                    </table>
+                </div>
+
+                    {{$categories->render()}}
                         @else
 
 
@@ -77,8 +87,6 @@
                         @endif
 
 
-                    </table>
-                </div>
 
 
             </div>

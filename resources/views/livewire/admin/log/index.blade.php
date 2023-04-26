@@ -4,9 +4,13 @@
         <div class="tab__box">
             <div class="tab__items">
                 <a class="tab__item is-active" href="/admin/log">گزارشات سیستم
-                    </a>
+                </a>
 
-                |
+                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -22,18 +26,19 @@
             <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
 
                 <div class="table__box">
+                    @if($readyToLoad)
+
                     <table class="table">
 
                         <thead role="rowgroup">
                         <tr role="row" class="title-row">
                             <th>آیدی</th>
                             <th>کاربر</th>
-                            <th>لینک</th>
+                            <th>عملیات</th>
                             <th>وضعیت</th>
                         </tr>
                         </thead>
 
-                        @if($readyToLoad)
                             <tbody>
                             @foreach($logs as $log)
                                 <tr role="row">
@@ -46,17 +51,17 @@
                                     <td><a href="">{{$log->url}}</a></td>
                                     <td><a href="">
                                             @if($log->actionType =='ایجاد')
-                                            <span style="background-color: green" class="badge badge-success">ایجاد</span>
+                                                <span style="background-color: green" class="badge badge-success">ایجاد</span>
                                             @elseif($log->actionType =='حذف')
                                                 <span style="background-color: red" class="badge badge-danger ">حذف</span>
                                             @elseif($log->actionType =='آپدیت')
                                                 <span style="background-color: #e29c5f" class="badge badge-warning">آپدیت</span>
                                             @elseif($log->actionType =='فعال')
-                                                <span style="background-color:blue" class="badge badge-primary">فعال</span>
+                                                <span style="background-color:#0dcaf0" class="badge badge-info">فعال</span>
                                             @elseif($log->actionType =='غیرفعال')
-                                                <span style="background-color:red" class="badge badge-danger">غیرفعال</span>
+                                                <span style="background-color:orange" class="badge badge-primary">غیرفعال</span>
                                             @elseif($log->actionType =='بازیابی')
-                                                <span style="background-color:wheat" class="badge badge-warning">بازیابی</span>
+                                                <span style="background-color:#4dd073" class="badge badge-warning">بازیابی</span>
                                             @endif
                                         </a></td>
 
@@ -65,7 +70,10 @@
                             @endforeach
 
                             </tbody>
-                            {!! $logs->render() !!}
+                    </table>
+                </div>
+
+                    {!! $logs->render() !!}
                         @else
 
 
@@ -78,8 +86,6 @@
                         @endif
 
 
-                    </table>
-                </div>
 
 
             </div>

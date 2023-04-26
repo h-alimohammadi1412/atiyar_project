@@ -66,9 +66,9 @@
             e = n.getElementsByTagName(t)[0];
             e.parentNode.insertBefore(s, k);
         })(window, document, 'script', "//static1.intrack.ir/api/web/download/sdk/inTrack.min.js?v=4", "Intk", intrack_config);</script>
-    <title>فروشگاه اینترنتی آتی یار</title>
+    <title>فروشگاه اینترنتی دیجی‌کالا</title>
     <meta name="description"
-          content="هر آنچه که نیاز دارید با بهترین قیمت از آتی یار بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!">
+          content="هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!">
     <meta name="msvalidate.01" content="15B2F9DC1A9D64AEB0134F21A3D8A683">
     <meta name="fontiran.com:license" content="THJBT">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">

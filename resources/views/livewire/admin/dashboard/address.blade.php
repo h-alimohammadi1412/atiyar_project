@@ -5,10 +5,7 @@
             <div class="tab__items">
                 <a class="tab__item is-active" href="/admin/dashboard/address">آدرس ها
                     </a>
-                <a class="tab__item " href="/admin/dashboard/address/recip">آدرس های انبار
-                </a>
-                <a class="tab__item " href="/admin/dashboard/address/time">زمان های ارسال
-                </a>
+
                 |
                 <a class="tab__item">جستجو: </a>
 

@@ -1,13 +1,18 @@
 @section('title','مشخصات کالا ')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
+
                 <a class="tab__item is-active" href="/admin/attribute">مشخصات کالا
                     ها</a>
                 <a class="tab__item " href="/admin/attributeValue">مقدار مشخصات کالا
                     </a>
+            <div class="d-none d-lg-inline-block">
+
                 |
+
+            </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -18,11 +23,14 @@
                 </a>
 
 
-                <a class="tab__item btn btn-danger"
-                   href="{{route('attribute.trashed')}}" style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
-                    ({{\App\Models\Attribute::onlyTrashed()->count()}})
-                </a>
+
             </div>
+        <div class="tab__items">
+            <a class="tab__item btn btn-danger"
+               href="{{route('attribute.trashed')}}" style="color: white;margin-left: 10px">سطل زباله
+                ({{\App\Models\Attribute::onlyTrashed()->count()}})
+            </a>
+        </div>
         </div>
         <div class="row">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">

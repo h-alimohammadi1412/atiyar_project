@@ -1,7 +1,7 @@
-@section('title','آپدیت دسته کودک')
+@section('title','آپدیت دسته فرزند')
 <div>
     <div class="main-content padding-0">
-        <p class="box__title">ویرایش دسته کودک -
+        <p class="box__title">ویرایش دسته فرزند -
             {{$childcategory->title}}</p>
         <div class="row no-gutters bg-white">
             <div class="col-8">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <select wire:model.lazy="childcategory.parent" name="parent" id="" class="form-control">
+                        <select wire:model.lazy="childcategory.parent" name="parent" id="" class="">
                             @foreach(\App\Models\SubCategory::all() as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                             @endforeach
@@ -54,7 +54,7 @@
                         @endif
                     </div>
 
-                    <button type="submit" class="btn btn-brand">آپدیت دسته کودک</button>
+                    <button type="submit" class="btn btn-brand">آپدیت دسته فرزند</button>
                 </form>
             </div>
         </div>

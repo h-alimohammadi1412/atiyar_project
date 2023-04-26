@@ -1,22 +1,26 @@
 @section('title','دسته ها')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
-                @can('show-category')
-                <a class="tab__item is-active" href="/admin/category">دسته
-                    ها</a>
-                @endcan
-                @can('subcategory-show')
-                <a class="tab__item {{Request::routeIs('subcategory.index') ? 'is-active': '' }}"
-                   href="/admin/subcategory">زیر دسته ها</a>
-                @endcan
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
+{{--                @can('show-category')--}}
+                    <a class="tab__item is-active" href="/admin/category">دسته
+                        ها</a>
+{{--                @endcan--}}
+{{--                @can('subcategory-show')--}}
+                    <a class="tab__item {{Request::routeIs('subcategory.index') ? 'is-active': '' }}"
+                       href="/admin/subcategory">زیر دسته ها</a>
+{{--                @endcan--}}
                 <a class="tab__item {{Request::routeIs('childcategory.index') ? 'is-active': '' }}"
                    href="/admin/childcategory">دسته های کودک</a>
                 <a class="tab__item {{Request::routeIs('categorylevel4.index') ? 'is-active': '' }}"
                    href="/admin/categorylevel4">دسته های سطح 4 </a>
+                <div class="d-none d-lg-inline-block">
 
-                |
+                    |
+
+                </div>
+
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -26,12 +30,18 @@
                     </form>
                 </a>
 
-                <a class="tab__item btn btn-danger"
-                   href="{{route('category.trashed')}}" style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
-                ({{\App\Models\Category::onlyTrashed()->count()}})
-                </a>
+
             </div>
-        </div>
+            <div class="tab__items">
+
+                    <a  class="tab__item btn btn-danger "
+                        href="{{route('category.trashed')}}" style="color: white;margin-left: 10px">سطل زباله
+                        ({{\App\Models\Category::onlyTrashed()->count()}})
+                    </a>
+
+            </div>
+            </div>
+
         <div class="row">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
 
@@ -63,7 +73,6 @@
                                     <td><a href="">{{$category->name}}</a></td>
 
                                     <td>
-                                        @can('status-category')
                                         @if($category->status == 1)
                                             <button wire:click="updateCategoryDisable({{$category->id}})"
                                                     type="submit" class="badge-success badge"
@@ -76,16 +85,11 @@
                                                 غیرفعال
                                             </button>
                                         @endif
-                                        @endcan
                                     </td>
                                     <td>
-                                        @can('delete-category')
                                         <a wire:click="deleteCategory({{$category->id}})" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
-                                        @endcan
-                                        @can('edit-category')
                                         <a href="{{route('category.update',$category)}}" class="item-edit " title="ویرایش"></a>
-                                            @endcan
                                     </td>
                                 </tr>
                             @endforeach
@@ -109,10 +113,8 @@
 
 
             </div>
-
             <div class="col-4 bg-white">
                 <p class="box__title">ایجاد دسته بندی جدید</p>
-                @can('create-category')
                 <form wire:submit.prevent="categoryForm"
                       enctype="multipart/form-data" role="form"
                       class="padding-10 categoryForm">
@@ -170,7 +172,6 @@
 
                     <button class="btn btn-brand">افزودن دسته</button>
                 </form>
-                @endcan
             </div>
         </div>
 

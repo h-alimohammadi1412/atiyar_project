@@ -81,8 +81,7 @@
                                     </td>
 
                                     <td>
-{{--                                        @foreach(DB::connection('mysql-category')->table('category_title_swiper')--}}
-                                        @foreach(DB::table('category_title_swiper')
+                                        @foreach(DB::connection('mysql-category')->table('category_title_swiper')
                                             ->where('id',$category->title_id)->get() as $cat)
                                             {{$cat->title}}
                                         @endforeach
@@ -163,8 +162,7 @@
                         <select wire:model.lazy="title_id" name="title_id" id="" class="form-control">
                             <option value=" ">- دسته صفحه اصلی -</option>
 
-{{--                            @foreach(DB::connection('mysql-category')->table('category_title_swiper')->--}}
-                            @foreach(DB::table('category_title_swiper')->
+                            @foreach(DB::connection('mysql-category')->table('category_title_swiper')->
                                     where('c_id',$this->category_id)->get() as $title)
                                 <option value="{{$title->id}}">{{$title->title}}</option>
                             @endforeach

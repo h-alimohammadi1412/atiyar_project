@@ -648,13 +648,13 @@
                                                 </div>
                                             </a><div class="c-rating-chart__description-tooltip uk-dropdown" uk-dropdown="boundary: .js-dropdown-desc; pos: bottom-center"><a href="/orders/" class="c-rating-chart__details-bar">
                                                 </a><a href="/orders/?search%5Bhas_warehouse_stock%5D=1" class="c-rating-chart__details-bar">
-                                                    <div class="c-rating-chart__description c-rating-chart__description--bar c-rating-chart__description--sub">موجود در دیجیکالا:</div>
+                                                    <div class="c-rating-chart__description c-rating-chart__description--bar c-rating-chart__description--sub">موجود در آتی یار:</div>
                                                     <div class="c-rating-chart__details-value c-rating-chart__details-value--sub">
                                                         ۰
                                                     </div>
                                                 </a>
                                                 <a href="/orders/?search%5Bhas_warehouse_stock%5D=0" class="c-rating-chart__details-bar">
-                                                    <div class="c-rating-chart__description c-rating-chart__description--bar c-rating-chart__description--sub">ناموجود در دیجیکالا:</div>
+                                                    <div class="c-rating-chart__description c-rating-chart__description--bar c-rating-chart__description--sub">ناموجود در آتی یار:</div>
                                                     <div class="c-rating-chart__details-value c-rating-chart__details-value--sub">
                                                         ۰
                                                     </div>

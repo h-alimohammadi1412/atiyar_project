@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-brand">افزودن مشخصات کالا</button>
+                    <button class="btn btn-brand">آپدیت مشخصات کالا</button>
                 </form>
             </div>
         </div>

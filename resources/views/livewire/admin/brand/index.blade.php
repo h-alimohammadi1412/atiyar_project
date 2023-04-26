@@ -1,12 +1,16 @@
 @section('title','برند ها')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
                 <a class="tab__item is-active" href="/admin/brand">برند
                     ها</a>
 
-                |
+                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -15,14 +19,16 @@
                                type="text" class="text" placeholder="جستجوی برند ...">
                     </form>
                 </a>
+            </div>
 
+            <div class="tab__items">
                 <a class="tab__item btn btn-danger"
-                   href="{{route('brand.trashed')}}
-                       " style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
+                   href="{{route('brand.trashed')}}" style="color: white;margin-left: 10px">سطل زباله
                     ({{\App\Models\Brand::onlyTrashed()->count()}})
                 </a>
             </div>
         </div>
+
         <div class="row">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
 
@@ -36,7 +42,6 @@
                             <th>نام برند</th>
                             <th>دسته برند</th>
                             <th>وضعیت برند</th>
-                            <th>ویژه</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -67,20 +72,6 @@
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال
-                                            </button>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($brand->vip == 1)
-                                            <button wire:click="updateBrandDisable({{$brand->id}})"
-                                                    type="submit" class="badge-success badge"
-                                                    style="background-color: green">ویژه
-                                            </button>
-                                        @else
-                                            <button wire:click="updateBrandEnable({{$brand->id}})"
-                                                    type="submit" class="badge-danger badge"
-                                                    style="background-color: red">
-                                                غیر ویژه
                                             </button>
                                         @endif
                                     </td>
@@ -136,13 +127,6 @@
                             <input id="option4" type="checkbox" wire:model.lazy="brand.status" name="status"
                                    class="form-control">
                             <label for="option4">نمایش در برند اصلی:</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="notificationGroup">
-                            <input id="option6" type="checkbox" wire:model.lazy="brand.vip" name="vip"
-                                   class="form-control">
-                            <label for="option6">برند ویژه:</label>
                         </div>
                     </div>
                     <div class="form-group">

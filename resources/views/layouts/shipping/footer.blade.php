@@ -86,19 +86,19 @@
                     پشتیبانی آنلاین
                 </div>
                 <div class="c-cro__support-status-bar"><p>
-                        پیشتیبان هوش مصنوعی آتی یار
+                        پیشتیبان هوش مصنوعی دیجی‌کالا
                     </p><a class="c-wiki__trigger c-wiki c-wiki__holder js-dk-wiki-trigger">
                         <div class="c-wiki__container js-dk-wiki is-right  ">
                             <div class="c-wiki__arrow"></div>
                             <p class="c-wiki__text">
-                                من ربات هوشمند گفت و گوی آنلاین آتی یار هستم و در حال حاضر در حال آموزش دیدن برای
+                                من ربات هوشمند گفت و گوی آنلاین دیجی‌کالا هستم و در حال حاضر در حال آموزش دیدن برای
                                 پاسخگویی بهتر و انتقال پیام شما به پاسخگوی مرتبط با مشکلتان هستم.
                             </p></div>
                     </a></div>
                 <div class="c-cro__chat-body">
                     <div class="js-chatbot-body">
                         <div class="c-cro__chat-message c-cro__chat-message--dk"><p>
-                                به پشتیبانی هوشمند آتی یار خوش آمدید. لطفا سوال خود را بپرسید.
+                                به پشتیبانی هوشمند دیجی‌کالا خوش آمدید. لطفا سوال خود را بپرسید.
                             </p><span>
                                     پشتیبان هوش مصنوعی
                                 </span></div>

@@ -1,34 +1,38 @@
 @section('title','محصولات')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
-                <a class="tab__item is-active" href="/admin/product">محصولات</a>
-                <a class="tab__item " href="/admin/color"> رنگ های محصولات</a>
-                <a class="tab__item " href="/admin/gallery"> گالری تصاویر محصولات</a>
+            <div class="tab__box d-flex tab_items_flex">
+                <div class="tab__items grow-1">
+                    <a class="tab__item is-active" href="/admin/product">محصولات</a>
+                    <a class="tab__item " href="/admin/color"> رنگ های محصولات</a>
+                    <a class="tab__item " href="/admin/gallery"> گالری تصاویر محصولات</a>
+                    <div class="d-none d-lg-inline-block">
 
+                        |
 
-                |
-                <a class="tab__item">جستجو: </a>
+                    </div>
+                    <a class="tab__item">جستجو: </a>
 
-                <a class="t-header-search">
-                    <form action="" onclick="event.preventDefault();">
-                        <input wire:model.debounce.1000="search"
-                               type="text" class="text" placeholder="جستجوی محصول ...">
-                    </form>
-                </a>
+                    <a class="t-header-search">
+                        <form action="" onclick="event.preventDefault();">
+                            <input wire:model.debounce.1000="search"
+                                   type="text" class="text" placeholder="جستجوی محصول ...">
+                        </form>
+                    </a>
 
-                <a class="tab__item btn btn-danger"
-                   href="{{route('product.trashed')}}"
-                   style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
-                    ({{\App\Models\Product::onlyTrashed()->count()}})
-                </a>
-                <a class="tab__item btn btn-success"
-                   href="{{route('product.create')}}"
-                   style="color: white;float: left;margin-top: 10px;margin-left: 10px">افزودن محصول
-                </a>
+                </div>
+                <div class="tab__items">
+                    <a class="tab__item btn btn-danger"
+                       href="{{route('product.trashed')}}" style="color: white;margin-left: 10px;">سطل زباله
+                        ({{\App\Models\Product::onlyTrashed()->count()}})
+                    </a>
+                    <a class="tab__item btn btn-success"
+                       href="{{route('product.create')}}"
+                       style="color: white;margin-left: 10px">افزودن محصول
+                    </a>
+                </div>
             </div>
-        </div>
+
         <div class="row">
             <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
 
@@ -79,19 +83,11 @@
                                         @foreach(\App\Models\ChildCategory::where('id',$product->childcategory_id)->get() as $cat)
                                             {{$cat->title}}
                                         @endforeach
-                                            <br>
-                                            @if (\App\Models\CategoryLevel4::where('id',$product->categorylevel4_id)->first())
-                                                --
-                                                @foreach(\App\Models\CategoryLevel4::where('id',$product->categorylevel4_id)->get() as $cat)
-                                                    {{$cat->title}}
-                                                @endforeach
-                                                <br>
-                                            @endif
-
+                                        <br>
                                         برند:
-                                            @foreach(\App\Models\Brand::where('id',$product->brand_id)->get() as $brand)
-                                                {{$brand->name}}
-                                            @endforeach
+                                        @foreach(\App\Models\Brand::where('id',$product->brand_id)->get() as $brand)
+                                            {{$brand->name}}
+                                        @endforeach
 
                                     </td>
                                     <td>

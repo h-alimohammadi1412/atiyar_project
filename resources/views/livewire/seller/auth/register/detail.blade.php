@@ -3,10 +3,10 @@
         <aside class="c-new-login__sidebar c-new-login__sidebar--xs">
             <div class="c-new-login__sidebar-content">
                 <header class="c-new-login__sidebar-header">
-                    {{-- <a href="/seller/registration/" class="c-new-login__logo">
+                    <a href="/seller/registration/" class="c-new-login__logo">
                         <img src="https://seller.digikala.com/static/files/9eb66c4d.svg"
                              alt="Digikala marketplace seller center logo">
-                    </a> --}}
+                    </a>
 
                     <h1 class="c-new-login__header">ثبت‌نام در مرکز فروشندگان</h1>
                 </header>
@@ -30,7 +30,7 @@
 
 {{--                        <div class="c-reg-steps__icon c-reg-steps__icon--checkout"></div>--}}
 {{--                        <h2 class="c-reg-steps__header">۳. اتمام ثبت نام</h2>--}}
-{{--                        <p class="c-reg-steps__description">به جمع فروشندگان آتی یار خوش آمدید.</p>--}}
+{{--                        <p class="c-reg-steps__description">به جمع فروشندگان دیجی‌کالا خوش آمدید.</p>--}}
 {{--                    </li>--}}
                 </ul>
 
@@ -487,7 +487,7 @@
                                 <input type="text" name="register[business_name]"
                                        wire:model.lazy="brand_name"
                                        class="c-ui-input__field"
-                                       id="business_name" value="" placeholder="نام فروشگاه شما در سایت آتی یار"
+                                       id="business_name" value="" placeholder="نام فروشگاه شما در سایت دیجی‌کالا"
                                        maxlength="255" required="">
 
 
@@ -556,7 +556,7 @@
                     <a target="_blank" href="/fbs-courier/">ثبت رسید سفارش</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
-                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی آتی یار</a>
+                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی دیجی‌کالا</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
                     <a target="_blank" href="https://selleracademy.digikala.com/">مرکز آموزش فروشندگان</a>

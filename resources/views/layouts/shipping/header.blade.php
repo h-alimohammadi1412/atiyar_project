@@ -57,7 +57,7 @@
                 <div class="c-header__search">
                     <div class="c-search js-search" data-event="using_search_box" data-event-category="header_section">
                         <span class="c-search__reset u-hidden js-search-reset"></span><input type="text" name="q"
-                                                                                             placeholder="جستجو در آتی یار …"
+                                                                                             placeholder="جستجو در دیجی‌کالا …"
                                                                                              class="js-search-input"
                                                                                              autocomplete="off"
                                                                                              value="">
@@ -1084,15 +1084,15 @@
                                                 </li>
                                                 <li class="c-navi-new-list__sublist-option c-navi-new-list__sublist-option--title"
                                                     data-event="megamenu_click" data-event-category="header_section"
-                                                    data-event-label="category_en:  - category_fa: کارت هدیه خرید از آتی یار - level: 2">
+                                                    data-event-label="category_en:  - category_fa: کارت هدیه خرید از دیجی‌کالا - level: 2">
                                                     <a data-snt-event="dkMegaMenuClick"
-                                                       data-snt-params="{&quot;type&quot;:&quot;option-title&quot;,&quot;category_title&quot;:&quot;کارت هدیه خرید از آتی یار&quot;}"
+                                                       data-snt-params="{&quot;type&quot;:&quot;option-title&quot;,&quot;category_title&quot;:&quot;کارت هدیه خرید از دیجی‌کالا&quot;}"
                                                        href="/main/dk-ds-gift-card/"
-                                                       class=" c-navi-new__big-display-title"><span>کارت هدیه خرید از آتی یار</span></a><a
+                                                       class=" c-navi-new__big-display-title"><span>کارت هدیه خرید از دیجی‌کالا</span></a><a
                                                         data-snt-event="dkMegaMenuClick"
-                                                        data-snt-params="{&quot;type&quot;:&quot;option-title&quot;,&quot;category_title&quot;:&quot;کارت هدیه خرید از آتی یار&quot;}"
+                                                        data-snt-params="{&quot;type&quot;:&quot;option-title&quot;,&quot;category_title&quot;:&quot;کارت هدیه خرید از دیجی‌کالا&quot;}"
                                                         href="/main/dk-ds-gift-card/"
-                                                        class=" c-navi-new__medium-display-title"><span>کارت هدیه خرید از آتی یار</span></a>
+                                                        class=" c-navi-new__medium-display-title"><span>کارت هدیه خرید از دیجی‌کالا</span></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -7254,7 +7254,7 @@
                                                     </a></li>
                                                 <li class="c-fmcg-header-submenu__content-item"><a
                                                         href="/main/food-beverage/">
-                                                        سوپرمارکت آتی یار
+                                                        سوپرمارکت دیجی‌کالا
                                                     </a>
                                                     <ul>
                                                         <li class="c-fmcg-header-submenu__content-subitem"><a
@@ -7287,7 +7287,7 @@
                                                     alt="Jet"><span
                                                     class="c-fmcg-header-submenu__banner-touchpoint-details"><span
                                                         class="c-fmcg-header-submenu__banner-touchpoint-title">
-                            آتی یار جت <span>جدید</span></span><span
+                            دیجی‌کالا جت <span>جدید</span></span><span
                                                         class="c-fmcg-header-submenu__banner-touchpoint-subtitle">
                             کالاهای سوپرمارکتی با <span>ارسال رایگان</span> زیر ۳۰ دقیقه
                         </span></span><span class="c-fmcg-header-submenu__banner-touchpoint-arrow"></span></span></a>
@@ -7465,10 +7465,10 @@
                                                 <li class="c-navi-new-list__sublist-option c-navi-new-list__sublist-option--has-icon c-navi-new-list__sublist-option--gift-card">
                                                     <a href="/search/category-dk-ds-gift-card/"
                                                        class=" c-navi-new__big-display-title">
-                                                        کارت هدیه خرید از آتی یار
+                                                        کارت هدیه خرید از دیجی‌کالا
                                                     </a><a href="/search/category-dk-ds-gift-card/"
                                                            class=" c-navi-new__medium-display-title">
-                                                        کارت هدیه خرید از آتی یار
+                                                        کارت هدیه خرید از دیجی‌کالا
                                                     </a></li>
                                                 <li class="c-navi-new-list__sublist-option c-navi-new-list__sublist-option--has-icon c-navi-new-list__sublist-option--new-seller-product">
                                                     <a href="/promotion-center/new-sellers-products/"
@@ -7492,7 +7492,7 @@
                             <li class="js-categories-bar-item"><a
                                     class="c-navi-new-list__category-link c-navi-new-list__category-link--my-digikala c-navi-new-list__category-link--bold"
                                     href="/my-digikala/">
-                                    آتی یاری من
+                                    دیجی‌کالای من
                                 </a></li>
                             <li class="js-categories-bar-item js-mega-menu-main-item">
                                 <a class="c-navi-new-list__category-link c-navi-new-list__category-link--bold c-navi-new-list__category-link--plus c-digiplus-sign--before"

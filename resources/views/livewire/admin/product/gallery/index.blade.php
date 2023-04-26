@@ -7,7 +7,11 @@
                 <a class="tab__item " href="/admin/color"> تصویر های محصولات</a>
                 <a class="tab__item is-active" href="/admin/gallery"> گالری تصاویر محصولات</a>
 
-                |
+                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">

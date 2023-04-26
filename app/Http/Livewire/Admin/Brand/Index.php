@@ -52,7 +52,7 @@ class Index extends Component
     {
         $this->validate();
 
-        $brand = Brand::query()->create([
+        $brand =    Brand::query()->create([
             'description' => $this->brand->description,
             'name' => $this->brand->name,
             'link' => $this->brand->link,
