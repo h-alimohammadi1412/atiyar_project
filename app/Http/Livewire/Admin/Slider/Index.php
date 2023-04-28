@@ -94,8 +94,9 @@ class Index extends Component
     public function deleteCategory($id)
     {
         $slider = Slider::find($id);
-        Storage::disk('public')->delete("storage", $slider->img);
-        $slider->delete();
+        if ($slider->img) {
+            Storage::disk('public')->delete("storage", $slider->img);
+        }$slider->delete();
 
         Log::create([
             'user_id' => auth()->user()->id,

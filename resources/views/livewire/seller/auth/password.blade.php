@@ -2,9 +2,9 @@
     <div class="c-new-login c-new-login--vertical">
         <main class="c-new-login__main">
             <div class="c-new-login__logo">
-                {{-- <a href="/">
+                <a href="/">
                     <img src="https://seller.digikala.com/static/files/9eb66c4d.svg" alt="Digikala marketplace seller center logo">
-                </a> --}}
+                </a>
             </div>
             <div class="c-reg-form c-reg-form--forgot">
                 <form method="post" id="forgot-form" data-name="forgot" novalidate="novalidate">
@@ -52,12 +52,12 @@
 
         <footer class="c-new-login__main-footer">
             <div class="c-new-login__main-footer-row">
-                <div class="c-new-login__main-footer-contact">ارتباط با مرکز فروشندگان آتی یار</div>
+                <div class="c-new-login__main-footer-contact">ارتباط با مرکز فروشندگان دیجی‌کالا</div>
                 <div class="c-new-login__main-footer-contact c-new-login__main-footer-contact--phone">۶۱۹۳۰۶۰۰ - ۰۲۱</div>
                 <a href="mailto:>SellerSupport@digikala.com" class="c-new-login__main-footer-contact c-new-login__main-footer-contact--email">SellerSupport@digikala.com</a>
             </div>
             <div class="c-new-login__main-footer-row">
-                <div class="c-new-login__main-footer-copyright c-new-login__main-footer-copyright--bold">کليه حقوق اين سايت به <em>شرکت نوآوران فن آوازه (فروشگاه آنلاین آتی یار)</em> تعلق دارد.</div>
+                <div class="c-new-login__main-footer-copyright c-new-login__main-footer-copyright--bold">کليه حقوق اين سايت به <em>شرکت نوآوران فن آوازه (فروشگاه آنلاین دیجی‌کالا)</em> تعلق دارد.</div>
                 <div class="c-new-login__main-footer-copyright">Copyright © 2006 - 2022 Digikala.com</div>
             </div>
         </footer>

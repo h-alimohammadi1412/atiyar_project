@@ -1,13 +1,17 @@
 @section('title','سطل زباله محصولات')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
                 <a class="tab__item " href="/admin/product">محصولات
                     </a>
                 <a class="tab__item " href="/admin/color"> رنگ های محصولات</a>
                 <a class="tab__item " href="/admin/gallery"> گالری تصاویر محصولات</a>
-                |
+                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -17,11 +21,14 @@
                     </form>
                 </a>
 
+            </div>
+            <div class="tab__items">
                 <a class="tab__item btn btn-danger"
-                   href="{{route('product.trashed')}}" style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
+                   href="{{route('product.trashed')}}" style="color: white;margin-left: 10px;">سطل زباله
                     ({{\App\Models\Product::onlyTrashed()->count()}})
                 </a>
             </div>
+
         </div>
         <div class="row">
             <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
@@ -75,11 +82,11 @@
                                     <td><a href="">{{$product->brand_id}}</a></td>
                                     <td>
                                         قیمت:
-                                        {{number_format($product->price)}}
+                                        {{$product->price}}
                                         تومان
                                         <br>
                                         با تخفیف
-                                        {{number_format($product->discount_price)}}
+                                        {{$product->discount_price}}
                                         تومان
                                     </td>
 

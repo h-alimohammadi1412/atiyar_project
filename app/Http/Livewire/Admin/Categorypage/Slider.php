@@ -85,8 +85,9 @@ class Slider extends Component
 //        $slider = DB::connection('mysql-category')->table('category_slider')
         $slider = DB::table('category_slider')
             ->where('id', $id)->limit($id);
-        Storage::disk('public')->delete("storage", $slider2->img);
-        $slider->delete();
+        if ($slider->img) {
+            Storage::disk('public')->delete("storage", $slider2->img);
+        }$slider->delete();
 
         Log::create([
             'user_id' => auth()->user()->id,

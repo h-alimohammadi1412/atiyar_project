@@ -105,15 +105,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="notificationGroup">
-                                    <input id="option101" type="checkbox" wire:model.lazy="productSeller.anbar" name="anbar"
-                                           class="form-control">
-                                    <label for="option101">موجود در انبار فروشنده:</label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
 

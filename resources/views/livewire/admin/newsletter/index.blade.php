@@ -6,7 +6,11 @@
                 <a class="tab__item is-active" href="/admin/newsletter">خبرنامه سایت
                 </a>
 
-                |
+                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">

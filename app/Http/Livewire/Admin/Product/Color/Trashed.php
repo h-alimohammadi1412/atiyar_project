@@ -30,8 +30,9 @@ class Trashed extends Component
     public function deleteCategory($id)
     {
         $color = Color::withTrashed()->findOrFail($id);
-        Storage::disk('public')->delete("storage",$color->img);
-        $color->forceDelete();
+        if ($color->img) {
+            Storage::disk('public')->delete("storage", $color->img);
+        }$color->forceDelete();
         $this->emit('toast', 'success', ' رنگ به صورت کامل از دیتابیس حذف شد.');
     }
 

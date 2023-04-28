@@ -1,12 +1,16 @@
 @section('title','رنگ ها')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
                 <a class="tab__item " href="/admin/product">محصولات</a>
                 <a class="tab__item is-active" href="/admin/color"> رنگ های محصولات</a>
                 <a class="tab__item " href="/admin/gallery"> گالری تصاویر محصولات</a>
-                |
+                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -16,9 +20,12 @@
                     </form>
                 </a>
 
+
+            </div>
+            <div class="tab__items">
                 <a class="tab__item btn btn-danger"
                    href="{{route('color.trashed')}}
-                       " style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
+                       " style="color: white;margin-left: 10px">سطل زباله
                     ({{\App\Models\Color::onlyTrashed()->count()}})
                 </a>
             </div>

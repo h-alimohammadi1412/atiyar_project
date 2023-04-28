@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <select wire:model.lazy="subcategory.parent" name="parent" id="" class="form-control">
+                        <select wire:model.lazy="subcategory.parent" name="parent" id="" class="">
                             @foreach(\App\Models\Category::all() as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                             @endforeach

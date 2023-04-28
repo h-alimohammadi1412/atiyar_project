@@ -1,12 +1,16 @@
 @section('title','سطل زباله صفحات سایت')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
                 <a class="tab__item is-active" href="/admin/page">صفحات سایت
                 </a>
 
-                |
+                <div class="d-none d-lg-inline-block">
+
+                    |
+
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
@@ -16,9 +20,11 @@
                     </form>
                 </a>
 
+            </div>
+            <div class="tab__items">
                 <a class="tab__item btn btn-danger"
                    href="{{route('page.trashed')}}
-                       " style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
+                       " style="color: white;margin-left: 10px">سطل زباله
                     ({{\App\Models\Page::onlyTrashed()->count()}})
                 </a>
             </div>

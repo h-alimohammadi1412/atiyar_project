@@ -1,13 +1,13 @@
 @section('title','افزودن محصول')
-<div wire:ignore>
+<div>
 
     <div class="main-content">
         <div class="row" style="background-color: white">
             <p class="box__title">افزودن محصول جدید
-{{--            @if($this->product->title)--}}
-{{--                ---}}
-{{--                {{$this->product->title}}--}}
-{{--                @endif--}}
+                {{--            @if($this->product->title)--}}
+                {{--                ---}}
+                {{--                {{$this->product->title}}--}}
+                {{--                @endif--}}
             </p>
             <form wire:submit.prevent="categoryForm"
                   enctype="multipart/form-data" role="form"
@@ -45,12 +45,12 @@
                 </div>
 
                 <div class="row">
-{{--                    <div class="col-md-6">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <input type="text" wire:model.lazy="product.link" placeholder="لینک محصول "--}}
-{{--                                   class="form-control">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="col-md-6">--}}
+                    {{--                        <div class="form-group">--}}
+                    {{--                            <input type="text" wire:model.lazy="product.link" placeholder="لینک محصول "--}}
+                    {{--                                   class="form-control">--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
                     <div class="col-md-6">
                         <input type="text" wire:model.lazy="product.number" placeholder="تعداد موجودی محصول "
                                class="form-control">
@@ -100,20 +100,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <select wire:model.lazy="product.categorylevel4_id" name="categorylevel4_id" id=""
-                                    class="form-control">
-                                <option value="-1">--دسته سطح چهارم(می تواند خالی باشد)</option>
-                                @foreach(\App\Models\CategoryLevel4::where('parent',$this->product->childcategory_id)->get() as $category)
-                                    <option value="{{$category->id}}">{{$category->title}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
                             <select wire:model.lazy="product.brand_id" name="brand_id" id="" class="form-control">
                                 <option value="1">برند محصول</option>
                                 @foreach(\App\Models\Brand::all() as $brand)
@@ -122,6 +108,8 @@
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <select wire:model.lazy="product.color_id" name="brand_id" id="" class="form-control">
@@ -132,21 +120,18 @@
                             </select>
                         </div>
                     </div>
-
-
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" wire:model.lazy="product.tags" placeholder="تگ های محصول "
+                                   class="form-control">
+                            @if($this->product->tags)
+                                <span class="alert-info alert " style="margin-top: 5px;padding: 6px !important;">{{$this->product->tags}}</span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-            <input type="text" wire:model.lazy="product.tags" placeholder="تگ های محصول "
-                   class="form-control">
-            @if($this->product->tags)
-                <span class="alert-info alert " style="margin-top: 5px;padding: 6px !important;">{{$this->product->tags}}</span>
-            @endif
-        </div>
-    </div>
-</div>
+
 
                 <div class="row">
                     <div class="col-md-4">
@@ -170,7 +155,7 @@
                             <div class="notificationGroup">
                                 <input id="option10" type="checkbox" wire:model.lazy="product.shipment" name="shipment"
                                        class="form-control">
-                                <label for="option10">موجود در انبار آتی یار:</label>
+                                <label for="option10">موجود در انبار دیجی کالا:</label>
                             </div>
                         </div>
                     </div>

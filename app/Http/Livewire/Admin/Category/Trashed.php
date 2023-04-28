@@ -33,7 +33,7 @@ class Trashed extends Component
     public function deleteCategory($id)
     {
         $category = Category::withTrashed()->findOrFail($id);
-         Storage::disk('public')->delete("storage",$category->img);
+         if ($category->img) {Storage::disk('public')->delete("storage",$category->img);}
         $category->forceDelete();
         $this->emit('toast', 'success', ' دسته به صورت کامل با موفقیت حذف شد.');
     }

@@ -1,19 +1,23 @@
 @section('title','تنوع قیمت محصول')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">
+        <div class="tab__box d-flex tab_items_flex">
+            <div class="tab__items grow-1">
+
                 <a class="tab__item "> تنوع قیمت محصول -
                     {{$this->product->title}}
                 </a>
 
 
-                <a class="tab__item btn btn-danger"
-                   href="{{route('productVendor.trashed')}}"
-                   style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
-                    ({{\App\Models\ProductSeller::onlyTrashed()->count()}})
-                </a>
+
             </div>
+        <div class="tab__items">
+            <a class="tab__item btn btn-danger"
+               href="{{route('productVendor.trashed')}}"
+               style="color: white;margin-left: 10px">سطل زباله
+                ({{\App\Models\ProductSeller::onlyTrashed()->count()}})
+            </a>
+        </div>
         </div>
         <div class="row">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">

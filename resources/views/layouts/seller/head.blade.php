@@ -1,5 +1,5 @@
 <head>
-    <title>آتی یار</title>
+    <title>دیجی‌کالا</title>
 
   @include('layouts.seller.script_head')
 

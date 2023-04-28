@@ -1,7 +1,7 @@
 <div class="header d-flex item-center bg-white width-100 border-bottom padding-12-30">
     <div class="header__right d-flex flex-grow-1 item-center">
         <span class="bars"></span>
-
+        <a href="/"> <img style="height: 40px;margin-right: 20px" src="{{asset('/template/img/logo.png')}}" alt=""></a>
     </div>
     <div class="header__left d-flex flex-end item-center margin-top-2">
         <span class="account-balance font-size-12">موجودی : 2500,000 تومان</span>
@@ -13,19 +13,13 @@
                 </div>
             </div>
         </div>
+        {{--
+                <a href="{{ route('logout') }}" class="logout" title="خروج"></a>
+        --}}
+        <form method="POST" action="{{ route('logout') }}"  x-data>
+            @csrf
 
-        <a href="" class="logout" title="خروج"></a>
-        <span class="profile__name" style="margin-right: 10px !important;margin-left: -80px">
-        {{auth()->user()->name}}
-        </span>
-        <div class="avatar__img" style="width: 100px">
-            @if(auth()->user()->img)
-                <img src="{{asset(auth()->user()->img)}}" class="avatar___img">
-            @else
-                <img src="{{asset('img/pro.jpg')}}" class="avatar___img">
-            @endif
-        </div>
-
+            <a href="{{ route('logout') }}" @click.prevent="$root.submit();" class="logout" title="خروج"></a>
+        </form>
     </div>
-
 </div>
