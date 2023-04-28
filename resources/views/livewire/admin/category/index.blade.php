@@ -17,7 +17,9 @@
                     ({{ \App\Models\Category::onlyTrashed()->count() }})
                 </a>
             </div>
-        </div>
+        \
+            </div>
+
         <div class="row">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
 
@@ -104,7 +106,6 @@
 
 
             </div>
-
             <div class="col-4 bg-white">
                 <p class="box__title">ایجاد دسته بندی جدید</p>
                 @can('create-category')

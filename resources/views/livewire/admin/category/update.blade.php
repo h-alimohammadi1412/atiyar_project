@@ -2,7 +2,7 @@
 <div>
     <div class="main-content padding-0">
         <p class="box__title">ویرایش دسته -
-        {{$category->title}}</p>
+            {{$category->title}}</p>
         <div class="row no-gutters bg-white">
             <div class="col-8">
                 <form wire:submit.prevent="categoryForm"
