@@ -3,29 +3,23 @@
     <div class="main-content" wire:init="loadCategory">
         <div class="tab__box">
             <div class="tab__items">
-                <a class="tab__item">جستجو: </a>
-
+                <a class="tab__item">جستجو:</a>
                 <a class="t-header-search">
                     <form action="" onclick="event.preventDefault();">
                         <input wire:model.debounce.1000ms="search" type="text" class="text"
                             style="font-family: IRANYekan" placeholder="جستجوی دسته ...">
                     </form>
                 </a>
-
                 <a class="tab__item btn btn-danger" href="{{ route('category.trashed') }}"
                     style="color: white;float: left;margin-top: 10px;margin-left: 10px">سطل زباله
                     ({{ \App\Models\Category::onlyTrashed()->count() }})
                 </a>
             </div>
-        \
-            </div>
-
+        </div>
         <div class="row">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
-
                 <div class="table__box">
                     <table class="table ">
-
                         <thead role="rowgroup">
                             <tr role="row" class="title-row">
                                 <th>شناسه</th>
@@ -37,7 +31,6 @@
                                 <th>زیر دسته ها</th>
                             </tr>
                         </thead>
-
                         @if ($readyToLoad)
                             <tbody>
                                 @foreach ($categories as $category)

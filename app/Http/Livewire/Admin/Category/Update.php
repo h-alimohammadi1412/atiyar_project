@@ -37,7 +37,8 @@ class Update extends Component
         }
         Log::create([
             'user_id' => auth()->user()->id,
-            'url' => 'آپدیت دسته' .'-'. $this->category->title,
+            'title' => 'آپدیت دسته' .'-'. $this->category->title,
+            'url'=> 'admin/category',
             'actionType' => 'آپدیت'
         ]);
         alert()->success('دسته با موفقیت ایجاد شد.', 'دسته آپدیت شد.');

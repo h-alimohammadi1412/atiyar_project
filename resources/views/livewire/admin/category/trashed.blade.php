@@ -1,8 +1,8 @@
 @section('title','سطل زباله دسته ها')
 <div>
     <div class="main-content" wire:init="loadCategory">
-        <div class="tab__box">
-            <div class="tab__items">    
+        <div class="tab__box d-flex justify-content-between">
+            <div class="tab__items w-75">    
                 <a class="t-header-search">
                     <form action="" onclick="event.preventDefault();">
                         <input wire:model.debounce.1000="search"

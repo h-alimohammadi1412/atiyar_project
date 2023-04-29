@@ -75,7 +75,8 @@ class Index extends Component
 
         Log::create([
             'user_id' => auth()->user()->id,
-            'url' => 'افزودن دسته' . '-' . $this->category->title,
+            'title' => 'افزودن دسته' . '-' . $this->category->title,
+            'url'=> 'admin/category',
             'actionType' => 'ایجاد'
         ]);
         $this->emit('toast', 'success', ' دسته با موفقیت ایجاد شد.');
@@ -102,7 +103,8 @@ class Index extends Component
             $category->update(['status' => 1]);
             Log::create([
                 'user_id' => auth()->user()->id,
-                'url' => 'فعال کردن وضعیت دسته' . '-' . $category->title,
+                'title' => 'فعال کردن وضعیت دسته' . '-' . $category->title,
+                'url'=> 'admin/category',
                 'actionType' => 'فعال'
             ]);
             $this->emit('toast', 'success', 'وضعیت دسته با موفقیت فعال شد.');
@@ -110,7 +112,8 @@ class Index extends Component
             $category->update(['status' => 0]);
             Log::create([
                 'user_id' => auth()->user()->id,
-                'url' => 'غیرفعال کردن وضعیت دسته' . '-' . $category->title,
+                'title' => 'غیرفعال کردن وضعیت دسته' . '-' . $category->title,
+                'url'=> 'admin/category',
                 'actionType' => 'غیرفعال'
             ]);
             $this->emit('toast', 'success', 'وضعیت دسته با موفقیت غیرفعال شد.');
@@ -126,7 +129,8 @@ class Index extends Component
             $category->delete();
             Log::create([
                 'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن دسته' . '-' . $category->title,
+                'title' => 'حذف کردن دسته' . '-' . $category->title,
+                'url'=> 'admin/category',
                 'actionType' => 'حذف'
             ]);
             $this->emit('toast', 'success', ' دسته با موفقیت حذف شد.');

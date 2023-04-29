@@ -13,8 +13,12 @@ class Category extends Model
     
     protected $fillable = ['img','title','description','body','parent_id','link','en_name','status','search_url'];
 
-    public static function getCategories(){
-        $categories =['0'=>'دسته والد'];
+    public static function getCategories($select_category_product = false){
+        if($select_category_product){
+            $categories =['0'=>'انتخاب دسته بندی'];
+        }else{
+            $categories =['0'=>'دسته والد'];
+        }
         $categoryParent = self::with('getChild.getChild')->where('parent_id' ,0)->get();
 
         foreach($categoryParent as $value1){

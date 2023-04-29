@@ -22,17 +22,17 @@ Route::get('/log',\App\Http\Livewire\Admin\Log\Index::class)->name('log.index');
 
 //=======================================> //category//
 Route::get('/category',\App\Http\Livewire\Admin\Category\Index::class)->name('category.index')->middleware('can:show-category');
-Route::get('/subcategory',\App\Http\Livewire\Admin\Subcategory\Index::class)->name('subcategory.index');
-Route::get('/childcategory',\App\Http\Livewire\Admin\Childcategory\Index::class)->name('childcategory.index');
-Route::get('/categorylevel4',\App\Http\Livewire\Admin\Categorylevel4\Index::class)->name('categorylevel4.index');
+// Route::get('/subcategory',\App\Http\Livewire\Admin\Subcategory\Index::class)->name('subcategory.index');
+// Route::get('/childcategory',\App\Http\Livewire\Admin\Childcategory\Index::class)->name('childcategory.index');
+// Route::get('/categorylevel4',\App\Http\Livewire\Admin\Categorylevel4\Index::class)->name('categorylevel4.index');
 Route::get('/category/update/{category}',\App\Http\Livewire\Admin\Category\Update::class)->name('category.update');
-Route::get('/subcategory/update/{subcategory}',\App\Http\Livewire\Admin\Subcategory\Update::class)->name('subcategory.update');
-Route::get('/childcategory/update/{childcategory}',\App\Http\Livewire\Admin\Childcategory\Update::class)->name('childcategory.update');
-Route::get('/categorylevel4/update/{categorylevel4}',\App\Http\Livewire\Admin\Categorylevel4\Update::class)->name('categorylevel4.update');
+// Route::get('/subcategory/update/{subcategory}',\App\Http\Livewire\Admin\Subcategory\Update::class)->name('subcategory.update');
+// Route::get('/childcategory/update/{childcategory}',\App\Http\Livewire\Admin\Childcategory\Update::class)->name('childcategory.update');
+// Route::get('/categorylevel4/update/{categorylevel4}',\App\Http\Livewire\Admin\Categorylevel4\Update::class)->name('categorylevel4.update');
 Route::get('/category/trashed',\App\Http\Livewire\Admin\Category\Trashed::class)->name('category.trashed');
-Route::get('/subcategory/trashed',\App\Http\Livewire\Admin\Subcategory\Trashed::class)->name('subcategory.trashed');
-Route::get('/childcategory/trashed',\App\Http\Livewire\Admin\Childcategory\Trashed::class)->name('childcategory.trashed');
-Route::get('/categorylevel4/trashed',\App\Http\Livewire\Admin\Categorylevel4\Trashed::class)->name('categorylevel4.trashed');
+// Route::get('/subcategory/trashed',\App\Http\Livewire\Admin\Subcategory\Trashed::class)->name('subcategory.trashed');
+// Route::get('/childcategory/trashed',\App\Http\Livewire\Admin\Childcategory\Trashed::class)->name('childcategory.trashed');
+// Route::get('/categorylevel4/trashed',\App\Http\Livewire\Admin\Categorylevel4\Trashed::class)->name('categorylevel4.trashed');
 
 //=======================================> //product//
 Route::get('/product',\App\Http\Livewire\Admin\Product\Index::class)->name('product.index')->middleware('can:show-product');
