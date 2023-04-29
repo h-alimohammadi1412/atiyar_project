@@ -29,7 +29,7 @@ class Index extends Component
     public function render()
     {
 
-        $logs = $this->readyToLoad ? Log::where('actionType', 'LIKE', "%{$this->search}%")->
+        $logs = $this->readyToLoad ? Log::with('user')->where('actionType', 'LIKE', "%{$this->search}%")->
         orWhere('user_id', 'LIKE', "%{$this->search}%")->
         orWhere('url', 'LIKE', "%{$this->search}%")->
         orWhere('id', $this->search)->
