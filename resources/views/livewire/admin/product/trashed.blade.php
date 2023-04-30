@@ -42,9 +42,8 @@
                             <th>تصویر محصول</th>
                             <th>عنوان محصول</th>
                             <th>فروشنده محصول</th>
-                            <th>دسته های محصول</th>
+                            <th>دسته بندی محصول</th>
                             <th>برند محصول</th>
-                            <th>قیمت محصول</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -58,37 +57,12 @@
                                     </td>
                                     <td><a href="">{{$product->title}}</a></td>
                                     <td>
-                                        @foreach(\App\Models\User::where('id',$product->vendor_id)->get() as $user)
-                                            {{$user->name}}
-                                        @endforeach
+                                        @if($product->user){{ $product->user->name }}@endif
                                     </td>
                                     <td>
-                                        @foreach(\App\Models\Category::where('id',$product->category_id)->get() as $cat)
-                                            {{$cat->title}}
-                                        @endforeach
-                                        <br>
-                                        -
-                                        @foreach(\App\Models\SubCategory::where('id',$product->subcategory_id)->get() as $cat)
-                                            {{$cat->title}}
-                                        @endforeach
-
-                                        <br>
-                                        --
-                                        @foreach(\App\Models\ChildCategory::where('id',$product->childcategory_id)->get() as $cat)
-                                            {{$cat->title}}
-                                        @endforeach
-
+                                        {{ $product->category->title }}
                                     </td>
-                                    <td><a href="">{{$product->brand_id}}</a></td>
-                                    <td>
-                                        قیمت:
-                                        {{$product->price}}
-                                        تومان
-                                        <br>
-                                        با تخفیف
-                                        {{$product->discount_price}}
-                                        تومان
-                                    </td>
+                                    <td>     @if($product->brand){{ $product->brand->name }}@endif</td>                                
 
                                     <td>
                                         <a wire:click="deleteCategory({{$product->id}})" type="submit"

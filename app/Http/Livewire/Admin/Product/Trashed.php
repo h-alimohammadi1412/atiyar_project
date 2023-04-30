@@ -40,7 +40,8 @@ class Trashed extends Component
         $product->restore();
         Log::create([
             'user_id' => auth()->user()->id,
-            'url' => 'بازیابی محصول' .'-'. $product->title,
+            'title' => 'بازیابی محصول' .'-'. $product->title,
+            'url'=>'admin/category',
             'actionType' => 'بازیابی'
         ]);
         $this->emit('toast', 'success', ' محصول با موفقیت بازیابی شد.');
@@ -49,7 +50,8 @@ class Trashed extends Component
     public function render()
     {
 
-        $products = $this->readyToLoad ? DB::table('products')
+        $products =  $this->readyToLoad ? Product::with(['category','user','brand'])
+            ->onlyTrashed()
             ->whereNotNull('deleted_at')->
             latest()->paginate(15) : [];
         return view('livewire.admin.product.trashed',compact('products'));
