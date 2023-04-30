@@ -74,12 +74,8 @@ class Index extends AdminControllerLivewire
         $this->brand->status = false;
         $this->brand->vip = false;
         $this->img = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'افزودن برند' .'-'. $this->brand->title,
-            'url'=>'admin/brand',
-            'actionType' => 'ایجاد'
-        ]);
+        
+        $this->createLog('برند','admin/brand',$this->brand->name,'ایجاد');
         $this->emit('toast', 'success', ' برند با موفقیت ایجاد شد.');
 
     }
@@ -94,11 +90,7 @@ class Index extends AdminControllerLivewire
         $brand->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت برند' .'-'. $this->brand->title,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog('برند','admin/brand',$this->brand->name,'غیرفعال');
         $this->emit('toast', 'success', 'وضعیت برند با موفقیت غیرفعال شد.');
     }
 
@@ -108,11 +100,7 @@ class Index extends AdminControllerLivewire
         $brand->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت برند' .'-'. $this->brand->title,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog('برند','admin/brand',$this->brand->name,'فعال');
         $this->emit('toast', 'success', 'وضعیت برند با موفقیت فعال شد.');
     }
 
@@ -122,12 +110,7 @@ class Index extends AdminControllerLivewire
         $product = Product::where('brand_id',$id)->first();
         if ($product == null){
             $brand->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'title' => 'حذف کردن برند' .'-'. $this->brand->title,
-                'url'=>'admin/brand',
-                'actionType' => 'حذف'
-            ]);
+            $this->createLog('برند','admin/brand',$this->brand->name,'حذف');
             $this->emit('toast', 'success', ' برند با موفقیت حذف شد.');
         }else
         {
@@ -140,11 +123,12 @@ class Index extends AdminControllerLivewire
     public function render()
     {
 
-        $brands = $this->readyToLoad ? Brand::where('description', 'LIKE', "%{$this->search}%")->
+        $brands = $this->readyToLoad ? Brand::with('category')->where('description', 'LIKE', "%{$this->search}%")->
         orWhere('name', 'LIKE', "%{$this->search}%")->
         orWhere('link', 'LIKE', "%{$this->search}%")->
         orWhere('id', $this->search)->
         latest()->paginate(15) : [];
+
         return view('livewire.admin.brand.index',compact('brands'));
     }
 }

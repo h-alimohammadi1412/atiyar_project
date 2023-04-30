@@ -73,12 +73,7 @@ class Index extends AdminControllerLivewire
         $this->category->status = false;
         $this->img = null;
 
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'افزودن دسته' . '-' . $this->category->title,
-            'url'=> 'admin/category',
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('دسته', 'admin/category', $this->category->title, 'ایجاد');
         $this->emit('toast', 'success', ' دسته با موفقیت ایجاد شد.');
 
     }
@@ -93,12 +88,7 @@ class Index extends AdminControllerLivewire
         $category = Category::find($id);
         if ($category) {
             $category->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'title' => 'حذف کردن دسته' . '-' . $category->title,
-                'url'=> 'admin/category',
-                'actionType' => 'حذف'
-            ]);
+            $this->createLog('دسته', 'admin/category', $category->title, 'حذف');
             $this->emit('toast', 'success', ' دسته با موفقیت حذف شد.');
         } else {
             $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا زیردسته دارد!');
@@ -109,16 +99,10 @@ class Index extends AdminControllerLivewire
     {
 
         $categories = $this->readyToLoad ? Category::with('getChild.getChild')
-        ->where('parent_id', $this->category_id)
+            ->where('parent_id', $this->category_id)
             ->where('title', 'LIKE', "%{$this->search}%")
             ->where('en_name', 'LIKE', "%{$this->search}%")
             ->latest()->paginate(15) : [];
-
-        // dd(Category::with('getChild.getChild')->where('title', 'LIKE', "%{$this->search}%")->
-        // orWhere('en_name', 'LIKE', "%{$this->search}%")->
-        // orWhere('link', 'LIKE', "%{$this->search}%")->
-        // orWhere('id', $this->search)->
-        // latest()->paginate(15)[9]->getChild[0]->name);
         return view('livewire.admin.category.index', compact('categories'));
     }
 }

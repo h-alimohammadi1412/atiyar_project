@@ -39,12 +39,7 @@ class Update extends AdminControllerLivewire
                 'vip' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'آپدیت برند' .'-'. $this->brand->title,
-            'url'=>'admin/brand',
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('برند','admin/brand',$this->brand->title,'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'برند مورد نظر با موفقیت آپدیت شد.');
         return redirect(route('brand.index'));
 

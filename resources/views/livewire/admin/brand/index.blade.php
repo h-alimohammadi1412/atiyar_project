@@ -56,9 +56,7 @@
                                     </td>
                                     <td><a href="">{{$brand->name}}</a></td>
                                     <td>
-                                        @foreach(\App\Models\Category::where('id',$brand->parent)->get() as $ca)
-                                            {{$ca->title}}
-                                        @endforeach
+                                        @if($brand->category) {{$brand->category->title}} @endif
                                     </td>
 
                                     <td>
@@ -132,9 +130,8 @@
                     <div class="form-group">
                         <select wire:model.lazy="brand.parent" name="parent" id="" class="form-control">
                             <option value="-1"> - انتخاب دسته برند</option>
-                            @foreach(\App\Models\Category::all() as $category)
-
-                                <option value="{{$category->id}}">{{$category->title}}</option>
+                            @foreach(\App\Models\Category::getCategories() as $key=>$category)
+                                <option value="{{$key}}">{{$category}}</option>
                             @endforeach
                         </select>
                     </div>
