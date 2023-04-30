@@ -2,13 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Brand;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Brand;
 use App\Models\Log;
-use App\Models\SubCategory;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public Brand $brand;
@@ -26,7 +25,7 @@ class Update extends Component
     {
         $this->validate();
         if ($this->img){
-            $this->brand->img = $this->uploadImage();
+            $this->brand->img = $this->uploadImage('brand');
         }
 
         $this->brand->update($this->validate());
@@ -42,22 +41,15 @@ class Update extends Component
         }
         Log::create([
             'user_id' => auth()->user()->id,
-            'url' => 'آپدیت برند' .'-'. $this->brand->title,
+            'title' => 'آپدیت برند' .'-'. $this->brand->title,
+            'url'=>'admin/brand',
             'actionType' => 'آپدیت'
         ]);
         alert()->success(' با موفقیت آپدیت شد.', 'برند مورد نظر با موفقیت آپدیت شد.');
         return redirect(route('brand.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "brand/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
+ 
 
 
     public function render()

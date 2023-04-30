@@ -65,9 +65,9 @@
                                     <td>     @if($product->brand){{ $product->brand->name }}@endif</td>                                
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$product->id}})" type="submit"
+                                        <a wire:click="deleteField('Product','product','محصول','title',{{ $product->id }})" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
-                                        <a wire:click="trashedProduct({{$product->id}})"
+                                        <a wire:click="trashedField('Product','product','محصول','title',{{ $product->id }})"
                                            class="item-li i-checkouts item-restore"></a>
                                     </td>
                                 </tr>

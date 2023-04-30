@@ -2,15 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Brand;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Brand;
 use App\Models\Log;
-use App\Models\SubCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class Trashed extends Component
+class Trashed extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -26,26 +25,6 @@ class Trashed extends Component
     public function loadCategory()
     {
         $this->readyToLoad = true;
-    }
-
-    public function deleteCategory($id)
-    {
-        $brand = Brand::withTrashed()->findOrFail($id);
-        if ($brand->img) {Storage::disk('public')->delete("storage",$brand->img);}
-        $brand->forceDelete();
-        $this->emit('toast', 'success', ' برند به صورت کامل از دیتابیس حذف شد.');
-    }
-
-    public function trashedCategory($id)
-    {
-        $brand = Brand::withTrashed()->where('id', $id)->first();
-        $brand->restore();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'بازیابی برند' .'-'. $brand->name,
-            'actionType' => 'بازیابی'
-        ]);
-        $this->emit('toast', 'success', ' برند با موفقیت بازیابی شد.');
     }
 
     public function render()

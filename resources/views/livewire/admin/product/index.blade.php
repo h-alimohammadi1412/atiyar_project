@@ -98,12 +98,12 @@
 
                                         <td>
                                             @if ($product->status_product == 1)
-                                                <button wire:click="updateCategoryStatus({{ $product->id }})"
+                                                <button wire:click="updateStatus('Product','product','محصول','status_product',{{ $product->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                                 </button>
                                             @else
-                                                <button wire:click="updateCategoryStatus({{ $product->id }})"
+                                                <button wire:click="updateStatus('Product','product','محصول','status_product',{{ $product->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                     غیرفعال

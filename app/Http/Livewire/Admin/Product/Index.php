@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Product;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Product;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -28,36 +28,7 @@ class Index extends Component
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryStatus($id)
-    {
-        $product = Product::find($id);
-        if($product){
-            if($product->status_product == 0){
-                $product->update([
-                    'status_product' => 1
-                ]);
-                Log::create([
-                    'user_id' => auth()->user()->id,
-                    'title' => 'فعال کردن وضعیت محصول' .'-'. $product->title,
-                    'url'=> 'admin/product',
-                    'actionType' => 'فعال'
-                ]);
-                $this->emit('toast', 'success', 'وضعیت محصول با موفقیت فعال شد.');
-            }else{
-                $product->update([
-                    'status_product' => 0
-                ]);
-                Log::create([
-                    'user_id' => auth()->user()->id,
-                    'title' => 'غیرفعال کردن وضعیت محصول' .'-'. $product->title,
-                    'url'=> 'admin/product',
-                    'actionType' => 'غیرفعال'
-                ]);
-                $this->emit('toast', 'success', 'وضعیت محصول با موفقیت غیرفعال شد.');
-            }
-        }
-        
-    }
+
 
     public function deleteCategory($id)
     {

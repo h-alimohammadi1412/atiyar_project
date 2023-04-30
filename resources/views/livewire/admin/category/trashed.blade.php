@@ -51,9 +51,9 @@
                                     <td><a href="">{{$category->en_name}}</a></td>
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$category->id}})" type="submit"
+                                        <a wire:click="deleteField('Category','category','دسته','title',{{ $category->id }})" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
-                                        <a wire:click="trashedCategory({{$category->id}})"
+                                        <a wire:click="trashedField('Category','category','دسته','title',{{ $category->id }})"
                                            class="item-li i-checkouts item-restore"></a>
                                     </td>
                                 </tr>

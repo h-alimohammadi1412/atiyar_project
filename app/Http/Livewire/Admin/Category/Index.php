@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Category;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\SubCategory;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -62,7 +62,7 @@ class Index extends Component
 
         if ($this->img) {
             $category->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('category')
             ]);
         }
 
@@ -82,50 +82,16 @@ class Index extends Component
         $this->emit('toast', 'success', ' دسته با موفقیت ایجاد شد.');
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "category/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
+
     public function loadCategory()
     {
         $this->readyToLoad = true;
     }
 
-    public function updateCategoryStatus($id)
-    {
-        $category = Category::find($id);
-        if ($category->status == 0) {
-            $category->update(['status' => 1]);
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'title' => 'فعال کردن وضعیت دسته' . '-' . $category->title,
-                'url'=> 'admin/category',
-                'actionType' => 'فعال'
-            ]);
-            $this->emit('toast', 'success', 'وضعیت دسته با موفقیت فعال شد.');
-        } else {
-            $category->update(['status' => 0]);
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'title' => 'غیرفعال کردن وضعیت دسته' . '-' . $category->title,
-                'url'=> 'admin/category',
-                'actionType' => 'غیرفعال'
-            ]);
-            $this->emit('toast', 'success', 'وضعیت دسته با موفقیت غیرفعال شد.');
-        }
-
-    }
-
     public function deleteCategory($id)
     {
         $category = Category::find($id);
-        $subCategory = SubCategory::where('parent', $id)->first();
-        if ($subCategory == null) {
+        if ($category) {
             $category->delete();
             Log::create([
                 'user_id' => auth()->user()->id,

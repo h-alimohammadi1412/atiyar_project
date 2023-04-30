@@ -45,12 +45,12 @@
                                         <td>
                                             @can('status-category')
                                                 @if ($category->status == 1)
-                                                    <button wire:click="updateCategoryStatus({{ $category->id }})"
+                                                    <button wire:click="updateStatus('Category','category','دسته','status',{{ $category->id }})"
                                                         type="submit" class="badge-success badge"
                                                         style="background-color: green">فعال
                                                     </button>
                                                 @else
-                                                    <button wire:click="updateCategoryStatus({{ $category->id }})"
+                                                    <button wire:click="updateStatus('Category','category','دسته','status',{{ $category->id }})"
                                                         type="submit" class="badge-danger badge"
                                                         style="background-color: red">
                                                         غیرفعال

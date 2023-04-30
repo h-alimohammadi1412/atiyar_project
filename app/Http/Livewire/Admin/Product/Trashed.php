@@ -2,16 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Product;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Log;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class Trashed extends Component
+class Trashed extends AdminControllerLivewire
 {
     use WithPagination;
 

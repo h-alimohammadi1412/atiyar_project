@@ -62,13 +62,13 @@
                                     </td>
 
                                     <td>
-                                        @if($brand->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$brand->id}})"
+                                        @if($brand->vip == 1)
+                                            <button wire:click="updateStatus('Brand','brand','برند','vip',{{ $brand->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                             </button>
                                         @else
-                                            <button wire:click="updateCategoryEnable({{$brand->id}})"
+                                            <button wire:click="updateStatus('Brand','brand','برند','vip',{{ $brand->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال

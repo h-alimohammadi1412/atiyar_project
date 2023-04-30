@@ -2,15 +2,15 @@
 
 namespace App\Http\Livewire\Admin\Brand;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Product;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -63,7 +63,7 @@ class Index extends Component
 
         if ($this->img){
             $brand->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('brand')
             ]);
         }
 
@@ -76,22 +76,14 @@ class Index extends Component
         $this->img = null;
         Log::create([
             'user_id' => auth()->user()->id,
-            'url' => 'افزودن برند' .'-'. $this->brand->title,
+            'title' => 'افزودن برند' .'-'. $this->brand->title,
+            'url'=>'admin/brand',
             'actionType' => 'ایجاد'
         ]);
         $this->emit('toast', 'success', ' برند با موفقیت ایجاد شد.');
 
     }
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "brand/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
+   
     public function loadCategory()
     {
         $this->readyToLoad = true;
@@ -124,34 +116,6 @@ class Index extends Component
         $this->emit('toast', 'success', 'وضعیت برند با موفقیت فعال شد.');
     }
 
-    public function updateBrandDisable($id)
-    {
-        $brand = Brand::find($id);
-        $brand->update([
-            'vip' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت برند' .'-'. $this->brand->title,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت برند با موفقیت غیرفعال شد.');
-    }
-
-    public function updateBrandEnable($id)
-    {
-        $brand = Brand::find($id);
-        $brand->update([
-            'vip' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت برند' .'-'. $this->brand->title,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت برند با موفقیت فعال شد.');
-    }
-
     public function deleteCategory($id)
     {
         $brand = Brand::find($id);
@@ -160,7 +124,8 @@ class Index extends Component
             $brand->delete();
             Log::create([
                 'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن برند' .'-'. $this->brand->title,
+                'title' => 'حذف کردن برند' .'-'. $this->brand->title,
+                'url'=>'admin/brand',
                 'actionType' => 'حذف'
             ]);
             $this->emit('toast', 'success', ' برند با موفقیت حذف شد.');
