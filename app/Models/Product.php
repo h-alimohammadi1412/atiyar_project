@@ -13,10 +13,28 @@ class Product extends Model
     use SoftDeletes;
     use Sluggable;
 
-    protected $fillable = ['img', 'title', 'link', 'name', 'status_product','vendor_id',
-         'category_id', 'subcategory_id', 'childcategory_id', 'categorylevel4_id', 'color_id', 'brand_id','tags', 'body', 'description',
-        'price', 'discount_price', 'number','weight', 'view', 'shipment', 'publish_product',  'original',
-        'gift','order_count', 'special'];
+    protected $fillable = [
+        'img',
+        'title',
+        'link',
+        'en_name',
+        'status_product',
+        'vendor_id',
+        'color_id',
+        'brand_id',
+        'tags',
+        'body',
+        'description',
+        'price',
+        'discount_price',
+        'weight',
+        'view',
+        'shipment',
+        'original',
+        'gift',
+        'order_count',
+        'special'
+    ];
 
 
     /**
@@ -35,38 +53,39 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class,'category_id','id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
-    public function subcategory()
+    public function user()
     {
-        return $this->belongsTo(SubCategory::class,'subcategory_id','id');
-    }
-    public function childcategory()
-    {
-        return $this->belongsTo(ChildCategory::class,'childcategory_id','id');
-    }
-    public function categorylevel4()
-    {
-        return $this->belongsTo(CategoryLevel4::class,'categorylevel4_id','id');
+        return $this->belongsTo(User::class, 'seller_id', 'id');
     }
     public function brand()
     {
-        return $this->belongsTo(Brand::class,'brand_id','id');
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
     public function color()
     {
-        return $this->belongsTo(Color::class,'color_id','id');
+        return $this->belongsTo(Color::class, 'color_id', 'id');
     }
 
 
-    public function scopeWithFilters($query,$brands)
+    public function scopeWithFilters($query, $brands)
     {
         dd($query);
-        return $query->when(count($brands),function ($query) use ($brands){
-           $query->whereIn('brand_id',$brands);
+        return $query->when(count($brands), function ($query) use ($brands) {
+            $query->whereIn('brand_id', $brands);
         });
-        }
-
+    }
+    public static function productStatus()
+    {
+        $array = [];
+        $array[-3] = 'رد شده';
+        $array[-2] = 'در انتظار بررسی';
+        $array[-1] = 'توقف تولید';
+        $array[0] = 'نا موجود';
+        $array[1] = 'منتشر شده';
+        return $array;
+    }
 
 
 

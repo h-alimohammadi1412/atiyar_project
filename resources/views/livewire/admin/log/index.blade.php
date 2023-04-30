@@ -45,7 +45,7 @@
                                     <tr role="row">
                                         <td><a href="">{{ $log->id }}</a></td>
                                         <td>
-                                                {{ \App\Models\User::where('id', $log->user_id)->first()->name }}
+                                                {{ $log->user->name }}
                                         </td>
                                         <td><a href="{{ $log->url }}">{{ $log->title }}</a></td>
                                         <td>{{\App\Models\Log::date($log->created_at,true)['time']}} - {{\App\Models\Log::date($log->created_at)['date']}}</td>

@@ -31,6 +31,7 @@
         "@ckeditor/ckeditor5-build-classic": "^26.0.0",
         "bootstrap-iconpicker": "^1.8.2",
         "bootstrap-icons": "^1.4.0",
+        "bootstrap-select": "^1.13.18",
         "chart.js": "^3.7.1",
         "font-awesome": "^4.7.0",
         "remodal": "^1.1.1",

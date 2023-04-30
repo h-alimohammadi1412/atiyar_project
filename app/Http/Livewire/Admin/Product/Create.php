@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Log;
 use App\Models\Product;
 use App\Models\SubCategory;
+use DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -14,7 +15,7 @@ class Create extends Component
 {
     use WithFileUploads;
     public $img;
-public $subCategory;
+    public $color_id=[];
     public Product $product;
 
     public function mount()
@@ -26,49 +27,36 @@ public $subCategory;
 
     protected $rules = [
         'product.title' => 'required|min:3',
-        'product.name' => 'required',
-        'product.vendor_id' => 'nullable',
+        'product.en_name' => 'required',
+        'product.seller_id' => 'nullable',
         'product.category_id' => 'nullable',
         'product.status_product' => 'nullable',
-        'product.subcategory_id' => 'nullable',
-        'product.childcategory_id' => 'nullable',
-        'product.categorylevel4_id' => 'nullable',
         'product.color_id' => 'nullable',
-        'product.brand_id' => 'nullable',
+        'product.brand_id' => 'required',
         'product.tags' => 'nullable',
-        'product.body' => 'nullable',
-        'product.description' => 'nullable',
-        'product.price' => 'required|numeric',
-        'product.discount_price' => 'required|numeric',
-        'product.number' => 'nullable|numeric',
+        'product.body' => 'required',
+        'img' => 'required',
+        'product.description' => 'required',
         'product.weight' => 'nullable',
         'product.view' => 'nullable',
         'product.shipment' => 'nullable',
-        'product.publish_product' => 'nullable',
         'product.gift' => 'nullable',
         'product.original' => 'nullable',
-        'product.order_count' => 'nullable|numeric',
-        'product.special' => 'nullable',
     ];
-
-    public function updated($title)
-    {
-        $this->validateOnly($title);
-    }
-
 
     public function categoryForm()
     {
 
         $this->validate();
-        if ($this->img){
-        $this->product->img = $this->uploadImage();
-            }
+        if ($this->img) {
+            $this->product->img = $this->uploadImage();
+        }
         $this->product->save();
-
+       
         Log::create([
             'user_id' => auth()->user()->id,
-            'url' => 'افزودن محصول' .'-'. $this->product->title,
+            'title' => 'افزودن محصول' . '-' . $this->product->title,
+            'url' => 'admin/product',
             'actionType' => 'ایجاد'
         ]);
         alert()->success(' با موفقیت ایجاد شد.', 'محصول مورد نظر با موفقیت ایجاد شد.');

@@ -5,6 +5,9 @@
 
 
 <script src="{{asset('js/jscolor.js')}}"></script>
+<script src="{{asset('js/ckeditor.js')}}"></script>
+<script src="{{asset('/js/sweetalert.min.js')}}"></script>
 <script src="{{asset('js/js.js')}}"></script>
+<script></script>
 <livewire:scripts />
 

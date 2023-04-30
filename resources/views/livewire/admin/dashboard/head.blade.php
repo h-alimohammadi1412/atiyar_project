@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="{{asset('css/responsive_991.css')}}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{asset('css/responsive_768.css')}}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{asset('css/font.css')}}">
-    {{--    <link href="{{asset('js/jquery.select2.js')}}" rel="stylesheet" />--}}
+       {{-- <link href="{{asset('js/jquery.select2.js')}}" rel="stylesheet" /> --}}
     <link href="{{asset('css/select2.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/select2-bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
 {{--    <link rel="stylesheet" href="{{asset('css/bootstrap-iconpicker.min.css')}}">--}}
-    <script src="{{asset('js/ckeditor.js')}}"></script>
-    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
+  
+
     <livewire:styles />
 
     <style>

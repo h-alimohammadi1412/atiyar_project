@@ -28,32 +28,35 @@ class Index extends Component
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryDisable($id)
+    public function updateCategoryStatus($id)
     {
         $product = Product::find($id);
-        $product->update([
-            'status_product' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت محصول' .'-'. $product->title,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت محصول با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $product = Product::find($id);
-        $product->update([
-            'status_product' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت محصول' .'-'. $product->title,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت محصول با موفقیت فعال شد.');
+        if($product){
+            if($product->status_product == 0){
+                $product->update([
+                    'status_product' => 1
+                ]);
+                Log::create([
+                    'user_id' => auth()->user()->id,
+                    'title' => 'فعال کردن وضعیت محصول' .'-'. $product->title,
+                    'url'=> 'admin/product',
+                    'actionType' => 'فعال'
+                ]);
+                $this->emit('toast', 'success', 'وضعیت محصول با موفقیت فعال شد.');
+            }else{
+                $product->update([
+                    'status_product' => 0
+                ]);
+                Log::create([
+                    'user_id' => auth()->user()->id,
+                    'title' => 'غیرفعال کردن وضعیت محصول' .'-'. $product->title,
+                    'url'=> 'admin/product',
+                    'actionType' => 'غیرفعال'
+                ]);
+                $this->emit('toast', 'success', 'وضعیت محصول با موفقیت غیرفعال شد.');
+            }
+        }
+        
     }
 
     public function deleteCategory($id)
@@ -63,7 +66,8 @@ class Index extends Component
         $product->delete();
         Log::create([
             'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن محصول' .'-'. $product->title,
+            'title' => 'حذف کردن محصول' .'-'. $product->title,
+            'url'=> 'admin/product',
             'actionType' => 'حذف'
         ]);
         $this->emit('toast', 'success', ' محصول با موفقیت حذف شد.');
@@ -73,8 +77,9 @@ class Index extends Component
     public function render()
     {
 
-        $products = $this->readyToLoad ? Product::where('title', 'LIKE', "%{$this->search}%")->
-        orWhere('name', 'LIKE', "%{$this->search}%")->
+        $products = $this->readyToLoad ? Product::with(['category','user','brand'])->
+        where('title', 'LIKE', "%{$this->search}%")->
+        orWhere('en_name', 'LIKE', "%{$this->search}%")->
         orWhere('link', 'LIKE', "%{$this->search}%")->
         orWhere('body', 'LIKE', "%{$this->search}%")->
         orWhere('description', 'LIKE', "%{$this->search}%")->

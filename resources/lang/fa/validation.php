@@ -146,7 +146,12 @@ return [
     'attributes' => [
         'name'                  => 'نام',
         'en_name'                  => 'نام لاتین',
+        'price'                  => 'قیمت',
+        'discount_price'                  => 'تخفیف',
         'link'                  => 'لینک',
+        'color_id'                  => 'رنگ',
+        'brand_id'                  => 'برند',
+        'body'                  => 'توضیحات',
         'img'                  => 'تصویر',
         'username'              => 'نام کاربری',
         'email'                 => 'ایمیل',
