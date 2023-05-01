@@ -33,14 +33,6 @@ class Product extends AdminControllerLivewire
         $this->readyToLoad = true;
     }
 
-    public function deleteCategory($id,$title)
-    {
-        $gallery = Gallery::find($id);
-        $gallery->delete();
-        $this->createLog('تصویر محصول', 'admin/gallery', $title, 'حذف');
-        $this->emit('toast', 'success', ' تصویر محصول با موفقیت حذف شد.');
-    }
-
 
     public function render()
     {

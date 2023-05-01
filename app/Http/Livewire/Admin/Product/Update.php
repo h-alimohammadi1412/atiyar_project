@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Product;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Http\Livewire\Home\Profile\Notification;
 use App\Mail\ProductUpdateNotification;
 use App\Models\Category;
@@ -15,12 +16,12 @@ use Kavenegar\KavenegarApi;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
 
     public $img;
-    public $color_id=[];
+    public $color_id = [];
     public Product $product;
     protected $rules = [
         'product.title' => 'required|min:3',
@@ -46,14 +47,13 @@ class Update extends Component
         $this->validate();
         $data = $this->validate();
         if ($this->img) {
-            $data['img']=$this->uploadImage();
-        }else{
+            $data['img'] = $this->uploadImage('product');
+        } else {
             unset($data['img']);
         }
-        // dd($this->color_id);
         $this->product->update($data);
-        if($this->color_id){
-            DB::table('product_color')->where('product_id',$this->product->id)->delete();
+        if ($this->color_id) {
+            DB::table('product_color')->where('product_id', $this->product->id)->delete();
             foreach ($this->color_id as $color) {
                 DB::table('product_color')->insert([
                     'color_id' => $color,
@@ -62,7 +62,7 @@ class Update extends Component
                 ]);
             }
         }
-//         if ($this->product->publish_product == 1) {
+        //         if ($this->product->publish_product == 1) {
 //             $notifications = \App\Models\Notification::where('product_id', $this->product->id)->get();
 //             foreach ($notifications as $notification) {
 //                 if ($notification->system == 1) {
@@ -72,7 +72,7 @@ class Update extends Component
 //                 }
 //                 if ($notification->sms == 1) {
 
-//                     $client = new KavenegarApi(env('KAVENEGAR_CLIENT_API'));
+        //                     $client = new KavenegarApi(env('KAVENEGAR_CLIENT_API'));
 //                     $client->send(env('SENDER_MOBILE'), $notification->user->mobile,
 //                         "کالای شما موجود شد");
 // //                        "کالای شما موجود شد : $notification->product->title");
@@ -82,12 +82,12 @@ class Update extends Component
 //                         'user_id' => $notification->user_id,
 //                     ]);
 
-//                 }
+        //                 }
 //                 if ($notification->email == 1) {
 //                 Mail::to($notification->user->email)
 //                         ->send(new ProductUpdateNotification($notification));
 
-//                     Email::create([
+        //                     Email::create([
 //                         'user_id' =>$notification->user->id,
 //                         'user_email' =>$notification->user->email,
 //                         'user_name' =>$notification->user->name,
@@ -98,28 +98,12 @@ class Update extends Component
 //                 }
 //             }
 
-//         }
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'آپدیت محصول' . '-' . $this->product->title,
-            'url' => 'admin/product',
-            'actionType' => 'آپدیت'
-        ]);
+        //         }
+        $this->createLog('محصول', 'admin/product', $this->product->title, 'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'محصول مورد نظر با موفقیت آپدیت شد.');
 
         return redirect(route('product.index'));
 
-    }
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "product/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
     }
 
     public Category $category;
@@ -131,7 +115,7 @@ class Update extends Component
         } else {
             $this->product->status_product = false;
         }
-     
+
         if ($this->product->gift == 1) {
             $this->product->gift = true;
         } else {

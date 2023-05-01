@@ -72,7 +72,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a wire:click="deleteCategory({{ $color->id }})" type="submit"
+                                            <a wire:click="deletedFieldAsModel('Color','color','رنگ','{{ $color->name }}','{{ $color->id }}')" type="submit"
                                                 class="item-delete mlg-15" title="حذف"></a>
                                             <a href="{{ route('color.update', $color) }}
                                             "

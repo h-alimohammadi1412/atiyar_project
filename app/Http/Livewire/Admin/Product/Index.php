@@ -30,21 +30,6 @@ class Index extends AdminControllerLivewire
     }
 
 
-    public function deleteCategory($id)
-    {
-        $product = Product::find($id);
-
-        $product->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'حذف کردن محصول' .'-'. $product->title,
-            'url'=> 'admin/product',
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' محصول با موفقیت حذف شد.');
-    }
-
-
     public function render()
     {
 

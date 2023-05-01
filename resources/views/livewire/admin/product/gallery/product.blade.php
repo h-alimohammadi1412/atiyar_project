@@ -68,8 +68,8 @@
                                             @endif
                                         </td>
                                         <td><a href="">{{ $gallery->position }}</a></td>
-                                        <td>
-                                            <a wire:click="deleteCategory({{ $gallery->id }},'{{ $gallery->product->title }}')"
+                                        <td> 
+                                            <a wire:click="deletedFieldAsModel('Gallery','galley','تصویر محصول',{{ $gallery->product->title }},'{{ $gallery->id }}')"
                                                 type="submit" class="item-delete mlg-15" title="حذف"></a>                                     
                                         </td>
                                     </>

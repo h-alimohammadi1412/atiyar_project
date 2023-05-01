@@ -52,8 +52,7 @@ class Trashed extends AdminControllerLivewire
 
         $products =  $this->readyToLoad ? Product::with(['category','user','brand'])
             ->onlyTrashed()
-            ->whereNotNull('deleted_at')->
-            latest()->paginate(15) : [];
+            ->latest()->paginate(15) : [];
         return view('livewire.admin.product.trashed',compact('products'));
     }
 }

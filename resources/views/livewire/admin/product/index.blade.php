@@ -111,7 +111,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a wire:click="deleteCategory({{ $product->id }})" type="submit"
+                                            <a wire:click="deletedFieldAsModel('Product','product','محصول','{{ $product->title }}','{{ $product->id }}')" type="submit"
                                                 class="item-delete mlg-15" title="حذف"></a>
                                             <a href="{{ route('product.update', $product) }}" class="item-edit mlg-15"
                                                 title="ویرایش"></a>

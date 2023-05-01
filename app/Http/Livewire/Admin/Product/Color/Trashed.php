@@ -26,8 +26,7 @@ class Trashed extends AdminControllerLivewire
     public function render()
     {
 
-        $colors = $this->readyToLoad ? Color::whereNotNull('deleted_at')
-        ->onlyTrashed()
+        $colors = $this->readyToLoad ? Color::onlyTrashed()
         ->latest()->paginate(15) : [];
 
         return view('livewire.admin.product.color.trashed',compact('colors'));

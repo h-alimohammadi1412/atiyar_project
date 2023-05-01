@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Product\Warranty;
 
-use App\Models\Color;
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Warranty;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -52,12 +50,7 @@ class Index extends Component
         ]);
         $this->warranty->name = "";
         $this->warranty->status = false;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن گارانتی' .'-'. $this->warranty->name,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('گارانتی', 'admin/warranty', $this->warranty->name, 'ایجاد');
         $this->emit('toast', 'success', ' گارانتی با موفقیت ایجاد شد.');
 
     }
@@ -65,45 +58,6 @@ class Index extends Component
     public function loadCategory()
     {
         $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $warranty = Warranty::find($id);
-        $warranty->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت گارانتی' .'-'. $this->warranty->name,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت گارانتی با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $warranty = Warranty::find($id);
-        $warranty->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت گارانتی' .'-'. $this->warranty->name,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت گارانتی با موفقیت فعال شد.');
-    }
-
-    public function deleteCategory($id)
-    {
-        $warranty = Warranty::find($id);
-        $warranty->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن گارانتی' .'-'. $this->warranty->name,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' گارانتی با موفقیت حذف شد.');
     }
 
 

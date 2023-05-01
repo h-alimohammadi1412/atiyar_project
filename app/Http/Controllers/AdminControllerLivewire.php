@@ -99,5 +99,12 @@ class AdminControllerLivewire extends Component
         }
         return 'yes';
     }
+    public function deletedFieldAsModel($model, $route, $title, $fieldName, $id){
+        $Model = "\\App\\Models\\" . $model;
+        $modelSelect = $Model::withTrashed()->findOrFail($id);
+        $modelSelect->delete();
+        $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'حذف');
+        $this->emit('toast', 'success', " $title با موفقیت حذف شد."); 
+    }
 
 }

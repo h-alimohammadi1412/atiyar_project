@@ -63,33 +63,7 @@ class Index extends AdminControllerLivewire
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryDisable($id)
-    {
-        $color = Color::find($id);
-        $color->update([
-            'status' => 0
-        ]);
-        $this->createLog('رنگ', 'admin/color', $this->color->name, 'غیرفعال');
-        $this->emit('toast', 'success', 'وضعیت رنگ با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
-    {
-        $color = Color::find($id);
-        $color->update([
-            'status' => 1
-        ]);
-        $this->createLog('رنگ', 'admin/color', $this->color->name, 'فعال');
-        $this->emit('toast', 'success', 'وضعیت رنگ با موفقیت فعال شد.');
-    }
-
-    public function deleteCategory($id)
-    {
-        $color = Color::find($id);
-        $color->delete();
-        $this->createLog('رنگ', 'admin/color', $this->color->name, 'حذف');
-        $this->emit('toast', 'success', ' رنگ با موفقیت حذف شد.');
-    }
 
 
     public function render()
