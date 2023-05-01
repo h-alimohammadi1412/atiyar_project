@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
 use App\Models\Log;
+use App\Models\Product;
+use DB;
+use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,9 +62,42 @@ class AdminControllerLivewire extends Component
     {
         Log::create([
             'user_id' => auth()->user()->id,
-            'title' => "$actionType $modelName" . '-' . $title,
+            'title' => "$actionType کردن $modelName" . '-' . $title,
             'url' => $url,
             'actionType' => $actionType
         ]);
     }
+    public function galleryUpload($id, Request $request)
+    {
+        $product = Product::select(['id'])->where('id', $id)->firstOrFail();
+        if ($product) {
+            $count = DB::table('galleries')->where('product_id', $product->id)->count();
+            $image_url = upload_file($request, 'file', 'products/gallerys', 'image_' . $id . rand(1, 100));
+            if ($image_url != null) {
+                $count++;
+                DB::table('galleries')->insert([
+                    'product_id' => $id,
+                    'img' => $image_url,
+                    'position' => $count,
+                ]);
+                return 1;
+            } else
+                return 0;
+        } else {
+            return 0;
+        }
+    }
+    public function changeImagePosition($id, Request $request)
+    {
+
+        $i = 1;
+        $ids = explode(',', $request->get('parameters'));
+        foreach ($ids as $value) {
+            $productGallery = Gallery::where(['id' => $value, 'product_id' => $id])->first();
+            $productGallery->update(['position' => $i]);
+            $i++;
+        }
+        return 'yes';
+    }
+
 }

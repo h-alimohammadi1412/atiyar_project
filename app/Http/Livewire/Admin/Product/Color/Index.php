@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Product\Color;
 
-use App\Models\Brand;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Color;
-use App\Models\Log;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -56,11 +54,7 @@ class Index extends Component
         $this->color->name = "";
         $this->color->value = "";
         $this->color->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن رنگ' .'-'. $this->color->name,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('رنگ', 'admin/color', $this->color->name, 'ایجاد');
         $this->emit('toast', 'success', ' رنگ با موفقیت ایجاد شد.');
 
     }
@@ -75,11 +69,7 @@ class Index extends Component
         $color->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت رنگ' .'-'. $this->color->name,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog('رنگ', 'admin/color', $this->color->name, 'غیرفعال');
         $this->emit('toast', 'success', 'وضعیت رنگ با موفقیت غیرفعال شد.');
     }
 
@@ -89,11 +79,7 @@ class Index extends Component
         $color->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت رنگ' .'-'. $this->color->name,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog('رنگ', 'admin/color', $this->color->name, 'فعال');
         $this->emit('toast', 'success', 'وضعیت رنگ با موفقیت فعال شد.');
     }
 
@@ -101,11 +87,7 @@ class Index extends Component
     {
         $color = Color::find($id);
         $color->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن رنگ' .'-'. $this->color->name,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog('رنگ', 'admin/color', $this->color->name, 'حذف');
         $this->emit('toast', 'success', ' رنگ با موفقیت حذف شد.');
     }
 
