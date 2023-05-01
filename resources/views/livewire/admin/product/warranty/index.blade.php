@@ -1,33 +1,33 @@
-@section('title','گارانتی ها')
+@section('title', 'گارانتی ها')
 <div>
     <div class="main-content" wire:init="loadCategory">
         <div class="tab__box d-flex tab_items_flex">
             <div class="tab__items grow-1">
 
                 <a class="tab__item is-active" href="/admin/warranty">گارانتی محصولات</a>
-            <div class="d-none d-lg-inline-block">
+                <div class="d-none d-lg-inline-block">
 
-                |
+                    |
 
-            </div>
+                </div>
                 <a class="tab__item">جستجو: </a>
 
                 <a class="t-header-search">
                     <form action="" onclick="event.preventDefault();">
-                        <input wire:model.debounce.1000="search"
-                               type="text" class="text" placeholder="جستجوی گارانتی ...">
+                        <input wire:model.debounce.1000="search" type="text" class="text"
+                            placeholder="جستجوی گارانتی ...">
                     </form>
                 </a>
 
 
             </div>
-        <div class="tab__items">
-            <a class="tab__item btn btn-danger"
-               href="{{route('warranty.trashed')}}
-                       " style="color: white;margin-left: 10px">سطل زباله
-                ({{\App\Models\Warranty::onlyTrashed()->count()}})
-            </a>
-        </div>
+            <div class="tab__items">
+                <a class="tab__item btn btn-danger" href="{{ route('warranty.trashed') }}
+                       "
+                    style="color: white;margin-left: 10px">سطل زباله
+                    ({{ \App\Models\Warranty::onlyTrashed()->count() }})
+                </a>
+            </div>
         </div>
         <div class="row">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
@@ -36,50 +36,50 @@
                     <table class="table">
 
                         <thead role="rowgroup">
-                        <tr role="row" class="title-row">
-                            <th>آیدی</th>
-                            <th>نام گارانتی</th>
-                            <th>وضعیت گارانتی</th>
-                            <th>عملیات</th>
-                        </tr>
+                            <tr role="row" class="title-row">
+                                <th>آیدی</th>
+                                <th>نام گارانتی</th>
+                                <th>وضعیت گارانتی</th>
+                                <th>عملیات</th>
+                            </tr>
                         </thead>
 
-                        @if($readyToLoad)
+                        @if ($readyToLoad)
                             <tbody>
-                            @foreach($warranties as $warranty)
-                                <tr role="row">
-                                    <td><a href="">{{$warranty->id}}</a></td>
-                                    <td><a href="">{{$warranty->name}}</a></td>
+                                @foreach ($warranties as $warranty)
+                                    <tr role="row">
+                                        <td><a href="">{{ $warranty->id }}</a></td>
+                                        <td><a href="">{{ $warranty->name }}</a></td>
 
-                                    <td>
-                                        @if($warranty->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$warranty->id}})"
+                                        <td>
+                                            @if ($warranty->status == 1)
+                                                <button
+                                                    wire:click="updateStatus('Warranty','warranty','گارانتی','status',{{ $warranty->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
-                                            </button>
-                                        @else
-                                            <button wire:click="updateCategoryEnable({{$warranty->id}})"
+                                                </button>
+                                            @else
+                                                <button
+                                                    wire:click="updateStatus('Warranty','warranty','گارانتی','status',{{ $warranty->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
-                                                غیرفعال
-                                            </button>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a wire:click="deleteCategory({{$warranty->id}})" type="submit"
-                                           class="item-delete mlg-15" title="حذف"></a>
-                                        <a href="{{route('warranty.update',$warranty)}}
-                                            " class="item-edit " title="ویرایش"></a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                                    غیرفعال
+                                                </button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a wire:click="deletedFieldAsModel('Warranty','warranty','گارانتی','{{ $warranty->name }}','{{ $warranty->id }}')".
+                                                type="submit"class="item-delete mlg-15" title="حذف"></a>
+                                            <a href="{{ route('warranty.update', $warranty) }}
+                                            "
+                                                class="item-edit " title="ویرایش"></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
-                            {{$warranties->render()}}
+                            {{ $warranties->render() }}
                         @else
-
-
-
                             <div class="alert-warning alert">
                                 در حال خواندن اطلاعات از دیتابیس ...
                             </div>
@@ -95,23 +95,22 @@
             </div>
             <div class="col-4 bg-white">
                 <p class="box__title">ایجاد گارانتی جدید</p>
-                <form wire:submit.prevent="categoryForm"
-                      enctype="multipart/form-data" role="form"
-                      class="padding-10 categoryForm">
+                <form wire:submit.prevent="categoryForm" enctype="multipart/form-data" role="form"
+                    class="padding-10 categoryForm">
 
                     @include('errors.error')
 
 
                     <div class="form-group">
                         <input type="text" wire:model.lazy="warranty.name" placeholder="نام گارانتی "
-                               class="form-control">
+                            class="form-control">
                     </div>
 
 
                     <div class="form-group">
                         <div class="notificationGroup">
                             <input id="option4" type="checkbox" wire:model.lazy="warranty.status" name="status"
-                                   class="form-control">
+                                class="form-control">
                             <label for="option4">نمایش در گارانتی ها:</label>
                         </div>
                     </div>

@@ -51,9 +51,9 @@
                                     <td><a href="">{{$warranty->name}}</a></td>
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$warranty->id}})" type="submit"
+                                        <a wire:click="deleteField('warranty','warranty','گارارنتی','name',{{ $warranty->id }})"  type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
-                                        <a wire:click="trashedCategory({{$warranty->id}})"
+                                        <a wire:click="trashedField('warranty','warranty','گارارنتی','name',{{ $warranty->id }})"
                                            class="item-li i-checkouts item-restore"></a>
                                     </td>
                                 </tr>

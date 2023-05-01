@@ -2,14 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Product\Warranty;
 
-use App\Models\Brand;
-use App\Models\Color;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use App\Models\Warranty;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public Warranty $warranty;
@@ -28,11 +26,7 @@ class Update extends Component
                 'status' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت گارانتی' .'-'. $this->warranty->name,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('گارانتی', 'admin/warranty', $this->warranty->name, 'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'گارانتی مورد نظر با موفقیت آپدیت شد.');
         return redirect(route('warranty.index'));
 
