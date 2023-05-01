@@ -129,8 +129,7 @@
                     </div>
                     <div class="form-group">
                         <select wire:model.lazy="brand.parent" name="parent" id="" class="form-control">
-                            <option value="-1"> - انتخاب دسته برند</option>
-                            @foreach(\App\Models\Category::getCategories() as $key=>$category)
+                            @foreach(\App\Models\Category::getCategories(true) as $key=>$category)
                                 <option value="{{$key}}">{{$category}}</option>
                             @endforeach
                         </select>

@@ -1967,3 +1967,12 @@ table tr td {
 .form_add input, textarea{
     font-family: IRANYekan;
 }
+.dropzone {
+    border: 2px dashed #68a5ff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: #ffffff;
+}
+.ui-sortable-helper {
+    display: table;
+}

@@ -38,8 +38,8 @@
         @endcan
         <li class="item-li i-transactions {{Request::routeIs('color.index') ? 'is-active': '' }}"><a
                 href="/admin/color">رنگ محصولات</a></li>
-        <li class="item-li i-articles {{Request::routeIs('gallery.index') ? 'is-active': '' }}"><a
-                href="/admin/gallery">گالری تصاویر محصولات</a></li>
+        {{-- <li class="item-li i-articles {{Request::routeIs('gallery.index') ? 'is-active': '' }}"><a
+                href="/admin/gallery">گالری تصاویر محصولات</a></li> --}}
         <li class="item-li i-checkouts {{Request::routeIs('warranty.index') ? 'is-active': '' }}"><a
                 href="/admin/warranty">گارانتی محصولات</a></li>
         <li class="item-li i-courses {{Request::routeIs('productVendor.index') ? 'is-active': '' }}"><a

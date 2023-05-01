@@ -34,6 +34,7 @@
         "bootstrap-select": "^1.13.18",
         "chart.js": "^3.7.1",
         "font-awesome": "^4.7.0",
+        "jquery-ui": "^1.13.2",
         "remodal": "^1.1.1",
         "select2": "^4.1.0-rc.0",
         "select2-bootstrap-theme": "^0.1.0-beta.10",

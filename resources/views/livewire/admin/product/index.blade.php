@@ -4,8 +4,8 @@
         <div class="tab__box d-flex tab_items_flex">
             <div class="tab__items grow-1">
                 <a class="tab__item is-active" href="/admin/product">محصولات</a>
-                <a class="tab__item " href="/admin/color"> رنگ های محصولات</a>
-                <a class="tab__item " href="/admin/gallery"> گالری تصاویر محصولات</a>
+                {{-- <a class="tab__item " href="/admin/color"> رنگ های محصولات</a> --}}
+                {{-- <a class="tab__item " href="/admin/gallery"> گالری تصاویر محصولات</a> --}}
                 <div class="d-none d-lg-inline-block">
 
                     |

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,9 +40,11 @@ Route::get('/color',\App\Http\Livewire\Admin\Product\Color\Index::class)->name('
 Route::get('/color/update/{color}',\App\Http\Livewire\Admin\Product\Color\Update::class)->name('color.update');
 Route::get('/color/trashed',\App\Http\Livewire\Admin\Product\Color\Trashed::class)->name('color.trashed');
 //=======================================> //gallery Images//
-Route::get('/gallery',\App\Http\Livewire\Admin\Product\Gallery\Index::class)->name('gallery.index');
-Route::get('/gallery/update/{gallery}',\App\Http\Livewire\Admin\Product\Gallery\Update::class)->name('gallery.update');
+// Route::get('/gallery',\App\Http\Livewire\Admin\Product\Gallery\Index::class)->name('gallery.index');
+// Route::get('/gallery/update/{gallery}',\App\Http\Livewire\Admin\Product\Gallery\Update::class)->name('gallery.update');
 Route::get('/gallery/product/{product}',\App\Http\Livewire\Admin\Product\Gallery\Product::class)->name('product.gallery_image');
+Route::post('/product/gallery_upload/{id}', \App\Http\Controllers\AdminControllerLivewire::class.'@galleryUpload');
+Route::post('/product/gallery/change_image_position/{id}', \App\Http\Controllers\AdminControllerLivewire::class.'@changeImagePosition');
 //=======================================> //warranties//
 Route::get('/warranty',\App\Http\Livewire\Admin\Product\Warranty\Index::class)->name('warranty.index');
 Route::get('/warranty/update/{warranty}',\App\Http\Livewire\Admin\Product\Warranty\Update::class)->name('warranty.update');

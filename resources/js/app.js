@@ -1,5 +1,5 @@
 require('./bootstrap');
-
+import 'jquery-ui/ui/widgets/sortable';
 require('chart.js');
 require('alpinejs');
 require('select2');
