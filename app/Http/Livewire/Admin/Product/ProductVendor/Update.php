@@ -2,20 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Product\ProductVendor;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Cart;
-use App\Models\Category;
-use App\Models\Log;
 use App\Models\PriceDate;
-use App\Models\Product;
 use App\Models\ProductSeller;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
-    use WithFileUploads;
 
     public ProductSeller $productSeller;
+    public $product;
     protected $rules = [
         'productSeller.product_id' => 'nullable',
         'productSeller.vendor_id' => 'required',
@@ -57,14 +53,9 @@ class Update extends Component
                'product_warranty' =>$this->productSeller->warranty_id,
            ]);
        }
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت تنوع محصول' .'-'. $this->productSeller->product_id,
-            'actionType' => 'آپدیت'
-        ]);
+       $this->createLog('تنوع قیمت محصول', 'admin/productVendor/product/'.$this->productSeller->product_id, '---', 'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'تنوع محصول مورد نظر با موفقیت آپدیت شد.');
-        return redirect(route('productVendor.index'));
+        return redirect(route('product.productVendor',['product'=>$this->productSeller->product_id]));
 
     }
 
@@ -83,7 +74,6 @@ class Update extends Component
             $this->productSeller->anbar = false;
         }
         $productSeller = $this->productSeller;
-
         return view('livewire.admin.product.product-vendor.update',compact('productSeller'));
     }
 }

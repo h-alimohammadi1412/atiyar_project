@@ -17,7 +17,7 @@
                     @include('errors.error')
 
                     <div class="row">
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="form-group">
                                 <select wire:model.lazy="productSeller.product_id" name="product_id" id="" class="form-control">
                                     <option value="-1">-محصول-</option>
@@ -26,7 +26,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-6">
                             <div class="form-group">
                                 <select wire:model.lazy="productSeller.vendor_id" name="vendor_id" id=""

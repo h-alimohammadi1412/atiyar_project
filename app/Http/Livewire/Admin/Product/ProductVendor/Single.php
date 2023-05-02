@@ -2,28 +2,20 @@
 
 namespace App\Http\Livewire\Admin\Product\ProductVendor;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Gallery;
 use App\Models\Log;
+use App\Models\ProductColor;
 use App\Models\ProductSeller;
-use Livewire\Component;
-use Livewire\WithFileUploads;
+use DB;
 use Livewire\WithPagination;
 
-class Single extends Component
+class Single extends AdminControllerLivewire
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
     public ProductSeller $productSeller;
     public \App\Models\Product $product;
-
     public function mount()
     {
         $this->productSeller = new ProductSeller();
@@ -57,57 +49,9 @@ class Single extends Component
         $this->validate();
         $this->productSeller->product_id = $this->product->id;
         $this->productSeller->save();
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن تنوع قیمت محصول' .'-'. $this->productSeller->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('تنوع قیمت', 'admin/productSeller', $this->product->title, 'ایجاد');
         $this->emit('toast', 'success', ' تنوع قیمت محصول با موفقیت ایجاد شد.');
         return redirect()->back();
-    }
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $productSeller = ProductSeller::find($id);
-        $productSeller->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت تنوع قیمت محصول' .'-'. $this->productSeller->product_id,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت تنوع قیمت محصول با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $productSeller = ProductSeller::find($id);
-        $productSeller->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت تنوع قیمت محصول' .'-'. $this->productSeller->product_id,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت تنوع قیمت محصول با موفقیت فعال شد.');
-    }
-
-    public function deleteCategory($id)
-    {
-        $productSeller = ProductSeller::find($id);
-        $productSeller->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن تنوع قیمت محصول' .'-'. $this->productSeller->product_id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' تنوع قیمت محصول با موفقیت حذف شد.');
     }
 
 
@@ -119,7 +63,7 @@ class Single extends Component
             $this->readyToLoad ? ProductSeller::
             where('product_id', $this->product->id)->
             orderBy('price')->paginate(15): [];
-
-        return view('livewire.admin.product.product-vendor.single',compact('product','productSellers'));
+        $colors =ProductColor::with('color')->where('product_id',$this->product->id)->get();
+        return view('livewire.admin.product.product-vendor.single',compact('product','colors','productSellers'));
     }
 }

@@ -23,11 +23,15 @@ class ProductSeller extends Model
 
     public function vendor()
     {
-        return $this->belongsTo(User::class,'vendor_id');
+        return $this->belongsTo(User::class,'vendor_id','id');
     }
     public function warranty()
     {
         return $this->belongsTo(Warranty::class,'warranty_id','id');
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class,'product_id','id');
     }
 
 

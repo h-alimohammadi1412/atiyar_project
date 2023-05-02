@@ -12,14 +12,10 @@ class Index extends AdminControllerLivewire
     use WithFileUploads;
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
     public $img;
     public $search;
 
     protected $queryString = ['search'];
-
-    public $readyToLoad = false;
 
     public Color $color;
 
@@ -28,18 +24,11 @@ class Index extends AdminControllerLivewire
         $this->color = new Color();
     }
 
-
-
     protected $rules = [
         'color.name' => 'required',
         'color.value' => 'required',
         'color.status' => 'nullable',
     ];
-
-    public function updated($title)
-    {
-        $this->validateOnly($title);
-    }
 
 
     public function categoryForm()
@@ -58,13 +47,6 @@ class Index extends AdminControllerLivewire
         $this->emit('toast', 'success', ' رنگ با موفقیت ایجاد شد.');
 
     }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
-
 
     public function render()
     {

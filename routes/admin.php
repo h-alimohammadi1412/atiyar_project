@@ -50,8 +50,6 @@ Route::get('/warranty',\App\Http\Livewire\Admin\Product\Warranty\Index::class)->
 Route::get('/warranty/update/{warranty}',\App\Http\Livewire\Admin\Product\Warranty\Update::class)->name('warranty.update');
 Route::get('/warranty/trashed',\App\Http\Livewire\Admin\Product\Warranty\Trashed::class)->name('warranty.trashed');
 //=======================================> //warranties//
-Route::get('/productVendor',\App\Http\Livewire\Admin\Product\ProductVendor\Index::class)->name('productVendor.index');
-Route::get('/productVendor/create',\App\Http\Livewire\Admin\Product\ProductVendor\Create::class)->name('productVendor.create');
 Route::get('/productVendor/update/{productSeller}',\App\Http\Livewire\Admin\Product\ProductVendor\Update::class)->name('productSeller.update');
 Route::get('/productVendor/trashed',\App\Http\Livewire\Admin\Product\ProductVendor\Trashed::class)->name('productVendor.trashed');
 Route::get('/productVendor/product/{product}',\App\Http\Livewire\Admin\Product\ProductVendor\Single::class)->name('product.productVendor');

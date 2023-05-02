@@ -69,12 +69,12 @@
                                     </td>
                                     <td>
                                         @if($productSeller->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$productSeller->id}})"
+                                            <button wire:click="updateStatus('ProductSeller','productSeller','تنوع قیمت','status',{{ $productSeller->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                             </button>
                                         @else
-                                            <button wire:click="updateCategoryEnable({{$productSeller->id}})"
+                                            <button wire:click="updateStatus('ProductSeller','productSeller','تنوع قیمت','status',{{ $productSeller->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال
@@ -82,7 +82,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a wire:click="deleteCategory({{$productSeller->id}})" type="submit"
+                                        <a wire:click="deletedFieldAsModel('ProductSeller','productSeller','تنوع قیمت','{{ $product->title }}','{{ $productSeller->id }}')" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                         <a href="{{route('productSeller.update',$productSeller)}}
                                             " class="item-edit " title="ویرایش"></a>
@@ -148,8 +148,8 @@
                                 <select wire:model.lazy="productSeller.color_id" name="color_id" id=""
                                         class="form-control">
                                     <option value="-1">-رنگ-</option>
-                                    @foreach(\App\Models\Color::all() as $color)
-                                        <option value="{{$color->id}}" style="background-color: {{$color->value}}">{{$color->name}}</option>
+                                    @foreach($colors as $color)
+                                        <option value="{{$color->color->id}}" style="background-color: {{$color->color->value}}">{{$color->color->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
