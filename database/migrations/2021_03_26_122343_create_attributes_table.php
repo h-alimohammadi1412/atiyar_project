@@ -15,7 +15,7 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->integer('childCategory')->nullable();
+            $table->integer('id_category');
             $table->integer('parent')->default(0);
             $table->string('title');
             $table->string('position');

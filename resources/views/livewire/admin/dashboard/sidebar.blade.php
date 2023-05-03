@@ -44,8 +44,8 @@
                 href="/admin/warranty">گارانتی محصولات</a></li>
         {{-- <li class="item-li i-courses {{Request::routeIs('productVendor.index') ? 'is-active': '' }}"><a
                 href="/admin/productVendor">تنوع قیمت محصولات</a></li> --}}
-        <li class="item-li i-user__inforamtion {{Request::routeIs('attribute.index') ? 'is-active': '' }}"><a
-                href="/admin/attribute">مشخصات محصولات</a></li>
+        {{-- <li class="item-li i-user__inforamtion {{Request::routeIs('attribute.index') ? 'is-active': '' }}"><a
+                href="/admin/attribute">مشخصات محصولات</a></li> --}}
         <li class="item-li i-discounts {{Request::routeIs('special.product.index') ? 'is-active': '' }}"><a
                 href="/admin/special/product">پیشنهاد شگفت انگیز</a></li>
         <li class="item-li i-comments {{Request::routeIs('admin.comment.index') ? 'is-active': '' }}"><a

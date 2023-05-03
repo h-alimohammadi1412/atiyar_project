@@ -2,21 +2,19 @@
 
 namespace App\Http\Livewire\Admin\Product\AttributeValue;
 
-use App\Http\Livewire\Admin\Product\Gallery\Product;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
-use App\Models\Log;
-use Livewire\Component;
+use App\Models\Product;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     public AttributeValue $attribute;
 
     protected $rules = [
-        'attribute.product_id' => 'required',
         'attribute.attribute_id' => 'required',
         'attribute.value' => 'required',
-        'attribute.status' => 'required',
+        'attribute.status' => 'nullable',
     ];
     public function categoryForm()
     {
@@ -27,29 +25,23 @@ class Update extends Component
                 'status' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت مقدار مشخصه' .'-'. $this->attribute->title,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('مشخصه کالا', 'admin/attribute/product/' . $this->attribute->product_id, $this->attribute->value, 'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'مقدار مشخصه مورد نظر با موفقیت آپدیت شد.');
-        return redirect(route('attributeValue.index'));
+        return redirect(route('product.attribute', ['product' => $this->attribute->product_id]));
 
     }
 
 
     public function render()
     {
-        if ($this->attribute->status == 1){
+        if ($this->attribute->status == 1) {
             $this->attribute->status = true;
-        }else
-        {
+        } else {
             $this->attribute->status = false;
         }
         $attribute = $this->attribute;
-        $product = \App\Models\Product::find($attribute->product_id);
-        $att= \App\Models\Attribute::where('parent','>', '0') ->where('childCategory',$product->childcategory_id)->get();
-        return view('livewire.admin.product.attribute-value.update',
-            compact('attribute','product','att'));
+        $product = Product::find($attribute->product_id);
+        $attributeParents = Attribute::where('parent', '>', '0')->where('category_id', $product->category_id)->get();
+        return view('livewire.admin.product.attribute-value.update', compact('attribute', 'product', 'attributeParents'));
     }
 }

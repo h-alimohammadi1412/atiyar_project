@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Product\Attribute;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\ChildCategory;
@@ -9,17 +10,10 @@ use App\Models\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Product extends Component
+class Product extends AdminControllerLivewire
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
 
     public AttributeValue $attribute;
     public \App\Models\Product $product;
@@ -35,14 +29,8 @@ class Product extends Component
         'attribute.product_id' => 'nullable',
         'attribute.attribute_id' => 'required',
         'attribute.value' => 'required',
-        'attribute.status' => 'required',
+        'attribute.status' => 'nullable',
     ];
-
-    public function updated($product_id)
-    {
-        $this->validateOnly($product_id);
-    }
-
 
 
     public function categoryForm()
@@ -60,57 +48,9 @@ class Product extends Component
         $this->attribute->product_id = null;
         $this->attribute->value = "";
         $this->attribute->status = false;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن مقدار مشخصه کالا' .'-'. $this->attribute->value,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('مشخصه کالا', 'admin/attribute/product/'.$this->product->id, $this->attribute->value, 'ایجاد');
         $this->emit('toast', 'success', ' مقدار مشخصه کالا با موفقیت ایجاد شد.');
         return redirect()->back();
-    }
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $attribute = AttributeValue::find($id);
-        $attribute->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت مقدار مشخصه کالا' .'-'. $this->attribute->value,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت مقدار مشخصه کالا با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $attribute = AttributeValue::find($id);
-        $attribute->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت مقدار مشخصه کالا' .'-'. $this->attribute->value,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت مقدار مشخصه کالا با موفقیت فعال شد.');
-    }
-
-    public function deleteCategory($id)
-    {
-        $attribute = AttributeValue::find($id);
-        $attribute->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن مقدار مشخصه کالا' .'-'. $this->attribute->value,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' مقدار مشخصه کالا با موفقیت حذف شد.');
     }
 
 
@@ -119,10 +59,11 @@ class Product extends Component
 
         $product = $this->product;
 
-        $attributes =
-            $this->readyToLoad ? AttributeValue::
-            where('product_id', $this->product->id)->
+        $attributeValues =
+            $this->readyToLoad ? AttributeValue::with(['product','attribute'])->
+            where('product_id', $product->id)->
             orderBy('product_id')->paginate(15): [];
-        return view('livewire.admin.product.attribute.product',compact('attributes','product'));
+            $attributeParent =Attribute::where('parent', '>', '0')->where('category_id', $product->category_id)->get();
+        return view('livewire.admin.product.attribute.product',compact('attributeValues','product','attributeParent'));
     }
 }

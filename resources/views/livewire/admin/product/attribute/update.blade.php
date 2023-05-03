@@ -17,19 +17,10 @@
 
 
                     <div class="form-group">
-                        <select wire:model.lazy="attribute.childCategory" name="parent" id="" class="form-control">
-                            <option value="-1">- انتخاب دسته نمایش کالا - </option>
-                            @foreach(\App\Models\ChildCategory::all() as $category)
-                                <option value="{{$category->id}}">{{$category->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <select wire:model.lazy="attribute.parent" name="parent" id="" class="form-control">
-                            <option value="-1">- انتخاب زیر دسته مشخصات کالا - </option>
-                            <option value="0">- سر دسته اصلی مشخصات کالا - </option>
-                            @foreach(\App\Models\Attribute::where('parent',0)->get() as $attribute)
-                                <option value="{{$attribute->id}}">-- {{$attribute->title}}</option>
+                            <option value="0">- مشخصه والد - </option>
+                            @foreach ($attributeParents as $attributeParent)
+                                <option value="{{ $attributeParent->id }}" @if($attribute->parent == $attributeParent->id) selected @endif>{{ $attributeParent->title }}</option>
                             @endforeach
                         </select>
                     </div>

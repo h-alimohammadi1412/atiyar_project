@@ -27,6 +27,7 @@
                                 <th>عنوان دسته</th>
                                 <th>نام لاتین دسته</th>
                                 <th>وضعیت دسته</th>
+                                <th>مشخصات فنی</th>
                                 <th>عملیات</th>
                                 <th>زیر دسته ها</th>
                             </tr>
@@ -57,6 +58,11 @@
                                                     </button>
                                                 @endif
                                             @endcan
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('admin/attribute/'.$category->id) }}">
+                                                <img width:="" 20px;="" src="{{ asset('icons/icons/list-check.svg') }}" alt="images">
+                                            </a>
                                         </td>
                                         <td>
                                             @can('delete-category')

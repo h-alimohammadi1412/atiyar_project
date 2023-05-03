@@ -56,12 +56,11 @@ Route::get('/productVendor/product/{product}',\App\Http\Livewire\Admin\Product\P
 
 
 //=======================================> //Attribute//
-Route::get('/attribute',\App\Http\Livewire\Admin\Product\Attribute\Index::class)->name('attribute.index');
-Route::get('/attribute/update/{attribute}',\App\Http\Livewire\Admin\Product\Attribute\Update::class)->name('attribute.update');
 Route::get('/attribute/trashed',\App\Http\Livewire\Admin\Product\Attribute\Trashed::class)->name('attribute.trashed');
-Route::get('/attribute/category/{category}',\App\Http\Livewire\Admin\Product\Attribute\Category::class)->name('category.attribute');
+Route::get('/attribute/{category}',\App\Http\Livewire\Admin\Product\Attribute\Index::class)->name('attribute.index');
+Route::get('/attribute/update/{attribute}',\App\Http\Livewire\Admin\Product\Attribute\Update::class)->name('attribute.update');
+
 //=======================================> //Attribute//
-Route::get('/attributeValue',\App\Http\Livewire\Admin\Product\AttributeValue\Index::class)->name('attributeValue.index');
 Route::get('/attributeValue/update/{attribute}',\App\Http\Livewire\Admin\Product\AttributeValue\Update::class)->name('attributeValue.update');
 Route::get('/attributeValue/trashed',\App\Http\Livewire\Admin\Product\AttributeValue\Trashed::class)->name('attributeValue.trashed');
 Route::get('/attribute/product/{product}',\App\Http\Livewire\Admin\Product\Attribute\Product::class)->name('product.attribute');

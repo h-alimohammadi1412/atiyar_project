@@ -2,21 +2,17 @@
 
 namespace App\Http\Livewire\Admin\Product\Attribute;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Attribute;
-use App\Models\ChildCategory;
-use App\Models\Log;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     public Attribute $attribute;
 
     protected $rules = [
-        'attribute.childCategory' => 'required',
-        'attribute.parent' => 'required',
         'attribute.title' => 'required',
         'attribute.position' => 'required',
+        'attribute.parent' => 'nullable',
         'attribute.status' => 'required',
     ];
     public function categoryForm()
@@ -28,13 +24,9 @@ class Update extends Component
                 'status' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت مشخصات کالا' .'-'. $this->attribute->title,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('مشخصات کالا', 'admin/attribute/'.$this->attribute->category_id, $this->attribute->title, 'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'مشخصات محصول مورد نظر با موفقیت آپدیت شد.');
-        return redirect(route('attribute.index'));
+        return redirect(route('attribute.index',['category'=>$this->attribute->category_id]));
 
     }
 
@@ -48,6 +40,7 @@ class Update extends Component
             $this->attribute->status = false;
         }
         $attribute = $this->attribute;
-        return view('livewire.admin.product.attribute.update',compact('attribute'));
+        $attributeParents = Attribute::where(['category_id'=>$this->attribute->category_id,'parent'=>0])->get();
+        return view('livewire.admin.product.attribute.update',compact('attribute','attributeParents'));
     }
 }

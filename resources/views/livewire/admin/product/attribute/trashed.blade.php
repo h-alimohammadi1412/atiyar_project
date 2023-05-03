@@ -4,11 +4,6 @@
         <div class="tab__box d-flex tab_items_flex" style="padding-bottom: 20px;">
             <div class="tab__items grow-1">
 
-                <a class="tab__item " href="/admin/attribute">مشخصات کالا
-                    ها</a>
-                <a class="tab__item " href="/admin/attributeValue">مقدار مشخصات کالا
-                    </a>
-
 
 
             </div>
@@ -29,10 +24,8 @@
                         <tr role="row" class="title-row">
                             <th>آیدی</th>
                             <th>عنوان </th>
-                            <th>دسته نمایش کالا </th>
-                            <th>زیر دسته مشخصات</th>
+                            <th>مشخصه والد</th>
                             <th>موقعیت</th>
-
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -41,31 +34,21 @@
                             <tbody>
                             @foreach($attributes as $attribute)
                                 <tr role="row">
-                                    <td><a href="">{{$attribute->id}}</a></td>
-                                    <td><a href="">{{$attribute->title}}</a></td>
+                                    <td><a href="">{{ $attribute->id }}</a></td>
+                                    <td><a href="">{{ $attribute->title }}</a></td>
                                     <td>
-                                        @foreach(\App\Models\ChildCategory::where('id',$attribute->childCategory)->get() as $ca)
-                                            {{$ca->title}}
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @if($attribute->parent == 0)
-                                            سر دسته مشخصات
+                                        @if ($attribute->parent == 0)
+                                            مشخصه والد
                                         @else
-                                            @foreach(\App\Models\Attribute::where('id',$attribute->parent)->get() as $ca)
-
-
-                                                {{$ca->title}}
-
-                                            @endforeach
+                                            {{ $attribute->getParent->title }}
                                         @endif
                                     </td>
-                                    <td><a href="">{{$attribute->position}}</a></td>
+                                    <td><a href="">{{ $attribute->position }}</a></td>
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$attribute->id}})" type="submit"
+                                        <a wire:click="deleteField('attribute','attribute','مشخصه','title',{{ $attribute->id }})" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
-                                        <a wire:click="trashedCategory({{$attribute->id}})"
+                                        <a wire:click="trashedField('attribute','attribute','مشخصه','title',{{ $attribute->id }})"
                                            class="item-li i-checkouts item-restore"></a>
                                     </td>
                                 </tr>

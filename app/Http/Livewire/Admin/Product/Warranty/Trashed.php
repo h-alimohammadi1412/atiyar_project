@@ -19,10 +19,6 @@ class Trashed extends AdminControllerLivewire
 
     public $readyToLoad = false;
 
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
 
     public function render()
     {

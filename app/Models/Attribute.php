@@ -11,5 +11,8 @@ class Attribute extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['childCategory','parent','title','position','status'];
+    public function getParent(){
+        return $this->belongsTo(Attribute::class,'parent','id');
+    }
+    protected $fillable = ['category_id','parent','title','position','status'];
 }
