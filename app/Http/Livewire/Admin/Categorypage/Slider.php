@@ -141,7 +141,7 @@ class Slider extends Component
     {
 
 //        $sliders = $this->readyToLoad ? DB::connection('mysql-category')->table('category_slider')
-        $sliders = $this->readyToLoad ? DB::table('category_slider')
+        $sliders = $this->readyToLoad ? DB::connection('mysql-category')->table('category_slider')
             ->where('title', 'LIKE', "%{$this->search}%")->
             orWhere('link', 'LIKE', "%{$this->search}%")->
             orWhere('id', $this->search)->

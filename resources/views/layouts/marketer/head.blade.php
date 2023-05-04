@@ -1,7 +1,7 @@
 <head>
     <title>آتی یار</title>
 
-  @include('layouts.seller.script_head')
+  @include('layouts.marketer.script_head')
 
     <link rel="stylesheet" href="{{asset('static/merged/47d27f93.css')}}">
 

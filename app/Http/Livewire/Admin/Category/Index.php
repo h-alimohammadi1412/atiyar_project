@@ -142,7 +142,7 @@ class Index extends Component
     {
 
         $categories = $this->readyToLoad ? Category::where('title', 'LIKE', "%{$this->search}%")->
-        orWhere('name', 'LIKE', "%{$this->search}%")->
+        orWhere('en_name', 'LIKE', "%{$this->search}%")->
         orWhere('link', 'LIKE', "%{$this->search}%")->
         orWhere('id', $this->search)->
         latest()->paginate(15) : [];

@@ -147,21 +147,7 @@ Route::get('/payment/bank/callback',[\App\Http\Controllers\PayController::class,
     ->name('bank.callback');
 
 
-//seller register
-Route::get('/seller/registration',App\Http\Livewire\Seller\Auth\Register::class)
-    ->name('seller.register');
-Route::get('/seller/registration/email/{seller}',App\Http\Livewire\Seller\Auth\Register\Email::class)
-    ->name('seller.register.email');
 
-Route::get('/seller/registration/business-details/{seller}',App\Http\Livewire\Seller\Auth\Register\Detail::class)
-    ->name('seller.register.detail');
-
-//seller Login
-Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
-    ->name('seller.login');
-//seller Login
-Route::get('/seller/account/forgotpassword/',App\Http\Livewire\Seller\Auth\Password::class)
-    ->name('seller.password');
 
 
 //marketer register

@@ -464,7 +464,9 @@ class Index extends Component
         orderBy('discount_price', 'ASC')->first();
 
         $priceDate_min_price_first1 = PriceDate::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->get()[1];
+        orderBy('discount_price', 'ASC')->get();
+
+
 
 ;        if ($priceDate_min_price_first1) {
             $date1 = $priceDate_min_price_first->created_at;

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/testttttt',function(){
     return 'marketermarketer';
 });
-//======================================>seller/dashboard
+//======================================>marketer/dashboard
 Route::get('/',App\Http\Livewire\Marketer\Dashboard\Index::class)
     ->name('marketer.dashboard.index');
 //======================================>Marketer/profile
