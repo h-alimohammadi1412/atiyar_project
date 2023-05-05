@@ -453,6 +453,7 @@ class Index extends Component
         $productSeller_count = ProductSeller::where('product_id', $product->id)->count();
 
 
+
         $priceDate = PriceDate::where('product_id', $product->id)->get();
 
         $priceDate_min_price = PriceDate::where('product_id', $product->id)->
@@ -465,8 +466,7 @@ class Index extends Component
         $priceDate_min_price_first1 = PriceDate::where('product_id', $product->id)->
         orderBy('discount_price', 'ASC')->get()[1];
 
-
-        if ($priceDate_min_price_first1) {
+;        if ($priceDate_min_price_first1) {
             $date1 = $priceDate_min_price_first->created_at;
             $date2 = $priceDate_min_price_first1->created_at;
             $different = $date2->diff($date1);
@@ -474,6 +474,7 @@ class Index extends Component
         }
         $day = $different->format('%d');
         $mo = $different->format('%m');
+
 
         SEOMeta::setTitle($product->title);
         SEOMeta::setDescription($product->resume);

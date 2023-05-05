@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('marketers', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->string('seller')->default(0);
         });
     }
