@@ -44,7 +44,7 @@
 
                                     <td><a href="">{{$newsletter->email}}</a></td>
                                     <td>
-                                        <a wire:click="deleteCategory({{$newsletter->id}})" type="submit"
+                                        <a wire:click="deletedFieldAsModel('NewsLetter','newsletter','خبرنامه','{{ $newsletter->email }}','{{ $newsletter->id }}')"  type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                     </td>
                                 </tr>

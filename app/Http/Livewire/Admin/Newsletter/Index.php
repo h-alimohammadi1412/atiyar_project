@@ -2,24 +2,17 @@
 
 namespace App\Http\Livewire\Admin\Newsletter;
 
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\NewsLetter;
-use App\Models\Page;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
 
     public $search;
 
     protected $queryString = ['search'];
-
-    public $readyToLoad = false;
 
     public NewsLetter $newsletter;
 
@@ -50,38 +43,14 @@ class Index extends Component
 
 
         $this->newsletter->email = "";
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن خبرنامه' .'-'. $this->newsletter->email,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('صفحه سایت', 'admin/page', $this->newsletter->email , 'ایجاد');
         $this->emit('toast', 'success', ' خبرنامه با موفقیت ایجاد شد.');
 
     }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function deleteCategory($id)
-    {
-        $page = NewsLetter::find($id);
-        $page->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن خبرنامه' .'-'. $this->newsletter->email,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' خبرنامه با موفقیت حذف شد.');
-
-    }
-
-
     public function render()
     {
 
         $newsletters = $this->readyToLoad ? NewsLetter::where('email', 'LIKE', "%{$this->search}%")->
-        orWhere('id', $this->search)->
         latest()->paginate(15) : [];
         return view('livewire.admin.newsletter.index',compact('newsletters'));
     }
