@@ -28,3 +28,4 @@
 </footer>
 
 @yield('footer_home')
+
