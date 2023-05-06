@@ -51,7 +51,7 @@
                                     <td><a target="_blank" href="{{$social->link}}">{{$social->link}}</a></td>
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$social->id}})" type="submit"
+                                        <a wire:click="deletedFieldAsModel('Social','social','صفحات','{{ $social->title }}','{{ $social->id }}')"  type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                     </td>
                                 </tr>

@@ -2,22 +2,20 @@
 
 namespace App\Http\Livewire\Admin\Social;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use App\Models\Social;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
 
     public $search;
 
     protected $queryString = ['search'];
 
-    public $readyToLoad = false;
 
     public Social $social;
 
@@ -57,31 +55,8 @@ class Index extends Component
         $this->social->icon = "";
         $this->social->title = "";
         $this->social->link = "";
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن شبکه اجتماعی' .'-'. $this->social->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('شبکه اجتماعی', 'admin/social', $this->social->title, 'ایجاد');
         $this->emit('toast', 'success', ' شبکه اجتماعی با موفقیت ایجاد شد.');
-
-    }
-
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function deleteCategory($id)
-    {
-        $page = Social::find($id);
-        $page->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن شبکه اجتماعی' .'-'. $this->social->title,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' شبکه اجتماعی با موفقیت حذف شد.');
 
     }
 
