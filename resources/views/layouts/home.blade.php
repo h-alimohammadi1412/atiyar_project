@@ -9,7 +9,7 @@
     @include('sweet::alert')
     @include('livewire.home.home.header')
 
-    <div class="test5556">222222222222222222222222222</div>
+{{$slot}}
     @include('livewire.home.home.footer')
     @include('livewire.home.home.jscript')
 </body>
