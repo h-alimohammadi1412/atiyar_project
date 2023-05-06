@@ -3,10 +3,7 @@
 namespace App\Http\Livewire\Admin\Page;
 
 use App\Http\Controllers\AdminControllerLivewire;
-use App\Models\Brand;
-use App\Models\Log;
 use App\Models\Page;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class Update extends AdminControllerLivewire

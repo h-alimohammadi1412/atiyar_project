@@ -2,14 +2,11 @@
 
 namespace App\Http\Livewire\Admin\Footer\Link;
 
-
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\FooterLinkThree;
-use App\Models\Log;
-use Livewire\Component;
 
-class Three extends Component
+class Three extends AdminControllerLivewire
 {
-    public $readyToLoad = false;
 
     public FooterLinkThree $footerLinkThree;
 
@@ -38,36 +35,16 @@ class Three extends Component
             'page_id' => $this->footerLinkThree->page_id,
         ]);
         $this->footerLinkThree->page_id = "";
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن صفحه به فوتر سایت' .'-'. $this->footerLinkThree->page_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('صفحه فوتر سایت', 'admin/footer/link3', 'صفحه فوتر سایت', 'ایجاد');
+
         $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
-
-    }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function deleteCategory($id)
-    {
-        $page = FooterLinkThree::find($id);
-        $page->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن صفحه به فوتر سایت' .'-'. $this->footerLinkThree->page_id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت حذف شد.');
 
     }
 
     public function render()
     {
 
-        $footer_links = FooterLinkThree::latest()->get();
+        $footer_links = FooterLinkThree::with('getPage')->latest()->get();
 
         return view('livewire.admin.footer.link.three',compact('footer_links'));
     }

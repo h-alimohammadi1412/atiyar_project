@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Footer\Link;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\FooterLinkTwo;
 use App\Models\Log;
 use Livewire\Component;
 
-class Two extends Component
+class Two extends AdminControllerLivewire
 {
-    public $readyToLoad = false;
 
     public FooterLinkTwo $footerLinkTwo;
 
@@ -37,29 +37,8 @@ class Two extends Component
             'page_id' => $this->footerLinkTwo->page_id,
         ]);
         $this->footerLinkTwo->page_id = "";
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن صفحه به فوتر سایت' .'-'. $this->footerLinkTwo->page_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('صفحه فوتر سایت', 'admin/footer/link2', 'صفحه فوتر سایت', 'ایجاد');
         $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
-
-    }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function deleteCategory($id)
-    {
-        $page = FooterLinkTwo::find($id);
-        $page->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن صفحه به فوتر سایت' .'-'. $this->footerLinkTwo->page_id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت حذف شد.');
 
     }
 

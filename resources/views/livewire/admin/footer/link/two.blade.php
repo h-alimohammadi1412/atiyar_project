@@ -42,7 +42,7 @@
 
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$footer_page->id}})" type="submit"
+                                        <a wire:click="deletedFieldAsModel('FooterLinkTwo','footer','صفحه بالای فوتر سایت','{{ $footer_page->getPage->title }}','{{ $footer_page->id }}')" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                     </td>
                                 </tr>

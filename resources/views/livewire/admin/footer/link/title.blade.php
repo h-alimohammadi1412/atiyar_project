@@ -35,9 +35,7 @@
 
                                     <td><a href="">{{$footer_page->page_id}}</a></td>
                                     <td>
-                                        @foreach(\App\Models\Page::where('id',$footer_page->page_id)->get() as $page)
-                                            {{$page->title}}
-                                        @endforeach
+                                        {{$footer_page->getPage->title}}
                                     </td>
 
 

@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Footer\Link;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\FooterLinkOne;
 use App\Models\FooterPartner;
 use App\Models\Log;
 use Livewire\Component;
 
-class Partner extends Component
+class Partner extends AdminControllerLivewire
 {
-    public $readyToLoad = false;
 
     public FooterPartner $footerLinkOne;
 
@@ -38,36 +38,15 @@ class Partner extends Component
             'page_id' => $this->footerLinkOne->page_id,
         ]);
         $this->footerLinkOne->page_id = "";
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن صفحه به فوتر سایت' .'-'. $this->footerLinkOne->page_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('صفحه فوتر سایت', 'admin/footer/partner', 'صفحه فوتر سایت', 'ایجاد');
         $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
-
-    }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function deleteCategory($id)
-    {
-        $page = FooterPartner::find($id);
-        $page->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن صفحه به فوتر سایت' .'-'. $this->footerLinkOne->page_id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت حذف شد.');
 
     }
 
     public function render()
     {
 
-        $footer_links = FooterPartner::latest()->get();
+        $footer_links = FooterPartner::with('getPage')->latest()->get();
 
         return view('livewire.admin.footer.link.partner',compact('footer_links'));
     }

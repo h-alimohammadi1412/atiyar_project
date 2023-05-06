@@ -37,9 +37,7 @@
 
                                     <td><a href="">{{$footer_page->page_id}}</a></td>
                                     <td>
-                                        @foreach(\App\Models\Page::where('id',$footer_page->page_id)->get() as $page)
-                                            {{$page->title}}
-                                        @endforeach
+                                            {{$footer_page->getPage->title}}
                                     </td>
                                     <td>
                                         @if($footer_page->top == 1)
@@ -52,7 +50,7 @@
                                     </td>
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$footer_page->id}})" type="submit"
+                                        <a wire:click="deletedFieldAsModel('FooterInnerBox','footer','صفحه بالای فوتر سایت','{{ $footer_page->getPage->title }}','{{ $footer_page->id }}')"  type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                     </td>
                                 </tr>

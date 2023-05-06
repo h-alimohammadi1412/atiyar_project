@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin\Footer\Link;
 
 use App\Models\FooterLinkTitle;
-use App\Models\Log;
 use Livewire\Component;
 
 class TitleUpdate extends Component
@@ -17,11 +16,7 @@ class TitleUpdate extends Component
     {
         $this->validate();
         $this->footer_page->update($this->validate());
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت عنوان فوتر صفحه سایت' .'-'. $this->footer_page->page_id,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('صفحه فوتر سایت', 'admin/footer/linktitle', 'صفحه فوتر سایت', 'آپدیت');
         alert()->success('عنوان فوتر صفحه سایت با موفقیت ایجاد شد.', 'عنوان فوتر صفحه سایت آپدیت شد.');
 
         return redirect(route('footer_page_title.index'));

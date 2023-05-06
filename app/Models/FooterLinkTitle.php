@@ -9,4 +9,7 @@ class FooterLinkTitle extends Model
 {
     use HasFactory;
     protected $fillable=['page_id'];
+     public function getPage(){
+        return $this->belongsTo(Page::class,'page_id','id');
+    }
 }
