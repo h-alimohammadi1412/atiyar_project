@@ -57,7 +57,7 @@
                                     <td><a target="_blank" href="{{url($page->link)}}">{{$page->link}}</a></td>
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$page->id}})" type="submit"
+                                        <a wire:click="deletedFieldAsModel('Page','page','صفحات','{{ $page->title }}','{{ $page->id }}')" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                         <a href="{{route('page.update',$page)}}
                                             " class="item-edit " title="ویرایش"></a>

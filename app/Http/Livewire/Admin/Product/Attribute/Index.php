@@ -45,17 +45,11 @@ class Index extends AdminControllerLivewire
             'status' => $this->attribute->status ? 1:0 ,
         ]);
 
-        $this->attribute->childCategory = null;
         $this->attribute->parent = null;
         $this->attribute->title = "";
         $this->attribute->position = null;
         $this->attribute->status = false;
-
-        // Log::create([
-        //     'user_id' => auth()->user()->id,
-        //     'url' => 'افزودن مشخصات کالا' .'-'. $this->attribute->title,
-        //     'actionType' => 'ایجاد'
-        // ]);
+        $this->createLog('مشخصه کالا', 'admin/attribute/product/'.$this->category->id, $this->attribute->title, 'ایجاد');
         $this->emit('toast', 'success', ' مشخصات کالا با موفقیت ایجاد شد.');
 
     }

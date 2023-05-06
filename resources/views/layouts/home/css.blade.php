@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{asset('digikalanew/cd7b892d.css')}}">
 @yield('newcss')
+<link rel="stylesheet" href="{{asset('digikalanew/cd7b892d.css')}}">
 <link rel="stylesheet" href="{{asset('digikalanew/aee78a28.css')}}" media="screen and (max-height: 1184px)">
 <link rel="stylesheet" href="{{asset('digikalanew/ab0ffad8.css')}}" media="screen and (max-width: 1365px)">
 <link rel="stylesheet" href="{{asset('digikalanew/2f1e410d.css')}}" media="screen and (min-width: 1025px)">
@@ -89,4 +89,5 @@
         border: 1px solid #e3122a !important;
     }
 </style>
+
 @yield('css')

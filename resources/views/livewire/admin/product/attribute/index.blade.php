@@ -51,7 +51,7 @@
                                             @if ($attribute->parent == 0)
                                                 مشخصه والد
                                             @else
-                                                {{ $attribute->getParent->title }}
+                                                @if($attribute->getParent){{ $attribute->getParent->title }}@endif
                                             @endif
                                         </td>
                                         <td><a href="">{{ $attribute->position }}</a></td>
@@ -116,15 +116,6 @@
                             @endforeach
                         </select>
                     </div>
-                    {{-- <div class="form-group">
-                        <select wire:model.lazy="attribute.parent" name="parent" id="" class="form-control">
-                            <option value="-1">- انتخاب زیر دسته مشخصات کالا - </option>
-                            <option value="0">- سر دسته اصلی مشخصات کالا - </option>
-                            @foreach (\App\Models\Attribute::where('parent', 0)->get() as $attribute)
-                                <option value="{{$attribute->id}}">-- {{$attribute->title}}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
                     <div class="form-group">
                         <input type="text" wire:model.lazy="attribute.position" placeholder="موقعیت مشخصات کالا "
                             class="form-control">

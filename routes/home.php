@@ -32,12 +32,11 @@ use Spatie\Sitemap\SitemapGenerator;
 //
 //});
 
-Route::get('/sitem',function (){
+Route::get('/sitem', function () {
     SitemapGenerator::create('http://127.0.0.1:8000/')->writeToFile(public_path('sitemap.xml'));
     return back();
 });
-Route::get('/', \App\Http\Livewire\Home\Home\Index::class)
-    ->name('home.index') ;
+Route::get('/', \App\Http\Livewire\Home\Home\Index::class)->name('home.index');
 Route::get('/login', function () {
     return redirect(\route('user.login-register'));
 })->name('login');
@@ -48,7 +47,7 @@ Route::get('/register', function () {
 //category and Subcategory
 Route::middleware('web')->prefix('main')->group(function () {
     Route::get('/{category}', \App\Http\Livewire\Home\Category\Index::class);
-//Route::get('/electronic-devices',\App\Http\Livewire\Home\Category\Electronic\Index::class)->name('category.electronic.index');
+    //Route::get('/electronic-devices',\App\Http\Livewire\Home\Category\Electronic\Index::class)->name('category.electronic.index');
 //Route::get('/vehicles',\App\Http\Livewire\Home\Category\Vehicle\Index::class)->name('category.electronic.index');
 //Route::get('/apparel',\App\Http\Livewire\Home\Category\Apparel\Index::class)->name('category.apparel.index');
 //Route::get('/mother-and-child/',\App\Http\Livewire\Home\Category\Child\Index::class)->name('category.child.index');
@@ -129,8 +128,8 @@ Route::get('/cart', \App\Http\Livewire\Home\Cart\Index::class)->name('cart.index
 //shopping
 Route::get('/shipping', \App\Http\Livewire\Home\Order\Shipping::class)
     ->name('order.shipping')->middleware('auth');
-Route::post('/shipping',[PostController::class,'shipping'])->name('address.shipping.create');
-Route::delete('/shipping/delete/{id}',[PostController::class,'shipping_delete'])->name('address.shipping.delete');
+Route::post('/shipping', [PostController::class, 'shipping'])->name('address.shipping.create');
+Route::delete('/shipping/delete/{id}', [PostController::class, 'shipping_delete'])->name('address.shipping.delete');
 //payment
 Route::get('/payment', \App\Http\Livewire\Home\Order\Payment::class)
     ->name('order.payment')->middleware('auth');
@@ -140,42 +139,42 @@ Route::get('/payment/bank/order-{order_number}', \App\Http\Livewire\Home\Order\P
     ->name('bank.payment')->middleware('auth');
 
 //payment Bank
-Route::get('/payment/bank/pay',[\App\Http\Controllers\PayController::class,'pay'])
+Route::get('/payment/bank/pay', [\App\Http\Controllers\PayController::class, 'pay'])
     ->name('bank.pay')->middleware('auth');
 //payment Bank
-Route::get('/payment/bank/callback',[\App\Http\Controllers\PayController::class,'callback'])
+Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class, 'callback'])
     ->name('bank.callback');
 
 
 //seller register
-Route::get('/seller/registration',App\Http\Livewire\Seller\Auth\Register::class)
+Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
     ->name('seller.register');
-Route::get('/seller/registration/email/{seller}',App\Http\Livewire\Seller\Auth\Register\Email::class)
+Route::get('/seller/registration/email/{seller}', App\Http\Livewire\Seller\Auth\Register\Email::class)
     ->name('seller.register.email');
 
-Route::get('/seller/registration/business-details/{seller}',App\Http\Livewire\Seller\Auth\Register\Detail::class)
+Route::get('/seller/registration/business-details/{seller}', App\Http\Livewire\Seller\Auth\Register\Detail::class)
     ->name('seller.register.detail');
 
 //seller Login
-Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
+Route::get('/seller/account/login', App\Http\Livewire\Seller\Auth\Login::class)
     ->name('seller.login');
 //seller Login
-Route::get('/seller/account/forgotpassword/',App\Http\Livewire\Seller\Auth\Password::class)
+Route::get('/seller/account/forgotpassword/', App\Http\Livewire\Seller\Auth\Password::class)
     ->name('seller.password');
 
 
 //marketer register
-Route::get('/marketer/registration',App\Http\Livewire\Marketer\Auth\Register::class)
+Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
     ->name('marketer.register');
-Route::get('/marketer/registration/email/{marketer}',App\Http\Livewire\Marketer\Auth\Register\Email::class)
+Route::get('/marketer/registration/email/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Email::class)
     ->name('marketer.register.email');
 
-Route::get('/marketer/registration/business-details/{marketer}',App\Http\Livewire\Marketer\Auth\Register\Detail::class)
+Route::get('/marketer/registration/business-details/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Detail::class)
     ->name('marketer.register.detail');
 
 //marketer Login
-Route::get('/marketer/account/login',App\Http\Livewire\Marketer\Auth\Login::class)
+Route::get('/marketer/account/login', App\Http\Livewire\Marketer\Auth\Login::class)
     ->name('marketer.login');
 //marketer Login
-Route::get('/marketer/account/forgotpassword/',App\Http\Livewire\Marketer\Auth\Password::class)
+Route::get('/marketer/account/forgotpassword/', App\Http\Livewire\Marketer\Auth\Password::class)
     ->name('marketer.password');

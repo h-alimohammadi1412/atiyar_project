@@ -15,14 +15,12 @@ class Index extends AdminControllerLivewire
     use WithFileUploads;
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
 
     public $img;
     public $search;
 
     protected $queryString = ['search'];
 
-    public $readyToLoad = false;
 
     public Brand $brand;
 
@@ -41,11 +39,6 @@ class Index extends AdminControllerLivewire
         'brand.status' => 'nullable',
         'brand.vip' => 'nullable',
     ];
-
-    public function updated($title)
-    {
-        $this->validateOnly($title);
-    }
 
 
     public function categoryForm()
@@ -78,30 +71,6 @@ class Index extends AdminControllerLivewire
         $this->createLog('برند','admin/brand',$this->brand->name,'ایجاد');
         $this->emit('toast', 'success', ' برند با موفقیت ایجاد شد.');
 
-    }
-   
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $brand = Brand::find($id);
-        $brand->update([
-            'status' => 0
-        ]);
-        $this->createLog('برند','admin/brand',$this->brand->name,'غیرفعال');
-        $this->emit('toast', 'success', 'وضعیت برند با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $brand = Brand::find($id);
-        $brand->update([
-            'status' => 1
-        ]);
-        $this->createLog('برند','admin/brand',$this->brand->name,'فعال');
-        $this->emit('toast', 'success', 'وضعیت برند با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)

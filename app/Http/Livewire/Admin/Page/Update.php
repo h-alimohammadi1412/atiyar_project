@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Page;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Brand;
 use App\Models\Log;
 use App\Models\Page;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public Page $page;
@@ -22,29 +23,15 @@ class Update extends Component
     {
         $this->validate();
         if ($this->img){
-            $this->page->img = $this->uploadImage();
+            $this->page->img = $this->uploadImage('page');
         }
 
         $this->page->update($this->validate());
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت صفحه سایت' .'-'. $this->page->title,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('صفحه سایت', 'admin/page', $this->page->title, 'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'صفحه سایت مورد نظر با موفقیت آپدیت شد.');
         return redirect(route('page.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "page/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-
 
     public function render()
     {

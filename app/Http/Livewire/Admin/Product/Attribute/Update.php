@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Product\Attribute;
 
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Attribute;
+use Tdanandeh\SweetAlert\SweetAlert;
 
 class Update extends AdminControllerLivewire
 {
@@ -25,7 +26,9 @@ class Update extends AdminControllerLivewire
             ]);
         }
         $this->createLog('مشخصات کالا', 'admin/attribute/'.$this->attribute->category_id, $this->attribute->title, 'آپدیت');
-        alert()->success(' با موفقیت آپدیت شد.', 'مشخصات محصول مورد نظر با موفقیت آپدیت شد.');
+        // alert()->success(' با موفقیت آپدیت شد.', 'مشخصات محصول مورد نظر با موفقیت آپدیت شد.');
+        alert()->success('مشخصات محصول مورد نظر با موفقیت آپدیت شد.');
+
         return redirect(route('attribute.index',['category'=>$this->attribute->category_id]));
 
     }

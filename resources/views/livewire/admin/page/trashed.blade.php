@@ -57,9 +57,9 @@
                                     <td><a target="_blank" href="{{url($page->link)}}">{{$page->link}}</a></td>
 
                                     <td>
-                                        <a wire:click="deleteCategory({{$page->id}})" type="submit"
+                                        <a wire:click="deleteField('Page','page','صفحات سایت','title',{{ $page->id }})" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
-                                        <a wire:click="trashedCategory({{$page->id}})"
+                                        <a wire:click="trashedField('Page','page','صفحات سایت','title',{{ $page->id }})"
                                            class="item-li i-checkouts item-restore"></a>
                                     </td>
                                 </tr>

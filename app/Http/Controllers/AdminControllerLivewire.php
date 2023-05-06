@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminControllerLivewire extends Component
 {
-public $readyToLoad = false;
+    public $readyToLoad = false;
     protected $paginationTheme = 'bootstrap';
-      public function loadCategory()
+    public function loadCategory()
     {
         $this->readyToLoad = true;
     }
@@ -36,11 +36,12 @@ public $readyToLoad = false;
         if ($modelSelect->$field == 0) {
             $modelSelect->update([$field => 1]);
             $this->createLog($title, 'admin/' . $route, $modelSelect->title, 'فعال');
-            $this->emit('toast', 'success', "وضعیت $title با موفقیت فعال شد.");
+            alert()->success("وضعیت $title با موفقیت فعال شد.");
+
         } else {
             $modelSelect->update([$field => 0]);
             $this->createLog($title, 'admin/' . $route, $modelSelect->title, 'غیرفعال');
-            $this->emit('toast', 'success', "وضعیت $title با موفقیت غیرفعال شد.");
+            alert()->success("وضعیت $title با موفقیت غیرفعال شد.");
         }
 
     }
@@ -53,7 +54,7 @@ public $readyToLoad = false;
         }
         $modelSelect->forceDelete();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'حذف');
-        $this->emit('toast', 'success', " $title به صورت کامل از دیتابیس حذف شد.");
+        alert()->success(" $title به صورت کامل از دیتابیس حذف شد.");
     }
 
     public function trashedField($model, $route, $title, $fieldName, $id)
@@ -62,8 +63,7 @@ public $readyToLoad = false;
         $modelSelect = $Model::withTrashed()->where('id', $id)->first();
         $modelSelect->restore();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'بازیابی');
-
-        $this->emit('toast', 'success', " $title با موفقیت بازیابی شد.");
+        alert()->success(" $title با موفقیت بازیابی شد.");
     }
     public function createLog($modelName, $url, $title, $actionType)
     {
@@ -73,6 +73,7 @@ public $readyToLoad = false;
             'url' => $url,
             'actionType' => $actionType
         ]);
+        alert()->success("مشخصات $title مورد نظر با موفقیت $actionType شد.");
     }
     public function galleryUpload($id, Request $request)
     {
@@ -112,7 +113,9 @@ public $readyToLoad = false;
         $modelSelect = $Model::withTrashed()->findOrFail($id);
         $modelSelect->delete();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'حذف');
-        $this->emit('toast', 'success', " $title با موفقیت حذف شد.");
+        alert()->success( " $title با موفقیت حذف شد.");
+
+        
     }
 
 }
