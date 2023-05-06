@@ -2,7 +2,7 @@
     <div class="uk-container uk-container-large">
         <div class="c-header__top">
             <h1 class="c-header__logo"><a style="background: url({{asset('9eb66c4d.svg')}})" class="with-new-logo" href="/"></a></h1>
-            <h2 class="c-header__tag">مرکز فروشندگان</h2>
+            <h2 class="c-header__tag">مرکز بازاریابان</h2>
         </div>
     </div>
 </header>

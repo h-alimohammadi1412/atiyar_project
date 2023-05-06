@@ -14,28 +14,28 @@
                             <div class="js-sticky-2">
                                 <div class="js-products js-sticky-inner-2 c-listing-wrapper"
                                      style="position: relative;">
-{{--                                    @if (DB::connection('mysql-category')->table('category_slider')->where('c_id',$category->id)->where('status', 1)->exists())--}}
-                                    @if (DB::table('category_slider')->where('c_id',$category->id)->where('status', 1)->exists())
+                                    @if (DB::connection('mysql-category')->table('category_slider')->where('c_id',$category->id)->where('status', 1)->exists())
+{{--                                    @if (DB::table('category_slider')->where('c_id',$category->id)->where('status', 1)->exists())--}}
                                         @include('livewire.home.category.base.slider')
                                     @endif
-{{--                                    @if (DB::connection('mysql-category')->table('category_amazing')->where('c_id',$category->id) ->exists())--}}
-                                    @if (DB::table('category_amazing')->where('c_id',$category->id) ->exists())
+                                    @if (DB::connection('mysql-category')->table('category_amazing')->where('c_id',$category->id) ->exists())
+{{--                                    @if (DB::table('category_amazing')->where('c_id',$category->id) ->exists())--}}
                                         @include('livewire.home.category.base.super-deal')
                                     @endif
-{{--                                    @if (DB::connection('mysql-category')->table('category_banner')->where('type', 0)-> where('c_id',$category->id) ->exists())--}}
-                                    @if (DB::table('category_banner')->where('type', 0)-> where('c_id',$category->id) ->exists())
+                                    @if (DB::connection('mysql-category')->table('category_banner')->where('type', 0)-> where('c_id',$category->id) ->exists())
+{{--                                    @if (DB::table('category_banner')->where('type', 0)-> where('c_id',$category->id) ->exists())--}}
                                         @include('livewire.home.category.base.aside2')
                                     @endif
-{{--                                    @if (DB::connection('mysql-category')->table('category_product_swiper')->where('c_id',$category->id) -> where('status', 1)->exists())--}}
-                                    @if (DB::table('category_product_swiper')->where('c_id',$category->id) -> where('status', 1)->exists())
+                                    @if (DB::connection('mysql-category')->table('category_product_swiper')->where('c_id',$category->id) -> where('status', 1)->exists())
+{{--                                    @if (DB::table('category_product_swiper')->where('c_id',$category->id) -> where('status', 1)->exists())--}}
                                         @include('livewire.home.category.base.swiper-product')
                                     @endif
-{{--                                    @if (DB::connection('mysql-category')->table('category_banner')->where('type', 1)->where('c_id',$category->id) ->take(2)->exists())--}}
-                                    @if (DB::table('category_banner')->where('type', 1)->where('c_id',$category->id) ->take(2)->exists())
+                                    @if (DB::connection('mysql-category')->table('category_banner')->where('type', 1)->where('c_id',$category->id) ->take(2)->exists())
+{{--                                    @if (DB::table('category_banner')->where('type', 1)->where('c_id',$category->id) ->take(2)->exists())--}}
                                         @include('livewire.home.category.base.aside3')
                                     @endif
-{{--                                    @if (DB::connection('mysql-category')->table('category_brand')->where('c_id',$category->id) ->exists())--}}
-                                    @if (DB::table('category_brand')->where('c_id',$category->id) ->exists())
+                                    @if (DB::connection('mysql-category')->table('category_brand')->where('c_id',$category->id) ->exists())
+{{--                                    @if (DB::table('category_brand')->where('c_id',$category->id) ->exists())--}}
                                         @include('livewire.home.category.base.brand')
                                     @endif
                                     @if ($category->description != null)

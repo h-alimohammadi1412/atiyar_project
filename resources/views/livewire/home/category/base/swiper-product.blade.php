@@ -14,8 +14,8 @@
                 class="swiper-container swiper-container-horizontal js-swiper-products swiper-container-rtl">
                 <div class="swiper-wrapper"
                      style="transform: translate3d(0px, 0px, 0px);">
-{{--                    @foreach(DB::connection('mysql-vehicle')->table('category_vehicle_product_swiper')->--}}
-                    @foreach(DB::table('category_vehicle_product_swiper')->
+{{--                   @foreach(DB::table('category_vehicle_product_swiper')->--}}
+                     @foreach(DB::connection('mysql-vehicle')->table('category_vehicle_product_swiper')->
                         where('title_id',$title->id)-> where('status',1)->get() as $cat)
                         <div class="swiper-slide js-sntracker-carousel-item" data-id="870282"
                              data-gtm-vis-recent-on-screen-9070001_346="2493"

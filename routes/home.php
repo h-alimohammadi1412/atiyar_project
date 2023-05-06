@@ -146,6 +146,7 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
     ->name('bank.callback');
 
 
+
 //seller register
 Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
     ->name('seller.register');

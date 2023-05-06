@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Category;
 
-use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\SubCategory;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends AdminControllerLivewire
+class Index extends Component
 {
     use WithFileUploads;
     use WithPagination;
@@ -22,75 +22,118 @@ class Index extends AdminControllerLivewire
     protected $queryString = ['search'];
     public $readyToLoad = false;
     public Category $category;
-    public $category_id;
-
-
     public function mount()
     {
-        $id = request()->get('category_id');
-        $id === null ? $this->category_id = 0 : $this->category_id = $id;
         $this->category = new Category();
-        $this->category->parent_id = 0;
     }
-
     protected $rules = [
         'category.title' => 'required|min:3',
-        'category.img' => 'nullable',
-        'category.en_name' => 'required',
+        'category.icon' => 'nullable',
+        'category.name' => 'required',
         'category.link' => 'required',
         'category.description' => 'required',
+        'category.body' => 'required',
         'category.status' => 'nullable',
-        'category.notShow' => 'nullable',
-        'category.parent_id' => 'required',
-
     ];
 
+    public function updated($title)
+    {
+        $this->validateOnly($title);
+    }
     public function categoryForm()
     {
 
         $this->validate();
-        $category = Category::create([
+
+        $category =  Category::query()->create([
             'title' => $this->category->title,
-            'img' => $this->category->img,
-            'parent_id' => $this->category->parent_id,
-            'en_name' => $this->category->en_name,
+            'icon' => $this->category->icon,
+            'name' => $this->category->name,
             'link' => $this->category->link,
             'description' => $this->category->description,
-            'status' => $this->category->status ? true : false,
-            'notShow' => $this->category->status ? true : false,
+            'body' => $this->category->body,
+            'status' => $this->category->status ? true:false ,
         ]);
 
-        if ($this->img) {
+        if ($this->img){
             $category->update([
-                'img' => $this->uploadImage('category')
+                'img' => $this->uploadImage()
             ]);
         }
 
         $this->category->title = "";
+        $this->category->icon = "";
         $this->category->description = "";
-        $this->category->en_name = "";
+        $this->category->body = "";
+        $this->category->name = "";
         $this->category->link = "";
         $this->category->status = false;
         $this->img = null;
 
-        $this->createLog('دسته', 'admin/category', $this->category->title, 'ایجاد');
+        Log::create([
+           'user_id' => auth()->user()->id,
+            'url' => 'افزودن دسته' .'-'. $this->category->title,
+            'actionType' => 'ایجاد'
+        ]);
         $this->emit('toast', 'success', ' دسته با موفقیت ایجاد شد.');
 
     }
 
+    public function uploadImage()
+    {
+        $year = now()->year;
+        $month = now()->month;
+        $directory = "category/$year/$month";
+        $name = $this->img->getClientOriginalName();
+        $this->img->storeAs($directory, $name);
+        return "$directory/$name";
+    }
     public function loadCategory()
     {
         $this->readyToLoad = true;
+    }
+    public function updateCategoryDisable($id)
+    {
+        $category = Category::find($id);
+        $category->update([
+            'status' => 0
+        ]);
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'url' => 'غیرفعال کردن وضعیت دسته' .'-'. $category->title,
+            'actionType' => 'غیرفعال'
+        ]);
+        $this->emit('toast', 'success', 'وضعیت دسته با موفقیت غیرفعال شد.');
+    }
+
+    public function updateCategoryEnable($id)
+    {
+        $category = Category::find($id);
+        $category->update([
+            'status' => 1
+        ]);
+        Log::create([
+            'user_id' => auth()->user()->id,
+            'url' => 'فعال کردن وضعیت دسته' .'-'. $category->title,
+            'actionType' => 'فعال'
+        ]);
+        $this->emit('toast', 'success', 'وضعیت دسته با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
     {
         $category = Category::find($id);
-        if ($category) {
+        $subCategory = SubCategory::where('parent',$id)->first();
+        if ($subCategory == null){
             $category->delete();
-            $this->createLog('دسته', 'admin/category', $category->title, 'حذف');
+            Log::create([
+                'user_id' => auth()->user()->id,
+                'url' => 'حذف کردن دسته' .'-'. $category->title,
+                'actionType' => 'حذف'
+            ]);
             $this->emit('toast', 'success', ' دسته با موفقیت حذف شد.');
-        } else {
+        }else
+        {
             $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا زیردسته دارد!');
         }
 
@@ -98,11 +141,12 @@ class Index extends AdminControllerLivewire
     public function render()
     {
 
-        $categories = $this->readyToLoad ? Category::with('getChild.getChild')
-            ->where('parent_id', $this->category_id)
-            ->where('title', 'LIKE', "%{$this->search}%")
-            ->where('en_name', 'LIKE', "%{$this->search}%")
-            ->latest()->paginate(15) : [];
+        $categories = $this->readyToLoad ? Category::where('title', 'LIKE', "%{$this->search}%")->
+        orWhere('en_name', 'LIKE', "%{$this->search}%")->
+        orWhere('link', 'LIKE', "%{$this->search}%")->
+        orWhere('id', $this->search)->
+        latest()->paginate(15) : [];
+
         return view('livewire.admin.category.index', compact('categories'));
     }
 }

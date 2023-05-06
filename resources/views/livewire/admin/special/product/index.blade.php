@@ -145,7 +145,7 @@
                     <div class="form-group">
                         <select wire:model.lazy="specialProduct.product_id" name="product_id" id="" class="form-control">
                             <option value=" ">- محصول -</option>
-                            @foreach(\App\Models\Product::where('childcategory_id',$this->specialProduct->childCategory_id)->get() as $product)
+                            @foreach(\App\Models\SpecialProduct::where('childcategory_id',$this->specialProduct->childCategory_id)->get() as $product)
                                 <option value="{{$product->id}}">{{$product->title}}</option>
                             @endforeach
                         </select>
