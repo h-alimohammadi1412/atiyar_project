@@ -2,10 +2,15 @@
 
 namespace App\Http\Livewire\Home\Home;
 
+use App\Mail\SellerRegister;
+use App\Mail\UserRegister;
 use App\Models\FooterLinkTitle;
 use App\Models\NewsLetter;
-use App\Models\Notification;
+// use App\Models\Notification;
 use App\Models\SMS;
+use App\Models\User;
+use App\Services\Notification as ServicesNotification;
+use App\Services\Notification\Notification;
 use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
@@ -14,13 +19,19 @@ use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
+use Mail;
+
 class Index extends Component
 {
 
     public function render()
     {
         auth()->loginUsingId(1);
-
+        // $notification = resolve(Notification::class);
+        // $notification->sendEmail(User::find(1),new UserRegister);
+        // $secure_code = rand(1000, 9999);
+        // $res =$notification->sendSms("09387029274", "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از : " . $secure_code);
+        // dd($res);
         $ip = Request::ip();
         if (auth()->user()){
             $no = Notification::where('user_id',auth()->user()->id)->

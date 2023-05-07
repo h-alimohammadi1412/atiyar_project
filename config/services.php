@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'sms'=>[
+        'user'=> "md.09133886881",
+        'password'=> "kho!423",
+        'fromNumber'=> "10009611",
+    ]
+
 ];
