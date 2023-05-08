@@ -1,62 +1,61 @@
 <section class="tns-carousel tns-controls-lg">
-    <div class="tns-carousel-inner"
-        data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;responsive&quot;: {&quot;0&quot;:{&quot;nav&quot;:true, &quot;controls&quot;: false},&quot;992&quot;:{&quot;nav&quot;:false, &quot;controls&quot;: true}}}">
-        <!-- Item-->
-        <div class="px-lg-5" style="background-color: #3aafd2;">
-            <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img
-                    class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="img/home/hero-slider/01.jpg"
-                    alt="تجهیزات جانبی">
-                <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
-                    style="max-width: 42rem; z-index: 10;">
-                    <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
-                        <h3 class="h2 text-light fw-light pb-1 from-start">تازه رسیده است!</h3>
-                        <h2 class="text-light display-5 from-start delay-1">مجموعه تابستان عظیم</h2>
-                        <p class="fs-lg text-light pb-3 from-start delay-2">لباس شنا ، تاپ ، شلوارک ، عینک
-                            آفتابی و موارد دیگر ...</p>
-                        <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary"
-                                href="shop-grid-ls.html">خرید کنید<i
-                                    class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                    </div>
-                </div>
+    <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            @foreach (\App\Models\Slider::all() as $slider )
+            
+            <div class="swiper-slide">
+                <img src="/storage/{{ $slider->img }}">
             </div>
+            
+            @endforeach
         </div>
-        <!-- Item-->
-        <div class="px-lg-5" style="background-color: #f5b1b0;">
-            <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img
-                    class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="img/home/hero-slider/02.jpg"
-                    alt="تجهیزات جانبی">
-                <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
-                    style="max-width: 42rem; z-index: 10;">
-                    <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
-                        <h3 class="h2 text-light fw-light pb-1 from-bottom">تازه رسیده است!</h3>
-                        <h2 class="text-light display-5 from-bottom delay-1">مجموعه تابستان عظیم</h2>
-                        <p class="fs-lg text-light pb-3 from-bottom delay-2">لباس شنا ، تاپ ، شلوارک ، عینک
-                            آفتابی و موارد دیگر ...</p>
-                        <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary"
-                                href="shop-grid-ls.html">خرید کنید<i
-                                    class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Item-->
-        <div class="px-lg-5" style="background-color: #eba170;">
-            <div class="d-lg-flex justify-content-between align-items-center ps-lg-4"><img
-                    class="d-block order-lg-2 me-lg-n5 flex-shrink-0" src="img/home/hero-slider/03.jpg"
-                    alt="تجهیزات جانبی">
-                <div class="position-relative mx-auto me-lg-n5 py-5 px-4 mb-lg-5 order-lg-1"
-                    style="max-width: 42rem; z-index: 10;">
-                    <div class="pb-lg-5 mb-lg-5 text-center text-lg-start text-lg-nowrap">
-                        <h3 class="h2 text-light fw-light pb-1 from-top">تازه رسیده است!</h3>
-                        <h2 class="text-light display-5 from-top delay-1">مجموعه تابستان عظیم</h2>
-                        <p class="fs-lg text-light pb-3 from-top delay-2">لباس شنا ، تاپ ، شلوارک ، عینک
-                            آفتابی و موارد دیگر ...</p>
-                        <div class="d-table scale-up delay-4 mx-auto mx-lg-0"><a class="btn btn-primary"
-                                href="shop-grid-ls.html">خرید کنید<i
-                                    class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+    
+        <!-- If we need navigation buttons -->
+        {{-- <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div> --}}
+    
+        <!-- If we need scrollbar -->
     </div>
+    
+    <style>
+        .swiper {
+            width: 100%;
+        }
+        .swiper img{
+            width: 100%;
+        }
+    </style>
+       
+    
 </section>
+
+@section('script')<script type="module">
+    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+  
+    const swiper = new Swiper('.swiper', {
+  // Optional parameters
+//   direction: 'vertical',
+  loop: true,
+  effect: 'fade',
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+    dynamicBullets : true
+  },
+
+//   Navigation arrows
+//   navigation: {
+//     nextEl: '.swiper-button-next',
+//     prevEl: '.swiper-button-prev',
+//   },
+  autoplay	: {
+      delay	: 5000
+  },
+});
+  </script>
+    
+@endsection
