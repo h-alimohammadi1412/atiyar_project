@@ -157,7 +157,7 @@
         @include('livewire.home.home.header1')
         {{ $slot }}
     </main>
-    @include('livewire.home.home.footer1')
+    @include('livewire.home.home.footer')
     <!-- Toolbar for handheld devices (Default)-->
     {{-- <div class="handheld-toolbar">
         <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item"

@@ -6,7 +6,7 @@ use App\Mail\SellerRegister;
 use App\Mail\UserRegister;
 use App\Models\FooterLinkTitle;
 use App\Models\NewsLetter;
-// use App\Models\Notification;
+use App\Models\Notification as ModelsNotification;
 use App\Models\SMS;
 use App\Models\User;
 use App\Services\Notification as ServicesNotification;
@@ -34,7 +34,7 @@ class Index extends Component
         // dd($res);
         $ip = Request::ip();
         if (auth()->user()){
-            $no = Notification::where('user_id',auth()->user()->id)->
+            $no = ModelsNotification::where('user_id',auth()->user()->id)->
             where('type','ip')->get()->last();
 
             if ($no != null) {

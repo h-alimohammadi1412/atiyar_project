@@ -18,6 +18,8 @@ class CreatePagesTable extends Migration
             $table->text('img')->nullable();
             $table->string('title');
             $table->string('link');
+            $table->string('icon')->nullable();
+            $table->string('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
