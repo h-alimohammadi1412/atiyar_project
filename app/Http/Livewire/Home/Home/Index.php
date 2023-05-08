@@ -7,6 +7,7 @@ use App\Mail\UserRegister;
 use App\Models\FooterLinkTitle;
 use App\Models\NewsLetter;
 use App\Models\Notification as ModelsNotification;
+use App\Models\Product;
 use App\Models\SMS;
 use App\Models\User;
 use App\Services\Notification as ServicesNotification;
@@ -16,6 +17,7 @@ use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Artesaos\SEOTools\Facades\TwitterCard;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
@@ -27,15 +29,10 @@ class Index extends Component
     public function render()
     {
         auth()->loginUsingId(1);
-        // $notification = resolve(Notification::class);
-        // $notification->sendEmail(User::find(1),new UserRegister);
-        // $secure_code = rand(1000, 9999);
-        // $res =$notification->sendSms("09387029274", "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از : " . $secure_code);
-        // dd($res);
         $ip = Request::ip();
-        if (auth()->user()){
-            $no = ModelsNotification::where('user_id',auth()->user()->id)->
-            where('type','ip')->get()->last();
+        if (auth()->user()) {
+            $no = ModelsNotification::where('user_id', auth()->user()->id)->
+                where('type', 'ip')->get()->last();
 
             if ($no != null) {
 
@@ -54,18 +51,18 @@ class Index extends Component
                     ]);
                 }
 
-            }elseif($no == null){
+            } elseif ($no == null) {
 
                 $type = 'ip';
                 $ip = Request::ip();
                 Notification::create([
                     'user_id' => auth()->user()->id,
-                    'type' =>$type,
-                    'sms' =>0,
-                    'ip' =>$ip,
-                    'email' =>0,
-                    'system' =>1,
-                    'text' =>' هشدار: یک ورود موفق با آی پی '.$ip.' در سیستم ثبت شده است. ',
+                    'type' => $type,
+                    'sms' => 0,
+                    'ip' => $ip,
+                    'email' => 0,
+                    'system' => 1,
+                    'text' => ' هشدار: یک ورود موفق با آی پی ' . $ip . ' در سیستم ثبت شده است. ',
                 ]);
             }
 
@@ -99,7 +96,7 @@ class Index extends Component
         SEOTools::opengraph()->addProperty('type', 'articles');
         SEOTools::twitter()->setSite('@LuizVinicius73');
         SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
-//        $this->seo()
+        //        $this->seo()
 //            ->setTitle(' ')
 //            ->setDescription('هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!')
 //        ;

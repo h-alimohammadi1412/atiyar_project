@@ -18,7 +18,7 @@ class Update extends AdminControllerLivewire
         'category.img' => 'nullable',
         'category.en_name' => 'required',
         'category.link' => 'required',
-        'category.description' => 'required',
+        'category.description' => 'nullable',
         'category.status' => 'nullable',
         'category.notShow' => 'nullable',
         'category.parent_id' => 'required',
@@ -37,7 +37,7 @@ class Update extends AdminControllerLivewire
             ]);
         }
         $this->createLog('دسته', 'admin/category', $this->category->title, 'آپدیت');
-        alert()->success('دسته با موفقیت ایجاد شد.', 'دسته آپدیت شد.');
+        alert()->success('دسته با موفقیت آپدیت شد.', 'دسته آپدیت شد.');
         return redirect(route('category.index'));
 
     }

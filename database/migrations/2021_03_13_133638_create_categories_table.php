@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->string('search_url')->nullable();    
             $table->string('description');
             $table->string('link')->nullable();
+            $table->string('icon')->nullable();
             $table->string('status')->default(1);    
             $table->integer('parent_id');
             $table->tinyInteger('notShow')->default(1);                

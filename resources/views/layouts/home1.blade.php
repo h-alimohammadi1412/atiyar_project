@@ -2,10 +2,11 @@
 <html lang="fa">
 
 <head>
-    @include('livewire.home.home.head1')
+    @include('livewire.home.home.head')
 </head>
 
 <body class=" t-index">
+    @include('sweet::alert')
     <!-- ورود/ثبت نام modal-->
     @include('livewire.home.home.home.login_register')
     <main class="page-wrapper">
