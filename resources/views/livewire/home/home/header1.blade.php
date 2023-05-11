@@ -168,30 +168,33 @@
                 </div>
                 <!-- Departments menu-->
                 @include('livewire.home.home.home.navbar_categories')
+                @php
+                    $headers = \App\Models\SiteHeader::get();
+                @endphp
                 <!-- Primary menu-->
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-                            href="{{ url('/') }}" data-bs-toggle="dropdown">آتی یار</a>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ url($headers[0]->link) }}"
+                            data-bs-toggle="dropdown">{{ $headers[0]->title }}</a>
                     </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                            data-bs-toggle="dropdown" data-bs-auto-close="outside">قوانین و مقررات</a>
-                        <ul class="dropdown-menu">            
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ url($headers[1]->link) }}"
+                            data-bs-toggle="dropdown" data-bs-auto-close="outside">{{ $headers[1]->title }}</a>
+                        <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="about.html">قوانین خریداران</a></li>
-                            <li><a class="dropdown-item" href="contacts.html">قوانین فروشندگان</a></li>                         
-                            <li><a class="dropdown-item" href="contacts.html">قوانین بازاریابان</a></li>                         
+                            <li><a class="dropdown-item" href="contacts.html">قوانین فروشندگان</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">قوانین بازاریابان</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                            data-bs-toggle="dropdown" data-bs-auto-close="outside">همکاری</a>                        
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ url($headers[2]->link) }}"
+                            data-bs-toggle="dropdown" data-bs-auto-close="outside">{{ $headers[2]->title }}</a>
                     </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                            data-bs-toggle="dropdown" data-bs-auto-close="outside">تبلیغات</a>                      
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ url($headers[3]->link) }}"
+                            data-bs-toggle="dropdown" data-bs-auto-close="outside">{{ $headers[3]->title }}</a>
                     </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                            data-bs-toggle="dropdown" data-bs-auto-close="outside">وبلاگ</a>                        
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ url($headers[4]->link) }}"
+                            data-bs-toggle="dropdown" data-bs-auto-close="outside">{{ $headers[4]->title }}</a>
                     </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                            data-bs-toggle="dropdown">پشتیبانی</a>                     
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ url($headers[5]->link) }}"
+                            data-bs-toggle="dropdown">{{ $headers[5]->title }}</a>
                     </li>
                 </ul>
             </div>
