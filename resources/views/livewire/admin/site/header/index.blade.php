@@ -53,12 +53,12 @@
 
                                     <td>
                                         @if($header->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$header->id}})"
+                                            <button wire:click="updateStatus('SiteHeader','header','منو','status',{{ $header->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                             </button>
                                         @else
-                                            <button wire:click="updateCategoryEnable({{$header->id}})"
+                                            <button wire:click="updateStatus('SiteHeader','header','منو','status',{{ $header->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال

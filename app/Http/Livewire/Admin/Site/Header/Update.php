@@ -2,17 +2,17 @@
 
 namespace App\Http\Livewire\Admin\Site\Header;
 
-use App\Models\header;
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\SiteHeader;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public $img;
     public $status = null;
+    public SiteHeader $header;
+
     protected $rules = [
         'header.title' => 'required|min:3',
         'header.status' => 'required',
@@ -24,7 +24,7 @@ class Update extends Component
 
         $this->validate();
         if ($this->img) {
-            $this->header->img = $this->uploadImage();
+            $this->header->img = $this->uploadImage('site');
         }
         $this->header->update($this->validate());
         if (!$this->header->status) {
@@ -32,25 +32,10 @@ class Update extends Component
                 'status' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت منو' .'-'. $this->header->title,
-            'actionType' => 'آپدیت'
-        ]);
-        alert()->success('منو با موفقیت ایجاد شد.', 'منو آپدیت شد.');
+        $this->createLog('منو هدر ', 'admin/header', $this->header->title, 'آپدیت');
         return redirect(route('header.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "site/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-    public SiteHeader $header;
 
     public function render()
     {

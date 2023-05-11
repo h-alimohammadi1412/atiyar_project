@@ -2,27 +2,21 @@
 
 namespace App\Http\Livewire\Admin\Site\Header;
 
-use App\Models\Category;
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\SiteHeader;
-use App\Models\SubCategory;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
 
     public $img;
     public $search;
 
     protected $queryString = ['search'];
-
-    public $readyToLoad = false;
 
     public SiteHeader $header;
 
@@ -60,7 +54,7 @@ class Index extends Component
 
         if ($this->img){
             $header->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('site')
             ]);
         }
 
@@ -69,69 +63,9 @@ class Index extends Component
         $this->header->icon = "";
         $this->header->status = false;
         $this->img = null;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن منو هدر' .'-'. $this->header->title,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' منو هدر با موفقیت ایجاد شد.');
+        $this->createLog('منو هدر ', 'admin/header', $this->header->title, 'ایجاد');
 
     }
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "site/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $header = SiteHeader::find($id);
-        $header->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت منو هدر' .'-'. $header->title,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت منو هدر با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $header = SiteHeader::find($id);
-        $header->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت منو هدر' .'-'. $header->title,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت منو هدر با موفقیت فعال شد.');
-    }
-
-    public function deleteCategory($id)
-    {
-        $header = SiteHeader::find($id);
-            $header->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن منو هدر' .'-'. $header->title,
-                'actionType' => 'حذف'
-            ]);
-            $this->emit('toast', 'success', ' منو هدر با موفقیت حذف شد.');
-    }
-
     public function render()
     {
 
