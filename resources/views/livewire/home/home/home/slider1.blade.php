@@ -1,61 +1,50 @@
 <section class="tns-carousel tns-controls-lg">
-    <div class="swiper">
+    <div class="swiper swiper_slider ">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @foreach (\App\Models\Slider::all() as $slider )
-            
-            <div class="swiper-slide">
-                <img src="/storage/{{ $slider->img }}">
-            </div>
-            
+            @foreach (\App\Models\Slider::all() as $slider)
+                <div class="swiper-slide">
+                  <a href="{{ $slider->link }}">
+                    <img src="/storage/{{ $slider->img }}" style="height: 500px; object-fit: cover;">
+                  </a>
+                </div>
             @endforeach
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
-    
+
         <!-- If we need navigation buttons -->
         {{-- <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div> --}}
-    
+
         <!-- If we need scrollbar -->
     </div>
-    
-    <style>
-        .swiper {
-            width: 100%;
-        }
-        .swiper img{
-            width: 100%;
-        }
-    </style>
-       
-    
+
+
 </section>
 
-@section('script')<script type="module">
-    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
-  
-    const swiper = new Swiper('.swiper', {
-  // Optional parameters
-//   direction: 'vertical',
-  loop: true,
-  effect: 'fade',
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-    dynamicBullets : true
-  },
+@section('script')
+    <script>
+        const swiper = new Swiper('.swiper_slider', {
+            loop: true,
+            effect: 'fade',
+            pagination: {
+                el: '.swiper-pagination',
+                dynamicBullets: true
+            },
+            autoplay: {
+                delay: 5000
+            },
+        });
+        const swiper1 = new Swiper('.swiper_specials', {
+            slidesPerView: 6,
+            spaceBetween: 50,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
 
-//   Navigation arrows
-//   navigation: {
-//     nextEl: '.swiper-button-next',
-//     prevEl: '.swiper-button-prev',
-//   },
-  autoplay	: {
-      delay	: 5000
-  },
-});
-  </script>
-    
+        });
+    </script>
 @endsection

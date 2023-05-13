@@ -167,10 +167,10 @@
                     <input class="form-control rounded-start" type="text" placeholder="جستجو برای محصول">
                 </div>
                 <!-- Departments menu-->
-                @include('livewire.home.home.home.navbar_categories')
                 @php
                     $headers = \App\Models\SiteHeader::get();
                 @endphp
+                @include('livewire.home.home.home.navbar_categories',['headers6'=>$headers[7]])
                 <!-- Primary menu-->
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ url($headers[0]->link) }}"

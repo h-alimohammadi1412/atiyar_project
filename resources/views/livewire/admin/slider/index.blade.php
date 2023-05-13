@@ -46,12 +46,12 @@
                                     <td><a target="_blank" href="{{url($slider->link)}}">{{\Illuminate\Support\Str::limit($slider->link,20)}}</a></td>
                                     <td>
                                         @if($slider->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$slider->id}})"
+                                            <button wire:click="updateStatus('Slider','slider','اسلایدر','status',{{ $slider->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                             </button>
                                         @else
-                                            <button wire:click="updateCategoryEnable({{$slider->id}})"
+                                            <button wire:click="updateStatus('Slider','slider','اسلایدر','status',{{ $slider->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال
@@ -59,7 +59,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a wire:click="deleteCategory({{$slider->id}})" type="submit"
+                                        <a wire:click="deletedFieldAsModel('Slider','slider','اسلایدر','{{ $slider->title }}','{{ $slider->id }}')" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                         <a href="{{route('slider.update',$slider)}}
                                             " class="item-edit " title="ویرایش"></a>

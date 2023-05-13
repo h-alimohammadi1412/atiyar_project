@@ -19590,3 +19590,27 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
     float: left;
 }
 .simplebar-offset{ left:0px !important;}
+.swiper-button-prev,.swiper-button-next {
+    width: 45px !important;
+    background-color: white !important;
+    box-shadow: 3px 2px 6px #746d6da8;
+    border-radius: 100%;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after{
+    font-size: 22px !important;
+}
+.cart_body{
+    height: 115px !important;
+}
+.card-img-top{
+    height: 200px !important;
+
+}
+.card-img-top img{
+    height: 100% !important;
+
+}
+.cart_body_product{
+    height: 100px !important;
+}

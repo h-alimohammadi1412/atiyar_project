@@ -17,8 +17,6 @@ class CreateSpecialProductsTable extends Migration
             $table->id();
             $table->string('product_id');
             $table->string('category_id');
-            $table->string('subCategory_id');
-            $table->string('childCategory_id')->nullable();
             $table->string('status')->default(1);
             $table->integer('natural')->nullable();
             $table->integer('supermarket')->nullable();
