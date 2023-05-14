@@ -18,8 +18,6 @@ class CreateCategoryIndicesTable extends Migration
             $table->string('title_id');
             $table->string('product_id');
             $table->string('category_id');
-            $table->string('subCategory_id');
-            $table->string('childCategory_id')->nullable();
             $table->string('status')->default(1);
             $table->timestamps();
         });

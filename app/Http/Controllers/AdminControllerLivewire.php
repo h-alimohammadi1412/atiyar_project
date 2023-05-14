@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminControllerLivewire extends Component
 {
+    public $search;
+
+    protected $queryString = ['search'];
+    
     public $readyToLoad = false;
     protected $paginationTheme = 'bootstrap';
     public function loadCategory()

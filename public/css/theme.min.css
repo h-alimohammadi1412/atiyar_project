@@ -19605,6 +19605,9 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 }
 .card-img-top{
     height: 200px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 
 }
 .card-img-top img{
@@ -19612,5 +19615,14 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 
 }
 .cart_body_product{
-    height: 100px !important;
+    height: 115px !important;
+}
+.product-title{
+    height: 50px !important;
+}
+.swiper-grid-column>.swiper-wrapper{
+flex-direction: unset;
+}
+.featured_category  .swiper-slide{
+    margin-top: 0 !important;
 }

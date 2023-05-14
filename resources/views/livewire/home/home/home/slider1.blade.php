@@ -44,7 +44,44 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-
+            breakpoints: {
+              // when window width is >= 320px
+              320: {
+                slidesPerView: 2,
+                spaceBetween: 20
+              },
+              // when window width is >= 480px
+              480: {
+                slidesPerView: 3,
+                spaceBetween: 30
+              },
+              // when window width is >= 640px
+              900: {
+                slidesPerView: 4,
+                spaceBetween: 40
+              },
+              // when window width is >= 640px
+              1000: {
+                slidesPerView: 5,
+                spaceBetween: 40
+              },
+              // when window width is >= 640px
+              1300: {
+                slidesPerView: 6,
+                spaceBetween: 50
+              }
+            }
+        });
+        var featured_category = new Swiper(".featured_category", {
+            slidesPerView: 3,
+            grid: {
+                rows: 2,
+            },
+            spaceBetween: 30,
+            pagination: {
+                el: ".swiper-pagination-featured_category",
+                clickable: true,
+            },
         });
     </script>
 @endsection

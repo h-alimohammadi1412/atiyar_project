@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire\Admin\Index\Title;
 
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\TitleCategoryIndex;
-use Livewire\Component;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
 
     protected $rules = [
@@ -17,12 +16,7 @@ class Update extends Component
 
         $this->validate();
         $this->index->update($this->validate());
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت عنوان دسته' .'-'. $this->index->title,
-            'actionType' => 'آپدیت'
-        ]);
-        alert()->success('عنوان دسته با موفقیت ایجاد شد.', 'عنوان دسته آپدیت شد.');
+        $this->createLog('عنوان دسته صفحه اصلی سایت', 'admin/category/title', $this->index->title, 'آپدیت');
         return redirect(route('index.title.index'));
 
     }
@@ -31,7 +25,6 @@ class Update extends Component
 
     public function render()
     {
-
         $index = $this->index;
         return view('livewire.admin.index.title.update',compact('index'));
     }

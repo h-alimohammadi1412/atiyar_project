@@ -29,8 +29,6 @@
                             <th>آیدی</th>
 
                             <th>دسته اصلی</th>
-                            <th>زیر دسته</th>
-                            <th>دسته کودک</th>
                             <th>محصول</th>
                             <th>دسته صفحه اصلی</th>
                             <th>وضعیت نمایش</th>
@@ -48,18 +46,6 @@
                                         {{$category->category->title}}
                                     </td>
                                     <td>
-                                        {{$category->subCategory->title}}
-                                    </td>
-                                    @if($category->childCategory_id == null)
-                                        <td>
-                                            -
-                                        </td>
-                                    @else
-                                        <td>
-                                            {{$category->childCategory->title}}
-                                        </td>
-                                    @endif
-                                    <td>
                                         {{$category->product->title}}
                                     </td>
 
@@ -68,12 +54,12 @@
                                     </td>
                                     <td>
                                         @if($category->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$category->id}})"
+                                            <button wire:click="updateStatus('CategoryIndex','index/category','محصول دسته صفحه اصلی','status',{{ $category->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                             </button>
                                         @else
-                                            <button wire:click="updateCategoryEnable({{$category->id}})"
+                                            <button wire:click="updateStatus('CategoryIndex','index/category','محصول دسته صفحه اصلی','status',{{ $category->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال
@@ -81,7 +67,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a wire:click="deleteCategory({{$category->id}})" type="submit"
+                                        <a wire:click="deleteCategory({{ $category->id }})" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                     </td>
                                 </tr>
@@ -117,32 +103,15 @@
 
                     <div class="form-group">
                         <select wire:model.lazy="category.category_id" name="category_id" id="" class="form-control">
-                            <option value="-1" >- دسته  -</option>
-                            @foreach(\App\Models\Category::all() as $category)
-                                <option value="{{$category->id}}">{{$category->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select wire:model.lazy="category.subCategory_id" name="subCategory_id" id="" class="form-control">
-                            <option value="-1" >- زیردسته  -</option>
-                            @foreach(\App\Models\SubCategory::where('parent',$this->category->category_id)->get() as $category)
-                                <option value="{{$category->id}}">{{$category->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select wire:model.lazy="category.childCategory_id" name="childCategory_id" id="" class="form-control">
-                            <option value=" ">- دسته کودک  -</option>
-                            @foreach(\App\Models\ChildCategory::where('parent',$this->category->subCategory_id)->get() as $category)
-                                <option value="{{$category->id}}">{{$category->title}}</option>
+                            @foreach(\App\Models\Category::getCategories() as $key=>$category)
+                                <option value="{{$key}}">{{$category}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <select wire:model.lazy="category.product_id" name="product_id" id="" class="form-control">
                             <option value=" ">- محصول -</option>
-                            @foreach(\App\Models\Product::where('childcategory_id',$this->category->childCategory_id)->get() as $product)
+                            @foreach(\App\Models\Product::where('category_id',$this->category->category_id)->get() as $product)
                                 <option value="{{$product->id}}">{{$product->title}}</option>
                             @endforeach
                         </select>

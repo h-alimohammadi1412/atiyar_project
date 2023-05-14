@@ -2,23 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Index\Title;
 
-use App\Models\Log;
-use App\Models\Menu;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\TitleCategoryIndex;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
 
     public TitleCategoryIndex $index;
 
@@ -32,12 +22,6 @@ class Index extends Component
         'index.title' => 'required',
     ];
 
-    public function updated($title)
-    {
-        $this->validateOnly($title);
-    }
-
-
     public function categoryForm()
     {
         $this->validate();
@@ -47,26 +31,15 @@ class Index extends Component
         ]);
 
         $this->index->title = '';
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن عنوان دسته صفحه اصلی سایت' . '-' . $this->index->title,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' عنوان دسته صفحه اصلی سایت با موفقیت ایجاد شد.');
+        $this->createLog('عنوان دسته صفحه اصلی سایت', 'admin/category/title', $this->index->title, 'ایجاد');
 
     }
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
-
     public function render()
     {
 
         $indexes = $this->readyToLoad ? TitleCategoryIndex::where('title', 'LIKE', "%{$this->search}%")->
-        orWhere('id', $this->search)->
-        latest()->paginate(15) : [];
-        return view('livewire.admin.index.title.index',compact('indexes'));
+            orWhere('id', $this->search)->
+            latest()->paginate(15) : [];
+        return view('livewire.admin.index.title.index', compact('indexes'));
     }
 }
