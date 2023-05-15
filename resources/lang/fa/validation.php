@@ -146,6 +146,7 @@ return [
     'attributes' => [
         'name' => 'نام',
         'en_name' => 'نام لاتین',
+        'email_phone' => 'ایمیل یا شماره موبایل',
         'price' => 'قیمت',
         'value' => 'مقدار',
         'status' => 'وضعیت',

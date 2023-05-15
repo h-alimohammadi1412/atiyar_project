@@ -17,7 +17,7 @@
     <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="index-2.html">
-                <img src="{{ asset('img/weblogo.png') }}" width="142" alt="کارتزیلا">
+                <img src="{{ asset('img/weblogo.png') }}" width="142" alt="آتی یار">
             </a>
             <a class="navbar-brand d-sm-none me-2" href="index-2.html"><img src="img/logo-icon.png"
                     width="74"alt="کارتزیلا"></a>
@@ -46,7 +46,7 @@
                     <div class="dropdown">
                         <a href="{{ url('profile') }}" class="dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="false" style="color: #505764;">
-                            {{ auth()->user()->email }}
+                            {{ auth()->user()->mobile }}
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ url('/profile/orders') }}">سفارش های من</a>

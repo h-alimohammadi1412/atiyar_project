@@ -19626,3 +19626,7 @@ flex-direction: unset;
 .featured_category  .swiper-slide{
     margin-top: 0 !important;
 }
+.modal-dialog .btn-primary{
+    background-color: #fe696a;
+    border: 1px solid #fe696a;
+}

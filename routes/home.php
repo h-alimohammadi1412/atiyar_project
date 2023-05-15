@@ -38,10 +38,10 @@ Route::get('/sitem', function () {
 });
 Route::get('/', \App\Http\Livewire\Home\Home\Index::class)->name('home.index');
 Route::get('/login', function () {
-    return redirect(\route('user.login-register'));
+    return redirect(route('user.login-register'));
 })->name('login');
 Route::get('/register', function () {
-    return redirect(\route('user.login-register'));
+    return redirect(route('user.login-register'));
 })->name('register');
 
 //category and Subcategory
@@ -62,9 +62,9 @@ Route::middleware('web')->prefix('product')->group(function () {
 Route::get('/product/comment/dkp-{id}/{product}', \App\Http\Livewire\Home\Comment\Review::class)->middleware('auth');
 
 //User page
-Route::middleware('web')->prefix('users')->group(function () {
+Route::middleware(['web','auth'])->prefix('users')->group(function () {
     Route::get('/login-register', \App\Http\Livewire\Home\User\Register::class)->name('user.login-register');
-    Route::get('/login/confirm/{user}', \App\Http\Livewire\Home\User\Confirm::class)->name('users.confirm');
+    Route::get('/login-register/confirm/{code}', \App\Http\Livewire\Home\User\Confirm::class)->name('users.confirm');
     Route::get('/login/confirm/password/{user}', \App\Http\Livewire\Home\User\ConfirmPassword::class)->name('users.confirm.password');
     Route::get('/login/confirm/password/verify/{user}', \App\Http\Livewire\Home\User\ConfirmPasswordVerify::class)->name('users.confirm.password.verify');
     Route::get('/register/confirm/{user}', \App\Http\Livewire\Home\User\Registerconfirm::class)->name('users.register.confirm');

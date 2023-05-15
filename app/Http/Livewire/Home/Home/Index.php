@@ -28,7 +28,7 @@ class Index extends Component
 
     public function render()
     {
-        auth()->loginUsingId(1);
+        // auth()->loginUsingId(1);
         $ip = Request::ip();
         if (auth()->user()) {
             $no = ModelsNotification::where('user_id', auth()->user()->id)->
@@ -40,30 +40,30 @@ class Index extends Component
 
                     $type = 'ip';
                     $ip = Request::ip();
-                    Notification::create([
-                        'user_id' => auth()->user()->id,
-                        'type' => $type,
-                        'sms' => 0,
-                        'email' => 0,
-                        'ip' => $ip,
-                        'system' => 1,
-                        'text' => ' هشدار: یک ورود موفق با آی پی ' . $ip . ' در سیستم ثبت شده است. ',
-                    ]);
+                    // Notification::create([
+                    //     'user_id' => auth()->user()->id,
+                    //     'type' => $type,
+                    //     'sms' => 0,
+                    //     'email' => 0,
+                    //     'ip' => $ip,
+                    //     'system' => 1,
+                    //     'text' => ' هشدار: یک ورود موفق با آی پی ' . $ip . ' در سیستم ثبت شده است. ',
+                    // ]);
                 }
 
             } elseif ($no == null) {
 
                 $type = 'ip';
                 $ip = Request::ip();
-                Notification::create([
-                    'user_id' => auth()->user()->id,
-                    'type' => $type,
-                    'sms' => 0,
-                    'ip' => $ip,
-                    'email' => 0,
-                    'system' => 1,
-                    'text' => ' هشدار: یک ورود موفق با آی پی ' . $ip . ' در سیستم ثبت شده است. ',
-                ]);
+                // Notification::create([
+                //     'user_id' => auth()->user()->id,
+                //     'type' => $type,
+                //     'sms' => 0,
+                //     'ip' => $ip,
+                //     'email' => 0,
+                //     'system' => 1,
+                //     'text' => ' هشدار: یک ورود موفق با آی پی ' . $ip . ' در سیستم ثبت شده است. ',
+                // ]);
             }
 
 
