@@ -23,7 +23,7 @@
         <div class="col-md-7 pt-4 pt-md-0">
             <div class="swiper featured_category">
                 <div class="swiper-wrapper">
-                    @foreach (\App\Models\CategoryIndex::with('product')->where('title_id',$categoryIndex->id)->limit(12)->get() as $product)    
+                    @foreach (cache('featuredCategory') as $product)    
                     <div class="swiper-slide">
                         <div >
                             <div class="card product-card">

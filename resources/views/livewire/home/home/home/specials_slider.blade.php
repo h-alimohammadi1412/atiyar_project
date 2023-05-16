@@ -4,9 +4,8 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @foreach (\App\Models\SpecialProduct::with(['product', 'category'])->get() as $slider)
+            @foreach (cache('specialProduct') as $slider)
                 <div class="swiper-slide">
-                    {{-- <img src="/storage/{{ $slider->product->img }}"> --}}
                     <div class="">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"

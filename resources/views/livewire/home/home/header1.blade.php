@@ -168,7 +168,7 @@
                 </div>
                 <!-- Departments menu-->
                 @php
-                    $headers = \App\Models\SiteHeader::get();
+                    $headers = cache('siteHeader');
                 @endphp
                 @include('livewire.home.home.home.navbar_categories',['headers6'=>$headers[7]])
                 <!-- Primary menu-->

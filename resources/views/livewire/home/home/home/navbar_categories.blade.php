@@ -2,7 +2,7 @@
     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"
             data-bs-auto-close="outside"><i class="ci-menu align-middle mt-n1 me-2"></i>{{ $headers6->title }}</a>
         <ul class="dropdown-menu">
-            @foreach (\App\Models\Category::where('parent_id', 0)->with('getChild.getChild')->get() as $category)
+            @foreach (cache('categories') as $category)
                 <li class="dropdown mega-dropdown">
                     <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="{{ $category->icon }} opacity-60 fs-lg mt-n1 me-2"></i>{{ $category->title }}

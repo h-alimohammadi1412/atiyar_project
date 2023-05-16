@@ -5,9 +5,9 @@
             <div class="col-md-4 col-sm-6">
                 <div class="widget widget-links widget-light pb-2 mb-4">
                     <h3 class="widget-title text-light">
-                        {{ \App\Models\FooterLinkTitle::with('getPage')->get()[0]->getPage->title }}</h3>
+                        {{ cache('footerLinkTitle')[0]->getPage->title }}</h3>
                     <ul class="widget-list">
-                        @foreach (\App\Models\FooterLinkOne::with('getPage')->get() as $footerLinkOne)
+                        @foreach (cache('footerLinkTitle') as $footerLinkOne)
                             <li class="widget-list-item">
                                 <a class="widget-list-link" href=" {{ $footerLinkOne->getPage->link }}">
                                     {{ $footerLinkOne->getPage->title }}
@@ -20,7 +20,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="widget widget-links widget-light pb-2 mb-4">
                     <h3 class="widget-title text-light">
-                        {{ \App\Models\FooterLinkTitle::with('getPage')->get()[1]->getPage->title }}</h3>
+                        {{ cache('footerLinkTitle')[1]->getPage->title }}</h3>
                     <ul class="widget-list">
                         @foreach (\App\Models\FooterLinkTwo::with('getPage')->get() as $footerLinkTwo)
                             <li class="widget-list-item">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="widget widget-links widget-light pb-2 mb-4">
                     <h3 class="widget-title text-light">
-                        {{ \App\Models\FooterLinkTitle::with('getPage')->get()[2]->getPage->title }}</h3>
+                        {{ cache('footerLinkTitle')[2]->getPage->title }}</h3>
                     <ul class="widget-list">
                         @foreach (\App\Models\FooterLinkThree::with('getPage')->get() as $footerLinkThree)
                             <li class="widget-list-item">
@@ -82,7 +82,7 @@
     <div class="pt-5 bg-darker">
         <div class="container">
             <div class="row pb-3">
-                @foreach (\App\Models\FooterInnerBox::with('getPage')->where('top', 1)->get() as $footerInnerBox)
+                @foreach (cache('footerInnerBox') as $footerInnerBox)
                     <div class="col-md-3 col-sm-6 mb-4">
                         <div class="d-flex"><i class="{{ $footerInnerBox->getPage->icon }} text-primary"
                                 style="font-size: 2.25rem;"></i>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="col-md-6 text-center text-md-end mb-4">
                     <div class="mb-3">
-                        @foreach (\App\Models\Social::all() as $social)
+                        @foreach (cache('social') as $social)
                             <a class="btn-social bs-light bs-twitter ms-2 mb-2" href="{{ $social->link }}">
                                 <i class="{{ $social->icon }}"></i>
                             </a>
@@ -153,7 +153,7 @@
                 </div>
             </div>
             <div class="pb-4 fs-xs text-light opacity-50 text-center text-md-start">
-                {{ \App\Models\FooterTitle::get()[2]->title }}
+                {{ cache('footerTitle')[2]->title }}
             </div>
         </div>
     </div>

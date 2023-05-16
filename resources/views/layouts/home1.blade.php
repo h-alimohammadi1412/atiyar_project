@@ -6,6 +6,7 @@
 </head>
 
 <body class=" t-index">
+    
     @include('sweet::alert')
     <!-- ورود/ثبت نام modal-->
     {{-- @include('livewire.home.home.home.login_register') --}}

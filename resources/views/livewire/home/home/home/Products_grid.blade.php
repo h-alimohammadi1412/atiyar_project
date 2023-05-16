@@ -1,7 +1,7 @@
 <section class="container pt-md-5 pb-5 mb-md-3 mt">
     <h2 class="h3 text-center">محصولات پرطرفدار</h2>
     <div class="row pt-4 mx-n2">
-        @foreach (\App\Models\Product::orderBy('view','ASC')->limit(8)->get() as $product)
+        @foreach (cache('productsGrid') as $product)
         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
             <div class="card product-card">
                 <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"

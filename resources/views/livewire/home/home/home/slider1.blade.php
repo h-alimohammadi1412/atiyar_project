@@ -3,7 +3,7 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @foreach (\App\Models\Slider::all() as $slider)
+            @foreach (cache('slider') as $slider)
                 <div class="swiper-slide">
                   <a href="{{ $slider->link }}">
                     <img src="/storage/{{ $slider->img }}" style="height: 500px; object-fit: cover;">

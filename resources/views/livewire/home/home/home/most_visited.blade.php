@@ -4,7 +4,7 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @foreach (\App\Models\Product::with('category')->orderBy('view','ASC')->get() as $product)
+            @foreach (cache('mostVisited') as $product)
                 <div class="swiper-slide">
                     <div class="">
                         <div class="card product-card">
