@@ -34,7 +34,7 @@
                     <h3 class="widget-title text-light">
                         {{ cache('footerLinkTitle')[2]->getPage->title }}</h3>
                     <ul class="widget-list">
-                        @foreach (\App\Models\FooterLinkThree::with('getPage')->get() as $footerLinkThree)
+                        @foreach (cache('footerLinkThree') as $footerLinkThree)
                             <li class="widget-list-item">
                                 <a class="widget-list-link"
                                     href="{{ $footerLinkThree->getPage->link }}">{{ $footerLinkThree->getPage->title }}</a>

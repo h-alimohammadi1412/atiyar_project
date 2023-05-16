@@ -18,15 +18,16 @@ class Index extends AdminControllerLivewire
     {
         // auth()->loginUsingId(2);
         $this->user = User::findOrFail(auth()->user()->id);
+        // dd($this->user);
     }
     protected $rules = [
-        // 'img' => 'nullable',
         'user.name' => 'nullable',
         'user.email' => 'nullable',
         'user.birthday' => 'nullable',
         'user.job' => 'nullable',
         'user.money_back' => 'nullable',
         'user.newsletter' => 'nullable',
+        'user.mobile' => 'nullable',
 
     ];
     public function profileData()
@@ -44,7 +45,9 @@ class Index extends AdminControllerLivewire
         }else{
             $data['newsletter'] = 0;
         }
-        unset($data['img']);
+        // unset($data['img']);
+        unset($data['mobile']);
+        dd($data);
 
         $this->user->update($data);
        

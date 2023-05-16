@@ -77,6 +77,10 @@ class Index extends Component
             $mostVisited =\App\Models\Product::with('category')->orderBy('view','ASC')->get();
             cache(['mostVisited' =>  $mostVisited ], now()->addDay(29));
         }
+        if(!cache('footerLinkThree')){
+            $footerLinkThree =\App\Models\FooterLinkThree::with('getPage')->get();
+            cache(['footerLinkThree' =>  $footerLinkThree ], now()->addDay(29));
+        }
 
 
 
@@ -84,7 +88,7 @@ class Index extends Component
 
         // dd(cache('siteHeader'));
 
-        // auth()->loginUsingId(2);
+        auth()->loginUsingId(1);
         // $ip = Request::ip();
         // if (auth()->user()) {
         //     $no = ModelsNotification::where('user_id', auth()->user()->id)->

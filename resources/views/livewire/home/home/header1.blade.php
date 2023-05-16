@@ -16,7 +16,7 @@
 <div class="navbar-sticky bg-light">
     <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="index-2.html">
+            <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="/">
                 <img src="{{ asset('img/weblogo.png') }}" width="142" alt="آتی یار">
             </a>
             <a class="navbar-brand d-sm-none me-2" href="index-2.html"><img src="img/logo-icon.png"
