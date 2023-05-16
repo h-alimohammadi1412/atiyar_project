@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42e67f9bfc93f2d7cb816b5d83984de2",
+    "content-hash": "215c08993304837845f85b6ede1157fe",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -8010,7 +8010,7 @@
         },
         {
             "name": "tdanandeh/sweet-alert",
-            "version": "dev-main",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tdanandeh/sweet-alert.git",
@@ -8032,7 +8032,6 @@
                 "mockery/mockery": "^1.5.1",
                 "phpunit/phpunit": "^10.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -11046,9 +11045,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "tdanandeh/sweet-alert": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

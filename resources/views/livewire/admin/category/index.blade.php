@@ -108,7 +108,7 @@
             <div class="col-4 bg-white">
                 <p class="box__title">ایجاد دسته بندی جدید</p>
                 @can('create-category')
-                    <form wire:submit.prevent="categoryForm" enctype="multipart/form-data" role="form"
+                    <form action="" wire:submit.prevent="categoryForm" enctype="multipart/form-data" role="form"
                         class="padding-10 categoryForm form_add">
 
                         @include('errors.error')

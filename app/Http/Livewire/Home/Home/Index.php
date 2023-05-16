@@ -28,7 +28,7 @@ class Index extends Component
 
     public function render()
     {
-        // auth()->loginUsingId(1);
+        auth()->loginUsingId(2);
         $ip = Request::ip();
         if (auth()->user()) {
             $no = ModelsNotification::where('user_id', auth()->user()->id)->

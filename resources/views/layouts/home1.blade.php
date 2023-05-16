@@ -8,7 +8,7 @@
 <body class=" t-index">
     @include('sweet::alert')
     <!-- ورود/ثبت نام modal-->
-    @include('livewire.home.home.home.login_register')
+    {{-- @include('livewire.home.home.home.login_register') --}}
     <main class="page-wrapper">
         <!-- Quick View Modal-->
         <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">

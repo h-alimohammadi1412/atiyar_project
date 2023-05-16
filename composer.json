@@ -29,7 +29,7 @@
         "shetabit/multipay": "^1.9",
         "spatie/laravel-sitemap": "^6.0",
         "stevebauman/location": "^6.2",
-        "tdanandeh/sweet-alert": "dev-main",
+        "tdanandeh/sweet-alert": "^1.0",
         "unisharp/laravel-filemanager": "^2.2"
     },
     "require-dev": {
