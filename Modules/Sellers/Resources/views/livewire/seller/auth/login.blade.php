@@ -8,7 +8,7 @@
                              alt="Digikala marketplace seller center logo">
                     </a>
 
-                    <h1 class="c-new-login__header">به مرکز فروشندگان دیجی‌کالا <br> خوش آمدید!</h1>
+                    <h1 class="c-new-login__header">به مرکز فروشندگان آتی یار <br> خوش آمدید!</h1>
                 </header>
 
                 <div class="c-new-login__sidebar-center">

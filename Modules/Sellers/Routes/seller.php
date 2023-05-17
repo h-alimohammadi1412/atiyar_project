@@ -14,26 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 //======================================>seller/dashboard
-Route::get('/',Http\Livewire\Seller\Dashboard\Index::class)
+Route::get('/',Modules\Sellers\Http\Livewire\Seller\Dashboard\Index::class)
     ->name('seller.dashboard.index');
 
 //======================================>seller/profile
-Route::get('/profile',Http\Livewire\Seller\Dashboard\Profile::class)
+Route::get('/profile',Modules\Sellers\Http\Livewire\Seller\Dashboard\Profile::class)
     ->name('seller.dashboard.profile');
 
 //======================================>seller/find/product
-Route::get('/content/find/product',Http\Livewire\Seller\Product\Find::class)
+Route::get('/content/find/product',Modules\Sellers\Http\Livewire\Seller\Product\Find::class)
     ->name('seller.product.find');
 //======================================>seller/product
-Route::get('/product',Http\Livewire\Seller\Product\Product::class)
+Route::get('/product',Modules\Sellers\Http\Livewire\Seller\Product\Product::class)
     ->name('seller.product.product');
 
 //======================================>orders
-Route::get('/orders',Http\Livewire\Seller\Orders\Order::class)
+Route::get('/orders',Modules\Sellers\Http\Livewire\Seller\Orders\Order::class)
     ->name('seller.order.order');
 
 //======================================>seller/create/product
-Route::get('/content/create/product',Http\Livewire\Seller\Product\Create::class)
+Route::get('/content/create/product',Modules\Sellers\Http\Livewire\Seller\Product\Create::class)
     ->name('seller.product.create');
 
 

@@ -13,7 +13,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Modules\Sellers';
+    protected $moduleNamespace = '';
 
 
     /**

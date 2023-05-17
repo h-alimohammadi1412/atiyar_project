@@ -15,6 +15,8 @@ return [
 
     'paths' => [
         resource_path('views'),
+        base_path('Modules/Sellers/Resources/views'),
+        base_path('Modules/Marketers/Resources/views'),
     ],
 
     /*
