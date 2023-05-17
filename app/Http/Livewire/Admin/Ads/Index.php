@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Ads;
 
-use App\Models\AdsCategory;
-use App\Models\Brand;
-use App\Models\Log;
-use App\Models\Product;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use App\Models\AdsCategory;
+use App\Models\Product;
+use Livewire\Component;
+use App\Models\Brand;
+use App\Models\Log;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -57,7 +58,7 @@ class Index extends Component
 
         if ($this->img){
             $ads->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('Ads')
             ]);
         }
 
@@ -65,24 +66,11 @@ class Index extends Component
         $this->ads->category_id = null;
         $this->ads->status = false;
         $this->img = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن تبلیغات دسته' .'-'. $this->ads->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' تبلیغات دسته','admin/Ads',$this->ads->title,'ایجاد');
         $this->emit('toast', 'success', ' تبلیغات دسته با موفقیت ایجاد شد.');
 
     }
 
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "Ads/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
     public function loadCategory()
     {
         $this->readyToLoad = true;
@@ -93,11 +81,7 @@ class Index extends Component
         $brand->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت تبلیغات دسته' .'-'. $this->ads->title,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog(' وضعیت تبلیغات دسته','admin/Ads',$this->ads->title,'غیرفعال ');
         $this->emit('toast', 'success', 'وضعیت تبلیغات دسته با موفقیت غیرفعال شد.');
     }
 
@@ -107,11 +91,7 @@ class Index extends Component
         $brand->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت تبلیغات دسته' .'-'. $this->ads->title,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog('وضعیت تبلیغات دسته','admin/Ads',$this->ads->title,'فعال ');
         $this->emit('toast', 'success', 'وضعیت تبلیغات دسته با موفقیت فعال شد.');
     }
 
@@ -119,11 +99,7 @@ class Index extends Component
     {
         $brand = AdsCategory::find($id);
         $brand->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن تبلیغات دسته' .'-'. $this->ads->title,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' تبلیغات دسته','admin/Ads',$this->ads->title,'حذف');
         $this->emit('toast', 'success', ' تبلیغات دسته با موفقیت حذف شد.');
 
     }

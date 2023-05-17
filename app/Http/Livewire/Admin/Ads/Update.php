@@ -2,13 +2,15 @@
 
 namespace App\Http\Livewire\Admin\Ads;
 
-use App\Models\AdsCategory;
-
-use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
+use App\Models\AdsCategory;
+use Livewire\Component;
+use App\Models\Log;
 
-class Update extends Component
+
+
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public AdsCategory $ads;
@@ -23,7 +25,7 @@ class Update extends Component
     {
         $this->validate();
         if ($this->img){
-            $this->ads->img = $this->uploadImage();
+            $this->ads->img = $this->uploadImage('Ads');
         }
 
         $this->ads->update($this->validate());
@@ -32,26 +34,11 @@ class Update extends Component
                 'status' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت تبلیغات دسته' .'-'. $this->ads->title,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog(' تبلیغات دسته','admin/Ads',$this->ads->title,'آپدیت');
         alert()->success(' با موفقیت آپدیت شد.', 'تبلیغات دسته مورد نظر با موفقیت آپدیت شد.');
         return redirect(route('ads.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "ads/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-
-
     public function render()
     {
         if ($this->ads->status == 1){

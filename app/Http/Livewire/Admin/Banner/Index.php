@@ -2,14 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Banner;
 
+use App\Http\Controllers\AdminControllerLivewire;
+use Livewire\WithFileUploads;
+use Livewire\Component;
 use App\Models\Banner;
 use App\Models\Log;
 use App\Models\Page;
-use Livewire\Component;
-use Livewire\WithFileUploads;
+
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -53,30 +55,17 @@ class Index extends Component
 
         if ($this->img) {
             $banner->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('banner')
             ]);
         }
 
         $this->banner->title = "";
         $this->banner->link = "";
         $this->img = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن بنر' . '-' . $this->banner->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('بنر','admin/banner',$this->banner->title,'ایجاد');
+
         $this->emit('toast', 'success', ' بنر با موفقیت ایجاد شد.');
 
-    }
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "banner/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
     }
 
     public function loadCategory()

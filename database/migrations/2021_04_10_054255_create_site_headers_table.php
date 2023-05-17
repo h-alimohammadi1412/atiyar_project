@@ -17,7 +17,7 @@ class CreateSiteHeadersTable extends Migration
             $table->id();
             $table->string('img')->nullable();
             $table->string('icon')->nullable();
-            $table->string('link')->nullable();
+            $table->string('link')->default('#');
             $table->string('title')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

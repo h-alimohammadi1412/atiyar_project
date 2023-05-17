@@ -3,11 +3,12 @@
 namespace App\Http\Livewire\Admin\Brand;
 
 use App\Http\Controllers\AdminControllerLivewire;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Log;
-use App\Models\Product;
 use Livewire\WithFileUploads;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Log;
+
 use Livewire\WithPagination;
 
 class Index extends AdminControllerLivewire
@@ -67,7 +68,7 @@ class Index extends AdminControllerLivewire
         $this->brand->status = false;
         $this->brand->vip = false;
         $this->img = null;
-        
+
         $this->createLog('برند','admin/brand',$this->brand->name,'ایجاد');
         $this->emit('toast', 'success', ' برند با موفقیت ایجاد شد.');
 

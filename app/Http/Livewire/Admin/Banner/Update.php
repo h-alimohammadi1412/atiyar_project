@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Banner;
 
-use App\Models\Banner;
-use App\Models\Log;
-use App\Models\Page;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
+use Livewire\Component;
+use App\Models\Banner;
+use App\Models\Page;
+use App\Models\Log;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public Banner $banner;
@@ -22,29 +23,16 @@ class Update extends Component
     {
         $this->validate();
         if ($this->img){
-            $this->banner->img = $this->uploadImage();
+            $this->banner->img = $this->uploadImage('banner');
         }
 
         $this->banner->update($this->validate());
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت بنر' .'-'. $this->banner->title,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('بنر ','admin/banner',$this->banner->title,'آپدیت');
+
         alert()->success(' با موفقیت آپدیت شد.', 'بنر مورد نظر با موفقیت آپدیت شد.');
         return redirect(route('banner.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "banner/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-
 
     public function render()
     {
