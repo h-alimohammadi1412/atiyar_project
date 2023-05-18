@@ -3,6 +3,7 @@
 
 <head>
     @include('livewire.home.home.head')
+   
 </head>
 
 <body class=" t-index">

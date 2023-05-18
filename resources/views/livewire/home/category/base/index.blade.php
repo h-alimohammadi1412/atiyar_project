@@ -1,6 +1,9 @@
 @section('title')
     {{ $category->title }}
 @endsection
+@section('head')
+    <link rel="stylesheet" media="screen" href="{{ asset('vendor/nouislider/dist/nouislider.min.css') }}" />
+@endsection
 
 <!-- Page Title-->
 <div class="page-title-overlap bg-dark pt-4">
@@ -17,10 +20,17 @@
             </nav>
         </div>
         <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-            <h1 class="h3 text-light mb-0">{{ $category->title }}</h1>
+            <h1 class="h3 text-light mb-0">{{ $category->title }} -- {{ $ddd }}</h1>
+            <button wire:click="addTodo({{ 'vvv' }}, '{{ 'vvvvvvvd' }}')">
+                Add Todo
+            </button>
         </div>
     </div>
 </div>
+<form wire:submit.prevent="changeColor">
+    <input type="text" class="form-control">
+    <button>vvvxcvsd</button>
+</form>
 <div class="container pb-5 mb-2 mb-md-4">
     <div class="row">
         <!-- Sidebar-->
@@ -36,435 +46,79 @@
                 <div class="offcanvas-body py-grid-gutter px-lg-grid-gutter">
                     <!-- Categories-->
                     <div class="widget widget-categories mb-4 pb-4 border-bottom">
-                        <h3 class="widget-title">دسته بندی</h3>
+                        <h3 class="widget-title">دسته بندی فرزند</h3>
                         <div class="accordion mt-n1" id="shop-categories">
-                            <!-- Shoes-->
-                            <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shoes"
-                                        role="button" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="shoes">کفش</a></h3>
-                                <div class="accordion-collapse collapse" id="shoes"
-                                    data-bs-parent="#shop-categories">
-                                    <div class="accordion-body">
-                                        <div class="widget widget-links widget-filter">
-                                            <div class="input-group input-group-sm mb-2">
-                                                <input class="widget-filter-search form-control rounded-end"
-                                                    type="text" placeholder="جستجو"><i
-                                                    class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
-                                            </div>
-                                            <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;"
-                                                data-simplebar data-simplebar-auto-hide="false">
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">دیدن
-                                                            همه</span><span
-                                                            class="fs-xs text-muted ms-3">1,953</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">پمپ و کفش
-                                                            پاشنه بلند</span><span
-                                                            class="fs-xs text-muted ms-3">247</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">پمپ و کفش
-                                                            پاشنه بلند</span><span
-                                                            class="fs-xs text-muted ms-3">156</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">صندل</span><span
-                                                            class="fs-xs text-muted ms-3">310</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">صندل</span><span
-                                                            class="fs-xs text-muted ms-3">402</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">صندل</span><span
-                                                            class="fs-xs text-muted ms-3">393</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">دمپایی</span><span
-                                                            class="fs-xs text-muted ms-3">50</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">دمپایی</span><span
-                                                            class="fs-xs text-muted ms-3">93</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">بوت
-                                                            مردانه</span><span
-                                                            class="fs-xs text-muted ms-3">122</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">بوت
-                                                            مردانه</span><span
-                                                            class="fs-xs text-muted ms-3">116</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">همه کفش
-                                                            ها</span><span class="fs-xs text-muted ms-3">24</span></a>
-                                                </li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">همه کفش
-                                                            ها</span><span class="fs-xs text-muted ms-3">31</span></a>
-                                                </li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">کفش
-                                                            مجلسی</span><span
-                                                            class="fs-xs text-muted ms-3">9</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">کفش
-                                                            مجلسی</span><span
-                                                            class="fs-xs text-muted ms-3">18</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- Clothing-->
-                            <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button" href="#clothing"
-                                        role="button" data-bs-toggle="collapse" aria-expanded="true"
-                                        aria-controls="clothing">تن پوش</a></h3>
-                                <div class="accordion-collapse collapse show" id="clothing"
-                                    data-bs-parent="#shop-categories">
-                                    <div class="accordion-body">
-                                        <div class="widget widget-links widget-filter">
-                                            <div class="input-group input-group-sm mb-2">
-                                                <input class="widget-filter-search form-control rounded-end"
-                                                    type="text" placeholder="جستجو"><i
-                                                    class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
+                            @if (sizeof($category->getChild) > 0)
+                                @foreach ($category->getChild as $key => $categoryChild)
+                                    <div class="accordion-item">
+                                        <h3 class="accordion-header"><a class="accordion-button"
+                                                href="#{{ $categoryChild->link }}" role="button"
+                                                data-bs-toggle="collapse" aria-expanded="true"
+                                                aria-controls="clothing">{{ $categoryChild->title }}</a></h3>
+
+                                        <div class="accordion-collapse collapse" id="{{ $categoryChild->link }}"
+                                            data-bs-parent="#shop-categories">
+                                            <div class="accordion-body">
+                                                <div class="widget widget-links widget-filter">
+                                                    <div class="input-group input-group-sm mb-2">
+                                                        <input class="widget-filter-search form-control rounded-end"
+                                                            type="text" placeholder="جستجو"><i
+                                                            class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
+                                                    </div>
+                                                    <ul class="widget-list widget-filter-list pt-1"
+                                                        style="height: 12rem;" data-simplebar
+                                                        data-simplebar-auto-hide="false">
+                                                        <li class="widget-list-item widget-filter-item"><a
+                                                                class="widget-list-link d-flex justify-content-between align-items-center"
+                                                                href="{{ url('main/' . $categoryChild->link) }}"><span
+                                                                    class="widget-filter-item-text">{{ $categoryChild->title }}</span><span
+                                                                    class="fs-xs text-muted ms-3">والد</span></a>
+                                                        </li>
+                                                        @if (sizeof($categoryChild->getChild) > 0)
+                                                            @foreach ($categoryChild->getChild as $categoryChild2)
+                                                                <li class="widget-list-item widget-filter-item"><a
+                                                                        class="widget-list-link d-flex justify-content-between align-items-center"
+                                                                        href="{{ url('main/' . $categoryChild2->link) }}"><span
+                                                                            class="widget-filter-item-text">{{ $categoryChild2->title }}</span><span
+                                                                            class="fs-xs text-muted ms-3">فرزند</span></a>
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;"
-                                                data-simplebar data-simplebar-auto-hide="false">
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">دیدن
-                                                            همه</span><span
-                                                            class="fs-xs text-muted ms-3">2,548</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">تن
-                                                            پوش</span><span
-                                                            class="fs-xs text-muted ms-3">235</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">تن
-                                                            پوش</span><span
-                                                            class="fs-xs text-muted ms-3">410</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">لباس</span><span
-                                                            class="fs-xs text-muted ms-3">107</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">لباس</span><span
-                                                            class="fs-xs text-muted ms-3">93</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">هودی</span><span
-                                                            class="fs-xs text-muted ms-3">122</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">هودی</span><span
-                                                            class="fs-xs text-muted ms-3">116</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">کت</span><span
-                                                            class="fs-xs text-muted ms-3">215</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">کت</span><span
-                                                            class="fs-xs text-muted ms-3">150</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">جین</span><span
-                                                            class="fs-xs text-muted ms-3">8</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">جین</span><span
-                                                            class="fs-xs text-muted ms-3">26</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">پیراهن</span><span
-                                                            class="fs-xs text-muted ms-3">164</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">پیراهن</span><span
-                                                            class="fs-xs text-muted ms-3">147</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">تی
-                                                            شرت</span><span
-                                                            class="fs-xs text-muted ms-3">139</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">تی
-                                                            شرت</span><span class="fs-xs text-muted ms-3">65</span></a>
-                                                </li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">پیراهن</span><span
-                                                            class="fs-xs text-muted ms-3">18</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">پیراهن</span><span
-                                                            class="fs-xs text-muted ms-3">209</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">تاپ</span><span
-                                                            class="fs-xs text-muted ms-3">132</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">تاپ</span><span
-                                                            class="fs-xs text-muted ms-3">105</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">لباس
-                                                            شنا</span><span class="fs-xs text-muted ms-3">87</span></a>
-                                                </li>
-                                            </ul>
                                         </div>
+
                                     </div>
-                                </div>
-                            </div>
-                            <!-- Bags-->
-                            <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#bags"
-                                        role="button" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="bags">کیف</a></h3>
-                                <div class="accordion-collapse collapse" id="bags"
-                                    data-bs-parent="#shop-categories">
-                                    <div class="accordion-body">
-                                        <div class="widget widget-links widget-filter">
-                                            <div class="input-group input-group-sm mb-2">
-                                                <input class="widget-filter-search form-control rounded-end"
-                                                    type="text" placeholder="جستجو"><i
-                                                    class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
-                                            </div>
-                                            <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;"
-                                                data-simplebar data-simplebar-auto-hide="false">
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">دیدن
-                                                            همه</span><span
-                                                            class="fs-xs text-muted ms-3">801</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">مجلسی</span><span
-                                                            class="fs-xs text-muted ms-3">238</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">مجلسی</span><span
-                                                            class="fs-xs text-muted ms-3">116</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">اسپرت</span><span
-                                                            class="fs-xs text-muted ms-3">104</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">اسپرت</span><span
-                                                            class="fs-xs text-muted ms-3">115</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">پول</span><span
-                                                            class="fs-xs text-muted ms-3">17</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">پول</span><span
-                                                            class="fs-xs text-muted ms-3">9</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">ورزشی</span><span
-                                                            class="fs-xs text-muted ms-3">93</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">ورزشی</span><span
-                                                            class="fs-xs text-muted ms-3">5</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">مسافرتی</span><span
-                                                            class="fs-xs text-muted ms-3">8</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">زنانه و
-                                                            بچگانه</span><span
-                                                            class="fs-xs text-muted ms-3">2</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">مسافرتی</span><span
-                                                            class="fs-xs text-muted ms-3">31</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span class="widget-filter-item-text">زنانه و
-                                                            بچگانه</span><span
-                                                            class="fs-xs text-muted ms-3">45</span></a></li>
-                                                <li class="widget-list-item widget-filter-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span
-                                                            class="widget-filter-item-text">مسافرتی</span><span
-                                                            class="fs-xs text-muted ms-3">18</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Sunglasses-->
-                            <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#sunglasses"
-                                        role="button" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="sunglasses">عینک</a></h3>
-                                <div class="collapse" id="sunglasses" data-bs-parent="#shop-categories">
-                                    <div class="accordion-body">
-                                        <div class="widget widget-links">
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>دیدن همه</span><span
-                                                            class="fs-xs text-muted ms-3">1,842</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>فشن</span><span
-                                                            class="fs-xs text-muted ms-3">953</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>اسپرت</span><span
-                                                            class="fs-xs text-muted ms-3">589</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>کلاسیک</span><span
-                                                            class="fs-xs text-muted ms-3">300</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Watches-->
-                            <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button collapsed" href="#watches"
-                                        role="button" data-bs-toggle="collapse" aria-expanded="false"
-                                        aria-controls="watches">جین</a></h3>
-                                <div class="accordion-collapse collapse" id="watches"
-                                    data-bs-parent="#shop-categories">
-                                    <div class="accordion-body">
-                                        <div class="widget widget-links">
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>دیدن همه</span><span
-                                                            class="fs-xs text-muted ms-3">734</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>جین فشن</span><span
-                                                            class="fs-xs text-muted ms-3">572</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>جین باکلاس</span><span
-                                                            class="fs-xs text-muted ms-3">110</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>جین فشن</span><span
-                                                            class="fs-xs text-muted ms-3">34</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>جین اسپرت</span><span
-                                                            class="fs-xs text-muted ms-3">18</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Accessories-->
-                            <div class="accordion-item">
-                                <h3 class="accordion-header"><a class="accordion-button collapsed"
-                                        href="#accessories" role="button" data-bs-toggle="collapse"
-                                        aria-expanded="false" aria-controls="accessories">کیف</a></h3>
-                                <div class="accordion-collapse collapse" id="accessories"
-                                    data-bs-parent="#shop-categories">
-                                    <div class="accordion-body">
-                                        <div class="widget widget-links">
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>دیدن همه</span><span
-                                                            class="fs-xs text-muted ms-3">920</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>کمربندها</span><span
-                                                            class="fs-xs text-muted ms-3">364</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>کلاه</span><span
-                                                            class="fs-xs text-muted ms-3">405</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>جواهر</span><span
-                                                            class="fs-xs text-muted ms-3">131</span></a></li>
-                                                <li class="widget-list-item"><a
-                                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                                        href="#"><span>آرایشی</span><span
-                                                            class="fs-xs text-muted ms-3">20</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                @endforeach
+                            @else
+                                <span class="alert alert-danger">بدون دسته</span>
+                            @endif
+
                         </div>
                     </div>
                     <!-- قیمت -->
                     <div class="widget mb-4 pb-4 border-bottom">
                         <h3 class="widget-title">قیمت</h3>
-                        <div class="range-slider" data-start-min="250" data-start-max="680" data-min="0"
-                            data-max="1000" data-step="1">
+                        <div class="range-slider" data-start-min="0" data-start-max="{{ $maxPrice }}"
+                            data-min="0" data-max="{{ $maxPrice }}" data-step="1">
                             <div class="range-slider-ui"></div>
                             <div class="d-flex pb-1">
                                 <div class="w-50 pe-2 me-2">
-                                    <div class="input-group input-group-sm"><span
-                                            class="input-group-text">تومان</span>
+                                    <div class="input-group input-group-sm"><span class="input-group-text">تومان</span>
                                         <input class="form-control range-slider-value-min" type="text">
                                     </div>
                                 </div>
                                 <div class="w-50 ps-2">
-                                    <div class="input-group input-group-sm"><span
-                                            class="input-group-text">تومان</span>
+                                    <div class="input-group input-group-sm"><span class="input-group-text">تومان</span>
                                         <input class="form-control range-slider-value-max" type="text">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- Filter by Brand-->
                     <div class="widget widget-filter mb-4 pb-4 border-bottom">
                         <h3 class="widget-title">برند</h3>
@@ -476,323 +130,16 @@
 
                         <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;"
                             data-simplebar data-simplebar-auto-hide="false">
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="adidas">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="adidas">آدیداس</label>
-                                </div><span class="fs-xs text-muted">425</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="ataylor">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="ataylor">آدیداس</label>
-                                </div><span class="fs-xs text-muted">15</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="armani">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="armani">آدیداس</label>
-                                </div><span class="fs-xs text-muted">18</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="banana">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="banana">آدیداس</label>
-                                </div><span class="fs-xs text-muted">103</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="bilabong">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="bilabong">آدیداس</label>
-                                </div><span class="fs-xs text-muted">27</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="birkenstock">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="birkenstock">نایک</label>
-                                </div><span class="fs-xs text-muted">10</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="klein">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="klein">نایک</label>
-                                </div><span class="fs-xs text-muted">365</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="columbia">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="columbia">نایک</label>
-                                </div><span class="fs-xs text-muted">508</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="converse">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="converse">نایک</label>
-                                </div><span class="fs-xs text-muted">176</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="dockers">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="dockers">نایک</label>
-                                </div><span class="fs-xs text-muted">54</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="fruit">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="fruit">نایک</label>
-                                </div><span class="fs-xs text-muted">739</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="hanes">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="hanes">نایک</label>
-                                </div><span class="fs-xs text-muted">92</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="choo">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="choo">نایک</label>
-                                </div><span class="fs-xs text-muted">17</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="levis">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="levis">پوما</label>
-                                </div><span class="fs-xs text-muted">361</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="lee">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="lee">پوما</label>
-                                </div><span class="fs-xs text-muted">264</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="wearhouse">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="wearhouse">پوما</label>
-                                </div><span class="fs-xs text-muted">75</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="newbalance">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="newbalance">پوما</label>
-                                </div><span class="fs-xs text-muted">218</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="nike">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="nike">پوما</label>
-                                </div><span class="fs-xs text-muted">810</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="navy">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="navy">پوما</label>
-                                </div><span class="fs-xs text-muted">147</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="polo">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="polo">پوما</label>
-                                </div><span class="fs-xs text-muted">64</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="puma">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="puma">تامی</label>
-                                </div><span class="fs-xs text-muted">370</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="reebok">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="reebok">تامی</label>
-                                </div><span class="fs-xs text-muted">506</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="skechers">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="skechers">تامی</label>
-                                </div><span class="fs-xs text-muted">209</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="hilfiger">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="hilfiger">تامی</label>
-                                </div><span class="fs-xs text-muted">487</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="armour">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="armour">پوما</label>
-                                </div><span class="fs-xs text-muted">90</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="urban">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="urban">پوما</label>
-                                </div><span class="fs-xs text-muted">152</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="vsecret">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="vsecret">پوما</label>
-                                </div><span class="fs-xs text-muted">238</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="wolverine">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="wolverine">نایک</label>
-                                </div><span class="fs-xs text-muted">29</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="wrangler">
-                                    <label class="form-check-label widget-filter-item-text"
-                                        for="wrangler">نایک</label>
-                                </div><span class="fs-xs text-muted">115</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Filter by Size-->
-                    <div class="widget widget-filter mb-4 pb-4 border-bottom">
-                        <h3 class="widget-title">سایز</h3>
-                        <div class="input-group input-group-sm mb-2">
-                            <input class="widget-filter-search form-control rounded-end pe-5" type="text"
-                                placeholder="جستجو"><i
-                                class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
-                        </div>
-                        <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;"
-                            data-simplebar data-simplebar-auto-hide="false">
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-xs">
-                                    <label class="form-check-label widget-filter-item-text" for="size-xs">XS</label>
-                                </div><span class="fs-xs text-muted">34</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-s">
-                                    <label class="form-check-label widget-filter-item-text" for="size-s">S</label>
-                                </div><span class="fs-xs text-muted">57</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-m">
-                                    <label class="form-check-label widget-filter-item-text" for="size-m">M</label>
-                                </div><span class="fs-xs text-muted">198</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-l">
-                                    <label class="form-check-label widget-filter-item-text" for="size-l">L</label>
-                                </div><span class="fs-xs text-muted">72</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-xl">
-                                    <label class="form-check-label widget-filter-item-text" for="size-xl">XL</label>
-                                </div><span class="fs-xs text-muted">46</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-39">
-                                    <label class="form-check-label widget-filter-item-text" for="size-39">39</label>
-                                </div><span class="fs-xs text-muted">112</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-40">
-                                    <label class="form-check-label widget-filter-item-text" for="size-40">40</label>
-                                </div><span class="fs-xs text-muted">85</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-41">
-                                    <label class="form-check-label widget-filter-item-text" for="size-40">41</label>
-                                </div><span class="fs-xs text-muted">210</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-42">
-                                    <label class="form-check-label widget-filter-item-text" for="size-42">42</label>
-                                </div><span class="fs-xs text-muted">57</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-43">
-                                    <label class="form-check-label widget-filter-item-text" for="size-43">43</label>
-                                </div><span class="fs-xs text-muted">30</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-44">
-                                    <label class="form-check-label widget-filter-item-text" for="size-44">44</label>
-                                </div><span class="fs-xs text-muted">61</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-45">
-                                    <label class="form-check-label widget-filter-item-text" for="size-45">45</label>
-                                </div><span class="fs-xs text-muted">23</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-46">
-                                    <label class="form-check-label widget-filter-item-text" for="size-46">46</label>
-                                </div><span class="fs-xs text-muted">19</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-47">
-                                    <label class="form-check-label widget-filter-item-text" for="size-47">47</label>
-                                </div><span class="fs-xs text-muted">15</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-48">
-                                    <label class="form-check-label widget-filter-item-text" for="size-48">48</label>
-                                </div><span class="fs-xs text-muted">12</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-49">
-                                    <label class="form-check-label widget-filter-item-text" for="size-49">49</label>
-                                </div><span class="fs-xs text-muted">8</span>
-                            </li>
-                            <li class="widget-filter-item d-flex justify-content-between align-items-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="size-50">
-                                    <label class="form-check-label widget-filter-item-text" for="size-50">50</label>
-                                </div><span class="fs-xs text-muted">6</span>
-                            </li>
+                            @foreach ($brands as $brand)
+                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="br-{{ $brand->link }}"
+                                            wire:click="changeBrand">
+                                        <label class="form-check-label widget-filter-item-text"
+                                            for="br-{{ $brand->link }}">{{ $brand->name }}</label>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- Filter by Color-->
@@ -800,62 +147,19 @@
                         <h3 class="widget-title">رنگ</h3>
 
                         <div class="d-flex flex-wrap">
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-blue-gray">
-                                <label class="form-option-label rounded-circle" for="color-blue-gray"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #b3c8db;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-blue-gray">آبی</label>
-                            </div>
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-burgundy">
-                                <label class="form-option-label rounded-circle" for="color-burgundy"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #ca7295;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-burgundy">بنفش</label>
-                            </div>
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-teal">
-                                <label class="form-option-label rounded-circle" for="color-teal"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #91c2c3;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-teal">آبی</label>
-                            </div>
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-brown">
-                                <label class="form-option-label rounded-circle" for="color-brown"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #9a8480;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-brown">قهوه ای</label>
-                            </div>
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-coral-red">
-                                <label class="form-option-label rounded-circle" for="color-coral-red"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #ff7072;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-coral-red">قرمز</label>
-                            </div>
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-navy">
-                                <label class="form-option-label rounded-circle" for="color-navy"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #696dc8;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-navy">سورمه ای</label>
-                            </div>
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-charcoal">
-                                <label class="form-option-label rounded-circle" for="color-charcoal"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #4e4d4d;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-charcoal">زغالی</label>
-                            </div>
-                            <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                <input class="form-check-input" type="checkbox" id="color-sky-blue">
-                                <label class="form-option-label rounded-circle" for="color-sky-blue"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: #8bcdf5;"></span></label>
-                                <label class="d-block fs-xs text-muted mt-n1" for="color-sky-blue">آبی آسمانی</label>
-                            </div>
+                            @foreach ($colors as $color)
+                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
+                                    <input class="form-check-input" type="checkbox" id="{{ $color->value }}"
+                                        wire:click="changeColor">
+                                    <label class="form-option-label rounded-circle" for="{{ $color->value }}"><span
+                                            class="form-option-color rounded-circle"
+                                            style="background-color: {{ $color->value }};"></span></label>
+                                    <label class="d-block fs-xs text-muted mt-n1"
+                                        for="{{ $color->value }}">{{ $color->name }}</label>
+                                </div>
+                            @endforeach
+
+
                         </div>
                     </div>
                 </div>
@@ -893,10 +197,12 @@
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
                                     class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="/storage/{{ $product->img }}" alt="محصول"></a>
+                                href="shop-single-v1.html"><img src="/storage/{{ $product->img }}"
+                                    alt="محصول"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                                    href="#">زنانه و بچگانه</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">کفش کتانی</a></h3>
+                                    href="#">{{ $product->category->title }}</a>
+                                <h3 class="product-title fs-sm"><a
+                                        href="shop-single-v1.html">{{ substr($product->title, 50) . '...' }}</a></h3>
                                 <div class="d-flex justify-content-between">
                                     <div class="product-price"><span class="text-accent">154.<small>00</small></span>
                                     </div>
@@ -909,7 +215,7 @@
                                 </div>
                             </div>
                             <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
+                                {{-- <div class="text-center pb-2">
                                     <div class="form-check form-option form-check-inline mb-2">
                                         <input class="form-check-input" type="radio" name="size1"
                                             id="s-75">
@@ -930,17 +236,17 @@
                                             id="s-90">
                                         <label class="form-option-label" for="s-90">9</label>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
                                         class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                {{-- <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
                                         data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>مشاهده</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
-                @endforeach              
+                @endforeach
             </div>
             <hr class="my-3">
             <!-- Pagination-->
@@ -951,8 +257,8 @@
                 </ul>
                 <ul class="pagination">
                     <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
-                    <li class="page-item active d-none d-sm-block" aria-current="page"><span
-                            class="page-link">1<span class="visually-hidden">(جاری)</span></span></li>
+                    <li class="page-item active d-none d-sm-block" aria-current="page"><span class="page-link">1<span
+                                class="visually-hidden">(جاری)</span></span></li>
                     <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
                     <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
                     <li class="page-item d-none d-sm-block"><a class="page-link" href="#">4</a></li>
@@ -969,7 +275,9 @@
 
 
 
-
+@section('script')
+    <script src="{{ asset('vendor/nouislider/dist/nouislider.min.js') }}"></script>
+@endsection
 
 
 

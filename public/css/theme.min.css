@@ -19630,3 +19630,9 @@ flex-direction: unset;
     background-color: #fe696a;
     border: 1px solid #fe696a;
 }
+.range-slider-ui .noUi-value:first-child{
+    right:-2% !important;
+}
+.range-slider-ui .noUi-value:last-child{
+    right:88% !important;
+}

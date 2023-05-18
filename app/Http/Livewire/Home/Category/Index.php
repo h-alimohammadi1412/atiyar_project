@@ -3,22 +3,69 @@
 namespace App\Http\Livewire\Home\Category;
 
 use App\Http\Controllers\AdminControllerLivewire;
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
-use Livewire\Component;
 
 
 class Index extends AdminControllerLivewire
 {
 
     public $category;
-    public function mount(){
-        $this->category= Category::where('link', 'electronic-devices')->first();
+    public $color_ids = [];
+    public $brand_ids = [];
+    public $ddd = 'zzzzzz';
+
+    protected $listeners = ['changeColor' => 'changeBrand'];
+    public function mount()
+    {
+        $this->category = Category::with('getChild.getChild')->where('link', 'electronic-devices')->first();
+    }
+    public function changeColor($id)
+    {
+        if (in_array($id, $this->color_ids)) {
+            unset($this->color_ids[$id]);
+        } else {
+            $this->color_ids[$id] = $id;
+        }
+    }
+    public function changeBrand($id)
+    {
+        if (in_array($id, $this->brand_ids)) {
+            unset($this->brand_ids[$id]);
+        } else {
+            $this->brand_ids[$id] = $id;
+        }
     }
     public function render()
     {
-        $products = Product::where('category_id', $this->category->id)->get();
+        $maxPrice = Product::where(['category_id' => $this->category->id, 'status_product' => 1])->orderBy('price', 'ASC')->first()->price;
+        $res = Product::with(['category', 'brand'])->where('category_id', $this->category->id);
+
+        if (sizeof($this->color_ids) > 0) {
+            $res->with('color', function ($query) {
+                return $query->whereIn('color_id', $this->color_ids);
+            });
+        }
+        if (sizeof($this->brand_ids) > 0) {
+            $res->whereIn('brand_id', $this->brand_ids);
+        }
+        $res = $res->get();
+
+        $products = [];
+        if (sizeof($this->color_ids) > 0) {
+            foreach ($res as $product) {
+                if (!empty($product->color->all())) {
+                    array_push($products, $product);
+                }
+            }
+        } else {
+            $products = $res;
+        }
+        
+        $brands = Brand::all();
+        $colors = Color::all();
         // $sliders = DB::connection('mysql-category')->table('category_slider')->
         //     where('c_id',$category->id)->where('status', 1)->get();
 
@@ -38,8 +85,8 @@ class Index extends AdminControllerLivewire
         // where('c_id',$category->id) -> where('status', 1)->get();
         // $brands = DB::connection('mysql-category')->table('category_brand')->
         // where('c_id',$category->id) ->get();
-        // dd($this->category);
+        // dd($this->category->getChild);
 
-        return view('livewire.home.category.base.index',compact('products'))->layout('layouts.home1');
+        return view('livewire.home.category.index', compact('products', 'maxPrice', 'brands', 'colors'))->layout('layouts.home1');
     }
 }

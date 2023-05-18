@@ -25,6 +25,7 @@
 <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" />
 <!-- Main Theme Styles + Bootstrap-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+@yield('head')
 <link rel="stylesheet" media="screen" href="{{ asset('css/theme.min.css') }}">
 <!-- Google Tag Manager-->
 <livewire:styles />
