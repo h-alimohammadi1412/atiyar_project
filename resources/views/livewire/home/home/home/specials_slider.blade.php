@@ -12,12 +12,12 @@
                                 data-bs-placement="left" title=""
                                 data-bs-original-title="اضافه کردن به علاقه مندی"
                                 aria-label="اضافه کردن به علاقه مندی"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
+                                class="card-img-top d-block overflow-hidden" href="/product/dkp-{{$slider->product->id}}/{{$slider->product->link}}"><img
                                     src="/storage/{{ $slider->product->img }}" alt="محصول"></a>
                             <div class="card-body py-2 cart_body_product"><a class="product-meta d-block fs-xs pb-1"
-                                    href="#">{{ $slider->category->title }}</a>
+                                    href="/product/dkp-{{$slider->product->id}}/{{$slider->product->link}}">{{ $slider->category->title }}</a>
                                 <h3 class="product-title fs-sm"><a
-                                        href="shop-single-v1.html">{{ substr($slider->product->title, 50) . '...' }}</a>
+                                        href="/product/dkp-{{$slider->product->id}}/{{$slider->product->link}}">{{ substr($slider->product->title, 50) . '...' }}</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
                                     <div class="product-price"><span class="text-accent">39.<small>50</small></span>
@@ -53,8 +53,8 @@
                                 <button
                                     class="btn btn-primary btn-sm d-block w-100 mb-2 d-flex justify-content-center align-items-center"
                                     type="button"><i class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>مشاهده</a></div>
+                                {{-- <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>مشاهده</a></div> --}}
                             </div>
                         </div>
                         <hr class="d-sm-none">

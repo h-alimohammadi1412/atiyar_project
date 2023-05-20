@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Home\Product;
 
 
 use App\Models\Cart;
+use App\Models\Gallery;
+use App\Models\ProductColor;
 use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Compare;
@@ -32,7 +34,7 @@ class Index extends Component
 
     public $queryString = ['filters'];
     public Notification $notification;
-//    public Comment $comment;
+    //    public Comment $comment;
     public $readyToLoad = false;
 
     public array $filterOptions = [
@@ -56,9 +58,9 @@ class Index extends Component
 
     public function mount($id)
     {
-        $this->product = Product::find($id);
+        $this->product = Product::findOrFail($id);
         $this->notification = new Notification();
-//        $this->comment = new Comment();
+        //        $this->comment = new Comment();
     }
 
     protected $rules = [
@@ -323,7 +325,7 @@ class Index extends Component
     {
         $this->validate();
         $notification = Notification::where('product_id', $this->product->id)->
-        where('user_id', auth()->user()->id)->first();
+            where('user_id', auth()->user()->id)->first();
         if ($notification) {
 
             if ($this->notification->sms == null && $this->notification->email == null && $this->notification->system == null) {
@@ -351,7 +353,7 @@ class Index extends Component
         }
 
         $this->emit('toast', 'success', ' محصول ثبت شد و در صورت موجود بودن با روش های انتخابی اطلاع رسانی خواهد شد.');
-//        return $this->redirect(request()->header('Referer'));
+        //        return $this->redirect(request()->header('Referer'));
     }
 
     public function updateFavoriteDisable($id)
@@ -388,33 +390,33 @@ class Index extends Component
 
     public function compareAdd($id)
     {
-        if (auth()->user()){
-//dd(Compare::where('user_id',auth()->user()->id)->first());
-            if (Compare::where('user_id',auth()->user()->id)->first()){
-                if (Compare::where('product_id',$id)->where('user_id',auth()->user()->id)->first() == null){
-                 $com =    Compare::create([
-                        'user_id' =>auth()->user()->id,
-                        'product_id' =>$id,
+        if (auth()->user()) {
+            //dd(Compare::where('user_id',auth()->user()->id)->first());
+            if (Compare::where('user_id', auth()->user()->id)->first()) {
+                if (Compare::where('product_id', $id)->where('user_id', auth()->user()->id)->first() == null) {
+                    $com = Compare::create([
+                        'user_id' => auth()->user()->id,
+                        'product_id' => $id,
                     ]);
-                 $first = Compare::where('user_id',auth()->user()->id)->first();
-                 $url = '/compare/dkp-'.$first->product_id.'/dkp-'.$id;
+                    $first = Compare::where('user_id', auth()->user()->id)->first();
+                    $url = '/compare/dkp-' . $first->product_id . '/dkp-' . $id;
                     return $this->redirect($url);
-                }else{
-                    return $this->redirect(route('compare.step1',$id));
+                } else {
+                    return $this->redirect(route('compare.step1', $id));
                 }
 
 
-            }else{
-                    Compare::create([
-                        'user_id' =>auth()->user()->id,
-                        'product_id' =>$id,
-                    ]);
+            } else {
+                Compare::create([
+                    'user_id' => auth()->user()->id,
+                    'product_id' => $id,
+                ]);
 
-                return $this->redirect(route('compare.step1',$id));
+                return $this->redirect(route('compare.step1', $id));
             }
 
 
-        }else{
+        } else {
             $this->redirect('/login');
         }
 
@@ -423,11 +425,16 @@ class Index extends Component
 
     public function render()
     {
+
         $product = $this->product;
+        $productGallerys = Gallery::where(['product_id' => $product->id, 'status'=> 1])->get();
+        $productColors = ProductColor::with('color')->where(['product_id' => $product->id])->get();
+        $productColors = ProductColor::with('color')->where(['product_id' => $product->id])->get();
+        $productCategories = Product::with('category')->where(['category_id' => $product->category_id])->limit(10)->get();
 
         if (auth()->user()) {
             $userhistory = \App\Models\UserHistory::where('user_id', auth()->user()->id)->
-            where('product_id', $product->id)->first();
+                where('product_id', $product->id)->first();
 
             if ($userhistory == null) {
                 \App\Models\UserHistory::create([
@@ -439,17 +446,17 @@ class Index extends Component
         $productSeller = ProductSeller::where('product_id', $product->id)->get();
         $productSeller = $productSeller->unique('color_id');
         $productSeller_max_price = ProductSeller::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->get();
+            orderBy('discount_price', 'ASC')->get();
 
         $productSeller_min_price_first = ProductSeller::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->first();
+            orderBy('discount_price', 'ASC')->first();
         $productSeller_max_price_first = ProductSeller::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->first();
+            orderBy('discount_price', 'ASC')->first();
 
         $productSeller_max_price_all = ProductSeller::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->take('3')->get();
+            orderBy('discount_price', 'ASC')->take('3')->get();
         $productSeller_max_price_all_init = ProductSeller::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->skip('3')->take(PHP_INT_MAX)->get();
+            orderBy('discount_price', 'ASC')->skip('3')->take(PHP_INT_MAX)->get();
         $productSeller_count = ProductSeller::where('product_id', $product->id)->count();
 
 
@@ -457,25 +464,25 @@ class Index extends Component
         $priceDate = PriceDate::where('product_id', $product->id)->get();
 
         $priceDate_min_price = PriceDate::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->get();
+            orderBy('discount_price', 'ASC')->get();
 
         ///
         $priceDate_min_price_first = PriceDate::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->first();
+            orderBy('discount_price', 'ASC')->first();
 
         $priceDate_min_price_first1 = PriceDate::where('product_id', $product->id)->
-        orderBy('discount_price', 'ASC')->get();
+            orderBy('discount_price', 'ASC')->get();
 
 
 
-;        if ($priceDate_min_price_first1) {
-            $date1 = $priceDate_min_price_first->created_at;
-            $date2 = $priceDate_min_price_first1->created_at;
-            $different = $date2->diff($date1);
+        // ;        if ($priceDate_min_price_first1) {
+//             // $date1 = $priceDate_min_price_first->created_at;
+//             $date2 = $priceDate_min_price_first1->created_at;
+//             $different = $date2->diff($date1);
 
-        }
-        $day = $different->format('%d');
-        $mo = $different->format('%m');
+        //         }
+        // $day = $different->format('%d');
+        // $mo = $different->format('%m');
 
 
         SEOMeta::setTitle($product->title);
@@ -663,13 +670,27 @@ class Index extends Component
 
 
         $comments = $this->readyToLoad ? Comment::where('status', 1)->
-        where('product_id', $product->id)->where('parent', 0)->
-        latest()->paginate(15) : [];
-        return view('livewire.home.product.index', compact('product', 'productSeller_count'
-                , 'productSeller', 'productSeller_max_price', 'productSeller_max_price_first',
-                'productSeller_max_price_all', 'mo', 'day', 'priceDate_min_price_first',
-                'productSeller_max_price_all_init', 'productSeller_min_price_first'
-                , 'comments')
-        )->layout('layouts.home');
+            where('product_id', $product->id)->where('parent', 0)->
+            latest()->paginate(15) : [];
+        return view(
+            'livewire.home.product.index',
+            compact(
+                'product',
+                'productGallerys',
+                'productColors',
+                'productCategories',
+                'productSeller_count'
+                ,
+                'productSeller',
+                'productSeller_max_price',
+                'productSeller_max_price_first',
+                'productSeller_max_price_all',
+                'priceDate_min_price_first',
+                'productSeller_max_price_all_init',
+                'productSeller_min_price_first'
+                ,
+                'comments'
+            )
+        )->layout('layouts.home1');
     }
 }

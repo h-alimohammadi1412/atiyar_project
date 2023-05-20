@@ -23,7 +23,7 @@
                 </nav>
             </div>
             <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-                <h1 class="h3 text-light mb-0">{{ $category->title }} -- {{ print_r($brand_ids) }}</h1>
+                <h1 class="h3 text-light mb-0">{{ $category->title }}</h1>
             </div>
         </div>
     </div>
@@ -278,6 +278,51 @@
 
     @section('script')
         <script src="{{ asset('vendor/nouislider/dist/nouislider.min.js') }}"></script>
+        <script>
+            function () {
+            for (var l = document.querySelectorAll(".range-slider"), e = 0; e < l.length; e++)
+                !(function (e) {
+                    var t = l[e].querySelector(".range-slider-ui"),
+                        r = l[e].querySelector(".range-slider-value-min"),
+                        n = l[e].querySelector(".range-slider-value-max"),
+                        a = {
+                            dataStartMin: parseInt(l[e].dataset.startMin, 10),
+                            dataStartMax: parseInt(l[e].dataset.startMax, 10),
+                            dataMin: parseInt(l[e].dataset.min, 10),
+                            dataMax: parseInt(l[e].dataset.max, 10),
+                            dataStep: parseInt(l[e].dataset.step, 10),
+                        },
+                        o = l[e].dataset.currency;
+                    noUiSlider.create(t, {
+                        start: [a.dataStartMin, a.dataStartMax],
+                        connect: !0,
+                        step: a.dataStep,
+						direction: 'rtl',
+                        pips: { mode: "count", values: 2 },
+                        tooltips: !0,
+                        range: { min: a.dataMin, max: a.dataMax },
+                        format: {
+                            to: function (e) {
+                                return "".concat(o || "تومان").concat(parseInt(e, 10));
+                            },
+                            from: function (e) {
+                                return Number(e);
+                            },
+                        },
+                    }),
+                        t.noUiSlider.on("update", function (e, t) {
+                            e = (e = e[t]).replace(/\D/g, "");
+                            t ? (n.value = Math.round(e)) : (r.value = Math.round(e));
+                        }),
+                        r.addEventListener("change", function () {
+                            t.noUiSlider.set([this.value, null]);
+                        }),
+                        n.addEventListener("change", function () {
+                            t.noUiSlider.set([null, this.value]);
+                        });
+                })(e);
+        };
+        </script>
     @endsection
 </div>
 
