@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Home\Product;
 
 use App\Models\Cart;
 use App\Models\Gallery;
+use App\Models\Attribute;
 use App\Models\ProductColor;
 use App\Models\Color;
 use App\Models\Comment;
@@ -427,10 +428,15 @@ class Index extends Component
     {
 
         $product = $this->product;
-        $productGallerys = Gallery::where(['product_id' => $product->id, 'status'=> 1])->get();
+        $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
         $productColors = ProductColor::with('color')->where(['product_id' => $product->id])->get();
-        $productColors = ProductColor::with('color')->where(['product_id' => $product->id])->get();
-        $productCategories = Product::with('category')->where(['category_id' => $product->category_id])->limit(10)->get();
+        $productCategories = Product::with(['category', 'attributes'])->where(['category_id' => $product->category_id])->limit(10)->get();
+        $productAttributes = Attribute::with(['getChild' => ['getvalue' => function ($query) {
+            return $query->where('product_id', $this->product->id); }]])->where(['category_id' => $product->category_id, 'parent' => 0])->get();
+        // dd($productAttributes);
+
+
+
 
         if (auth()->user()) {
             $userhistory = \App\Models\UserHistory::where('user_id', auth()->user()->id)->
@@ -443,6 +449,8 @@ class Index extends Component
                 ]);
             }
         }
+
+
         $productSeller = ProductSeller::where('product_id', $product->id)->get();
         $productSeller = $productSeller->unique('color_id');
         $productSeller_max_price = ProductSeller::where('product_id', $product->id)->
@@ -679,6 +687,7 @@ class Index extends Component
                 'productGallerys',
                 'productColors',
                 'productCategories',
+                'productAttributes',
                 'productSeller_count'
                 ,
                 'productSeller',
