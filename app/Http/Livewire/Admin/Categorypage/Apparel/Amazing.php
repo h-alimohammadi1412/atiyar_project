@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Categorypage\Apparel;
 
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\DB;
-use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Component;
+use App\Models\Log;
 
-class Amazing extends Component
+class Amazing extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -48,11 +49,7 @@ class Amazing extends Component
         $this->status = false;
         $this->property1 = null;
         $this->property2 = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن پیشنهاد شگفت انگیز' . '-' . $this->product_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('پیشنهاد شگفت انگیز','admin/categorypage/apparel', $this->product_id,'ایجاد');
         $this->emit('toast', 'success', ' پیشنهاد شگفت انگیز با موفقیت ایجاد شد.');
 
     }
@@ -73,11 +70,7 @@ class Amazing extends Component
         $category->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت پیشنهاد شگفت انگیز' . '-' . $category2->category_id,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog('وضعیت پیشنهاد شگفت انگیز','admin/categorypage/apparel', $category2->category_id,'غیرفعال');
         $this->emit('toast', 'success', 'وضعیت پیشنهاد شگفت انگیز با موفقیت غیرفعال شد.');
     }
 
@@ -92,11 +85,7 @@ class Amazing extends Component
         $category->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت پیشنهاد شگفت انگیز' . '-' . $category2->category_id,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog('وضعیت پیشنهاد شگفت انگیز','admin/categorypage/apparel', $category2->category_id,'فعال');
         $this->emit('toast', 'success', 'وضعیت پیشنهاد شگفت انگیز با موفقیت فعال شد.');
     }
 
@@ -109,11 +98,7 @@ class Amazing extends Component
         $amazing = DB::table('category_apparel_amazing')
             ->where('id', $id)->limit($id);
         $amazing->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن پیشنهاد شگفت انگیز' . '-' . $amazing2->category_id,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' پیشنهاد شگفت انگیز','admin/categorypage/apparel', $amazing2->category_id,'حذف');
         $this->emit('toast', 'success', ' پیشنهاد شگفت انگیز با موفقیت حذف شد.');
 
     }

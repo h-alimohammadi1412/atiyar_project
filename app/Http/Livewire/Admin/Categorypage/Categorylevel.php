@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Admin\Categorypage;
 
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\DB;
-use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Component;
+use App\Models\Log;
 
-class Categorylevel extends Component
+
+
+class Categorylevel extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -39,12 +42,7 @@ class Categorylevel extends Component
         $this->childCategory_id = null;
         $this->categorylevel4_id = null;
         $this->property = null;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن دسته های زیردسته ها' . '-' . $this->category_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' دسته های زیردسته ها ','admin/categorypage', $this->category_id,'ایجاد');
         $this->emit('toast', 'success', ' دسته های زیردسته ها با موفقیت ایجاد شد.');
 
     }
@@ -63,11 +61,7 @@ class Categorylevel extends Component
         $category->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت دسته های زیردسته ها' . '-' . $category2->category_id,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog('وضعیت دسته های زیردسته ها ','admin/categorypage',$category2->category_id,'غیرفعال');
         $this->emit('toast', 'success', 'وضعیت دسته های زیردسته ها با موفقیت غیرفعال شد.');
     }
 
@@ -80,11 +74,7 @@ class Categorylevel extends Component
         $category->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت دسته های زیردسته ها' . '-' . $category2->category_id,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog('وضعیت دسته های زیردسته ها ','admin/categorypage',$category2->category_id,'فعال');
         $this->emit('toast', 'success', 'وضعیت دسته های زیردسته ها با موفقیت فعال شد.');
     }
 
@@ -95,11 +85,7 @@ class Categorylevel extends Component
         $amazing = DB::table('category_levels')
             ->where('id', $id)->limit($id);
         $amazing->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن دسته های زیردسته ها' . '-' . $amazing2->category_id,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' دسته های زیردسته ها ','admin/categorypage',$amazing2->category_id,'حذف');
         $this->emit('toast', 'success', ' دسته های زیردسته ها با موفقیت حذف شد.');
 
     }

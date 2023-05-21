@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Categorylevel4;
 
-use App\Models\CategoryLevel4;
-use App\Models\ChildCategory;
-use App\Models\Log;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+use App\Models\CategoryLevel4;
 use Livewire\WithPagination;
+use App\Models\ChildCategory;
+use Livewire\Component;
+use App\Models\Log;
 
-class Trashed extends Component
+class Trashed extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -41,11 +42,7 @@ class Trashed extends Component
     {
         $category = CategoryLevel4::withTrashed()->where('id', $id)->first();
         $category->restore();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'بازیابی دسته سطح چهارم' .'-'. $category->title,
-            'actionType' => 'بازیابی'
-        ]);
+        $this->createLog('دسته سطح چهارم','admin/categorylevel4', $category->title,'بازیابی');
         $this->emit('toast', 'success', ' دسته سطح چهارم با موفقیت بازیابی شد.');
     }
 

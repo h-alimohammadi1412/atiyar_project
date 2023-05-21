@@ -2,15 +2,17 @@
 
 namespace App\Http\Livewire\Admin\Childcategory;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\ChildCategory;
-use App\Models\Log;
-use App\Models\Product;
+use Livewire\WithFileUploads;
 use App\Models\SubCategory;
 use Livewire\Component;
-use Livewire\WithFileUploads;
+use App\Models\Product;
+use App\Models\Log;
+
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -62,7 +64,7 @@ class Index extends Component
 
         if ($this->img){
             $childCategory->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('childcategory')
             ]);
         }
 
@@ -72,24 +74,11 @@ class Index extends Component
         $this->childcategory->parent = null;
         $this->childcategory->status = false;
         $this->img = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن دسته کودک' .'-'. $this->childcategory->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' دسته کودک','admin/childcategory', $this->childcategory->title,'ایجاد');
         $this->emit('toast', 'success', ' دسته کودک با موفقیت ایجاد شد.');
 
     }
 
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "childcategory/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
     public function loadCategory()
     {
         $this->readyToLoad = true;
@@ -100,11 +89,7 @@ class Index extends Component
         $category->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت دسته کودک' .'-'. $category->title,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog(' وضعیت دسته کودک','admin/childcategory', $category->title,'غیرفعال');
         $this->emit('toast', 'success', 'وضعیت دسته کودک با موفقیت غیرفعال شد.');
     }
 
@@ -114,11 +99,7 @@ class Index extends Component
         $category->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت دسته کودک' .'-'. $category->title,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog(' وضعیت دسته کودک','admin/childcategory', $category->title,'فعال');
         $this->emit('toast', 'success', 'وضعیت دسته کودک با موفقیت فعال شد.');
     }
 
@@ -128,11 +109,7 @@ class Index extends Component
         $product = Product::where('childcategory_id',$id)->first();
         if ($product == null){
             $category->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن دسته کودک' .'-'. $category->title,
-                'actionType' => 'حذف'
-            ]);
+            $this->createLog('  دسته کودک','admin/childcategory', $category->title,'حذف');
             $this->emit('toast', 'success', ' دسته کودک با موفقیت حذف شد.');
         }else
         {

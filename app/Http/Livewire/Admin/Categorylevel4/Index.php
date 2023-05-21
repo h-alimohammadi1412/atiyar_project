@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Admin\Categorylevel4;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\CategoryLevel4;
-use App\Models\Log;
-use App\Models\Product;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use App\Models\Product;
+use Livewire\Component;
+use App\Models\Log;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -61,7 +62,7 @@ class Index extends Component
 
         if ($this->img){
             $categorylevel4->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('categorylevel4')
             ]);
         }
 
@@ -71,24 +72,12 @@ class Index extends Component
         $this->categorylevel4->parent = null;
         $this->categorylevel4->status = false;
         $this->img = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن دسته سطح 4' .'-'. $this->categorylevel4->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('دسته سطح 4','admin/categorylevel4', $this->categorylevel4->title,'ایجاد');
+
         $this->emit('toast', 'success', ' دسته سطح 4 با موفقیت ایجاد شد.');
 
     }
 
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "categorylevel4/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
     public function loadCategory()
     {
         $this->readyToLoad = true;
@@ -99,11 +88,8 @@ class Index extends Component
         $category->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت دسته سطح 4' .'-'. $category->title,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog('دسته سطح 4','admin/categorylevel4', $category->title,'غیرفعال');
+
         $this->emit('toast', 'success', 'وضعیت دسته سطح 4 با موفقیت غیرفعال شد.');
     }
 
@@ -113,11 +99,7 @@ class Index extends Component
         $category->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت دسته سطح 4' .'-'. $category->title,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog('دسته سطح 4','admin/categorylevel4', $category->title,'فعال');
         $this->emit('toast', 'success', 'وضعیت دسته سطح 4 با موفقیت فعال شد.');
     }
 
@@ -127,11 +109,7 @@ class Index extends Component
         $product = Product::where('categorylevel4_id',$id)->first();
         if ($product == null){
             $category->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن دسته سطح 4' .'-'. $category->title,
-                'actionType' => 'حذف'
-            ]);
+            $this->createLog('دسته سطح 4','admin/categorylevel4', $category->title,'حذف');
             $this->emit('toast', 'success', ' دسته سطح 4 با موفقیت حذف شد.');
         }else
         {

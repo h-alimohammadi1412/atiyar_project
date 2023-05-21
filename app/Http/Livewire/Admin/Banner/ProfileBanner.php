@@ -59,7 +59,7 @@ class ProfileBanner extends AdminControllerLivewire
 
         if ($this->img) {
             $banner->update([
-                'img' => $this->uploadImage('profileBanner')
+                'img' => $this->uploadImage('bannerprofile')
             ]);
         }
 

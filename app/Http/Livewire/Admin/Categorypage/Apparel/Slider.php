@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Admin\Categorypage\Apparel;
 
-use App\Models\Log;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Component;
+use App\Models\Log;
 
-class Slider extends Component
+class Slider extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -43,30 +44,16 @@ class Slider extends Component
             ->where('id', $slider2->id)->limit($slider2->id);
         if ($this->img) {
             $slider3->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('categorypage/apparel')
             ]);
         }
 
         $this->title = "";
         $this->link = "";
         $this->img = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن اسلایدر' . '-' . $this->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' اسلایدر','admin/categorypage/apparel',  $this->title,'ایجاد');
         $this->emit('toast', 'success', ' اسلایدر با موفقیت ایجاد شد.');
 
-    }
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "categorypage/apparel/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
     }
 
     public function loadCategory()
@@ -85,12 +72,7 @@ class Slider extends Component
         if ($slider->img) {
             Storage::disk('public')->delete("storage", $slider2->img);
         } $slider->delete();
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن اسلایدر' . '-' . $slider2->title,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' اسلایدر','admin/categorypage/apparel',  $slider2->title,'حذف');
         $this->emit('toast', 'success', ' اسلایدر با موفقیت حذف شد.');
 
     }
@@ -107,11 +89,7 @@ class Slider extends Component
         $slider->update([
             'status' => 0
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن اسلایدر' . '-' . $slider2->title,
-            'actionType' => 'غیرفعال'
-        ]);
+        $this->createLog(' اسلایدر','admin/categorypage/apparel',  $slider2->title,'غیرفعال');
         $this->emit('toast', 'success', 'اسلایدر با موفقیت غیرفعال شد.');
     }
 
@@ -126,11 +104,7 @@ class Slider extends Component
         $slider->update([
             'status' => 1
         ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن اسلایدر' . '-' . $slider2->title,
-            'actionType' => 'فعال'
-        ]);
+        $this->createLog(' اسلایدر','admin/categorypage/apparel',  $slider2->title,'فعال');
         $this->emit('toast', 'success', 'اسلایدر با موفقیت فعال شد.');
     }
 

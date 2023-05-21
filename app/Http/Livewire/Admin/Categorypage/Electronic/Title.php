@@ -2,14 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Categorypage\Electronic;
 
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Component;
+use App\Models\Log;
 
-class Title extends Component
+class Title extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -35,11 +34,7 @@ class Title extends Component
         ]);
         $this->title = "";
         $this->link = "";
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن عناوین' . '-' . $this->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' عناوین','admin/categorypage/electronic', $this->title,'ایجاد');
         $this->emit('toast', 'success', ' عناوین با موفقیت ایجاد شد.');
 
     }
@@ -59,12 +54,7 @@ class Title extends Component
         $banner = DB::table('category_electronic_title_swiper')
             ->where('id', $id)->limit($id);
         $banner->delete();
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن عناوین' . '-' . $banner2->title,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' عناوین','admin/categorypage/electronic', $banner2->title,'حذف');
         $this->emit('toast', 'success', ' عناوین با موفقیت حذف شد.');
 
     }

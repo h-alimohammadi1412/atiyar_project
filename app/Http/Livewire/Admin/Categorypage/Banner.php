@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Admin\Categorypage;
 
-use App\Models\Log;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Component;
+use App\Models\Log;
 
-class Banner extends Component
+class Banner extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -48,7 +49,7 @@ class Banner extends Component
 
         if ($this->img) {
             $banner3->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('categorypage')
             ]);
         }
 
@@ -57,25 +58,10 @@ class Banner extends Component
         $this->type = false;
         $this->c_id = false;
         $this->img = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن بنر' . '-' . $this->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' بنر ','admin/categorypage', $this->title,'ایجاد');
         $this->emit('toast', 'success', ' بنر با موفقیت ایجاد شد.');
 
     }
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "categorypage/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-
     public function loadCategory()
     {
         $this->readyToLoad = true;
@@ -92,12 +78,7 @@ class Banner extends Component
         if ($banner->img) {
             Storage::disk('public')->delete("storage", $banner2->img);
         } $banner->delete();
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن بنر' . '-' . $banner2->title,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog('  بنر','admin/categorypage', $banner2->title,'حذف');
         $this->emit('toast', 'success', ' بنر با موفقیت حذف شد.');
 
     }

@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Admin\Category;
 
 use App\Http\Controllers\AdminControllerLivewire;
-use App\Models\Category;
-use App\Models\Log;
-use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\Category;
+use Livewire\Component;
+use App\Models\Log;
 
 class Update extends AdminControllerLivewire
 {

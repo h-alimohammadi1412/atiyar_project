@@ -24,7 +24,7 @@ class ProfileBannerUpdate extends AdminControllerLivewire
     {
         $this->validate();
         if ($this->img){
-            $this->banner->img = $this->uploadImage('profileBanner');
+            $this->banner->img = $this->uploadImage('bannerprofile');
         }
 
         $this->banner->update($this->validate());

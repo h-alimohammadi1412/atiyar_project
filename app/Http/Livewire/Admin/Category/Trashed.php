@@ -3,14 +3,14 @@
 namespace App\Http\Livewire\Admin\Category;
 
 use App\Http\Controllers\AdminControllerLivewire;
-use App\Models\Category;
-use App\Models\Log;
-use App\Models\Warranty;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use App\Models\Warranty;
+use App\Models\Category;
+use App\Models\Log;
 
 class Trashed extends AdminControllerLivewire
 {

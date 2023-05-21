@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Categorypage\Apparel;
 
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\DB;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Component;
+use App\Models\Log;
 
-class Brand extends Component
+class Brand extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -40,11 +41,7 @@ class Brand extends Component
 
 
         $this->brand_id = null;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن محصول' . '-' . $this->brand_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' محصول ','admin/categorypage/apparel', $this->brand_id,'ایجاد');
         $this->emit('toast', 'success', ' محصول با موفقیت ایجاد شد.');
 
     }
@@ -64,12 +61,7 @@ class Brand extends Component
         $banner = DB::table('category_apparel_brand')
             ->where('id', $id)->limit($id);
         $banner->delete();
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن محصول' . '-' . $banner2->brand_id,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' محصول ','admin/categorypage/apparel', $banner2->brand_id,'حذف');
         $this->emit('toast', 'success', ' محصول با موفقیت حذف شد.');
 
     }

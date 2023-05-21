@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Categorypage;
 
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\DB;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Component;
+use App\Models\Log;
 
-class Product extends Component
+class Product extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -58,11 +59,7 @@ class Product extends Component
         $this->c_id = false;
         $this->childCategory_id = null;
         $this->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن محصول' . '-' . $this->title_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' محصول ','admin/categorypage', $this->title_id,'ایجاد');
         $this->emit('toast', 'success', ' محصول با موفقیت ایجاد شد.');
 
     }
@@ -82,12 +79,7 @@ class Product extends Component
         $banner = DB::table('category_product_swiper')
             ->where('id', $id)->limit($id);
         $banner->delete();
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن محصول' . '-' . $banner2->title_id,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' محصول ','admin/categorypage', $banner2->title_id,'حذف');
         $this->emit('toast', 'success', ' محصول با موفقیت حذف شد.');
 
     }

@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Categorylevel4;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\CategoryLevel4;
-use App\Models\Log;
-use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Component;
+use App\Models\Log;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public CategoryLevel4 $categorylevel4;
@@ -24,7 +25,7 @@ class Update extends Component
     {
         $this->validate();
         if ($this->img){
-            $this->categorylevel4->img = $this->uploadImage();
+            $this->categorylevel4->img = $this->uploadImage('categorylevel4');
         }
 
         $this->categorylevel4->update($this->validate());
@@ -33,26 +34,12 @@ class Update extends Component
                 'status' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت دسته کودک' .'-'. $this->categorylevel4->title,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('  دسته کودک','admin/categorylevel4', $this->categorylevel4->title,'آپدیت');
         alert()->success('دسته کودک با موفقیت ایجاد شد.', 'دسته کودک آپدیت شد.');
 
         return redirect(route('categorylevel4.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "categorylevel4/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-
 
     public function render()
     {
