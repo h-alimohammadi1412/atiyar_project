@@ -14,5 +14,12 @@ class Attribute extends Model
     public function getParent(){
         return $this->belongsTo(Attribute::class,'parent','id');
     }
+    public function getChild(){
+        return $this->hasMany(Attribute::class,'parent','id');
+    }
+    public function getvalue(){
+        return $this->hasMany(AttributeValue::class,'attribute_id','id');
+    }
+  
     protected $fillable = ['category_id','parent','title','position','status'];
 }
