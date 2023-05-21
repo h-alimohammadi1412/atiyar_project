@@ -49,8 +49,8 @@
                             <div class="col-lg-7 pe-lg-0">
                                 <div class="product-gallery">
                                     <div class="product-gallery-preview order-sm-2">
-                                        @foreach ($productGallerys as $key=>$productGallery)
-                                            <div class="product-gallery-preview-item @if($key==0) active @endif"
+                                        @foreach ($productGallerys as $key => $productGallery)
+                                            <div class="product-gallery-preview-item @if ($key == 0) active @endif"
                                                 id="image_galerry_product_{{ $productGallery->id }}"><img
                                                     class="image-zoom"
                                                     src="{{ asset('files/uploads/products/gallerys/' . $productGallery->img) }}"
@@ -61,8 +61,8 @@
                                         @endforeach
                                     </div>
                                     <div class="product-gallery-thumblist order-sm-1">
-                                        @foreach ($productGallerys as $key=>$productGallery)
-                                            <a class="product-gallery-thumblist-item @if($key==0) active @endif"
+                                        @foreach ($productGallerys as $key => $productGallery)
+                                            <a class="product-gallery-thumblist-item @if ($key == 0) active @endif"
                                                 href="#image_galerry_product_{{ $productGallery->id }}"><img
                                                     src="{{ asset('files/uploads/products/gallerys/' . $productGallery->img) }}"
                                                     alt="تصویر محصول"></a>
@@ -73,18 +73,22 @@
                             <!-- Product details-->
                             <div class="col-lg-5 pt-4 pt-lg-0">
                                 <div class="product-details ms-auto pb-3">
-                                    <div class="h3 fw-normal text-accent mb-3 me-1">{{ $product->price }}  <del class="fs-5 text-border">{{ $product->discount_price }}</del></div>
+                                    <div class="h3 fw-normal text-accent mb-3 me-1">{{ $product->price }} <del
+                                            class="fs-5 text-border">{{ $product->discount_price }}</del></div>
                                     <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">رنگ:</span></div>
                                     <div class="position-relative me-n4 mb-3">
-                                        @foreach ($productColors as $key=>$productColor)    
-                                        <div class="form-check form-option form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="color" id="color_{{ $productColor->id }}"
-                                                data-bs-label="colorOption" value="{{ $productColor->color->name }}" @if($key==0) checked @endif>
-                                            <label class="form-option-label rounded-circle" for="color_{{ $productColor->id }}"><span
-                                                    class="form-option-color rounded-circle"
-                                                    style="background-color: {{ $productColor->color->value }};"></span></label>
-                                        </div>
-                                        @endforeach                                       
+                                        @foreach ($productColors as $key => $productColor)
+                                            <div class="form-check form-option form-check-inline mb-2">
+                                                <input class="form-check-input" type="radio" name="color"
+                                                    id="color_{{ $productColor->id }}" data-bs-label="colorOption"
+                                                    value="{{ $productColor->color->name }}"
+                                                    @if ($key == 0) checked @endif>
+                                                <label class="form-option-label rounded-circle"
+                                                    for="color_{{ $productColor->id }}"><span
+                                                        class="form-option-color rounded-circle"
+                                                        style="background-color: {{ $productColor->color->value }};"></span></label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                     <div class="d-flex align-items-center pt-2 pb-4">
                                         <select class="form-select me-3" style="width: 5rem;">
@@ -181,11 +185,12 @@
                     <!-- Tech specs tab-->
                     <div class="tab-pane fade" id="specs" role="tabpanel">
                         <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                            <div class="d-flex align-items-center me-md-3"><img src="img/shop/single/gallery/th05.jpg"
+                            <div class="d-flex align-items-center me-md-3"><img src="/storage/{{ $product->img }}"
                                     width="90" alt="تصویر محصول">
                                 <div class="ps-3">
-                                    <h6 class="fs-base mb-2">تلفن های هوشمند</h6>
-                                    <div class="h4 fw-normal text-accent">124.<small>99</small></div>
+                                    <h6 class="fs-base mb-2">{{ $product->title }}</h6>
+                                    <div class="h4 fw-normal text-accent">{{ $product->price }} <del
+                                            class="fs-5 text-border">{{ $product->discount_price }}</del></div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center pt-3">
@@ -212,81 +217,34 @@
                             </div>
                         </div>
                         <!-- Specs table-->
-
                         <div class="row pt-2">
-                            <div class="col-lg-5 col-sm-6">
-                                <h3 class="h6">اطلاعات عمومی</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">مدل :</span><span>ساعت هوشمند</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">جنسیت :</span><span>هر دو</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">تلفن :</span><span>دارد</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">قابلیت سازگاری با سیستم عامل
-                                            :</span></span><span>اندروید</span></li>
-                                </ul>
-                                <h3 class="h6">مشخصات فیزیکی</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">شکل :</span><span>مستطیل</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">بدنه:</span><span>پلاستیک / سرامیک</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">مواد باند:</span><span>سیلیکون</span></li>
-                                </ul>
-                                <h3 class="h6">نمایش</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">نوع نمایش:</span><span>رنگی</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted"> سایز</span><span>1.28"</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">رزلوشن:</span><span>176 x 176</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">تاچ:</span><span>نه</span></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-5 col-sm-6 offset-lg-1">
-                                <h3 class="h6">کارکرد</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">تماس های تلفنی:</span><span>اعلان تماس ورودی</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">نظارت بر:</span><span> ضربان قلب / فعالیت بدنی
-                                        </span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">پشتیبانی:</span><span>بله</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">سنسورها:</span><span>ضربان قلب ، ژیروسکوپ ، ژئومغناطیسی
-                                            ، حسگر نور</span></li>
-                                </ul>
-                                <h3 class="h6">باتری</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">باتری :</span><span>لی پال</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">ظرفیت باتری:</span><span>190 آمپر</span></li>
-                                </ul>
-                                <h3 class="h6">ابعاد</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">ابعاد :</span><span>195 x 20 میلی متر</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">وزن :</span><span>32 گرم</span></li>
-                                </ul>
-                            </div>
+                            @foreach ($productAttributes as $productAttribute)
+                                <div class="col-lg-5 col-sm-6">
+                                    <h3 class="h6">{{ $productAttribute->title }}</h3>
+                                    <ul class="list-unstyled fs-sm pb-2">
+                                        @foreach ($productAttribute->getChild as $productAttributeChild)
+                                            <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                                    class="text-muted">{{ $productAttributeChild->title }} :</span>
+                                                @foreach ($productAttributeChild->getValue as $value)
+                                                    <span>{{ $value->value }}</span>
+                                                @endforeach
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- Reviews tab-->
                     <div class="tab-pane fade" id="reviews" role="tabpanel">
                         <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                            <div class="d-flex align-items-center me-md-3"><img src="img/shop/single/gallery/th05.jpg"
+                            <div class="d-flex align-items-center me-md-3"><img src="/storage/{{ $product->img }}"
                                     width="90" alt="تصویر محصول">
                                 <div class="ps-3">
-                                    <h6 class="fs-base mb-2">تلفن های هوشمند</h6>
-                                    <div class="h4 fw-normal text-accent">124.<small>99</small></div>
+                                    <h6 class="fs-base mb-2">{{ $product->title }}</h6>
+                                    <div class="h4 fw-normal text-accent">{{ $product->price }} <del
+                                            class="fs-5 text-border">{{ $product->discount_price }}</del></div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center pt-3">
@@ -590,29 +548,31 @@
         <h2 class="h3 text-center pb-4">ممکن است دوست داشته باشید</h2>
         <div class="tns-carousel ltr tns-controls-static tns-controls-outside">
             <div class="tns-carousel-inner"
-                data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">            
-               @foreach ($productCategories as $productCategory)
-                <div>
-                    <div class="card product-card card-static rtl">
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="#"><img src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
-                        <div class="card-body py-2">
-                            <h3 class="product-title fs-sm"><a href="/product/dkp-{{$productCategory->id}}/{{$productCategory->link}}">{{ substr($productCategory->title, 50) . '...' }}</a>
-                            </h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price text-accent">26.<small>99</small></div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-half active"></i><i
-                                        class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
+                data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">
+                @foreach ($productCategories as $productCategory)
+                    <div>
+                        <div class="card product-card card-static rtl">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="#"><img src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
+                            <div class="card-body py-2">
+                                <h3 class="product-title fs-sm"><a
+                                        href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}">{{ substr($productCategory->title, 50) . '...' }}</a>
+                                </h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price text-accent">26.<small>99</small></div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-half active"></i><i
+                                            class="star-rating-icon ci-star"></i><i
+                                            class="star-rating-icon ci-star"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> 
-               @endforeach
+                @endforeach
             </div>
         </div>
     </div>
