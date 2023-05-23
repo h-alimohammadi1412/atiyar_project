@@ -17,16 +17,6 @@
                     @include('errors.error')
 
                     <div class="row">
-                        {{-- <div class="col-md-6">
-                            <div class="form-group">
-                                <select wire:model.lazy="productSeller.product_id" name="product_id" id="" class="form-control">
-                                    <option value="-1">-محصول-</option>
-                                    @foreach(\App\Models\Product::all() as $product)
-                                        <option value="{{$product->id}}">{{$product->title}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
                         <div class="col-md-6">
                             <div class="form-group">
                                 <select wire:model.lazy="productSeller.vendor_id" name="vendor_id" id=""
@@ -55,8 +45,8 @@
                                 <select wire:model.lazy="productSeller.color_id" name="color_id" id=""
                                         class="form-control">
                                     <option value="-1">-رنگ-</option>
-                                    @foreach(\App\Models\Color::all() as $color)
-                                        <option value="{{$color->id}}" style="background-color: {{$color->value}}">{{$color->name}}</option>
+                                    @foreach($colors as $color)
+                                        <option value="{{$color->color->id}}" style="background-color: {{$color->color->value}}">{{$color->color->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

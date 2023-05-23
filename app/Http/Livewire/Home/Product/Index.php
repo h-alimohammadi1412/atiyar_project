@@ -429,10 +429,12 @@ class Index extends Component
 
         $product = $this->product;
         $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
-        $productColors = ProductColor::with('color')->where(['product_id' => $product->id])->get();
+        $productSellers = ProductSeller::with(['color'])->where(['product_id'=> $product->id,'status'=>1])->orderBy('price','ASC')->get();
         $productCategories = Product::with(['category', 'attributes'])->where(['category_id' => $product->category_id])->limit(10)->get();
         $productAttributes = Attribute::with(['getChild' => ['getvalue' => function ($query) {
             return $query->where('product_id', $this->product->id); }]])->where(['category_id' => $product->category_id, 'parent' => 0])->get();
+        $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
+
         // dd($productAttributes);
 
 
@@ -685,12 +687,11 @@ class Index extends Component
             compact(
                 'product',
                 'productGallerys',
-                'productColors',
                 'productCategories',
                 'productAttributes',
                 'productSeller_count'
                 ,
-                'productSeller',
+                'productSellers',
                 'productSeller_max_price',
                 'productSeller_max_price_first',
                 'productSeller_max_price_all',

@@ -1,0 +1,53 @@
+<div class="tab-pane fade" id="specs" role="tabpanel">
+    <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
+        <div class="d-flex align-items-center me-md-3"><img src="/storage/{{ $product->img }}"
+                width="90" alt="تصویر محصول">
+            <div class="ps-3">
+                <h6 class="fs-base mb-2">{{ $product->title }}</h6>
+                <div class="h4 fw-normal text-accent">{{ $product->price }} <del
+                        class="fs-5 text-border">{{ $product->discount_price }}</del></div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center pt-3">
+            <select class="form-select me-2" style="width: 5rem;">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button class="btn btn-primary btn-shadow me-2" type="button"><i
+                    class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">اضافه کردن
+                    به سبدخرید</span></button>
+            <div class="me-2">
+                <button class="btn btn-secondary btn-icon" type="button"
+                    data-bs-toggle="tooltip" title="اضافه کردن به علاقه مندی"><i
+                        class="ci-heart fs-lg"></i></button>
+            </div>
+            <div>
+                <button class="btn btn-secondary btn-icon" type="button"
+                    data-bs-toggle="tooltip" title="Compare"><i
+                        class="ci-compare fs-lg"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- Specs table-->
+    <div class="row pt-2">
+        @foreach ($productAttributes as $productAttribute)
+            <div class="col-lg-5 col-sm-6">
+                <h3 class="h6">{{ $productAttribute->title }}</h3>
+                <ul class="list-unstyled fs-sm pb-2">
+                    @foreach ($productAttribute->getChild as $productAttributeChild)
+                        <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                class="text-muted">{{ $productAttributeChild->title }} :</span>
+                            @foreach ($productAttributeChild->getValue as $value)
+                                <span>{{ $value->value }}</span>
+                            @endforeach
+                        </li>
+                    @endforeach
+
+                </ul>
+            </div>
+        @endforeach
+    </div>
+</div>

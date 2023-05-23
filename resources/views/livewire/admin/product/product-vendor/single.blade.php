@@ -82,7 +82,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a wire:click="deletedFieldAsModel('ProductSeller','productSeller','تنوع قیمت','{{ $product->title }}','{{ $productSeller->id }}')" type="submit"
+                                        <a wire:click="deletedFieldAsModel('ProductSeller','productSeller','تنوع قیمت','{{ $product->title }}','{{ $productSeller->id }}','{{ $product->id }}')" type="submit"
                                            class="item-delete mlg-15" title="حذف"></a>
                                         <a href="{{route('productSeller.update',$productSeller)}}
                                             " class="item-edit " title="ویرایش"></a>

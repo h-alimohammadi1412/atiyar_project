@@ -20,6 +20,7 @@ class CreateAttributesTable extends Migration
             $table->string('title');
             $table->string('position');
             $table->string('status');
+            $table->tinyInteger('notShow')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

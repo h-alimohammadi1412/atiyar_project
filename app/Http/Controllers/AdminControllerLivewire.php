@@ -49,8 +49,9 @@ class AdminControllerLivewire extends Component
         }
 
     }
-    public function deleteField($model, $route, $title, $fieldName, $id)
+    public function deleteField($model, $route, $title, $fieldName, $id ,$setProductPrice_id =null)
     {
+
         $Model = "\\App\\Models\\" . $model;
         $modelSelect = $Model::withTrashed()->findOrFail($id);
         if ($modelSelect->img) {
@@ -58,15 +59,21 @@ class AdminControllerLivewire extends Component
         }
         $modelSelect->forceDelete();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'حذف');
+        if($setProductPrice_id != null){
+            setProductPrice($setProductPrice_id);
+        }
         alert()->success(" $title به صورت کامل از دیتابیس حذف شد.");
     }
 
-    public function trashedField($model, $route, $title, $fieldName, $id)
+    public function trashedField($model, $route, $title, $fieldName, $id ,$setProductPrice_id =null)
     {
         $Model = "\\App\\Models\\" . $model;
         $modelSelect = $Model::withTrashed()->where('id', $id)->first();
         $modelSelect->restore();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'بازیابی');
+        if($setProductPrice_id != null){
+            setProductPrice($setProductPrice_id);
+        }
         alert()->success(" $title با موفقیت بازیابی شد.");
     }
     public function createLog($modelName, $url, $title, $actionType)
@@ -111,12 +118,15 @@ class AdminControllerLivewire extends Component
         }
         return 'yes';
     }
-    public function deletedFieldAsModel($model, $route, $title, $fieldName, $id)
+    public function deletedFieldAsModel($model, $route, $title, $fieldName, $id,$setProductPrice_id =null)
     {
         $Model = "\\App\\Models\\" . $model;
         $modelSelect = $Model::withTrashed()->findOrFail($id);
         $modelSelect->delete();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'حذف');
+        if($setProductPrice_id != null){
+            setProductPrice($setProductPrice_id);
+        }
         alert()->success( " $title با موفقیت حذف شد.");
 
         

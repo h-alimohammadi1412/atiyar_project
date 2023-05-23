@@ -75,9 +75,9 @@
                                         </td>
 
                                         <td>
-                                            <a wire:click="deleteField('ProductSeller','productSeller','تنوع قیمت','name',{{ $productSeller->id }})"
+                                            <a wire:click="deleteField('ProductSeller','productSeller','تنوع قیمت','name',{{ $productSeller->id }},'{{ $productSeller->product_id }})') "
                                                 type="submit" class="item-delete mlg-15" title="حذف"></a>
-                                            <a wire:click="trashedField('ProductSeller','productSeller','تنوع قیمت','name',{{ $productSeller->id }})"
+                                            <a wire:click="trashedField('ProductSeller','productSeller','تنوع قیمت','name',{{ $productSeller->id }},'{{ $productSeller->product_id }})') "
                                                 class="item-li i-checkouts item-restore"></a>
                                         </td>
                                     </tr>
