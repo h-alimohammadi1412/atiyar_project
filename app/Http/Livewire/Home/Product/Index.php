@@ -28,6 +28,8 @@ use Stevebauman\Location\Facades\Location;
 class Index extends Component
 {
     public $product;
+    public $product_seller_id;
+    public $product_seller_selected;
     public $color;
     public $comment;
     public $vendor_new;
@@ -61,7 +63,7 @@ class Index extends Component
     {
         $this->product = Product::findOrFail($id);
         $this->notification = new Notification();
-        //        $this->comment = new Comment();
+        $this->product_seller_selected = ProductSeller::where(['product_id' => $id, 'status' => 1])->orderBy('price', 'ASC')->first();
     }
 
     protected $rules = [
@@ -424,21 +426,27 @@ class Index extends Component
 
     }
 
+    public function ProductSellerSelected($id){
+        $this->product_seller_selected = ProductSeller::find($id);
+        // dd($this->product_seller_selected);
+    }
     public function render()
     {
 
         $product = $this->product;
         $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
-        $productSellers = ProductSeller::with(['color'])->where(['product_id'=> $product->id,'status'=>1])->orderBy('price','ASC')->get();
+        $productSellers = ProductSeller::with(['color'])->where(['product_id' => $product->id, 'status' => 1])->orderBy('price', 'ASC')->get();
         $productCategories = Product::with(['category', 'attributes'])->where(['category_id' => $product->category_id])->limit(10)->get();
-        $productAttributes = Attribute::with(['getChild' => ['getvalue' => function ($query) {
-            return $query->where('product_id', $this->product->id); }]])->where(['category_id' => $product->category_id, 'parent' => 0])->get();
-        $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
-
+        $productAttributes = Attribute::with([
+            'getChild' => [
+                'getvalue' => function ($query) {
+                    return $query->where('product_id', $this->product->id);
+                }
+            ]
+        ])->where(['category_id' => $product->category_id, 'parent' => 0])->get();
         // dd($productAttributes);
 
-
-
+        $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
 
         if (auth()->user()) {
             $userhistory = \App\Models\UserHistory::where('user_id', auth()->user()->id)->
@@ -453,8 +461,8 @@ class Index extends Component
         }
 
 
-        $productSeller = ProductSeller::where('product_id', $product->id)->get();
-        $productSeller = $productSeller->unique('color_id');
+        // $productSeller = ProductSeller::where('product_id', $product->id)->get();
+        // $productSeller = $productSeller->unique('color_id');
         $productSeller_max_price = ProductSeller::where('product_id', $product->id)->
             orderBy('discount_price', 'ASC')->get();
 
@@ -689,8 +697,7 @@ class Index extends Component
                 'productGallerys',
                 'productCategories',
                 'productAttributes',
-                'productSeller_count'
-                ,
+                'productSeller_count',
                 'productSellers',
                 'productSeller_max_price',
                 'productSeller_max_price_first',

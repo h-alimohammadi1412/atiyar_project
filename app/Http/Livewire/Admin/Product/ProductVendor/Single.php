@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin\Product\ProductVendor;
 
 use App\Http\Controllers\AdminControllerLivewire;
-use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductSeller;
 use Livewire\WithPagination;
@@ -75,8 +74,6 @@ class Single extends AdminControllerLivewire
     public function render()
     {
         $product = $this->product;
-        // dd( ProductSeller::where(['product_id' => 12])->orderBy('price', 'ASC')->get());
-
         $productSellers =
             $this->readyToLoad ? ProductSeller::
                 where('product_id', $this->product->id)->

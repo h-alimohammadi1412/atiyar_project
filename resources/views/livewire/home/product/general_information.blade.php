@@ -27,17 +27,19 @@
         <!-- Product details-->
         <div class="col-lg-5 pt-4 pt-lg-0">
             <div class="product-details ms-auto pb-3">
-                <div class="h3 fw-normal text-accent mb-3 me-1">{{ $product->price }} <del
-                        class="fs-5 text-border">{{ $product->discount_price }}</del></div>
+                <div class="h3 fw-normal text-accent mb-3 me-1">{{ number_format($product_seller_selected->price) }} <del
+                        class="fs-5 text-border">{{ number_format($product_seller_selected->discount_price) }}</del></div>
                 <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">رنگ:</span></div>
                 <div class="position-relative me-n4 mb-3">
                     @foreach ($productSellers as $key => $productSeller)
-                        <div class="form-check form-option form-check-inline mb-2">
+                        <div class="form-check form-option form-check-inline mb-2"
+                            wire:click="ProductSellerSelected({{ $productSeller->id }})">
                             <input class="form-check-input" type="radio" name="color"
                                 id="color_{{ $productSeller->color->id }}" data-bs-label="colorOption"
                                 value="{{ $productSeller->color->name }}"
                                 @if ($key == 0) checked @endif>
-                            <label class="form-option-label rounded-circle" for="color_{{ $productSeller->color->id }}"><span
+                            <label class="form-option-label rounded-circle"
+                                for="color_{{ $productSeller->color->id }}"><span
                                     class="form-option-color rounded-circle"
                                     style="background-color: {{ $productSeller->color->value }};"></span></label>
                         </div>
@@ -46,10 +48,9 @@
                 <div class="d-flex align-items-center pt-2 pb-4">
                     <select class="form-select me-3" style="width: 5rem;">
                         <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        @for ($i = 2; $i <= $product_seller_selected->limit_order; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
                     </select>
                     <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i
                             class="ci-cart fs-lg me-2"></i>اضافه کردن به سبدخرید</button>

@@ -4,17 +4,16 @@
                 width="90" alt="تصویر محصول">
             <div class="ps-3">
                 <h6 class="fs-base mb-2">{{ $product->title }}</h6>
-                <div class="h4 fw-normal text-accent">{{ $product->price }} <del
-                        class="fs-5 text-border">{{ $product->discount_price }}</del></div>
+                <div class="h4 fw-normal text-accent">{{ number_format($product_seller_selected->price) }} <del
+                        class="fs-5 text-border">{{ number_format($product_seller_selected->discount_price) }}</del></div>
             </div>
         </div>
         <div class="d-flex align-items-center pt-3">
             <select class="form-select me-2" style="width: 5rem;">
                 <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                @for ($i = 2; $i <= $product_seller_selected->limit_order; $i++)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
             </select>
             <button class="btn btn-primary btn-shadow me-2" type="button"><i
                     class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">اضافه کردن
@@ -26,7 +25,7 @@
             </div>
             <div>
                 <button class="btn btn-secondary btn-icon" type="button"
-                    data-bs-toggle="tooltip" title="Compare"><i
+                    data-bs-toggle="tooltip" title="مقایسه"><i
                         class="ci-compare fs-lg"></i></button>
             </div>
         </div>
