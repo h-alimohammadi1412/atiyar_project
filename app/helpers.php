@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Product;
+use App\Models\ProductSeller;
+
 function upload_file($request, $name, $dir, $pix = '')
 {
     if ($request->hasFile($name)) {
@@ -12,4 +15,13 @@ function upload_file($request, $name, $dir, $pix = '')
         return null;
     }
 
+}
+
+function setProductPrice($product_id){
+    $productPrice = ProductSeller::where(['product_id' => $product_id])->orderBy('price', 'ASC')->first();
+    if ($productPrice) {
+        Product::where('id', $product_id)->update(['price' => $productPrice->price, 'discount_price' => $productPrice->discount_price]);
+    } else {
+        Product::where('id', $product_id)->update(['price' => 0, 'discount_price' => 0]);
+    }
 }

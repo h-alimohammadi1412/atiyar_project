@@ -3,11 +3,9 @@
 namespace App\Http\Livewire\Admin\Product\ProductVendor;
 
 use App\Http\Controllers\AdminControllerLivewire;
-use App\Models\Gallery;
-use App\Models\Log;
+use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductSeller;
-use DB;
 use Livewire\WithPagination;
 
 class Single extends AdminControllerLivewire
@@ -45,25 +43,45 @@ class Single extends AdminControllerLivewire
 
     public function categoryForm()
     {
-
+        
         $this->validate();
-        $this->productSeller->product_id = $this->product->id;
-        $this->productSeller->save();
-        $this->createLog('تنوع قیمت', 'admin/productSeller', $this->product->title, 'ایجاد');
-        $this->emit('toast', 'success', ' تنوع قیمت محصول با موفقیت ایجاد شد.');
-        return redirect()->back();
-    }
+        $color = ProductSeller::where('color_id', $this->productSeller->color_id)->first();
+        if (!$color) {
+            $this->productSeller->product_id = $this->product->id;
+            $this->productSeller->save();
+            $this->createLog('تنوع قیمت', 'admin/productSeller', $this->product->title, 'ایجاد');
+            setProductPrice($this->product->id);
+            $this->emit('toast', 'success', ' تنوع قیمت محصول با موفقیت ایجاد شد.');
 
+            $this->productSeller->product_id = '';
+            $this->productSeller->vendor_id = '';
+            $this->productSeller->time = '';
+            $this->productSeller->warranty_id = '';
+            $this->productSeller->price = '';
+            $this->productSeller->discount_price = '';
+            $this->productSeller->color_id = '';
+            $this->productSeller->product_count = '';
+            $this->productSeller->limit_order = '';
+            $this->productSeller->status = '';
+            return redirect()->back();
+
+        } else {
+            alert()->warning("تنوع قیمت با این کد رنگ قبلا انتخاب شده است.");
+            return redirect(route('product.productVendor', ['product' => $this->product->id]));
+        }
+
+    }
 
     public function render()
     {
         $product = $this->product;
+        // dd( ProductSeller::where(['product_id' => 12])->orderBy('price', 'ASC')->get());
 
         $productSellers =
             $this->readyToLoad ? ProductSeller::
-            where('product_id', $this->product->id)->
-            orderBy('price')->paginate(15): [];
-        $colors =ProductColor::with('color')->where('product_id',$this->product->id)->get();
-        return view('livewire.admin.product.product-vendor.single',compact('product','colors','productSellers'));
+                where('product_id', $this->product->id)->
+                orderBy('price')->paginate(15) : [];
+        $colors = ProductColor::with('color')->where('product_id', $this->product->id)->get();
+        return view('livewire.admin.product.product-vendor.single', compact('product', 'colors', 'productSellers'));
     }
 }
