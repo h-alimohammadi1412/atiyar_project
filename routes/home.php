@@ -37,13 +37,6 @@ Route::get('/sitem', function () {
     return back();
 });
 Route::get('/', \App\Http\Livewire\Home\Home\Index::class)->name('home.index');
-Route::get('/login', function () {
-    return redirect(route('user.login-register'));
-})->name('login');
-Route::get('/register', function () {
-    return redirect(route('user.login-register'));
-})->name('register');
-
 //category and Subcategory
 Route::middleware('web')->prefix('main')->group(function () {
     Route::get('/{category}', \App\Http\Livewire\Home\Category\Index::class);
