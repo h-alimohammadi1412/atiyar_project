@@ -54,6 +54,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Cyaxaress\\User\\" : "Modules/Cyaxaress/User/",
             "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
