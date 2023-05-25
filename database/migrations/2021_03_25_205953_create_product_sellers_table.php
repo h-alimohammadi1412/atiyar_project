@@ -19,8 +19,8 @@ class CreateProductSellersTable extends Migration
             $table->integer('product_id')->nullable();
             $table->string('time');
             $table->string('warranty_id');
-            $table->string('price');
-            $table->string('discount_price');
+            $table->integer('price');
+            $table->integer('discount_price');
             $table->string('color_id');
             $table->string('product_count');
             $table->string('limit_order');

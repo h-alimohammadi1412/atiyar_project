@@ -28,6 +28,7 @@ use Stevebauman\Location\Facades\Location;
 class Index extends Component
 {
     public $product;
+    public $product_count = 1;
     public $product_seller_id;
     public $product_seller_selected;
     public $color;
@@ -61,9 +62,9 @@ class Index extends Component
 
     public function mount($id)
     {
-        $this->product = Product::findOrFail($id);
+        $this->product = Product::with('category', 'brand')->where('id', $id)->firstOrFail();
         $this->notification = new Notification();
-        $this->product_seller_selected = ProductSeller::where(['product_id' => $id, 'status' => 1])->orderBy('price', 'ASC')->first();
+        $this->product_seller_selected = ProductSeller::where(['product_id' => $id, 'status' => 1])->orderBy('discount_price', 'ASC')->first();
     }
 
     protected $rules = [
@@ -218,12 +219,13 @@ class Index extends Component
         $productSeller = ProductSeller::find($id);
         $carts = Cart::where('product_seller_id', $id)->first();
         $userIp = Request::ip();
+        dd($carts);
         if ($carts) {
             $carts->update([
-                'count' => $carts->count + 1,
+                'count' => $this->product_count,
             ]);
         } else {
-            if ($userIp = '127.0.0.1') {
+            if ($userIp == '127.0.0.1') {
                 if (auth()->user()) {
                     $cart = Cart::create([
                         'ip' => $userIp,
@@ -301,10 +303,20 @@ class Index extends Component
             }
         }
 
-        return $this->redirect('/cart');
+        // return $this->redirect('/cart');
 
     }
-
+    public function addToCartProductSeller($id)
+    {
+        $productSeller = ProductSeller::find($id);
+        $carts = Cart::where('product_seller_id', $id)->first();
+        $userIp = Request::ip();
+        if ($carts) {
+            $carts->update([
+                'count' => $carts->count + 1,
+            ]);
+        }
+    }
     public function loadComment()
     {
         $this->readyToLoad = true;
@@ -426,16 +438,17 @@ class Index extends Component
 
     }
 
-    public function ProductSellerSelected($id){
+    public function ProductSellerSelected($id)
+    {
         $this->product_seller_selected = ProductSeller::find($id);
-        // dd($this->product_seller_selected);
+        $this->product_count = 1;
     }
     public function render()
     {
 
         $product = $this->product;
         $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
-        $productSellers = ProductSeller::with(['color'])->where(['product_id' => $product->id, 'status' => 1])->orderBy('price', 'ASC')->get();
+        $productSellers = ProductSeller::with(['color', 'user', 'warranty'])->where(['product_id' => $product->id, 'status' => 1])->orderBy('discount_price', 'ASC')->get();
         $productCategories = Product::with(['category', 'attributes'])->where(['category_id' => $product->category_id])->limit(10)->get();
         $productAttributes = Attribute::with([
             'getChild' => [

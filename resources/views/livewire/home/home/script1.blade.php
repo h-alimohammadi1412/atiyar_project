@@ -5,7 +5,7 @@
 <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
 <!-- Main theme script-->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<livewire:scripts />
 @yield('script')
 <script src="{{ asset('js/theme.min.js') }}"></script>
 
-<livewire:scripts />
