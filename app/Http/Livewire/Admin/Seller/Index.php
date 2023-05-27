@@ -2,29 +2,25 @@
 
 namespace App\Http\Livewire\Admin\Seller;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Mail\OrderSubmit;
 use App\Models\Notification;
 use App\Models\Seller;
 use App\Models\Log;
 use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
 
     public $img;
     public $search;
 
     protected $queryString = ['search'];
-
-    public $readyToLoad = false;
 
     public Seller $seller;
 
@@ -32,17 +28,6 @@ class Index extends Component
     {
         $this->seller = new Seller();
     }
-
-
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
-
-
-
 
     public function deleteCategory($id)
     {

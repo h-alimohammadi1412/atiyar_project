@@ -7,13 +7,12 @@
                 <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                     data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
                         class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                    href="shop-single-v1.html"><img src="/storage/{{ $product->img }}" alt="محصول"></a>
+                    href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img src="/storage/{{ $product->img }}" alt="محصول"></a>
                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                        href="#">زنانه و بچگانه</a>
-                    <h3 class="product-title fs-sm"><a href="shop-single-v1.html">{{ substr($product->title, 50) . '...' }}</a></h3>
+                        href="{{ url('/main/' . $product->category->link) }}">{{ $product->category->title }}</a>
+                    <h3 class="product-title fs-sm"><a href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}">{{ substr($product->title, 50) . '...' }}</a></h3>
                     <div class="d-flex justify-content-between">
-                        <div class="product-price"><span class="text-accent">154.<small>00</small></span>
-                        </div>
+                        <div class="product-price"><span class="text-accent">{{ number_format($product->price) }}</div>
                         <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                 class="star-rating-icon ci-star-filled active"></i><i
                                 class="star-rating-icon ci-star-filled active"></i><i
@@ -25,8 +24,6 @@
                 <div class="card-body card-body-hidden">
                     <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
                             class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
-                    <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                            data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>مشاهده</a></div>
                 </div>
             </div>
             <hr class="d-sm-none">

@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire\Admin\Seller;
 
-use App\Models\Banner;
-use App\Models\Log;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Seller;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     use WithFileUploads;
     public Seller $seller;
@@ -46,31 +44,14 @@ class Update extends Component
     {
         $this->validate();
         if ($this->logo){
-            $this->seller->logo = $this->uploadImage();
+            $this->seller->logo = $this->uploadImage('seller');
         }
 
         $this->seller->update($this->validate());
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت فروشنده' .'-'. $this->seller->name,
-            'actionType' => 'آپدیت'
-        ]);
-        alert()->success(' با موفقیت آپدیت شد.', 'فروشنده مورد نظر با موفقیت آپدیت شد.');
+        $this->createLog('فروشنده', 'admin/seller', $this->seller->name, 'آپدیت');
         return redirect(route('seller.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $day = now()->day;
-        $directory = "seller/$year/$month/$day";
-        $name = $this->logo->getClientOriginalName();
-        $this->logo->storeAs($directory, $name);
-        return "$directory/$name";
-    }
-
-
     public function render()
     {
         $seller = $this->seller;

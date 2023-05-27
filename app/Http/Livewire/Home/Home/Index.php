@@ -70,7 +70,7 @@ class Index extends Component
         }
         if(!cache('featuredCategory')){
             $categoryIndex = \App\Models\TitleCategoryIndex::find(1);
-            $featuredCategory =\App\Models\CategoryIndex::with('product')->where('title_id',$categoryIndex->id)->limit(12)->get();
+            $featuredCategory =\App\Models\CategoryIndex::with('product','category')->where('title_id',$categoryIndex->id)->limit(12)->get();
             cache(['featuredCategory' =>  $featuredCategory ], now()->addDay(29));
         }
         if(!cache('mostVisited')){

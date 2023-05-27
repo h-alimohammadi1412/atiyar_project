@@ -23,40 +23,44 @@
         <div class="col-md-7 pt-4 pt-md-0">
             <div class="swiper featured_category">
                 <div class="swiper-wrapper">
-                    @foreach (cache('featuredCategory') as $product)    
-                    <div class="swiper-slide">
-                        <div >
-                            <div class="card product-card">
-                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                        class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                    href="shop-single-v1.html"><img src="/storage/{{ $product->product->img }}" alt="محصول"></a>
-                                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                                        href="#">زنانه و بچگانه</a>
-                                    <h3 class="product-title fs-sm"><a href="shop-single-v1.html">{{ substr($product->product->title, 50) . '...' }}</a></h3>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="product-price"><span class="text-accent">154.<small>00</small></span>
-                                        </div>
-                                        <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                class="star-rating-icon ci-star-half active"></i><i
-                                                class="star-rating-icon ci-star"></i>
+                    @foreach (cache('featuredCategory') as $product)
+                        <div class="swiper-slide">
+                            <div>
+                                <div class="card product-card">
+                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                        data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
+                                            class="ci-heart"></i></button><a
+                                        class="card-img-top d-block overflow-hidden"
+                                        href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img
+                                            src="/storage/{{ $product->product->img }}" alt="محصول"></a>
+                                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
+                                            href="{{ url('/main/' . $product->category->link) }}">{{ $product->category->title }}</a>
+                                        <h3 class="product-title fs-sm"><a
+                                                href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}">{{ substr($product->product->title, 50) . '...' }}</a>
+                                        </h3>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="product-price"><span
+                                                    class="text-accent">{{ number_format($product->product->price) }}</span>
+                                            </div>
+                                            <div class="star-rating"><i
+                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                    class="star-rating-icon ci-star-half active"></i><i
+                                                    class="star-rating-icon ci-star"></i>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="card-body">
+                                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                                class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                            class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
-                                    <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                            data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>مشاهده</a></div>
-                                </div>
+                                <hr class="d-sm-none">
                             </div>
-                            <hr class="d-sm-none">
                         </div>
-                    </div>
                     @endforeach
-                    
+
                 </div>
                 <div class="swiper-pagination-featured_category"></div>
             </div>
@@ -395,22 +399,21 @@
 </section>
 <style>
     .featured_category {
-      width: 100%;
-      height: 100%;
-      margin-left: auto;
-      margin-right: auto;
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .featured_category .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      height: calc((100% - 30px) / 2) !important;
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        height: calc((100% - 30px) / 2) !important;
 
-      /* Center slide text vertically */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
-

@@ -21,7 +21,7 @@ class CreateProductSellersTable extends Migration
             $table->string('warranty_id');
             $table->integer('price');
             $table->integer('discount_price');
-            $table->string('color_id');
+            $table->string('color_id'); 
             $table->string('product_count');
             $table->string('limit_order');
             $table->string('status');

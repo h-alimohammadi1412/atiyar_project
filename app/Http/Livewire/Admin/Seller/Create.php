@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire\Admin\Seller;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 
 use App\Models\Seller;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Create extends Component
+class Create extends AdminControllerLivewire
 {
     use WithFileUploads;
     public $logo;
@@ -62,31 +63,12 @@ class Create extends Component
 
         $this->validate();
         if ($this->logo){
-            $this->seller->logo = $this->uploadImage();
+            $this->seller->logo = $this->uploadImage('userseller');
         }
 
         $this->seller->save();
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن فروشنده' .'-'. $this->seller->name,
-            'actionType' => 'ایجاد'
-        ]);
-        alert()->success(' با موفقیت ایجاد شد.', 'فروشنده مورد نظر با موفقیت اضافه شد.');
+        $this->createLog('فروشنده', 'admin/seller', $this->seller->name, 'ایجاد');
         return redirect(route('seller.index'));
-    }
-
-
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $day = now()->day;
-        $directory = "userseller/$year/$month/$day";
-        $name = $this->logo->getClientOriginalName();
-        $this->logo->storeAs($directory, $name);
-        return "$directory/$name";
     }
 
     public function render()

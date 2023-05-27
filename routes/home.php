@@ -57,9 +57,9 @@ Route::middleware('web')->prefix('search')->group(function () {
 });
 //single Product page
 Route::middleware('web')->prefix('product')->group(function () {
-    Route::get('/dkp-{id}/{product}', \App\Http\Livewire\Home\Product\Index::class);
+    Route::get('/at-{id}/{product}', \App\Http\Livewire\Home\Product\Index::class);
 });
-Route::get('/product/comment/dkp-{id}/{product}', \App\Http\Livewire\Home\Comment\Review::class)->middleware('auth');
+Route::get('/product/comment/at-{id}/{product}', \App\Http\Livewire\Home\Comment\Review::class)->middleware('auth');
 
 //User page
 Route::middleware(['web'])->prefix('users')->group(function () {
