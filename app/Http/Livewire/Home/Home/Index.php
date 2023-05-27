@@ -88,7 +88,7 @@ class Index extends Component
 
         // dd(cache('siteHeader'));
 
-        auth()->loginUsingId(1);
+       // auth()->loginUsingId(1);
         // $ip = Request::ip();
         // if (auth()->user()) {
         //     $no = ModelsNotification::where('user_id', auth()->user()->id)->

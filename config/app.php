@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Tdanandeh\SweetAlert\SweetAlertServiceProvider::class,
 
+        Cyaxaress\User\Providers\UserServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
