@@ -55,7 +55,7 @@ Route::middleware('web')->prefix('product')->group(function () {
 Route::get('/product/comment/at-{id}/{product}', \App\Http\Livewire\Home\Comment\Review::class)->middleware('auth');
 
 //User page
-Route::middleware(['web'])->prefix('users')->group(function () {
+Route::middleware(['web','guest'])->prefix('users')->group(function () {
     Route::get('/login-register', \App\Http\Livewire\Home\User\Register::class)->name('user.login-register');
     Route::get('/login-register/confirm/{code}', \App\Http\Livewire\Home\User\Confirm::class)->name('users.confirm');
     Route::get('/login/confirm/password/{user}', \App\Http\Livewire\Home\User\ConfirmPassword::class)->name('users.confirm.password');

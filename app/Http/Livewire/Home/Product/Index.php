@@ -194,7 +194,7 @@ class Index extends Component
 
     public function addQuestion()
     {
-
+        dd('addQuestion');
         if (auth()->user()) {
             Comment::create([
                 'user_id' => auth()->user()->id,
@@ -456,7 +456,7 @@ class Index extends Component
                     return $query->where('product_id', $this->product->id);
                 }
             ]
-        ])->where(['category_id' => $product->category_id, 'parent' => 0])->get();
+        ])->has('getChild.getvalue')->where(['category_id' => $product->category_id, 'parent' => 0])->get();
         // dd($productAttributes);
 
         $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
@@ -473,6 +473,13 @@ class Index extends Component
             }
         }
 
+        $c = Comment::where('status', 1)->
+            where('product_id', $product->id)->where('parent', 0)->
+            latest()->get();
+        // dd($c);
+
+
+        // dd($productAttributes);
 
         // $productSeller = ProductSeller::where('product_id', $product->id)->get();
         // $productSeller = $productSeller->unique('color_id');

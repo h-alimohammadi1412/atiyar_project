@@ -34,9 +34,9 @@
             <!-- Tabs-->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item"><a class="nav-link py-4 px-sm-4 active" href="#general" data-bs-toggle="tab"
-                        role="tab">عمومی <span class='d-none d-sm-inline'>اطلاعات</span></a></li>
+                        role="tab"><span class='d-none d-sm-inline'>توضیحات کالا</span></a></li>
                 <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#specs" data-bs-toggle="tab"
-                        role="tab"><span class='d-none d-sm-inline'>لمسی</span> خاص</a></li>
+                        role="tab"><span class='d-none d-sm-inline'>مشخصات کالا</span></a></li>
                 <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#reviews" data-bs-toggle="tab"
                         role="tab">نظرات <span class="fs-sm opacity-60">(74)</span></a></li>
             </ul>

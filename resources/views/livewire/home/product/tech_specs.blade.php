@@ -34,19 +34,22 @@
         @foreach ($productAttributes as $productAttribute)
             <div class="col-lg-6 col-sm-12">
                 <h3 class="h6">{{ $productAttribute->title }}</h3>
-                <ul class="list-unstyled fs-sm pb-2">
+                <ul class="list-unstyled fs-sm pb-2 ul_productAttribute">
                     @foreach ($productAttribute->getChild as $productAttributeChild)
-                        <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                class="text-muted">{{ $productAttributeChild->title }} :</span>
+                        <li class="d-flex justify-content-between pb-2 border-bottom px-3">
+                            <span class="text-muted">{{ $productAttributeChild->title }} :</span>
 
                             @if (sizeof($productAttributeChild->getValue) > 0)
-                                @foreach ($productAttributeChild->getValue as $value)
-                                    <span>{{ $value->value }}</span>
+                                @foreach ($productAttributeChild->getValue as $key => $value)
+                                    @if ($key >0)
+                                    </li>
+                                    <li class="d-flex justify-content-end pb-2 border-bottom px-3">
+                                    @endif
+                                    <span>{{ $value->value }}</span>                                    
                                 @endforeach
                             @else
                                 <span>-----</span>
                             @endif
-
                         </li>
                     @endforeach
                 </ul>

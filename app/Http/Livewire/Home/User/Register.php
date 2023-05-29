@@ -12,6 +12,7 @@ class Register extends AdminControllerLivewire
 
     public $show_send_code_form = false;
     public $active_code = false;
+    public $active_code22 = 'sssssssss';
     public $input_active_code;
     public $user_id=0;
     public User $user;
@@ -26,7 +27,7 @@ class Register extends AdminControllerLivewire
     protected $rules = [
         'user.phone' => 'required|max:11|min:11',
     ];
-
+    protected $listeners = ['sendCodeActive'];
     public function updated($phone)
     {
         $this->validateOnly($phone);
@@ -43,6 +44,10 @@ class Register extends AdminControllerLivewire
             $this->sendActiveCode();
         }
     }
+    public function sendCodeActive()
+    {
+        return $this->redirect('login-register');
+    }
     public function userActiveCode()
     {
         if (strlen($this->input_active_code) == 5) {
@@ -53,11 +58,11 @@ class Register extends AdminControllerLivewire
                     ]);
                     auth()->loginUsingId($user->id);
                     $this->createLog('User', 'user/profile', 'کاربر جدید', 'افزودن');
-                    return $this->redirect(route('profile.index'));
+                    return $this->redirect(route('users.welcome'));
                 } else {
                     auth()->loginUsingId($this->user_id);
                     $this->createLog('User', 'user/profile', 'کاربر جدید', 'ورود');
-                    return $this->redirect(route('profile.index'));
+                    return $this->redirect(route('home.index'));
                 }
             } else {
                 $this->addError('user.phone', 'کد وارد شده صحیح نیست.');
@@ -80,8 +85,9 @@ class Register extends AdminControllerLivewire
         SMS::create([
             'code' => $this->active_code,
             'type' => $type,
-            'user_id' => 0,
+            'user_id' => $this->user_id,
         ]);
+        
     }
     public function render()
     {

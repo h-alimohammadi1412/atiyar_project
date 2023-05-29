@@ -114,8 +114,18 @@
                         <div class="mb-3 pt-4">
                             <label class="form-label " for="si-email">کد تایید برای شماره {{ $user->phone }}
                                 پیامک شد</label>
-                            <input wire:model.lazy="input_active_code" class="form-control" type="text"
-                                id="si-email" required maxlength="5" >
+                            {{-- <span class="d-block text-center my-2" x-data="{ show: true }" x-show="show"
+                                x-init="setTimeout(() => show = false, 5000)">ارسال مجدد کد تا <span id="countdown">00:05</span>
+                                دیگر</span> --}}
+                            <div class="d-block text-center my-2">
+                                <div>
+                                    ارسال مجدد کد تا
+                                    <span id="countdown">02:00</span>
+                                    دیگر
+                                </div>
+                            </div>
+                            <input wire:model.lazy="input_active_code" value="" class="form-control"
+                                type="text" id="si-email" required maxlength="5">
                             @if ($errors->any())
                                 <div class="alert alert-danger bg-body border-0 mt-2">
                                     <ul class="list-inline text-center">
@@ -127,18 +137,51 @@
                             @endif
                             <button class="btn btn-primary btn-shadow d-block w-100"
                                 style="margin-top: 4rem !important;" type="submit">ورود</button>
-
                         </div>
-
                     </form>
+
+                    <script>
+                        var seconds, temp;
+                        var GivenTime = document.getElementById('countdown').innerHTML;
+
+                        function countdown() {
+                            let time = document.getElementById('countdown').innerHTML;
+                            let timeArray = time.split(':')
+                            seconds = timeToSeconds(timeArray);
+
+                            if (seconds === 0) {
+                                clearTimeout(timeoutMyOswego);
+                                @this.show_send_code_form = false;
+                                return;
+                            }
+                            seconds--;
+                            temp = document.getElementById('countdown');
+                            temp.innerHTML = secondsToTime(seconds);
+                            var timeoutMyOswego = setTimeout(countdown, 1000);
+                        };
+                        countdown();
+
+                        function timeToSeconds(timeArray) {
+                            var minutes = (timeArray[0] * 1);
+                            var seconds = (minutes * 60) + (timeArray[1] * 1);
+                            return seconds;
+                        }
+
+                        function secondsToTime(secs) {
+                            console.log('ccccc');
+                            var hours = Math.floor(secs / (60 * 60));
+                            hours = hours < 10 ? '0' + hours : hours;
+                            var divisor_for_minutes = secs % (60 * 60);
+                            var minutes = Math.floor(divisor_for_minutes / 60);
+                            minutes = minutes < 10 ? '0' + minutes : minutes;
+                            var divisor_for_seconds = divisor_for_minutes % 60;
+                            var seconds = Math.ceil(divisor_for_seconds);
+                            seconds = seconds < 10 ? '0' + seconds : seconds;
+                            return minutes + ':' + seconds;
+                        }
+                    </script>
                 @endif
             </div>
         </div>
     </div>
 </div>
-
-@section('sccript')
-    <script>
-        
-    </script>
-@endsection

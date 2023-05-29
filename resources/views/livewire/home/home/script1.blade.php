@@ -7,5 +7,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <livewire:scripts />
 @yield('script')
+
 <script src="{{ asset('js/theme.min.js') }}"></script>
 

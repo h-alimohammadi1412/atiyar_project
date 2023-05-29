@@ -33,13 +33,13 @@
     <!-- Reviews-->
     <div class="row pt-2 pb-3">
         <div class="col-lg-4 col-md-5">
-            <h2 class="h3 mb-4">74 بررسی</h2>
+            <h2 class="h3 mb-4">74 نظر</h2>
             <div class="star-rating me-2"><i class="ci-star-filled fs-sm text-accent me-1"></i><i
                     class="ci-star-filled fs-sm text-accent me-1"></i><i
                     class="ci-star-filled fs-sm text-accent me-1"></i><i
                     class="ci-star-filled fs-sm text-accent me-1"></i><i
                     class="ci-star fs-sm text-muted me-1"></i></div><span
-                class="d-inline-block align-middle">74 بررسی</span>
+                class="d-inline-block align-middle">74 نظر</span>
             <p class="pt-3 fs-sm text-muted">58 از 74 (77٪)<br>مشتریان این محصول را توصیه می کنند
             </p>
         </div>
@@ -140,7 +140,7 @@
                                 class="star-rating-icon ci-star-filled active"></i><i
                                 class="star-rating-icon ci-star"></i>
                         </div>
-                        <div class="fs-ms text-muted">83٪ از کاربران این بررسی را مفید دانستند
+                        <div class="fs-ms text-muted">83٪ از کاربران این نظر را مفید دانستند
                         </div>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                                 class="star-rating-icon ci-star-filled active"></i><i
                                 class="star-rating-icon ci-star-filled active"></i>
                         </div>
-                        <div class="fs-ms text-muted">83٪ از کاربران این بررسی را مفید دانستند
+                        <div class="fs-ms text-muted">83٪ از کاربران این نظر را مفید دانستند
                         </div>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
                                 class="star-rating-icon ci-star"></i><i
                                 class="star-rating-icon ci-star"></i>
                         </div>
-                        <div class="fs-ms text-muted">83٪ از کاربران این بررسی را مفید دانستند
+                        <div class="fs-ms text-muted">83٪ از کاربران این نظر را مفید دانستند
                         </div>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
         <!-- Leave review form-->
         <div class="col-md-5 mt-2 pt-4 mt-md-0 pt-md-0">
             <div class="bg-secondary py-grid-gutter px-grid-gutter rounded-3">
-                <h3 class="h4 pb-2">یک بررسی بنویسید</h3>
+                <h3 class="h4 pb-2">یک نظر بنویسید</h3>
                 <form class="needs-validation" method="post" novalidate>
                     <div class="mb-3">
                         <label class="form-label" for="review-name">نام شما<span
@@ -272,7 +272,7 @@
                         <label class="form-label" for="review-text">نظر<span
                                 class="text-danger">*</span></label>
                         <textarea class="form-control" rows="6" required id="review-text"></textarea>
-                        <div class="invalid-feedback"> یک بررسی بنویسید!</div><small
+                        <div class="invalid-feedback"> یک نظر بنویسید!</div><small
                             class="form-text text-muted">نظر شما باید حداقل 50 نویسه باشد.</small>
                     </div>
                     <div class="mb-3">
@@ -283,8 +283,8 @@
                         <label class="form-label" for="review-cons">منفی</label>
                         <textarea class="form-control" rows="2" placeholder="با ویرگول جدا شده است" id="review-cons"></textarea>
                     </div>
-                    <button class="btn btn-primary btn-shadow d-block w-100" type="submit">ارسال
-                        یک بررسی</button>
+                    <button class="btn btn-primary btn-shadow d-block w-100" wire:click="addQuestion" >ارسال
+                        یک نظر</button>
                 </form>
             </div>
         </div>
