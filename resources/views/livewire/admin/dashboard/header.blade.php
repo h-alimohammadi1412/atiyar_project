@@ -16,10 +16,6 @@
         {{--
                 <a href="{{ route('logout') }}" class="logout" title="خروج"></a>
         --}}
-        <form method="POST" action="{{ route('logout') }}"  x-data>
-            @csrf
 
-            <a href="{{ route('logout') }}" @click.prevent="$root.submit();" class="logout" title="خروج"></a>
-        </form>
     </div>
 </div>

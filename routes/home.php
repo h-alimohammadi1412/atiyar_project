@@ -157,3 +157,7 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 // //marketer Login
 // Route::get('/marketer/account/forgotpassword/', App\Http\Livewire\Marketer\Auth\Password::class)
 //     ->name('marketer.password');
+Route::get('/logout', function () {
+    auth()->logout();
+    return redirect('/');
+});

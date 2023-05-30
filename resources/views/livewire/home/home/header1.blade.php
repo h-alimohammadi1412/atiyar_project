@@ -51,8 +51,12 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ url('/profile/orders') }}">سفارش های من</a>
                             {{-- <a class="dropdown-item" href="#">Another action</a> --}}
-                            <a class="dropdown-item" href="{{ url('/users/logout') }}">خروج از حساب کاربری</a>
+                            <form method="POST" action="{{ route('logout') }}"  x-data>
+                                @csrf
+                                <a  href="{{ route('logout') }}" @click.prevent="$root.submit();" class="dropdown-item">خروج از حساب کاربری</a>
+                            </form>
                         </div>
+
                     </div>
                 @else
                     <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ url('login') }}">
