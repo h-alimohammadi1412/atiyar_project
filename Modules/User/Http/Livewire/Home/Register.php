@@ -46,7 +46,7 @@ class Register extends AdminControllerLivewire
     }
     public function sendCodeActive()
     {
-        return $this->redirect('login-register');
+        return to_route('login-register');
     }
     public function userActiveCode()
     {

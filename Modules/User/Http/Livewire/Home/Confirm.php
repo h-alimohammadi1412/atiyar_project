@@ -37,7 +37,7 @@ class Confirm extends Component
                 }
 
             }
-            return $this->redirect('/');
+            return to_route('/');
         } else {
             $this->emit('toast', 'error', ' رمز عبور وارد شده اشتباه است!');
         }

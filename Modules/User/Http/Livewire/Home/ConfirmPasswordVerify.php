@@ -49,7 +49,7 @@ class ConfirmPasswordVerify extends Component
                     }
 
                 }
-                return $this->redirect('/');
+                return to_route('/');
             } else {
                 $this->emit('toast', 'error', ' کد وارد شده اشتباه است!');
             }

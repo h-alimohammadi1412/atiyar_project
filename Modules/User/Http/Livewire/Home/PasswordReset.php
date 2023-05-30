@@ -51,7 +51,7 @@ class PasswordReset extends Component
                 }
 
             }
-            return $this->redirect('/');
+            return to_route('/');
         } else {
             $this->emit('toast', 'error', ' پسورد وارد شده با هم مطابقت ندارد!');
         }
