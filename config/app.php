@@ -162,9 +162,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Tdanandeh\SweetAlert\SweetAlertServiceProvider::class,
-
-        Cyaxaress\User\Providers\UserServiceProvider::class,
-
         /*
          * Package Service Providers...
          */

@@ -1,4 +1,7 @@
 {
     "Sellers": true,
-    "Marketers": true
+    "Marketers": true,
+    "User": true,
+    "Category": true,
+    "Dashboard": true
 }

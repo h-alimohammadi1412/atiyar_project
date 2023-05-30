@@ -76,7 +76,7 @@ class Register extends AdminControllerLivewire
     public function sendActiveCode($user_id = 0)
     {
         if($user_id != 0){
-            $this->user_id = $user_id; 
+            $this->user_id = $user_id;
         }
         $this->active_code = random_int(10000, 99999);
         $res = (new Notification)->sendSms($this->user->phone, "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
@@ -87,7 +87,7 @@ class Register extends AdminControllerLivewire
             'type' => $type,
             'user_id' => $this->user_id,
         ]);
-        
+
     }
     public function render()
     {
