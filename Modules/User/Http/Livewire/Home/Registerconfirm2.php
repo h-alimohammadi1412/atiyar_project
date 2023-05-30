@@ -25,6 +25,6 @@ class RegisterConfirm2 extends Component
     }
     public function render()
     {
-        return view('user::livewire.home.registerconfirm2')->layout('layouts.login');
+        return view('user::livewire.home.registerconfirm2')->layout('user::layouts.login');
     }
 }

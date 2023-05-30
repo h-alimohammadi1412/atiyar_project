@@ -18,6 +18,7 @@ class AdminControllerLivewire extends Component
 
     public $readyToLoad = false;
     protected $paginationTheme = 'bootstrap';
+
     public function loadCategory()
     {
         $this->readyToLoad = true;
@@ -49,7 +50,8 @@ class AdminControllerLivewire extends Component
         }
 
     }
-    public function deleteField($model, $route, $title, $fieldName, $id ,$setProductPrice_id =null)
+
+    public function deleteField($model, $route, $title, $fieldName, $id, $setProductPrice_id = null)
     {
 
         $Model = "\\App\\Models\\" . $model;
@@ -59,23 +61,24 @@ class AdminControllerLivewire extends Component
         }
         $modelSelect->forceDelete();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'حذف');
-        if($setProductPrice_id != null){
+        if ($setProductPrice_id != null) {
             setProductPrice($setProductPrice_id);
         }
         alert()->success(" $title به صورت کامل از دیتابیس حذف شد.");
     }
 
-    public function trashedField($model, $route, $title, $fieldName, $id ,$setProductPrice_id =null)
+    public function trashedField($model, $route, $title, $fieldName, $id, $setProductPrice_id = null)
     {
         $Model = "\\App\\Models\\" . $model;
         $modelSelect = $Model::withTrashed()->where('id', $id)->first();
         $modelSelect->restore();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'بازیابی');
-        if($setProductPrice_id != null){
+        if ($setProductPrice_id != null) {
             setProductPrice($setProductPrice_id);
         }
         alert()->success(" $title با موفقیت بازیابی شد.");
     }
+
     public function createLog($modelName, $url, $title, $actionType)
     {
         Log::create([
@@ -86,6 +89,7 @@ class AdminControllerLivewire extends Component
         ]);
         alert()->success("مشخصات $title مورد نظر با موفقیت $actionType شد.");
     }
+
     public function galleryUpload($id, Request $request)
     {
         $product = Product::select(['id'])->where('id', $id)->firstOrFail();
@@ -106,6 +110,7 @@ class AdminControllerLivewire extends Component
             return 0;
         }
     }
+
     public function changeImagePosition($id, Request $request)
     {
 
@@ -118,16 +123,17 @@ class AdminControllerLivewire extends Component
         }
         return 'yes';
     }
-    public function deletedFieldAsModel($model, $route, $title, $fieldName, $id,$setProductPrice_id =null)
+
+    public function deletedFieldAsModel($model, $route, $title, $fieldName, $id, $setProductPrice_id = null)
     {
         $Model = "\\App\\Models\\" . $model;
         $modelSelect = $Model::withTrashed()->findOrFail($id);
         $modelSelect->delete();
         $this->createLog($title, 'admin/' . $route, $modelSelect->$fieldName, 'حذف');
-        if($setProductPrice_id != null){
+        if ($setProductPrice_id != null) {
             setProductPrice($setProductPrice_id);
         }
-        alert()->success( " $title با موفقیت حذف شد.");
+        alert()->success(" $title با موفقیت حذف شد.");
 
 
     }

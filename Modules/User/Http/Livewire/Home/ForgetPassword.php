@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Livewire\Home;
 
-use App\Models\SMS;
+use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
@@ -71,6 +71,6 @@ class ForgetPassword extends Component
 
         $user = User::find($id);
 
-        return view('user::livewire.home.forget-password', compact('user'))->layout('layouts.login');
+        return view('user::livewire.home.forget-password', compact('user'))->layout('user::layouts.login');
     }
 }

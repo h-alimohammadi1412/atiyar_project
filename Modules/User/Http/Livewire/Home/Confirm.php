@@ -49,6 +49,6 @@ class Confirm extends Component
     {
 
         $user = $this->user;
-        return view('user::livewire.home.confirm', compact('user'))->layout('layouts.login');
+        return view('user::livewire.home.confirm', compact('user'))->layout('user::layouts.login');
     }
 }

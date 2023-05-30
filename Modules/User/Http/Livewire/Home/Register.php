@@ -2,10 +2,10 @@
 
 namespace Modules\User\Http\Livewire\Home;
 
-use App\Http\Controllers\AdminControllerLivewire;
-use App\Models\SMS;
+use Modules\User\Http\Controllers\AdminControllerLivewire;
+use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
-use App\Services\Notification\Notification;
+use Modules\User\Services\Notification\Notification;
 
 class Register extends AdminControllerLivewire
 {
@@ -91,6 +91,6 @@ class Register extends AdminControllerLivewire
     }
     public function render()
     {
-        return view('user::livewire.home.register')->layout('layouts.login1');
+        return view('user::livewire.home.register')->layout('user::layouts.login1');
     }
 }

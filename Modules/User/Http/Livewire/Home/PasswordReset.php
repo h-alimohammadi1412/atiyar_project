@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Livewire\Home;
 
-use App\Models\SMS;
+use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
@@ -61,6 +61,6 @@ class PasswordReset extends Component
     public function render()
     {
 
-        return view('user::livewire.home.password-reset')->layout('layouts.login');
+        return view('user::livewire.home.password-reset')->layout('user::layouts.login');
     }
 }

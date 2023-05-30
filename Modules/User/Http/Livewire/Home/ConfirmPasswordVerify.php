@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Livewire\Home;
 
-use App\Models\SMS;
+use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Request;
 use Kavenegar\KavenegarApi;
@@ -78,6 +78,6 @@ class ConfirmPasswordVerify extends Component
 
     public function render()
     {
-        return view('user::livewire.home.confirm-password-verify')->layout('layouts.login');
+        return view('user::livewire.home.confirm-password-verify')->layout('user::layouts.login');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Modules\User\Http\Livewire\Home;
 
-use App\Models\SMS;
+use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Kavenegar\KavenegarApi;
 use Livewire\Component;
@@ -72,6 +72,6 @@ class ForgetPasswordPhone extends Component
     public function render()
     {
 
-        return view('user::livewire.home.forget-password-phone')->layout('layouts.login');
+        return view('user::livewire.home.forget-password-phone')->layout('user::layouts.login');
     }
 }
