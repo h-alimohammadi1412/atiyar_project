@@ -46,7 +46,7 @@ class ConfirmPassword extends Component
                 'type' => $type,
                 'user_id' => $mobile->id,
             ]);
-            return $this->redirect(route('users.confirm.password.verify',$mobile->id));
+            return to_route('users.confirm.password.verify',$mobile->id);
         } else {
             $this->emit('toast', 'error', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
         }

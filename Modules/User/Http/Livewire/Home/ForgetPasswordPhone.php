@@ -40,7 +40,7 @@ class ForgetPasswordPhone extends Component
 
             if ($sms_code->user_id == $this->user->id) {
 
-                return $this->redirect(route('users.password.reset',$this->user->id));
+                return to_route('users.password.reset', $this->user->id);
             } else {
 
                 $this->emit('toast', 'error', ' کد وارد شده اشتباه است!');
@@ -51,7 +51,9 @@ class ForgetPasswordPhone extends Component
             $this->emit('toast', 'error', ' کد وارد شده اشتباه است!');
         }
     }
-    public function resendSMS($id){
+
+    public function resendSMS($id)
+    {
 
         $type = 'اسمس دوباره فراموشی رمز حساب';
         $mobile = User::where('id', $id)->first();

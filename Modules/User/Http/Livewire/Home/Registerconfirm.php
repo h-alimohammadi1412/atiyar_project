@@ -48,7 +48,7 @@ class Registerconfirm extends Component
                     }
 
                 }
-                return $this->redirect(route('users.welcome'));
+                return to_route('users.welcome');
             } else {
                 $this->emit('toast', 'error', ' کد وارد شده اشتباه است!');
             }

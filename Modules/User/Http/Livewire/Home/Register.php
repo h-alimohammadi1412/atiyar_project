@@ -58,11 +58,11 @@ class Register extends AdminControllerLivewire
                     ]);
                     auth()->loginUsingId($user->id);
                     $this->createLog('User', 'user/profile', 'کاربر جدید', 'افزودن');
-                    return $this->redirect(route('users.welcome'));
+                    return to_route('users.welcome');
                 } else {
                     auth()->loginUsingId($this->user_id);
                     $this->createLog('User', 'user/profile', 'کاربر جدید', 'ورود');
-                    return $this->redirect(route('home.index'));
+                    return to_route('home.index');
                 }
             } else {
                 $this->addError('user.phone', 'کد وارد شده صحیح نیست.');

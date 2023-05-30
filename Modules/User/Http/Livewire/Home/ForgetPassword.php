@@ -49,7 +49,7 @@ class ForgetPassword extends Component
                 'type' => $type,
                 'user_id' => $mobile->id,
             ]);
-            return $this->redirect(route('users.password.forgetPhone',$mobile->id));
+            return to_route('users.password.forgetPhone',$mobile->id);
         }elseif ($email){
 
             Mail::to($email->email)->send(new \App\Mail\ForgetPassword($code));
@@ -58,7 +58,7 @@ class ForgetPassword extends Component
                 'type' => $type,
                 'user_id' => $email->id,
             ]);
-            return $this->redirect(route('users.password.forgetPhone',$email->id));
+            return to_route('users.password.forgetPhone',$email->id);
         } else {
             $this->emit('toast', 'error', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
         }
