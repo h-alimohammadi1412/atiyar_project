@@ -77,9 +77,6 @@ Route::middleware('web')->prefix('profile')->middleware('auth')->group(function 
         ->name('order.profile.returned2');
     Route::get('/orders/{id}/invoice', \App\Http\Livewire\Home\Profile\Order\Invoice::class)
         ->name('order.profile.invoice');
-
-
-
 });
 
 //compare

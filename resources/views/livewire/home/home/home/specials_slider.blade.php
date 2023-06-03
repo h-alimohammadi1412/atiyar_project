@@ -11,7 +11,7 @@
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title=""
                                 data-bs-original-title="اضافه کردن به علاقه مندی"
-                                aria-label="اضافه کردن به علاقه مندی"><i class="ci-heart"></i></button><a
+                                aria-label="اضافه کردن به علاقه مندی" wire:click="favoriteProduct({{ $slider->product->id }})"><i class="ci-heart"></i></button><a
                                 class="card-img-top d-block overflow-hidden"
                                 href="{{ url('/product/at-' . $slider->product->id . '/' . $slider->product->link) }}"><img
                                     src="/storage/{{ $slider->product->img }}" alt="محصول"></a>

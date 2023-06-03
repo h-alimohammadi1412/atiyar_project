@@ -69,8 +69,8 @@
                 </div>
                 <div class="d-flex mb-4">
                     <div class="w-100 me-3">
-                        <button class="btn btn-secondary d-block w-100" type="button"><i
-                                class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>اضافه کردن </span>علاقه
+                        <button class="btn btn-secondary d-block w-100" type="button" wire:click="favoriteProduct({{ $product->id }})"><i
+                                class="ci-heart fs-lg me-2 @if($favoriteProduct) text-danger  @endif"></i><span class='d-none d-sm-inline'>اضافه کردن </span>علاقه
                             مندی</button>
                     </div>
                     <div class="w-100">

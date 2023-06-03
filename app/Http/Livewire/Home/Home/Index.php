@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Home\Home;
 
 use App\Mail\SellerRegister;
 use App\Mail\UserRegister;
+use App\Models\Favorite;
 use App\Models\FooterLinkTitle;
 use App\Models\NewsLetter;
 use App\Models\Notification as ModelsNotification;
@@ -26,69 +27,88 @@ use Mail;
 class Index extends Component
 {
 
+    public function favoriteProduct($id)
+    {
+        if(auth()->check()){
+            $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+            if ($favorites) {
+                $favorites->delete();
+                $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
+            } else {
+                Favorite::create([
+                    'product_id' => $id,
+                    'user_id' => auth()->user()->id
+                ]);
+                $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+            }
+        }else{
+            $this->emit('toast', 'success', 'برای اضافه کردن به علاقه مندی ها باید وارد شوید.');
+        }
+    }
     public function render()
     {
-        if(!cache('categories')){
-            $categories = \App\Models\Category::where('parent_id', 0)->with('getChild.getChild')->get();
-            cache(['categories' =>  $categories ], now()->addDay(29));
-        }
-        if(!cache('siteHeader')){
-            $siteHeader = \App\Models\SiteHeader::get();
-            cache(['siteHeader' =>  $siteHeader ], now()->addDay(29));
-        }
-        if(!cache('footerLinkTitle')){
-            $footerLinkTitle =\App\Models\FooterLinkTitle::with('getPage')->get();
-            cache(['footerLinkTitle' =>  $footerLinkTitle ], now()->addDay(29));
-        }
-        if(!cache('footerLinkOne')){
-            $footerLinkOne =\App\Models\FooterLinkOne::with('getPage')->get();
-            cache(['footerLinkOne' =>  $footerLinkOne ], now()->addDay(29));
-        }
-        if(!cache('footerInnerBox')){
-            $footerInnerBox =\App\Models\FooterInnerBox::with('getPage')->where('top', 1)->get();
-            cache(['footerInnerBox' =>  $footerInnerBox ], now()->addDay(29));
-        }
-        if(!cache('social')){
-            $social =\App\Models\Social::all();
-            cache(['social' =>  $social ], now()->addDay(29));
-        }
-        if(!cache('footerTitle')){
-            $footerTitle =\App\Models\FooterTitle::get();
-            cache(['footerTitle' =>  $footerTitle ], now()->addDay(29));
-        }
-        if(!cache('slider')){
-            $slider =\App\Models\Slider::all();
-            cache(['slider' =>  $slider ], now()->addDay(29));
-        }
-        if(!cache('specialProduct')){
-            $specialProduct =\App\Models\SpecialProduct::with(['product', 'category'])->get();
-            cache(['specialProduct' =>  $specialProduct ], now()->addDay(29));
-        }
-        if(!cache('productsGrid')){
-            $productsGrid =\App\Models\Product::orderBy('view','ASC')->limit(8)->get();
-            cache(['productsGrid' =>  $productsGrid ], now()->addDay(29));
-        }
-        if(!cache('featuredCategory')){
-            $categoryIndex = \App\Models\TitleCategoryIndex::find(1);
-            $featuredCategory =\App\Models\CategoryIndex::with('product','category')->where('title_id',$categoryIndex->id)->limit(12)->get();
-            cache(['featuredCategory' =>  $featuredCategory ], now()->addDay(29));
-        }
-        if(!cache('mostVisited')){
-            $mostVisited =\App\Models\Product::with('category')->orderBy('view','ASC')->get();
-            cache(['mostVisited' =>  $mostVisited ], now()->addDay(29));
-        }
-        if(!cache('footerLinkThree')){
-            $footerLinkThree =\App\Models\FooterLinkThree::with('getPage')->get();
-            cache(['footerLinkThree' =>  $footerLinkThree ], now()->addDay(29));
-        }
+        auth()->loginUsingId(75);
 
+        if (!cache('categories')) {
+            $categories = \App\Models\Category::where('parent_id', 0)->with('getChild.getChild')->get();
+            cache(['categories' => $categories], now()->addDay(29));
+        }
+        if (!cache('siteHeader')) {
+            $siteHeader = \App\Models\SiteHeader::get();
+            cache(['siteHeader' => $siteHeader], now()->addDay(29));
+        }
+        if (!cache('footerLinkTitle')) {
+            $footerLinkTitle = \App\Models\FooterLinkTitle::with('getPage')->get();
+            cache(['footerLinkTitle' => $footerLinkTitle], now()->addDay(29));
+        }
+        if (!cache('footerLinkOne')) {
+            $footerLinkOne = \App\Models\FooterLinkOne::with('getPage')->get();
+            cache(['footerLinkOne' => $footerLinkOne], now()->addDay(29));
+        }
+        if (!cache('footerInnerBox')) {
+            $footerInnerBox = \App\Models\FooterInnerBox::with('getPage')->where('top', 1)->get();
+            cache(['footerInnerBox' => $footerInnerBox], now()->addDay(29));
+        }
+        if (!cache('social')) {
+            $social = \App\Models\Social::all();
+            cache(['social' => $social], now()->addDay(29));
+        }
+        if (!cache('footerTitle')) {
+            $footerTitle = \App\Models\FooterTitle::get();
+            cache(['footerTitle' => $footerTitle], now()->addDay(29));
+        }
+        if (!cache('slider')) {
+            $slider = \App\Models\Slider::all();
+            cache(['slider' => $slider], now()->addDay(29));
+        }
+        if (!cache('specialProduct')) {
+            $specialProduct = \App\Models\SpecialProduct::with(['product', 'category'])->get();
+            cache(['specialProduct' => $specialProduct], now()->addDay(29));
+        }
+        if (!cache('productsGrid')) {
+            $productsGrid = \App\Models\Product::orderBy('view', 'ASC')->limit(8)->get();
+            cache(['productsGrid' => $productsGrid], now()->addDay(29));
+        }
+        if (!cache('featuredCategory')) {
+            $categoryIndex = \App\Models\TitleCategoryIndex::find(1);
+            $featuredCategory = \App\Models\CategoryIndex::with('product', 'category')->where('title_id', $categoryIndex->id)->limit(12)->get();
+            cache(['featuredCategory' => $featuredCategory], now()->addDay(29));
+        }
+        if (!cache('mostVisited')) {
+            $mostVisited = \App\Models\Product::with('category')->orderBy('view', 'ASC')->get();
+            cache(['mostVisited' => $mostVisited], now()->addDay(29));
+        }
+        if (!cache('footerLinkThree')) {
+            $footerLinkThree = \App\Models\FooterLinkThree::with('getPage')->get();
+            cache(['footerLinkThree' => $footerLinkThree], now()->addDay(29));
+        }
 
 
 
 
         // dd(cache('siteHeader'));
 
-       // auth()->loginUsingId(1);
+        // auth()->loginUsingId(1);
         // $ip = Request::ip();
         // if (auth()->user()) {
         //     $no = ModelsNotification::where('user_id', auth()->user()->id)->

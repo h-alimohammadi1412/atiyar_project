@@ -5,7 +5,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
             <div class="card product-card">
                 <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                    data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
+                    data-bs-placement="left" title="اضافه کردن به علاقه مندی"  wire:click="favoriteProduct({{ $product->id }})"><i
                         class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
                     href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img src="/storage/{{ $product->img }}" alt="محصول"></a>
                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"

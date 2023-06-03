@@ -11,14 +11,11 @@ class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     public $img;
-
     public User $user;
 
     public function mount()
     {
-        // auth()->loginUsingId(2);
         $this->user = User::findOrFail(auth()->user()->id);
-        // dd($this->user);
     }
     protected $rules = [
         'user.name' => 'nullable',
@@ -32,6 +29,7 @@ class Index extends AdminControllerLivewire
     ];
     public function profileData()
     {
+        // dd($this->user);
 
         $data = $this->validate()['user'];
         
@@ -39,20 +37,17 @@ class Index extends AdminControllerLivewire
             $data['img'] = $this->uploadImage('users');
             $this->user->img = $data['img'];
         }
-        // dd($data);
         if ($data['newsletter'] == true) {
             $data['newsletter'] = 1;
         }else{
             $data['newsletter'] = 0;
         }
-        // unset($data['img']);
         unset($data['mobile']);
-        dd($data);
 
         $this->user->update($data);
        
         $this->createLog('اطلاعات کاربری', 'profile', $this->user->name, 'آپدیت');
-        alert()->success('اطلاعات کاربری با موفقیت آپدیت شد.', 'اطلاعات کاربری آپدیت شد.');
+        return $this->redirect('profile');
     }
     public function render()
     {

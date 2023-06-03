@@ -2,65 +2,30 @@
 
 namespace App\Http\Livewire\Home\Profile;
 
-use App\Models\FavList;
-use App\Models\SMS;
-use App\Models\User;
-use Illuminate\Support\Str;
+use App\Models\Favorite as ModelsFavorite;
 use Livewire\Component;
 
 class Favorite extends Component
 {
-    public FavList $favList;
+    public $favorites;
 
     public function mount()
     {
-        $this->favList = new FavList();
+        $this->favorites = ModelsFavorite::with(['product'=>['category','brand']])->where('user_id', auth()->user()->id)->get();
     }
-
-
-    protected $rules = [
-        'favList.title' => 'required',
-        'favList.description' => 'nullable',
-    ];
-
-    public function updated($title)
-    {
-        $this->validateOnly($title);
-    }
-
-
-    public function favlistForm()
-    {
-
-        $this->validate();
-
-        $favList = FavList::create([
-            'title' => $this->favList->title,
-            'description' => $this->favList->description,
-            'link' => Str::random('6'),
-            'user_id' => auth()->user()->id,
-        ]);
-        $this->emit('toast', 'success', ' لیست اضافه شد!');
-        return $this->redirect(request()->header('Referer'));
-    }
-
     public function deleteFavorite($id)
     {
-
-        $favorites = \App\Models\Favorite::where('id', $id)->first();
+        $favorites = ModelsFavorite::where('id', $id)->firstOrFail();
         $favorites->delete();
+        $this->favorites = ModelsFavorite::with(['product'=>['category','brand']])->where('user_id', auth()->user()->id)->get();
         $this->emit('toast', 'success', 'محصول از لیست علاقه مندی های شما حذف شد.');
     }
 
-    public function deleteObserved($id)
-    {
-        $observed = \App\Models\Observed::where('id', $id)->first();
-        $observed->delete();
-        $this->emit('toast', 'success', 'محصول از لیست اطلاع رسانی های شما حذف شد.');
-    }
 
     public function render()
     {
-        return view('livewire.home.profile.favorite')->layout('layouts.home');
+        // dd($this->favorites);
+
+        return view('livewire.home.profile.favorite')->layout('layouts.home1');
     }
 }

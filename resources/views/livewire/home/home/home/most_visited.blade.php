@@ -11,7 +11,7 @@
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title=""
                                 data-bs-original-title="اضافه کردن به علاقه مندی"
-                                aria-label="اضافه کردن به علاقه مندی"><i class="ci-heart"></i></button><a
+                                aria-label="اضافه کردن به علاقه مندی"  wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a
                                 class="card-img-top d-block overflow-hidden" href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img
                                     src="/storage/{{ $product->img }}" alt="محصول"></a>
                             <div class="card-body py-2 cart_body_product"><a class="product-meta d-block fs-xs pb-1"

@@ -28,7 +28,7 @@
                             <div>
                                 <div class="card product-card">
                                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
+                                        data-bs-placement="left" title="اضافه کردن به علاقه مندی"  wire:click="favoriteProduct({{ $product->id }})"><i
                                             class="ci-heart"></i></button><a
                                         class="card-img-top d-block overflow-hidden"
                                         href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img

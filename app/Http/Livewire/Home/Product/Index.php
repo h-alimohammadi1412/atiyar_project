@@ -36,6 +36,7 @@ class Index extends Component
     public $vendor_new;
     public $new_price;
 
+    public $favoriteProduct = false;
     public $queryString = ['filters'];
     public Notification $notification;
     //    public Comment $comment;
@@ -65,6 +66,9 @@ class Index extends Component
         $this->product = Product::with('category', 'brand')->where('id', $id)->firstOrFail();
         $this->notification = new Notification();
         $this->product_seller_selected = ProductSeller::where(['product_id' => $id, 'status' => 1])->orderBy('discount_price', 'ASC')->first();
+        $favorite = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+        $favorite ?      $this->favoriteProduct = true : $this->favoriteProduct = false; 
+
     }
 
     protected $rules = [
@@ -371,22 +375,24 @@ class Index extends Component
         //        return $this->redirect(request()->header('Referer'));
     }
 
-    public function updateFavoriteDisable($id)
+    public function favoriteProduct($id)
     {
+
         $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
-        $favorites->delete();
-        $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
-    }
+        if ($favorites) {
+            $favorites->delete();
+            $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
+        $this->favoriteProduct = false;
 
-    public function updateFavoriteEnable($id)
-    {
-        $favarites = Favorite::create([
-            'product_id' => $id,
-            'user_id' => auth()->user()->id
-        ]);
-        $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+        } else {
+            Favorite::create([
+                'product_id' => $id,
+                'user_id' => auth()->user()->id
+            ]);
+            $this->favoriteProduct = true;
+            $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+        }
     }
-
     public function updateObservedDisable($id)
     {
         $observed = \App\Models\Observed::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
