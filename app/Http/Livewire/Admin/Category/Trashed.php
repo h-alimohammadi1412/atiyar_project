@@ -16,19 +16,8 @@ class Trashed extends AdminControllerLivewire
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
     public $img;
-    public $search;
 
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
 
     public function render()
     {

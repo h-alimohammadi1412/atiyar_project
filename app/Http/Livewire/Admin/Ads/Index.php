@@ -6,24 +6,14 @@ use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use App\Models\AdsCategory;
-use App\Models\Product;
-use Livewire\Component;
-use App\Models\Brand;
-use App\Models\Log;
 
 class Index extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
 
     public $img;
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
 
     public AdsCategory $ads;
 
@@ -67,14 +57,9 @@ class Index extends AdminControllerLivewire
         $this->ads->status = false;
         $this->img = null;
         $this->createLog(' تبلیغات دسته','admin/Ads',$this->ads->title,'ایجاد');
-        $this->emit('toast', 'success', ' تبلیغات دسته با موفقیت ایجاد شد.');
 
     }
 
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
     public function updateCategoryDisable($id)
     {
         $brand = AdsCategory::find($id);
@@ -82,7 +67,6 @@ class Index extends AdminControllerLivewire
             'status' => 0
         ]);
         $this->createLog(' وضعیت تبلیغات دسته','admin/Ads',$this->ads->title,'غیرفعال ');
-        $this->emit('toast', 'success', 'وضعیت تبلیغات دسته با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -92,7 +76,6 @@ class Index extends AdminControllerLivewire
             'status' => 1
         ]);
         $this->createLog('وضعیت تبلیغات دسته','admin/Ads',$this->ads->title,'فعال ');
-        $this->emit('toast', 'success', 'وضعیت تبلیغات دسته با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
@@ -100,7 +83,6 @@ class Index extends AdminControllerLivewire
         $brand = AdsCategory::find($id);
         $brand->delete();
         $this->createLog(' تبلیغات دسته','admin/Ads',$this->ads->title,'حذف');
-        $this->emit('toast', 'success', ' تبلیغات دسته با موفقیت حذف شد.');
 
     }
 

@@ -18,11 +18,6 @@ class Index extends AdminControllerLivewire
 
 
     public $img;
-    public $search;
-
-    protected $queryString = ['search'];
-
-
     public Brand $brand;
 
     public function mount()
@@ -70,7 +65,6 @@ class Index extends AdminControllerLivewire
         $this->img = null;
 
         $this->createLog('برند','admin/brand',$this->brand->name,'ایجاد');
-        $this->emit('toast', 'success', ' برند با موفقیت ایجاد شد.');
 
     }
 

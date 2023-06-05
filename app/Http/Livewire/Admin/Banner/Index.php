@@ -16,15 +16,7 @@ class Index extends AdminControllerLivewire
     use WithFileUploads;
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
     public $img;
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
     public Banner $banner;
 
     public function mount()
@@ -63,14 +55,6 @@ class Index extends AdminControllerLivewire
         $this->banner->link = "";
         $this->img = null;
         $this->createLog('بنر','admin/banner',$this->banner->title,'ایجاد');
-
-        $this->emit('toast', 'success', ' بنر با موفقیت ایجاد شد.');
-
-    }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
     }
 
     public function render()

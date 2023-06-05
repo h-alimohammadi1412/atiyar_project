@@ -2,49 +2,27 @@
 
 namespace App\Http\Livewire\Admin\Dashboard;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Log;
-use App\Models\SubCategory;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Favorite extends Component
+class Favorite extends AdminControllerLivewire
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
     public function deleteCategory($id)
     {
-        $favorites = \App\Models\Favorite::where('id',$id)->first();
-
+        $favorites = \App\Models\Favorite::with('product')->where('id',$id)->first();
+        $this->createLog('علاقه مندی', 'admin/dashboard/favorite', $favorites->product->title, 'حذف');
         $favorites->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن علاقه مندی' . '-' . $id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' با موفقیت از لیست علاقه مندی ها حذف شد ! ');
-
     }
 
     public function render()
     {
 
-        $favorites = $this->readyToLoad ? \App\Models\Favorite::where('user_id', 'LIKE', "%{$this->search}%")->
+        $favorites = $this->readyToLoad ? \App\Models\Favorite::with(['product','users'])->where('user_id', 'LIKE', "%{$this->search}%")->
         orWhere('product_id', 'LIKE', "%{$this->search}%")->
         orWhere('id', $this->search)->
         latest()->paginate(15) : [];
