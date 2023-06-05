@@ -1,3 +1,7 @@
+<script>
+    
+</script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/simplebar/dist/simplebar.min.js') }}"></script>
 <script src="{{ asset('vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
@@ -9,4 +13,3 @@
 @yield('script')
 
 <script src="{{ asset('js/theme.min.js') }}"></script>
-

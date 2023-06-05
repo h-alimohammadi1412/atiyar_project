@@ -41,8 +41,7 @@
                         <button class="btn btn-secondary d-block w-100" type="button"
                             wire:click="observedProduct({{ $product->id }})"><i
                                 class="ci-bell fs-lg me-2 @if ($observedProduct) text-danger @endif"></i><span
-                                class='d-none d-sm-inline'>اضافه کردن </span>علاقه
-                            مندی</button>
+                                class='d-none d-sm-inline'>با خبرم کن</span></button>
                     </div>
                 @endif
                 @if (sizeof($productSellers)>0)

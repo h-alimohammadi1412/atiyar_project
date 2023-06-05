@@ -41,8 +41,8 @@
                                 <tr role="row">
                                     <td><a href="">{{$observed->id}}</a></td>
 
-                                    <td><a href="">{{$observed->users->name}}</a></td>
-                                    <td><a href="">{{$observed->products->title ?? 'NONE'}}</a></td>
+                                    <td><span>{{$observed->user->name}}</span></td>
+                                    <td><a href="{{ url('/product/at-' . $observed->product->id . '/' . $observed->product->link) }}">{{$observed->product->title ?? 'NONE'}}</a></td>
 
                                     <td>
                                         <a wire:click="deleteCategory({{$observed->id}})" type="submit"

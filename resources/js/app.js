@@ -16,3 +16,7 @@ const Toast = Swal.mixin({
     }
   })
 
+  var Turbolinks = require("turbolinks")
+    Turbolinks.start()
+
+    

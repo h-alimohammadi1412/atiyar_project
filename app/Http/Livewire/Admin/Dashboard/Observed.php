@@ -2,38 +2,20 @@
 
 namespace App\Http\Livewire\Admin\Dashboard;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Observed extends Component
+class Observed extends AdminControllerLivewire
 {
     use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
     public function deleteCategory($id)
     {
-        $favorites = \App\Models\Observed::where('id',$id)->first();
+        $favorites = \App\Models\Observed::with(['product','user'])->where('id',$id)->first();
 
         $favorites->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن اطلاع رسانی' . '-' . $id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' با موفقیت از لیست اطلاع رسانی ها حذف شد ! ');
+        $this->createLog('اطلاع رسانی', 'admin/dashboard/observed', $favorites->product->title, 'حذف');
 
     }
 

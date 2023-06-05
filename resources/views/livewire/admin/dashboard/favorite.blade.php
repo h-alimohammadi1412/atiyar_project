@@ -1,4 +1,4 @@
-@section('title','لیست علاقه مندی ها')
+@section('title', 'لیست علاقه مندی ها')
 <div>
     <div class="main-content" wire:init="loadCategory">
         <div class="tab__box">
@@ -13,8 +13,8 @@
 
                 <a class="t-header-search">
                     <form action="" onclick="event.preventDefault();">
-                        <input wire:model.debounce.1000="search"
-                               type="text" class="text" placeholder="جستجوی در لیست علاقه مندی ها ...">
+                        <input wire:model.debounce.1000="search" type="text" class="text"
+                            placeholder="جستجوی در لیست علاقه مندی ها ...">
                     </form>
                 </a>
 
@@ -27,38 +27,36 @@
                     <table class="table">
 
                         <thead role="rowgroup">
-                        <tr role="row" class="title-row">
-                            <th>آیدی</th>
-                            <th>کاربر</th>
-                            <th>عنوان محصول</th>
-                            <th>عملیات</th>
-                        </tr>
+                            <tr role="row" class="title-row">
+                                <th>آیدی</th>
+                                <th>کاربر</th>
+                                <th>عنوان محصول</th>
+                                <th>عملیات</th>
+                            </tr>
                         </thead>
 
-                        @if($readyToLoad)
+                        @if ($readyToLoad)
                             <tbody>
-                            @foreach($favorites as $favorite)
-                                <tr role="row">
-                                    <td><a href="">{{$favorite->id}}</a></td>
+                                @foreach ($favorites as $favorite)
+                                    <tr role="row">
+                                        <td><a>{{ $favorite->id }}</a></td>
 
-                                    <td><a href="">{{$favorite->users->name}}</a></td>
-                                    <td><a href="">{{$favorite->product->title ?? 'NONE'}}</a></td>
+                                        <td><a>{{ $favorite->users->name }}</a></td>
+                                        <td><a
+                                                href="{{ url('/product/at-' . $favorite->product->id . '/' . $favorite->product->link) }}">{{ $favorite->product->title ?? 'NONE' }}</a>
+                                        </td>
 
-                                    <td>
-                                        <a wire:click="deleteCategory({{$favorite->id}})" type="submit"
-                                           class="item-delete mlg-15" title="حذف"></a>
-
-
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        <td>
+                                            <a wire:click="deleteCategory({{ $favorite->id }})" type="submit"
+                                                class="item-delete mlg-15" title="حذف">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
-                            {{$favorites->render()}}
+                            {{ $favorites->render() }}
                         @else
-
-
-
                             <div class="alert-warning alert">
                                 در حال خواندن اطلاعات از دیتابیس ...
                             </div>

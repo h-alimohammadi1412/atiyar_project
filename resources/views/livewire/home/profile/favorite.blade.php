@@ -16,11 +16,11 @@
             @foreach ($favorites as $favorite)
                 <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
                     <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a
-                            class="d-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img
+                            class="d-block flex-shrink-0 mx-auto me-sm-4" href="{{ url('/product/at-' . $favorite->product->id . '/' . $favorite->product->link) }}" style="width: 10rem;"><img
                                 src="/storage/{{ $favorite->product->img }}" alt="محصول"></a>
                         <div class="pt-2">
                             <h3 class="product-title fs-base mb-2"><a
-                                    href="shop-single-v1.html">{{ $favorite->product->title }}</a></h3>
+                                    href="{{ url('/product/at-' . $favorite->product->id . '/' . $favorite->product->link) }}">{{ $favorite->product->title }}</a></h3>
                             <div class="fs-sm"><span class="text-muted me-2">برند :
                                 </span>{{ $favorite->product->brand->name }}</div>
                             <div class="fs-sm"><span class="text-muted me-2">دسته
