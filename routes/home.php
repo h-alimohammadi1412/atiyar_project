@@ -59,6 +59,7 @@ Route::middleware('web')->prefix('profile')->middleware('auth')->group(function 
     Route::get('/', \App\Http\Livewire\Home\Profile\Index::class)->name('profile.index');
     Route::get('/personal-info', \App\Http\Livewire\Home\Profile\PersonalInfo::class)->name('profile.personal-info');
     Route::get('/favorites', \App\Http\Livewire\Home\Profile\Favorite::class)->name('profile.favorite');
+    Route::get('/observed', \App\Http\Livewire\Home\Profile\Observed::class)->name('profile.observed');
     Route::get('/wishlist/{favlist}/details/', \App\Http\Livewire\Home\Profile\FavlistShow::class)->name('profile.fav;ist.show');
     Route::get('/addresses', \App\Http\Livewire\Home\Profile\Address::class)->name('address.index');
     Route::get('/addresses/edit/{address}', \App\Http\Livewire\Home\Profile\AddressEdit::class)->name('address.edit');

@@ -12,6 +12,7 @@ use App\Models\Comment;
 use App\Models\Compare;
 use App\Models\Favorite;
 use App\Models\Notification;
+use App\Models\Observed;
 use App\Models\PriceDate;
 use App\Models\Product;
 use App\Models\ProductSeller;
@@ -37,6 +38,7 @@ class Index extends Component
     public $new_price;
 
     public $favoriteProduct = false;
+    public $observedProduct = false;
     public $queryString = ['filters'];
     public Notification $notification;
     //    public Comment $comment;
@@ -377,38 +379,48 @@ class Index extends Component
 
     public function favoriteProduct($id)
     {
-
-        $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
-        if ($favorites) {
-            $favorites->delete();
-            $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
-        $this->favoriteProduct = false;
-
-        } else {
-            Favorite::create([
-                'product_id' => $id,
-                'user_id' => auth()->user()->id
-            ]);
-            $this->favoriteProduct = true;
-            $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+        if(auth()->check()){
+            $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+            if ($favorites) {
+                $favorites->delete();
+                $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
+                $this->product->id == $id ? $this->favoriteProduct = false : null ;
+    
+            } else {
+                Favorite::create([
+                    'product_id' => $id,
+                    'user_id' => auth()->user()->id
+                ]);
+                
+                $this->product->id == $id ? $this->favoriteProduct = true : null ;
+                $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+            }
+        }else{
+            return $this->redirect('login');
         }
     }
-    public function updateObservedDisable($id)
+    public function observedProduct($id)
     {
-        $observed = \App\Models\Observed::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
-        $observed->delete();
-        $this->emit('toast', 'success', 'محصول از اطلاع رسانی ها حذف شد.');
+        if(auth()->check()){
+            $observed = Observed::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+            if ($observed) {
+                $observed->delete();
+                $this->emit('toast', 'success', 'محصول از اطلاع رسانی ها حذف شد.');
+                $this->observedProduct = false;
+    
+            } else {
+                Observed::create([
+                    'product_id' => $id,
+                    'user_id' => auth()->user()->id
+                ]);
+                
+                $this->observedProduct = true ;
+                $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+            }
+        }else{
+            return $this->redirect('login');
+        }
     }
-
-    public function updateObservedEnable($id)
-    {
-        $observed = \App\Models\Observed::create([
-            'product_id' => $id,
-            'user_id' => auth()->user()->id
-        ]);
-        $this->emit('toast', 'success', 'محصول به اطلاع رسانی ها اضافه شد.');
-    }
-
     public function compareAdd($id)
     {
         if (auth()->user()) {

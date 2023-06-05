@@ -1,15 +1,15 @@
 @extends('livewire.home.profile.profile_layout')
 @section('title')
-    علاقه مندی ها-{{ auth()->user()->name }}
+اطلاع رسانی ها-{{ auth()->user()->name }}
 @endsection
 @section('url_profile')
-    علاقه مندی ها
+اطلاع رسانی ها
 @endsection
 @section('profile_content')
     <section class="col-lg-8">
         <!-- Toolbar-->
         <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-            <h6 class="fs-base text-light mb-0">مواردی که به لیست علاقه مندی ها اضافه کردید:</h6>
+            <h6 class="fs-base text-light mb-0">مواردی که به لیست اطلاع رسانی ها اضافه کردید:</h6>
         </div>
         <!-- Wishlist-->
         @if (sizeof($favorites) > 0)
@@ -36,7 +36,7 @@
             @endforeach
         @else
             <div class="alert alert-warning text-center">
-                هیچ محصولی در لیست علاقه مندی های شما وجود ندارد.
+                هیچ محصولی در لیست اطلاع رسانی های شما وجود ندارد.
             </div>
         @endif
     </section>

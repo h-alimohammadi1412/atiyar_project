@@ -35,6 +35,9 @@
                         class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('profile.favorite') ? 'active' : '' }}"
                         href="{{ route('profile.favorite') }}"><i class="ci-heart opacity-60 me-2"></i>علاقه
                         مندی<span class="fs-sm text-muted ms-auto">3</span></a></li>
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('profile.observed') ? 'active' : '' }}"
+                        href="{{ route('profile.observed') }}"><i class="ci-heart opacity-60 me-2"></i>اطلاع رسانی ها<span class="fs-sm text-muted ms-auto">3</span></a></li>
                 <li class="mb-0 border-bottom"><a
                         class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('address.index') ? 'active' : '' }}"
                         href="{{ route('order.profile.index') }}"><i

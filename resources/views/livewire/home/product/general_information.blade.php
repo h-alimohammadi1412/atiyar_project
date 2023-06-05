@@ -27,35 +27,55 @@
         <!-- Product details-->
         <div class="col-lg-5 pt-4 pt-lg-0">
             <div class="product-details ms-auto pb-3">
-                <div class="h3 fw-normal text-accent mb-3 me-1">{{ number_format($product_seller_selected->discount_price) }}
-                    <del class="fs-5 text-border">{{ number_format($product_seller_selected->price) }}</del>
-                </div>
-                <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">رنگ:</span></div>
-                <div class="position-relative me-n4 mb-3">
-                    @foreach ($productSellers as $key => $productSeller)
-                        <div class="form-check form-option form-check-inline mb-2"
-                            wire:click="ProductSellerSelected({{ $productSeller->id }})">
-                            <input class="form-check-input" type="radio" name="color"
-                                id="color_{{ $productSeller->color->id }}" data-bs-label="colorOption"
-                                value="{{ $productSeller->color->name }}"
-                                @if ($key == 0) checked @endif>
-                            <label class="form-option-label rounded-circle"
-                                for="color_{{ $productSeller->color->id }}"><span
-                                    class="form-option-color rounded-circle"
-                                    style="background-color: {{ $productSeller->color->value }};"></span></label>
-                        </div>
-                    @endforeach
-                </div>
+                @if ($product_seller_selected)
+                    <div class="h3 fw-normal text-accent mb-3 me-1">
+                        {{ number_format($product_seller_selected->discount_price) }}
+                        <del class="fs-5 text-border">{{ number_format($product_seller_selected->price) }}</del>
+                    </div>
+                @else
+                    <div class="h3 fw-normal text-accent mb-3 me-1 d-flex align-items-center justify-content-around">
+                        <span>ناموجود</span>
+                    </div>
+                    <div class="">
+                        <p class="text-center">این کالا فعلا موجود نیست اما می‌توانید زنگوله را بزنید تا به محض موجود شدن، به شما خبر دهیم.</p>
+                        <button class="btn btn-secondary d-block w-100" type="button"
+                            wire:click="observedProduct({{ $product->id }})"><i
+                                class="ci-bell fs-lg me-2 @if ($observedProduct) text-danger @endif"></i><span
+                                class='d-none d-sm-inline'>اضافه کردن </span>علاقه
+                            مندی</button>
+                    </div>
+                @endif
+                @if (sizeof($productSellers)>0)
+                    <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">رنگ:</span></div>
+                    <div class="position-relative me-n4 mb-3">
+                        @foreach ($productSellers as $key => $productSeller)
+                            <div class="form-check form-option form-check-inline mb-2"
+                                wire:click="ProductSellerSelected({{ $productSeller->id }})">
+                                <input class="form-check-input" type="radio" name="color"
+                                    id="color_{{ $productSeller->color->id }}" data-bs-label="colorOption"
+                                    value="{{ $productSeller->color->name }}"
+                                    @if ($key == 0) checked @endif>
+                                <label class="form-option-label rounded-circle"
+                                    for="color_{{ $productSeller->color->id }}"><span
+                                        class="form-option-color rounded-circle"
+                                        style="background-color: {{ $productSeller->color->value }};"></span></label>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
                 <div class="d-flex align-items-center pt-2 pb-4">
-                    <select class="form-select me-3" style="width: 5rem;" wire:model.lazy="product_count">
-                        <option value="1">1</option>
-                        @for ($i = 2; $i <= $product_seller_selected->limit_order; $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-                    <button class="btn btn-primary btn-shadow d-block w-100"
-                        wire:click="addToCart({{ $product_seller_selected->id }})"><i
-                            class="ci-cart fs-lg me-2"></i>اضافه کردن به سبدخرید</button>
+                    @if ($product_seller_selected)
+                        <select class="form-select me-3" style="width: 5rem;" wire:model.lazy="product_count">
+                            <option value="1">1</option>
+                            @for ($i = 2; $i <= $product_seller_selected->limit_order; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                        <button class="btn btn-primary btn-shadow d-block w-100"
+                            wire:click="addToCart({{ $product_seller_selected->id }})"><i
+                                class="ci-cart fs-lg me-2"></i>اضافه کردن به سبدخرید</button>
+                    @endif
+
                 </div>
                 <div class="d-flex mb-4 justify-content-around">
                     <div>
@@ -69,8 +89,10 @@
                 </div>
                 <div class="d-flex mb-4">
                     <div class="w-100 me-3">
-                        <button class="btn btn-secondary d-block w-100" type="button" wire:click="favoriteProduct({{ $product->id }})"><i
-                                class="ci-heart fs-lg me-2 @if($favoriteProduct) text-danger  @endif"></i><span class='d-none d-sm-inline'>اضافه کردن </span>علاقه
+                        <button class="btn btn-secondary d-block w-100" type="button"
+                            wire:click="favoriteProduct({{ $product->id }})"><i
+                                class="ci-heart fs-lg me-2 @if ($favoriteProduct) text-danger @endif"></i><span
+                                class='d-none d-sm-inline'>اضافه کردن </span>علاقه
                             مندی</button>
                     </div>
                     <div class="w-100">
@@ -164,37 +186,47 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="table-responsive fs-md">
-            <table class="table table-hover mb-0">
-                <thead>
-                    <tr>
-                        <th>فروشندگان دیگر این کالا</th>
-                        {{-- <th>اقدامات</th>
+    @if ($product_seller_selected)
+        <div class="row">
+            <div class="table-responsive fs-md">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>فروشندگان دیگر این کالا</th>
+                            {{-- <th>اقدامات</th>
                   <th>اقدامات</th>
                   <th>اقدامات</th>
                   <th>اقدامات</th> --}}
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($productSellers as $key => $productSeller) 
-                    <tr>
-                        <td class="py-3 align-middle">{{ $productSeller->user->name }}
-                        </td>
-                        <td class="py-3 align-middle"><div class="align-items-center d-flex"><i class="ci-truck fs-3 me-2" style="color:#fe3638;"></i> <span>ارسال آتی یار @if($productSeller->time > 0) از {{ $productSeller->time }} روز کاری دیگر  @endif</span></div>
-                        </td>
-                        <td class="py-3 align-middle"><div class="align-items-center d-flex"><i class="ci-security-check fs-4 me-2" style="color:#fe3638;"></i> <span>{{ $productSeller->warranty->name }}</span></div>
-                        </td>
-                        <td class="py-3 align-middle">{{ $productSeller->discount_price }} تومان 
-                        </td>
-                        <td class="py-3 align-middle">
-                            <a class="btn btn-outline-success">
-                                افزودن به سبد خرید
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-                    {{-- <tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($productSellers as $key => $productSeller)
+                            <tr>
+                                <td class="py-3 align-middle">{{ $productSeller->user->name }}
+                                </td>
+                                <td class="py-3 align-middle">
+                                    <div class="align-items-center d-flex"><i class="ci-truck fs-3 me-2"
+                                            style="color:#fe3638;"></i> <span>ارسال آتی یار @if ($productSeller->time > 0)
+                                                از {{ $productSeller->time }} روز کاری دیگر
+                                            @endif
+                                        </span></div>
+                                </td>
+                                <td class="py-3 align-middle">
+                                    <div class="align-items-center d-flex"><i class="ci-security-check fs-4 me-2"
+                                            style="color:#fe3638;"></i>
+                                        <span>{{ $productSeller->warranty->name }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 align-middle">{{ $productSeller->discount_price }} تومان
+                                </td>
+                                <td class="py-3 align-middle">
+                                    <a class="btn btn-outline-success">
+                                        افزودن به سبد خرید
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        {{-- <tr>
                   <td class="py-3 align-middle">ایران-یزد</td>
                   <td class="py-3 align-middle">ایران-یزد<span class="align-middle badge bg-info ms-2">اصلی</span></td>
                   <td class="py-3 align-middle">ایران-یزد<span class="align-middle badge bg-info ms-2">اصلی</span></td>
@@ -211,8 +243,10 @@
                   <td class="py-3 align-middle"><a class="nav-link-style me-2" href="#" data-bs-toggle="tooltip" title="" data-bs-original-title="ویرایش" aria-label="ویرایش"><i class="ci-edit"></i></a><a class="nav-link-style text-danger" href="#" data-bs-toggle="tooltip" title="" data-bs-original-title="حذف">
                       <div class="ci-trash"></div></a></td>
                 </tr> --}}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    @endif
+
 </div>

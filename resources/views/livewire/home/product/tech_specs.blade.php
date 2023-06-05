@@ -4,24 +4,32 @@
                 alt="تصویر محصول">
             <div class="ps-3">
                 <h6 class="fs-base mb-2">{{ $product->title }}</h6>
-                <div class="h4 fw-normal text-accent">{{ number_format($product_seller_selected->price) }} <del
-                        class="fs-5 text-border">{{ number_format($product_seller_selected->discount_price) }}</del>
-                </div>
+                @if ($product_seller_selected)
+                    <div class="h4 fw-normal text-accent">{{ number_format($product_seller_selected->price) }} <del
+                            class="fs-5 text-border">{{ number_format($product_seller_selected->discount_price) }}</del>
+                    </div>
+                @else
+                    <div class="h4 fw-normal text-accent">ناموجود</div>
+                @endif
             </div>
         </div>
         <div class="d-flex align-items-center pt-3">
-            <select class="form-select me-2" style="width: 5rem;">
-                <option value="1">1</option>
-                @for ($i = 2; $i <= $product_seller_selected->limit_order; $i++)
-                    <option value="{{ $i }}">{{ $i }}</option>
-                @endfor
-            </select>
-            <button class="btn btn-primary btn-shadow me-2" type="button"><i class="ci-cart fs-lg me-sm-2"></i><span
-                    class="d-none d-sm-inline">اضافه کردن
-                    به سبدخرید</span></button>
+            @if ($product_seller_selected)
+
+                <select class="form-select me-2" style="width: 5rem;">
+                    <option value="1">1</option>
+                    @for ($i = 2; $i <= $product_seller_selected->limit_order; $i++)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                </select>
+                <button class="btn btn-primary btn-shadow me-2" type="button"><i
+                        class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">اضافه کردن
+                        به سبدخرید</span></button>
+            @endif
+
             <div class="me-2">
                 <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip"
-                    title="اضافه کردن به علاقه مندی"><i class="ci-heart fs-lg"></i></button>
+                    title="اضافه کردن به علاقه مندی" wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart fs-lg @if ($favoriteProduct) text-danger @endif"></i></button>
             </div>
             <div>
                 <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip" title="مقایسه"><i
@@ -30,30 +38,35 @@
         </div>
     </div>
     <!-- Specs table-->
-    <div class="row pt-2">
-        @foreach ($productAttributes as $productAttribute)
-            <div class="col-lg-6 col-sm-12">
-                <h3 class="h6">{{ $productAttribute->title }}</h3>
-                <ul class="list-unstyled fs-sm pb-2 ul_productAttribute">
-                    @foreach ($productAttribute->getChild as $productAttributeChild)
-                        <li class="d-flex justify-content-between pb-2 border-bottom px-3">
-                            <span class="text-muted">{{ $productAttributeChild->title }} :</span>
+    @if (sizeof($productAttributes)>0)
+        <div class="row pt-2">
+            @foreach ($productAttributes as $productAttribute)
+                <div class="col-lg-6 col-sm-12">
+                    <h3 class="h6">{{ $productAttribute->title }}</h3>
+                    <ul class="list-unstyled fs-sm pb-2 ul_productAttribute">
+                        @foreach ($productAttribute->getChild as $productAttributeChild)
+                            <li class="d-flex justify-content-between pb-2 border-bottom px-3">
+                                <span class="text-muted">{{ $productAttributeChild->title }} :</span>
 
-                            @if (sizeof($productAttributeChild->getValue) > 0)
-                                @foreach ($productAttributeChild->getValue as $key => $value)
-                                    @if ($key >0)
-                                    </li>
-                                    <li class="d-flex justify-content-end pb-2 border-bottom px-3">
-                                    @endif
-                                    <span>{{ $value->value }}</span>                                    
-                                @endforeach
-                            @else
-                                <span>-----</span>
-                            @endif
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        @endforeach
-    </div>
+                                @if (sizeof($productAttributeChild->getValue) > 0)
+                                    @foreach ($productAttributeChild->getValue as $key => $value)
+                                        @if ($key > 0)
+                            </li>
+                            <li class="d-flex justify-content-end pb-2 border-bottom px-3">
+                        @endif
+                        <span>{{ $value->value }}</span>
+            @endforeach
+        @else
+            <span>-----</span>
+    @endif
+    </li>
+    @endforeach
+    </ul>
+</div>
+@endforeach
+</div>
+
+@else
+<div class="alert alert-warning text-center">هیچ مشخصه فنی برای این محصول وجود ندارد.</div>
+@endif
 </div>

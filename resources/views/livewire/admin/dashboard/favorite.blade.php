@@ -42,7 +42,7 @@
                                     <td><a href="">{{$favorite->id}}</a></td>
 
                                     <td><a href="">{{$favorite->users->name}}</a></td>
-                                    <td><a href="">{{$favorite->products->title ?? 'NONE'}}</a></td>
+                                    <td><a href="">{{$favorite->product->title ?? 'NONE'}}</a></td>
 
                                     <td>
                                         <a wire:click="deleteCategory({{$favorite->id}})" type="submit"

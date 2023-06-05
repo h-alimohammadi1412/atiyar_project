@@ -72,9 +72,9 @@
                     <div>
                         <div class="card product-card card-static rtl">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
+                                data-bs-placement="left" title="اضافه کردن به علاقه مندی" wire:click="favoriteProduct({{ $product->id }})"><i
                                     class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="#"><img src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
+                                href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}"><img src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
                             <div class="card-body py-2">
                                 <h3 class="product-title fs-sm"><a
                                         href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}">{{ substr($productCategory->title, 50) . '...' }}</a>
