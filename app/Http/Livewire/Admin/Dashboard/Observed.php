@@ -12,10 +12,9 @@ class Observed extends AdminControllerLivewire
     use WithPagination;
     public function deleteCategory($id)
     {
-        $favorites = \App\Models\Observed::with(['product','user'])->where('id',$id)->first();
-
-        $favorites->delete();
-        $this->createLog('اطلاع رسانی', 'admin/dashboard/observed', $favorites->product->title, 'حذف');
+        $Observed = \App\Models\Observed::with(['product','user'])->where('id',$id)->first();
+        $this->createLog('اطلاع رسانی', 'admin/dashboard/observed', $Observed->product->title, 'حذف');
+        $Observed->delete();
 
     }
 

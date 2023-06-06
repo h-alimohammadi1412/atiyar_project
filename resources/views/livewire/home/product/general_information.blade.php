@@ -37,14 +37,15 @@
                         <span>ناموجود</span>
                     </div>
                     <div class="">
-                        <p class="text-center">این کالا فعلا موجود نیست اما می‌توانید زنگوله را بزنید تا به محض موجود شدن، به شما خبر دهیم.</p>
+                        <p class="text-center">این کالا فعلا موجود نیست اما می‌توانید زنگوله را بزنید تا به محض موجود
+                            شدن، به شما خبر دهیم.</p>
                         <button class="btn btn-secondary d-block w-100" type="button"
                             wire:click="observedProduct({{ $product->id }})"><i
                                 class="ci-bell fs-lg me-2 @if ($observedProduct) text-danger @endif"></i><span
                                 class='d-none d-sm-inline'>با خبرم کن</span></button>
                     </div>
                 @endif
-                @if (sizeof($productSellers)>0)
+                @if (sizeof($productSellers) > 0)
                     <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">رنگ:</span></div>
                     <div class="position-relative me-n4 mb-3">
                         @foreach ($productSellers as $key => $productSeller)
@@ -177,11 +178,17 @@
                     </div>
                 </div> --}}
                 <!-- Sharing-->
-                <label class="form-label d-inline-block align-middle my-2 me-3">اشتراک:</label><a
-                    class="btn-share btn-twitter me-2 my-2" href="#"><i class="ci-twitter"></i>توییتر</a><a
-                    class="btn-share btn-instagram me-2 my-2" href="#"><i
-                        class="ci-instagram"></i>اینستاگرام</a><a class="btn-share btn-facebook my-2" href="#"><i
-                        class="ci-facebook"></i>فیسبوک</a>
+                <label class="form-label d-inline-block align-middle my-2 me-3">اشتراک:</label>
+                <a class="btn-share btn-twitter me-2 my-2" href="https://twitter.com/intent/tweet?url={{ url('/wishlist/'.$product->id) }}">
+                    <i class="ci-twitter"></i>توییتر
+                </a>
+
+                <a class="btn-share btn-instagram me-2 my-2" href="#">
+                    <i class="ci-instagram"></i>اینستاگرام
+                </a>
+                <a class="btn-share btn-facebook my-2" href="#">
+                    <i class="ci-facebook"></i>فیسبوک
+                </a>
             </div>
         </div>
     </div>

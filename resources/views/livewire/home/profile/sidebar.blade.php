@@ -45,7 +45,7 @@
                             class="fs-sm text-muted ms-auto">1</span></a></li>
                 <li class="border-bottom mb-0"><a
                         class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('address.index') ? 'active' : '' }}"
-                        href="{{ route('address.index') }}"><i class="ci-sign-out opacity-60 me-2"></i>آدرس
+                        href="{{ route('address.index') }}"><i class="ci-location opacity-60 me-2"></i>آدرس
                         ها</a>
                 </li>
                 <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
