@@ -11,7 +11,7 @@ class Observed extends Component
 
     public function mount()
     {
-        $this->observeds = ModelObserved::with(['product'=>['category','brand']])->where('user_id', auth()->user()->id)->get();
+        $this->observeds = أخفه::with(['product'=>['category','brand']])->where('user_id', auth()->user()->id)->get();
     }
     public function deleteFavorite($id)
     {

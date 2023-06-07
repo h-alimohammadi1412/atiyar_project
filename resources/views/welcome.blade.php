@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<span class="d-block ">sssssssssssssssssssssssssssccccccccccccccc</span>
+
+
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -133,4 +136,4 @@
 
         <livewire:scripts />
     </body>
-</html>
+</html> --}}

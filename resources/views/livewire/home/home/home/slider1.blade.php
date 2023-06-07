@@ -38,7 +38,7 @@
             },
         });
         const swiper1 = new Swiper('.swiper_specials', {
-            slidesPerView: 6,
+            slidesPerView: 5,
             spaceBetween: 50,
             navigation: {
                 nextEl: '.swiper-button-next',
@@ -62,12 +62,12 @@
               },
               // when window width is >= 640px
               1000: {
-                slidesPerView: 5,
+                slidesPerView: 4,
                 spaceBetween: 40
               },
               // when window width is >= 640px
               1300: {
-                slidesPerView: 6,
+                slidesPerView: 5,
                 spaceBetween: 50
               }
             }

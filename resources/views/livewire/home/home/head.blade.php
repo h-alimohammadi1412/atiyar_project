@@ -28,4 +28,4 @@
 @yield('head')
 <link rel="stylesheet" media="screen" href="{{ asset('css/theme.min.css') }}">
 <!-- Google Tag Manager-->
-<livewire:styles />
+@livewireStyles

@@ -10,9 +10,9 @@
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title=""
-                                data-bs-original-title="اضافه کردن به علاقه مندی"
-                                aria-label="اضافه کردن به علاقه مندی" wire:click="favoriteProduct({{ $slider->product->id }})"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden"
+                                data-bs-original-title="اضافه کردن به علاقه مندی" aria-label="اضافه کردن به علاقه مندی"
+                                wire:click="favoriteProduct({{ $slider->product->id }})"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
                                 href="{{ url('/product/at-' . $slider->product->id . '/' . $slider->product->link) }}"><img
                                     src="/storage/{{ $slider->product->img }}" alt="محصول"></a>
                             <div class="card-body py-2 cart_body_product"><a class="product-meta d-block fs-xs pb-1"
@@ -21,8 +21,13 @@
                                         href="/product/at-{{ $slider->product->id }}/{{ $slider->product->link }}">{{ substr($slider->product->title, 50) . '...' }}</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">{{ number_format($slider->product->price) }}</span>
+                                    <div class="product-price"><span class="text-accent">
+                                            @if ($slider->product->price > 0 && $slider->product->price != null)
+                                                <del>{{ number_format($slider->product->discount_price) }}</del>
+                                            @else
+                                                {{-- ناموجود --}}
+                                            @endif
+                                        </span>
                                     </div>
                                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
@@ -33,9 +38,14 @@
                                 </div>
                             </div>
                             <div class="card-body ">
-                                <button
-                                    class="btn btn-primary btn-sm d-block w-100 mb-2 d-flex justify-content-center align-items-center"
-                                    type="button"><i class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
+                                @if ($slider->product->price > 0 && $slider->product->price != null)
+                                    <span class="d-block fs- fs-4 text-center">{{ number_format($slider->product->price) }}</span>
+                                    <button
+                                        class="btn btn-primary btn-sm d-block w-100 mb-2 d-flex justify-content-center align-items-center"
+                                        type="button"><i class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
+                                @else
+                                    ناموجود
+                                @endif
                             </div>
                         </div>
                         <hr class="d-sm-none">

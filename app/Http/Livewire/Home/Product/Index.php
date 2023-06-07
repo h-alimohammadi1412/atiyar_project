@@ -36,7 +36,8 @@ class Index extends Component
     public $comment;
     public $vendor_new;
     public $new_price;
-
+    public $show_form_notification = false;
+    public $notification_show = false;
     public $favoriteProduct = false;
     public $observedProduct = false;
     public $queryString = ['filters'];
@@ -66,10 +67,19 @@ class Index extends Component
     public function mount($id)
     {
         $this->product = Product::with('category', 'brand')->where('id', $id)->firstOrFail();
-        $this->notification = new Notification();
         $this->product_seller_selected = ProductSeller::where(['product_id' => $id, 'status' => 1])->orderBy('discount_price', 'ASC')->first();
         $favorite = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
-        $favorite ?      $this->favoriteProduct = true : $this->favoriteProduct = false; 
+        $favorite ? $this->favoriteProduct = true : $this->favoriteProduct = false;
+        $this->notification = new Notification();
+        $notification = Notification::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+        if ($notification) {
+            $this->notification_show = true;
+            // $this->notification = $notification;
+        } else {
+            $this->notification_show = false;
+            // $this->notification->system = true;
+        }
+
 
     }
 
@@ -342,7 +352,7 @@ class Index extends Component
         $this->vendor_new = $seller;
     }
 
-    public function notificationReModal()
+    public function notificationReModal($id)
     {
         $this->validate();
         $notification = Notification::where('product_id', $this->product->id)->
@@ -351,26 +361,34 @@ class Index extends Component
 
             if ($this->notification->sms == null && $this->notification->email == null && $this->notification->system == null) {
                 $notification->delete();
+                $this->show_form_notification = false;
+                $this->notification_show = false;
             } else {
                 $notification->update([
                     'user_id' => auth()->user()->id,
                     'product_id' => $this->product->id,
-                    'sms' => $this->notification->sms,
-                    'email' => $this->notification->email,
-                    'system' => $this->notification->system,
+                    'sms' => $this->notification->sms ? 1 : 0,
+                    'email' => $this->notification->email ? 1 : 0,
+                    'system' => $this->notification->system ? 1 : 0,
                     'type' => 'موجود شدن',
                 ]);
+                $this->notification_show = true;
+                $this->show_form_notification = false;
             }
+
 
         } else {
             Notification::create([
                 'user_id' => auth()->user()->id,
                 'product_id' => $this->product->id,
-                'sms' => $this->notification->sms,
-                'email' => $this->notification->email,
-                'system' => $this->notification->system,
+                'sms' => $this->notification->sms? 1 : 0,
+                'email' => $this->notification->email? 1 : 0,
+                'system' => $this->notification->system? 1 : 0,
                 'type' => 'موجود شدن',
             ]);
+            $this->notification_show = true;
+            $this->show_form_notification = false;
+
         }
 
         $this->emit('toast', 'success', ' محصول ثبت شد و در صورت موجود بودن با روش های انتخابی اطلاع رسانی خواهد شد.');
@@ -379,45 +397,45 @@ class Index extends Component
 
     public function favoriteProduct($id)
     {
-        if(auth()->check()){
+        if (auth()->check()) {
             $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
             if ($favorites) {
                 $favorites->delete();
                 $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
-                $this->product->id == $id ? $this->favoriteProduct = false : null ;
-    
+                $this->product->id == $id ? $this->favoriteProduct = false : null;
+
             } else {
                 Favorite::create([
                     'product_id' => $id,
                     'user_id' => auth()->user()->id
                 ]);
-                
-                $this->product->id == $id ? $this->favoriteProduct = true : null ;
+
+                $this->product->id == $id ? $this->favoriteProduct = true : null;
                 $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
             }
-        }else{
+        } else {
             return $this->redirect('login');
         }
     }
     public function observedProduct($id)
     {
-        if(auth()->check()){
+        if (auth()->check()) {
             $observed = Observed::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
             if ($observed) {
                 $observed->delete();
                 $this->emit('toast', 'success', 'محصول از اطلاع رسانی ها حذف شد.');
                 $this->observedProduct = false;
-    
+
             } else {
                 Observed::create([
                     'product_id' => $id,
                     'user_id' => auth()->user()->id
                 ]);
-                
-                $this->observedProduct = true ;
+
+                $this->observedProduct = true;
                 $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
             }
-        }else{
+        } else {
             return $this->redirect('login');
         }
     }
@@ -479,7 +497,8 @@ class Index extends Component
 
         $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
 
-        if (auth()->user()) {
+
+        if (auth()->check()) {
             $userhistory = \App\Models\UserHistory::where('user_id', auth()->user()->id)->
                 where('product_id', $product->id)->first();
 

@@ -2,72 +2,18 @@
 
 namespace App\Http\Livewire\Admin\Product;
 
-use App\Models\Category;
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use App\Models\Product;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 
     protected $listeners = [
         'category.added' => '$refresh'
     ];
-    protected $paginationTheme = 'bootstrap';
-
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $product = Product::find($id);
-        $product->update([
-            'status_product' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت محصول' .'-'. $product->title,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت محصول با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $product = Product::find($id);
-        $product->update([
-            'status_product' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت محصول' .'-'. $product->title,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت محصول با موفقیت فعال شد.');
-    }
-
-    public function deleteCategory($id)
-    {
-        $product = Product::find($id);
-
-        $product->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن محصول' .'-'. $product->title,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' محصول با موفقیت حذف شد.');
-    }
 
 
     public function render()

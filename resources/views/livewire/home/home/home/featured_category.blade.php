@@ -28,19 +28,25 @@
                             <div>
                                 <div class="card product-card">
                                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="اضافه کردن به علاقه مندی"  wire:click="favoriteProduct({{ $product->id }})"><i
+                                        data-bs-placement="left" title="اضافه کردن به علاقه مندی"
+                                        wire:click="favoriteProduct({{ $product->id }})"><i
                                             class="ci-heart"></i></button><a
                                         class="card-img-top d-block overflow-hidden"
-                                        href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img
+                                        href="{{ url('/product/at-' . $product->product->id . '/' . $product->product->link) }}"><img
                                             src="/storage/{{ $product->product->img }}" alt="محصول"></a>
                                     <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
                                             href="{{ url('/main/' . $product->category->link) }}">{{ $product->category->title }}</a>
                                         <h3 class="product-title fs-sm"><a
-                                                href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}">{{ substr($product->product->title, 50) . '...' }}</a>
+                                                href="{{ url('/product/at-' . $product->product->id . '/' . $product->product->link) }}">{{ substr($product->product->title,0, 80) . '...' }}</a>
                                         </h3>
                                         <div class="d-flex justify-content-between">
-                                            <div class="product-price"><span
-                                                    class="text-accent">{{ number_format($product->product->price) }}</span>
+                                            <div class="product-price"><span class="text-accent">
+                                                    @if ($product->product->price > 0 && $product->product->price != null)
+                                                        <del>{{ number_format($product->product->discount_price) }}</del>
+                                                    @else
+                                                        {{-- ناموجود --}}
+                                                    @endif
+                                                </span>
                                             </div>
                                             <div class="star-rating"><i
                                                     class="star-rating-icon ci-star-filled active"></i><i
@@ -52,8 +58,16 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                                class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
+                                        @if ($product->product->price > 0 && $product->product->price != null)
+                                           <span class="fs-4"> {{ number_format($product->product->price) }}</span>
+                                            <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                                    class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
+                                        @else
+                                            <div class="align-items-center d-flex justify-content-center mb-2 w-100"
+                                                style="height: 66px;">ناموجود
+                                            </div>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <hr class="d-sm-none">

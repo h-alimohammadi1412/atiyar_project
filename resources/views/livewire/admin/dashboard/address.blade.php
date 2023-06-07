@@ -44,7 +44,7 @@
                                     <td><a href="">{{$address->id}}</a></td>
 
                                     <td><a href="">{{$address->user->name}}</a></td>
-                                    <td><a href="">{{$address->address}}</a></td>
+                                    <td><a href="">{{ $address->state }} - {{ $address->city }} - {{ $address->address }}</a></td>
                                     <td><a href="">{{$address->name}} {{$address->lname}}</a></td>
                                     <td><a href="">{{$address->code_posti}} </a></td>
                                     <td><a href="">{{$address->bld_num}} </a></td>

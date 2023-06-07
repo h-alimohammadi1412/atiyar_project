@@ -62,9 +62,9 @@ Route::middleware('web')->prefix('profile')->middleware('auth')->group(function 
     Route::get('/observed', \App\Http\Livewire\Home\Profile\Observed::class)->name('profile.observed');
     Route::get('/wishlist/{favlist}/details/', \App\Http\Livewire\Home\Profile\FavlistShow::class)->name('profile.fav;ist.show');
     Route::get('/addresses', \App\Http\Livewire\Home\Profile\Address::class)->name('address.index');
-    Route::get('/addresses/edit/{address}', \App\Http\Livewire\Home\Profile\AddressEdit::class)->name('address.edit');
+    // Route::get('/addresses/edit/{address}', \App\Http\Livewire\Home\Profile\AddressEdit::class)->name('address.edit');
     Route::get('/user-history', \App\Http\Livewire\Home\Profile\UserHistory::class)->name('user-history.index');
-    Route::get('/notification', \App\Http\Livewire\Home\Profile\Notification::class)->name('user-history2.index');
+    Route::get('/notification', \App\Http\Livewire\Home\Profile\Notification::class)->name('notification.index');
     Route::get('/giftcards', \App\Http\Livewire\Home\Profile\Gift::class)->name('gift.index');
     Route::get('/orders', \App\Http\Livewire\Home\Profile\Order::class)->name('order.profile.index');
     Route::get('/my-orders/paid-in-progress', \App\Http\Livewire\Home\Profile\Order\Paid::class)->name('order.profile.paid');
@@ -159,3 +159,4 @@ Route::get('/logout', function () {
     auth()->logout();
     return redirect('/');
 });
+Route::get('/welcome',\App\Http\Livewire\Welcome::class);

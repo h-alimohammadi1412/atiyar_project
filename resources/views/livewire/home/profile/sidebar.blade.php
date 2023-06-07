@@ -38,6 +38,10 @@
                 <li class="border-bottom mb-0"><a
                         class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('profile.observed') ? 'active' : '' }}"
                         href="{{ route('profile.observed') }}"><i class="ci-heart opacity-60 me-2"></i>اطلاع رسانی ها<span class="fs-sm text-muted ms-auto">3</span></a></li>
+                        <li class="border-bottom mb-0"><a
+                            class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('notification.index') ? 'active' : '' }}"
+                            href="{{ route('notification.index') }}"><i class="ci-time opacity-60 me-2"></i>پیغام ها</a>
+                    </li>
                 <li class="mb-0 border-bottom"><a
                         class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('address.index') ? 'active' : '' }}"
                         href="{{ route('order.profile.index') }}"><i
@@ -47,6 +51,10 @@
                         class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('address.index') ? 'active' : '' }}"
                         href="{{ route('address.index') }}"><i class="ci-location opacity-60 me-2"></i>آدرس
                         ها</a>
+                </li>
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('user-history.index') ? 'active' : '' }}"
+                        href="{{ route('user-history.index') }}"><i class="ci-time opacity-60 me-2"></i>بازدید های اخیر</a>
                 </li>
                 <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
                         href="{{ url('logout') }}"><i class="ci-sign-out opacity-60 me-2"></i>خروج</a>

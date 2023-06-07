@@ -29,6 +29,67 @@
             </div>
         </div>
     </div>
+    <!-- send notification-->
+    <form class="needs-validation modal fade @if ($show_form_notification) show @endif"
+        style=" margin-top: 0; @if ($show_form_notification) display: block; background: rgba(0,0,0,.5);" @endif
+        wire:submit.prevent='notificationReModal({{ $product->id }})' id="add-address"
+        tabindex="-1" novalidate>
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">به من اطلاع بده</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
+                        wire:click="$set('show_form_notification',false)"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row gx-4 gy-3">
+                        <span>
+                            اطلاع به من در زمان : <span>موجود شدن</span>
+                        </span>
+
+                        <span>از طریق : </span>
+
+                        <div class="align-items-center d-flex justify-content-between">
+                            <div class="w-50">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" disabled
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        ارسال ایمیل به {{ auth()->user()->email }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" wire:model.lazy="notification.sms"
+                                        id="flexCheckDefault1">
+                                    <label class="form-check-label" for="flexCheckDefault1">
+                                        ارسال پیامک به {{ auth()->user()->mobile }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked="checked" wire:model.lazy="notification.system"
+                                        id="flexCheckDefault2">
+                                    <label class="form-check-label" for="flexCheckDefault2">
+                                        سیستم پیام شخصی آتی یار
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center w-50">
+                                <i class="ci-bell fs-lg me-2 " style="    font-size: 140px !important; opacity: 0.3;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"
+                        wire:click="$set('show_form_notification',false)">بازگشت</button>
+                    <button class="btn btn-primary btn-shadow" type="submit">
+                        ثبت
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <div class="container">
         <div class="bg-light shadow-lg rounded-3">
             <!-- Tabs-->
@@ -48,7 +109,7 @@
                     @include('livewire.home.product.tech_specs')
                     <!-- Reviews tab-->
                     @include('livewire.home.product.reviews')
-                    
+
                 </div>
             </div>
         </div>
@@ -72,9 +133,11 @@
                     <div>
                         <div class="card product-card card-static rtl">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="اضافه کردن به علاقه مندی" wire:click="favoriteProduct({{ $product->id }})"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}"><img src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
+                                data-bs-placement="left" title="اضافه کردن به علاقه مندی"
+                                wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a
+                                class="card-img-top d-block overflow-hidden"
+                                href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}"><img
+                                    src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
                             <div class="card-body py-2">
                                 <h3 class="product-title fs-sm"><a
                                         href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}">{{ substr($productCategory->title, 50) . '...' }}</a>

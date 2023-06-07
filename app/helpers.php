@@ -2,6 +2,7 @@
 
 use App\Models\Product;
 use App\Models\ProductSeller;
+use Illuminate\Http\Response;
 
 function upload_file($request, $name, $dir, $pix = '')
 {

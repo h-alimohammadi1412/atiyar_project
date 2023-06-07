@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Product;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Product;
@@ -11,7 +12,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Create extends Component
+class Create extends AdminControllerLivewire
 {
     use WithFileUploads;
     public $img;
@@ -49,7 +50,7 @@ class Create extends Component
 
         $this->validate();
         if ($this->img) {
-            $this->product->img = $this->uploadImage();
+            $this->product->img = $this->uploadImage('product');
         }
         $this->product->save();
        
@@ -61,19 +62,6 @@ class Create extends Component
         ]);
         alert()->success(' با موفقیت ایجاد شد.', 'محصول مورد نظر با موفقیت ایجاد شد.');
         return redirect(route('product.index'));
-    }
-
-
-
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $day = now()->day;
-        $directory = "product/$year/$month/$day";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
     }
 
 

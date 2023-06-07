@@ -39,30 +39,33 @@
                     <div class="">
                         <p class="text-center">این کالا فعلا موجود نیست اما می‌توانید زنگوله را بزنید تا به محض موجود
                             شدن، به شما خبر دهیم.</p>
-                        <button class="btn btn-secondary d-block w-100" type="button"
-                            wire:click="observedProduct({{ $product->id }})"><i
-                                class="ci-bell fs-lg me-2 @if ($observedProduct) text-danger @endif"></i><span
-                                class='d-none d-sm-inline'>با خبرم کن</span></button>
+                        <button class="btn btn-secondary d-block w-100" type="button" {{-- wire:click="observedProduct({{ $product->id }})"  --}}
+                            wire:click="$set('show_form_notification',true)">
+                            <i class="ci-bell fs-lg me-2 @if ($observedProduct) text-danger @endif"></i>
+                            <span class='d-none d-sm-inline'>@if(!$notification_show)با خبرم کن  @else لازم نیست اطلاع بدی @endif </span></button>
                     </div>
                 @endif
-                @if (sizeof($productSellers) > 0)
-                    <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">رنگ:</span></div>
-                    <div class="position-relative me-n4 mb-3">
-                        @foreach ($productSellers as $key => $productSeller)
-                            <div class="form-check form-option form-check-inline mb-2"
-                                wire:click="ProductSellerSelected({{ $productSeller->id }})">
-                                <input class="form-check-input" type="radio" name="color"
-                                    id="color_{{ $productSeller->color->id }}" data-bs-label="colorOption"
-                                    value="{{ $productSeller->color->name }}"
-                                    @if ($key == 0) checked @endif>
-                                <label class="form-option-label rounded-circle"
-                                    for="color_{{ $productSeller->color->id }}"><span
-                                        class="form-option-color rounded-circle"
-                                        style="background-color: {{ $productSeller->color->value }};"></span></label>
-                            </div>
-                        @endforeach
-                    </div>
+                @if ($product_seller_selected)
+                    @if (sizeof($productSellers) > 0)
+                        <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">رنگ:</span></div>
+                        <div class="position-relative me-n4 mb-3">
+                            @foreach ($productSellers as $key => $productSeller)
+                                <div class="form-check form-option form-check-inline mb-2"
+                                    wire:click="ProductSellerSelected({{ $productSeller->id }})">
+                                    <input class="form-check-input" type="radio" name="color"
+                                        id="color_{{ $productSeller->color->id }}" data-bs-label="colorOption"
+                                        value="{{ $productSeller->color->name }}"
+                                        @if ($key == 0) checked @endif>
+                                    <label class="form-option-label rounded-circle"
+                                        for="color_{{ $productSeller->color->id }}"><span
+                                            class="form-option-color rounded-circle"
+                                            style="background-color: {{ $productSeller->color->value }};"></span></label>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 @endif
+
                 <div class="d-flex align-items-center pt-2 pb-4">
                     @if ($product_seller_selected)
                         <select class="form-select me-3" style="width: 5rem;" wire:model.lazy="product_count">
@@ -179,7 +182,8 @@
                 </div> --}}
                 <!-- Sharing-->
                 <label class="form-label d-inline-block align-middle my-2 me-3">اشتراک:</label>
-                <a class="btn-share btn-twitter me-2 my-2" href="https://twitter.com/intent/tweet?url={{ url('/wishlist/'.$product->id) }}">
+                <a class="btn-share btn-twitter me-2 my-2"
+                    href="https://twitter.com/intent/tweet?url={{ url('/wishlist/' . $product->id) }}">
                     <i class="ci-twitter"></i>توییتر
                 </a>
 

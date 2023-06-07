@@ -10,9 +10,10 @@
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title=""
-                                data-bs-original-title="اضافه کردن به علاقه مندی"
-                                aria-label="اضافه کردن به علاقه مندی"  wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img
+                                data-bs-original-title="اضافه کردن به علاقه مندی" aria-label="اضافه کردن به علاقه مندی"
+                                wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a
+                                class="card-img-top d-block overflow-hidden"
+                                href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img
                                     src="/storage/{{ $product->img }}" alt="محصول"></a>
                             <div class="card-body py-2 cart_body_product"><a class="product-meta d-block fs-xs pb-1"
                                     href="{{ url('/main/' . $product->category->link) }}">{{ $product->category->title }}</a>
@@ -20,7 +21,13 @@
                                         href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}">{{ substr($product->title, 50) . '...' }}</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span class="text-accent">39.<small>50</small></span>
+                                    <div class="product-price"><span class="text-accent">
+                                            @if ($product->price > 0 && $product->price != null)
+                                                <del>{{ number_format($product->discount_price) }}</del>
+                                            @else
+                                                {{-- ناموجود --}}
+                                            @endif
+                                        </span>
                                     </div>
                                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
@@ -30,10 +37,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body ">
-                                <button
-                                    class="btn btn-primary btn-sm d-block w-100 mb-2 d-flex justify-content-center align-items-center"
-                                    type="button"><i class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
+                            <div class="card-body py-5">
+                                @if ($product->price > 0 && $product->price != null)
+                                    <span
+                                        class="d-block fs- fs-4 text-center">{{ number_format($product->price) }}</span>
+                                    <button
+                                        class="btn btn-primary btn-sm d-block w-100 mb-2 d-flex justify-content-center align-items-center"
+                                        type="button"><i class="ci-cart fs-sm me-1"></i>اضافه کردن به سبدخرید</button>
+                                @else
+                                    <span class="d-block text-center fs-4" style="    margin-top: 37px;">ناموجود</span>
+                                @endif
                             </div>
                         </div>
                         <hr class="d-sm-none">

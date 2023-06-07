@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Dashboard;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use App\Models\Product;
 use App\Models\Seller;
@@ -10,30 +11,13 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Address extends Component
+class Address extends  AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
-
     public $img;
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
     public \App\Models\Address $address;
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
-
-
-
 
     public function deleteAddress($id)
     {
@@ -49,6 +33,8 @@ class Address extends Component
         $addreses = $this->readyToLoad ? \App\Models\Address::where('name', 'LIKE', "%{$this->search}%")->
         orWhere('lname', 'LIKE', "%{$this->search}%")->
         orWhere('address', 'LIKE', "%{$this->search}%")->
+        orWhere('state', 'LIKE', "%{$this->search}%")->
+        orWhere('city', 'LIKE', "%{$this->search}%")->
         orWhere('code_posti', 'LIKE', "%{$this->search}%")->
         orWhere('id', $this->search)->
         latest()->paginate(15) : [];
