@@ -15,7 +15,7 @@ class Notification
         return Mail::to($user)->send($mailable);
     }
 
-    public function sendSms(string $number, string $message)
+    public function sendSms(Array $number, string $message)
     {
         try {
             $client = new SoapClient("http://payamak-service.ir/SendService.svc?wsdl");
@@ -32,7 +32,7 @@ class Notification
                 'userName' => config('services.sms.user'),
                 'password' => config('services.sms.password'),
                 'fromNumber' => config('services.sms.fromNumber'),
-                'toNumbers' => array($number),
+                'toNumbers' => $number,
                 'messageContent' => $message,
                 'isFlash' => false,
                 'recId' => $recId,

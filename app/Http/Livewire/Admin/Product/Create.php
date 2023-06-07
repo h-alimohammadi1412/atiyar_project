@@ -53,14 +53,7 @@ class Create extends AdminControllerLivewire
             $this->product->img = $this->uploadImage('product');
         }
         $this->product->save();
-       
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'افزودن محصول' . '-' . $this->product->title,
-            'url' => 'admin/product',
-            'actionType' => 'ایجاد'
-        ]);
-        alert()->success(' با موفقیت ایجاد شد.', 'محصول مورد نظر با موفقیت ایجاد شد.');
+        $this->createLog('محصول', 'admin/product', $this->product->title, 'ایجاد');
         return redirect(route('product.index'));
     }
 

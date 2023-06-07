@@ -5,7 +5,7 @@ namespace Modules\User\Http\Livewire\Home;
 use Modules\User\Http\Controllers\AdminControllerLivewire;
 use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
-use Modules\User\Services\Notification\Notification;
+use App\Services\Notification\Notification;
 
 class Register extends AdminControllerLivewire
 {
@@ -79,7 +79,7 @@ class Register extends AdminControllerLivewire
             $this->user_id = $user_id;
         }
         $this->active_code = random_int(10000, 99999);
-        $res = (new Notification)->sendSms($this->user->phone, "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
+        $res = (new Notification)->sendSms([$this->user->phone], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
         $this->show_send_code_form = true;
         $type = 'ایجاد حساب';
         SMS::create([

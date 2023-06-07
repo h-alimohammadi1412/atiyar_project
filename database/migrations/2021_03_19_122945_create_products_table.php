@@ -30,7 +30,7 @@ class CreateProductsTable extends Migration
             $table->integer('discount_price')->nullable();
             $table->string('number')->nullable();
             $table->string('weight')->nullable();
-            $table->string('status_product')->nullable();
+            $table->string('status_product')->default(0);
             // $table->string('publish_product')->nullable();
             $table->integer('view')->nullable();
             $table->integer('gift')->nullable();

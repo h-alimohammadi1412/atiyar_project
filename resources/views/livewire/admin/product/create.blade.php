@@ -10,26 +10,26 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" wire:model.lazy="product.title" placeholder="نام محصول "
+                            <input type="text" wire:model.defer="product.title" placeholder="نام محصول "
                                 class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" wire:model.lazy="product.en_name" placeholder="نام انگلیسی محصول "
+                            <input type="text" wire:model.defer="product.en_name" placeholder="نام انگلیسی محصول "
                                 class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <textarea rows="5" wire:model.lazy="product.description" placeholder="توضیح کوتاه محصول " tabindex="-1"
+                        <textarea rows="5" wire:model.defer="product.description" placeholder="توضیح کوتاه محصول " tabindex="-1"
                             wire:key="description_create" class="form-control" id="description_create">
                             
                             </textarea>
                     </div>
                     <div class="form-group">
-                        <textarea wire:model.lazy="product.body" name="body" placeholder="توضیح محصول " class="form-control"
+                        <textarea wire:model.defer="product.body" name="body" placeholder="توضیح محصول " class="form-control"
                             id="body_create">
 
                             </textarea>
@@ -39,7 +39,7 @@
                     <div class="col-xs-12 col-md-6 p-0 order-1 order-md-0 ">
                         <div class="col-12">
                             <div class="form-group">
-                                <select wire:model.lazy="product.category_id" name="category_id" id=""
+                                <select wire:model.defer="product.category_id" name="category_id" id=""
                                     class="form-control">
                                     @foreach (\App\Models\Category::getCategories(true) as $key => $category)
                                         <option value="{{ $key }}">{{ $category }}</option>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <select wire:model.lazy="product.brand_id" name="brand_id" id=""
+                                <select wire:model.defer="product.brand_id" name="brand_id" id=""
                                     class="form-control">
                                     <option value="1">برند محصول</option>
                                     @foreach (\App\Models\Brand::all() as $brand)
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <select wire:model.lazy="color_id" name="color_id[]" id="" class="form-control"
+                                <select wire:model.defer="color_id" name="color_id[]" id="" class="form-control"
                                     multiple>
                                     <option value="1">رنگ محصول</option>
                                     @foreach (\App\Models\Color::all() as $color)
@@ -72,12 +72,12 @@
                             </div>                        
                         </div>
                         <div class="col-12">
-                            <input type="text" wire:model.lazy="product.weight" placeholder="وزن محصول "
+                            <input type="text" wire:model.defer="product.weight" placeholder="وزن محصول "
                                 class="form-control">
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <input type="text" wire:model.lazy="product.tags" placeholder="تگ های محصول "
+                                <input type="text" wire:model.defer="product.tags" placeholder="تگ های محصول "
                                     class="form-control">
                                 @if ($this->product->tags)
                                     <span class="alert-info alert "
@@ -85,9 +85,9 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <div class="form-group">
-                                <select wire:model.lazy="product.status_product" name="status_product" id=""
+                                <select wire:model.defer="product.status_product" name="status_product" id=""
                                     class="form-control">
                                     <option value="-5">وضعیت محصول</option>
                                     @foreach (\App\Models\Product::productStatus() as $key => $value)
@@ -95,13 +95,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-12">
                             <div class="row p-0 m-0">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="notificationGroup">
-                                            <input id="option10" type="checkbox" wire:model.lazy="product.shipment"
+                                            <input id="option10" type="checkbox" wire:model.defer="product.shipment"
                                                 name="shipment" class="form-control">
                                             <label for="option10">موجود در انبار دیجی کالا:</label>
                                         </div>
@@ -110,7 +110,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="notificationGroup">
-                                            <input id="option12" type="checkbox" wire:model.lazy="product.original"
+                                            <input id="option12" type="checkbox" wire:model.defer="product.original"
                                                 name="original" class="form-control">
                                             <label for="option12">محصول با کیفیت اصلی:</label>
                                         </div>
@@ -119,7 +119,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="notificationGroup">
-                                            <input id="option13" type="checkbox" wire:model.lazy="product.gift"
+                                            <input id="option13" type="checkbox" wire:model.defer="product.gift"
                                                 name="gift" class="form-control">
                                             <label for="option13">محصول به عنوان هدیه:</label>
                                         </div>
@@ -137,7 +137,7 @@
                             x-on:livewire-upload-error="isUploading = false"
                             x-on:livewire-upload-progress="progress = $event.detail.progress">
 
-                            <input type="file" id="resume" wire:model.lazy="img" aria-label="Resume"
+                            <input type="file" id="resume" wire:model.defer="img" aria-label="Resume"
                                 class="form-control" />
 
                             <div wire:ignore class="progress mt-2" id="progressbar" style="display: none">

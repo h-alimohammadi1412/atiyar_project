@@ -31,7 +31,10 @@ use Spatie\Sitemap\SitemapGenerator;
 //    ]);
 //
 //});
-
+Route::get('/logout', function () {
+    auth()->logout();
+    return redirect('/');
+});
 Route::get('/sitem', function () {
     SitemapGenerator::create('http://127.0.0.1:8000/')->writeToFile(public_path('sitemap.xml'));
     return back();
@@ -155,8 +158,3 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 // //marketer Login
 // Route::get('/marketer/account/forgotpassword/', App\Http\Livewire\Marketer\Auth\Password::class)
 //     ->name('marketer.password');
-Route::get('/logout', function () {
-    auth()->logout();
-    return redirect('/');
-});
-Route::get('/welcome',\App\Http\Livewire\Welcome::class);

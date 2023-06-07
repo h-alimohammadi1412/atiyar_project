@@ -122,7 +122,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select wire:model.lazy="productSeller.vendor_id" name="vendor_id" id=""
+                                <select wire:model.defer="productSeller.vendor_id" name="vendor_id" id=""
                                         class="form-control">
                                     <option value="-1">-فروشنده-</option>
                                     @foreach(\App\Models\User::all() as $user)
@@ -135,7 +135,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select wire:model.lazy="productSeller.warranty_id" name="warranty_id" id="" class="form-control">
+                                <select wire:model.defer="productSeller.warranty_id" name="warranty_id" id="" class="form-control">
                                     <option value="-1">-گارانتی-</option>
                                     @foreach(\App\Models\Warranty::all() as $warranty)
                                         <option value="{{$warranty->id}}">{{$warranty->name}}</option>
@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select wire:model.lazy="productSeller.color_id" name="color_id" id=""
+                                <select wire:model.defer="productSeller.color_id" name="color_id" id=""
                                         class="form-control">
                                     <option value="-1">-رنگ-</option>
                                     @foreach($colors as $color)
@@ -160,26 +160,26 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                            <input type="text" wire:model.lazy="productSeller.product_count" placeholder="تعداد موجودی  "
+                            <input type="text" wire:model.defer="productSeller.product_count" placeholder="تعداد موجودی  "
                                    class="form-control">
                         </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                            <input type="text" wire:model.lazy="productSeller.limit_order"
+                            <input type="text" wire:model.defer="productSeller.limit_order"
                                    placeholder="تعداد سفارش (صفر نامحدود) "
                                    class="form-control">
                         </div>
                         </div>
                         <div class="col-md-12 ">
                             <div class="form-group">
-                            <input type="text" wire:model.lazy="productSeller.price" placeholder="قیمت  محصول "
+                            <input type="text" wire:model.defer="productSeller.price" placeholder="قیمت  محصول "
                                    class="form-control">
                         </div>
                         </div>
                         <div class="col-md-12 ">
                             <div class="form-group">
-                            <input type="text" wire:model.lazy="productSeller.discount_price" placeholder="قیمت تخفیف خورده "
+                            <input type="text" wire:model.defer="productSeller.discount_price" placeholder="قیمت تخفیف خورده "
                                    class="form-control">
                         </div>
                         </div>
@@ -193,14 +193,14 @@
                     <div class="row">
                         <div class="col-md-12 ">
                             <div class="form-group">
-                                <input type="text" wire:model.lazy="productSeller.time" placeholder="زمان ارسال محصول به روز "
+                                <input type="text" wire:model.defer="productSeller.time" placeholder="زمان ارسال محصول به روز "
                                        class="form-control">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="notificationGroup">
-                                    <input id="option10" type="checkbox" wire:model.lazy="productSeller.status" name="status"
+                                    <input id="option10" type="checkbox" wire:model.defer="productSeller.status" name="status"
                                            class="form-control">
                                     <label for="option10">وضعیت محصول:</label>
                                 </div>

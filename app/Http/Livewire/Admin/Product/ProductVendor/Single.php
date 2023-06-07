@@ -44,7 +44,7 @@ class Single extends AdminControllerLivewire
     {
         
         $this->validate();
-        $color = ProductSeller::where('color_id', $this->productSeller->color_id)->first();
+        $color = ProductSeller::where('product_id', $this->productSeller->product_id)->where('color_id', $this->productSeller->color_id)->first();
         if (!$color) {
             $this->productSeller->product_id = $this->product->id;
             $this->productSeller->save();

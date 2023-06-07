@@ -8,6 +8,7 @@ use App\Mail\ProductUpdateNotification;
 use App\Models\Category;
 use App\Models\Email;
 use App\Models\Log;
+use App\Models\Notification as ModelsNotification;
 use App\Models\Product;
 use App\Models\SMS;
 use DB;
@@ -51,6 +52,7 @@ class Update extends AdminControllerLivewire
         } else {
             unset($data['img']);
         }
+      
         $this->product->update($data);
         if ($this->color_id) {
             DB::table('product_color')->where('product_id', $this->product->id)->delete();
@@ -110,11 +112,6 @@ class Update extends AdminControllerLivewire
 
     public function render()
     {
-        if ($this->product->status_product == 1) {
-            $this->product->status_product = true;
-        } else {
-            $this->product->status_product = false;
-        }
 
         if ($this->product->gift == 1) {
             $this->product->gift = true;
