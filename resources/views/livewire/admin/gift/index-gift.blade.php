@@ -46,9 +46,9 @@
                                     <td><a href="">{{$gift->code}}</a></td>
                                     <td><a href="">{{$gift->user->name ?? ''}}</a></td>
                                     <td><a href="">@if ($gift->type ==1)
-                                                <span class="alert alert-success">استفاده شده  </span>
+                                                <span class="btn-sm btn-success">استفاده شده  </span>
                                             @else
-                                                <span class="alert alert-danger">استفاده نشده  </span>
+                                                <span class="btn-sm btn-warning">استفاده نشده  </span>
 
                                             @endif</a></td>
                                     <td><a href="">{{\App\Models\PersianNumber::translate($gift->price)}}</a>

@@ -5,11 +5,8 @@ namespace App\Http\Livewire\Admin\Category;
 use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-use Illuminate\Http\Request;
 use App\Models\SubCategory;
 use App\Models\Category;
-use Livewire\Component;
-use App\Models\Log;
 
 class Index extends AdminControllerLivewire
 {
@@ -18,10 +15,7 @@ class Index extends AdminControllerLivewire
     protected $listeners = [
         'category.added' => '$refresh'
     ];
-    protected $paginationTheme = 'bootstrap';
     public $img;
-    public $search;
-    protected $queryString = ['search'];
     public Category $category;
     public $category_id;
     public function mount()
