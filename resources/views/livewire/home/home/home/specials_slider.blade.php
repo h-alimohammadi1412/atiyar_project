@@ -12,12 +12,12 @@
                                 data-bs-placement="left" title=""
                                 data-bs-original-title="اضافه کردن به علاقه مندی" aria-label="اضافه کردن به علاقه مندی"
                                 wire:click="favoriteProduct({{ $slider->product->id }})"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                    class="ci-heart"></i></button><a target="_blank" class="card-img-top d-block overflow-hidden"
                                 href="{{ url('/product/at-' . $slider->product->id . '/' . $slider->product->link) }}"><img
                                     src="/storage/{{ $slider->product->img }}" alt="محصول"></a>
-                            <div class="card-body py-2 cart_body_product"><a class="product-meta d-block fs-xs pb-1"
+                            <div class="card-body py-2 cart_body_product"><a target="_blank" class="product-meta d-block fs-xs pb-1"
                                     href="{{ url('/main/' . $slider->category->link) }}">{{ $slider->category->title }}</a>
-                                <h3 class="product-title fs-sm"><a
+                                <h3 class="product-title fs-sm"><a target="_blank"
                                         href="/product/at-{{ $slider->product->id }}/{{ $slider->product->link }}">{{ substr($slider->product->title, 50) . '...' }}</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">

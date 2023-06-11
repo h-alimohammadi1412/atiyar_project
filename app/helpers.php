@@ -39,8 +39,8 @@ function setProductPrice($product_id)
                 }
             }
             if(sizeof($mobiles)>0){
-                // $link = "/at-{$product_id}/{$product_id}";
-                // $res = (new \App\Services\Notification\Notification)->sendSms($mobiles, "کاربر گرامی محصول مورد نظر شما موجود شد : {".url($link)."}.آتی یار");
+                $link = "/at-{$product_id}/{$product_id}";
+                $res = (new \App\Services\Notification\Notification)->sendSms($mobiles, "کاربر گرامی محصول مورد نظر شما موجود شد : {".url($link)."}.آتی یار");
                 SMS::create([
                     'code' => "$product_id",
                     'type' => "موجود شدن محصول ".$productPrice->product->title,
@@ -53,3 +53,15 @@ function setProductPrice($product_id)
         Notification::where('product_id', $product_id)->update(['type' => '0']);
     }
 }
+
+function setCookieCustom($name,$value,$expire) {
+    $value = serialize($value);
+    $response = new Response('Hello World');
+    $response->withCookie(cookie($name, $value, $expire));
+    return $response;
+ }
+ function getCookieCustom($request,$name) {
+    $value = $request->cookie($name);
+    $value = unserialize($value);
+    return $value;
+ }

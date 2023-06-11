@@ -1,7 +1,7 @@
 <div>
     @section('head')
-        <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" />
-        <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
+    <link rel="stylesheet" media="screen" href="{{ asset('vendor/drift-zoom/dist/drift-basic.min.css') }}" />
+    <link rel="stylesheet" media="screen" href="{{ asset('vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
     @endsection
     <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
@@ -29,66 +29,6 @@
             </div>
         </div>
     </div>
-    <!-- send notification-->
-    <form class="needs-validation modal fade @if ($show_form_notification) show @endif"
-        style=" margin-top: 0; @if ($show_form_notification) display: block; background: rgba(0,0,0,.5);" @endif
-        wire:submit.prevent='notificationReModal({{ $product->id }})' id="add-address"
-        tabindex="-1" novalidate>
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">به من اطلاع بده</h5>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
-                        wire:click="$set('show_form_notification',false)"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row gx-4 gy-3">
-                        <span>
-                            اطلاع به من در زمان : <span>موجود شدن</span>
-                        </span>
-
-                        <span>از طریق : </span>
-
-                        <div class="align-items-center d-flex justify-content-between">
-                            <div class="w-50">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" disabled
-                                        id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        ارسال ایمیل به {{ auth()->user()->email }}
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" wire:model.lazy="notification.sms"
-                                        id="flexCheckDefault1">
-                                    <label class="form-check-label" for="flexCheckDefault1">
-                                        ارسال پیامک به {{ auth()->user()->mobile }}
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" checked="checked" wire:model.lazy="notification.system"
-                                        id="flexCheckDefault2">
-                                    <label class="form-check-label" for="flexCheckDefault2">
-                                        سیستم پیام شخصی آتی یار
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center w-50">
-                                <i class="ci-bell fs-lg me-2 " style="    font-size: 140px !important; opacity: 0.3;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"
-                        wire:click="$set('show_form_notification',false)">بازگشت</button>
-                    <button class="btn btn-primary btn-shadow" type="submit">
-                        ثبت
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
 
     <div class="container">
         <div class="bg-light shadow-lg rounded-3">
@@ -130,34 +70,95 @@
             <div class="tns-carousel-inner"
                 data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">
                 @foreach ($productCategories as $productCategory)
-                    <div>
-                        <div class="card product-card card-static rtl">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="اضافه کردن به علاقه مندی"
-                                wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden"
-                                href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}"><img
-                                    src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
-                            <div class="card-body py-2">
-                                <h3 class="product-title fs-sm"><a
-                                        href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}">{{ substr($productCategory->title, 50) . '...' }}</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price text-accent">26.<small>99</small></div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-half active"></i><i
-                                            class="star-rating-icon ci-star"></i><i
-                                            class="star-rating-icon ci-star"></i>
-                                    </div>
+                <div>
+                    <div class="card product-card card-static rtl">
+                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"
+                            wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a
+                            class="card-img-top d-block overflow-hidden"
+                            href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}"><img
+                                src="/storage/{{ $productCategory->img }}" alt="محصول"></a>
+                        <div class="card-body py-2">
+                            <h3 class="product-title fs-sm"><a
+                                    href="/product/dkp-{{ $productCategory->id }}/{{ $productCategory->link }}">{{
+                                    substr($productCategory->title, 50) . '...' }}</a>
+                            </h3>
+                            <div class="d-flex justify-content-between">
+                                <div class="product-price text-accent">26.<small>99</small></div>
+                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                        class="star-rating-icon ci-star-filled active"></i><i
+                                        class="star-rating-icon ci-star-half active"></i><i
+                                        class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
         </div>
     </div>
+
+    <!-- send notification-->
+    <form class="needs-validation modal fade @if ($show_form_notification) show @endif"
+        style=" margin-top: 0; @if ($show_form_notification) display: block; background: rgba(0,0,0,.5);" @endif
+        wire:submit.prevent='notificationReModal({{ $product->id }})' id="add-address" tabindex="-1" novalidate>
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">به من اطلاع بده</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
+                        wire:click="$set('show_form_notification',false)"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row gx-4 gy-3">
+                        <span>
+                            اطلاع به من در زمان : <span>موجود شدن</span>
+                        </span>
+
+                        <span>از طریق : </span>
+
+                        <div class="align-items-center d-flex justify-content-between">
+                            <div class="w-50">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" disabled id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        ارسال ایمیل به {{ auth()->check() ? auth()->user()->email : '' }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" wire:model.lazy="notification.sms"
+                                        id="flexCheckDefault1">
+                                    <label class="form-check-label" for="flexCheckDefault1">
+                                        ارسال پیامک به {{ auth()->check() ? auth()->user()->mobile: '' }}
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked="checked"
+                                        wire:model.lazy="notification.system" id="flexCheckDefault2">
+                                    <label class="form-check-label" for="flexCheckDefault2">
+                                        سیستم پیام شخصی آتی یار
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center w-50">
+                                <i class="ci-bell fs-lg me-2 "
+                                    style="    font-size: 140px !important; opacity: 0.3;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"
+                        wire:click="$set('show_form_notification',false)">بازگشت</button>
+                    <button class="btn btn-primary btn-shadow" type="submit">
+                        ثبت
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <!-- Product bundles carousel (Cheaper together)-->
     {{-- <div class="container pt-lg-1 pb-5 mb-md-3">
         <div class="card card-body pt-5">
@@ -189,8 +190,7 @@
                                             class="d-inline-block bg-danger fs-ms text-white rounded-1 py-1 px-2 mb-3">-20%</span>
                                         <h3 class="product-title fs-sm"><a href="#">ساعت هوشمند سلامتی و تناسب
                                                 اندام</a></h3>
-                                        <div class="product-price"><span
-                                                class="text-accent">16.<small>00</small></span>
+                                        <div class="product-price"><span class="text-accent">16.<small>00</small></span>
                                             <del class="fs-sm text-muted">20.<small>00</small></del>
                                         </div>
                                     </div>
@@ -232,8 +232,7 @@
                                             class="d-inline-block bg-danger fs-ms text-white rounded-1 py-1 px-2 mb-3">-15%</span>
                                         <h3 class="product-title fs-sm"><a href="#">ساعت هوشمند سلامتی و تناسب
                                                 اندام</a></h3>
-                                        <div class="product-price"><span
-                                                class="text-accent">59.<small>00</small></span>
+                                        <div class="product-price"><span class="text-accent">59.<small>00</small></span>
                                             <del class="fs-sm text-muted">69.<small>00</small></del>
                                         </div>
                                     </div>
@@ -256,9 +255,9 @@
         </div>
     </div> --}}
     @section('script')
-        <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
-        <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
-        <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+    <script src="{{ asset('vendor/drift-zoom/dist/Drift.min.js') }}"></script>
+    <script src="{{ asset('vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
+    <script src="{{ asset('vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
     @endsection
 </div>
 
@@ -307,7 +306,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </main>
 </div>
 

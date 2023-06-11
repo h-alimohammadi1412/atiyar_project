@@ -5,7 +5,7 @@
             <!-- Slides -->
             @foreach (cache('slider') as $slider)
                 <div class="swiper-slide">
-                  <a href="{{ $slider->link }}">
+                  <a href="{{ $slider->link }}" target="_blank">
                     <img src="/storage/{{ $slider->img }}" style="height: 500px; object-fit: cover;">
                   </a>
                 </div>

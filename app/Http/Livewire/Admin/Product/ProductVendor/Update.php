@@ -22,7 +22,7 @@ class Update extends AdminControllerLivewire
     protected $rules = [
         'productSeller.product_id' => 'nullable',
         'productSeller.vendor_id' => 'required',
-        'productSeller.time' => 'required',
+        'productSeller.time' => 'nullable',
         'productSeller.warranty_id' => 'required',
         'productSeller.price' => 'required',
         'productSeller.discount_price' => 'required',
@@ -44,31 +44,31 @@ class Update extends AdminControllerLivewire
         unset($arr2[$this->color_id]);
         if (!array_key_exists($this->productSeller->color_id, $arr2)) {
             $this->productSeller->update($this->validate());
-            PriceDate::create([
+            PriceDate::where(['product_seller_id'=>$this->productSeller->id,'seller_id'=>$this->productSeller->vendor_id])->update([
+                'seller_id' => $this->productSeller->vendor_id,
                 'product_id' => $this->productSeller->product_id,
                 'price' => $this->productSeller->price,
                 'discount_price' => $this->productSeller->discount_price,
                 'product_seller_id' => $this->productSeller->id,
             ]);
-            $cart = Cart::where('product_seller_id', $this->productSeller->id)->first();
-            if ($cart) {
-                $cart->update([
-                    'price_old' => $cart->product_price,
-                    'product_price_discount_old' => $cart->product_price_discount,
-                    'view' => 0,
-                    'read_cart' => 0,
-                ]);
-                $cart->update([
-                    'product_price' => $this->productSeller->price,
-                    'product_price_discount' => $this->productSeller->discount_price,
-                    'product_color' => $this->productSeller->color_id,
-                    'product_vendor' => $this->productSeller->vendor_id,
-                    'product_warranty' => $this->productSeller->warranty_id,
-                ]);
-            }
+            // $cart = Cart::where('product_seller_id', $this->productSeller->id)->first();
+            // if ($cart) {
+            //     $cart->update([
+            //         'price_old' => $cart->product_price,
+            //         'product_price_discount_old' => $cart->product_price_discount,
+            //         'view' => 0,
+            //         'read_cart' => 0,
+            //     ]);
+            //     $cart->update([
+            //         'product_price' => $this->productSeller->price,
+            //         'product_price_discount' => $this->productSeller->discount_price,
+            //         'product_color' => $this->productSeller->color_id,
+            //         'product_vendor' => $this->productSeller->vendor_id,
+            //         'product_warranty' => $this->productSeller->warranty_id,
+            //     ]);
+            // }
             setProductPrice($this->productSeller->product_id);
             $this->createLog('تنوع قیمت محصول', 'admin/productVendor/product/' . $this->productSeller->product_id, '---', 'آپدیت');
-            alert()->success(' با موفقیت آپدیت شد.', 'تنوع محصول مورد نظر با موفقیت آپدیت شد.');
             return redirect(route('product.productVendor', ['product' => $this->productSeller->product_id]));
         } else {
             alert()->warning("تنوع قیمت با این کد رنگ قبلا انتخاب شده است.");

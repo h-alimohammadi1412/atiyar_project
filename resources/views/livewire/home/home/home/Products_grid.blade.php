@@ -6,12 +6,12 @@
                 <div class="card product-card">
                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
                         title="اضافه کردن به علاقه مندی" wire:click="favoriteProduct({{ $product->id }})"><i
-                            class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                            class="ci-heart"></i></button><a target="_blank" class="card-img-top d-block overflow-hidden"
                         href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img
                             src="/storage/{{ $product->img }}" alt="محصول"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
+                    <div class="card-body py-2"><a target="_blank" class="product-meta d-block fs-xs pb-1"
                             href="{{ url('/main/' . $product->category->link) }}">{{ $product->category->title }}</a>
-                        <h3 class="product-title fs-sm"><a
+                        <h3 class="product-title fs-sm"><a target="_blank"
                                 href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}">{{ substr($product->title, 0,80) . '...' }}</a>
                         </h3>
                         <div class="d-flex justify-content-between">

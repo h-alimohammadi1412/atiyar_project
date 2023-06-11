@@ -22,7 +22,9 @@ use Artesaos\SEOTools\Facades\JsonLd;
 use Artesaos\SEOTools\Facades\JsonLdMulti;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 use Stevebauman\Location\Facades\Location;
 
@@ -32,6 +34,8 @@ class Index extends Component
     public $product_count = 1;
     public $product_seller_id;
     public $product_seller_selected;
+    public $addToCart = false;
+
     public $color;
     public $comment;
     public $vendor_new;
@@ -64,23 +68,44 @@ class Index extends Component
         'direction' => 'desc'
     ];
 
-    public function mount($id)
+    public function mount($id,Request $request)
     {
+
         $this->product = Product::with('category', 'brand')->where('id', $id)->firstOrFail();
         $this->product_seller_selected = ProductSeller::where(['product_id' => $id, 'status' => 1])->orderBy('discount_price', 'ASC')->first();
-        $favorite = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
-        $favorite ? $this->favoriteProduct = true : $this->favoriteProduct = false;
-        $this->notification = new Notification();
-        $notification = Notification::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
-        if ($notification) {
-            $this->notification_show = true;
-            // $this->notification = $notification;
-        } else {
-            $this->notification_show = false;
-            // $this->notification->system = true;
+        if (auth()->check()) {
+            $favorite = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+            $favorite ? $this->favoriteProduct = true : $this->favoriteProduct = false;
+
+            $notification = Notification::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
+            if ($notification) {
+                $this->notification_show = true;
+                // $this->notification = $notification;
+            } else {
+                $this->notification_show = false;
+                // $this->notification->system = true;
+            }
+            if ($this->product_seller_selected) {
+                $ps = Cart::where(['product_seller_id' => $this->product_seller_selected->id, 'user_id' => auth()->user()->id])->first();
+                if ($ps) {
+                    $this->addToCart = true;
+                } else {
+                    $this->addToCart = false;
+                }
+            }
+
+        }else{
+            if ($this->product_seller_selected) {
+                $ip = $request->ip();
+                $ps = Cart::where(['product_seller_id' => $this->product_seller_selected->id, 'ip' => $ip])->first();
+                if ($ps) {
+                    $this->addToCart = true;
+                } else {
+                    $this->addToCart = false;
+                }
+            }
         }
-
-
+        $this->notification = new Notification();
     }
 
     protected $rules = [
@@ -104,7 +129,6 @@ class Index extends Component
             if ($rate) {
                 $rate->delete();
                 $this->emit('toast', 'success', ' امتیاز شما حذف شد.');
-
             } else {
                 Rate::create([
                     'user_id' => auth()->user()->id,
@@ -114,7 +138,6 @@ class Index extends Component
                 ]);
             }
             $this->emit('toast', 'success', ' امتیاز شما ثبت شد.');
-
         } else {
             return $this->redirect('/login');
         }
@@ -127,14 +150,12 @@ class Index extends Component
 
             if ($com->report == 1) {
                 $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
-
             } else {
                 $com->update([
                     'report' => 1
                 ]);
             }
             $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
-
         } else {
             return $this->redirect('/login');
         }
@@ -154,7 +175,6 @@ class Index extends Component
             if ($rate) {
                 $rate->delete();
                 $this->emit('toast', 'success', ' امتیاز شما حذف شد.');
-
             } else {
                 Rate::create([
                     'user_id' => auth()->user()->id,
@@ -165,7 +185,6 @@ class Index extends Component
             }
 
             $this->emit('toast', 'success', ' امتیاز شما ثبت شد.');
-
         } else {
             return $this->redirect('/login');
         }
@@ -180,7 +199,6 @@ class Index extends Component
                 'dislike' => 1
             ]);
             $this->emit('toast', 'success', ' امتیاز شما ثبت شد.');
-
         } else {
             return $this->redirect('/login');
         }
@@ -194,14 +212,12 @@ class Index extends Component
 
             if ($review->report == 1) {
                 $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
-
             } else {
                 $review->update([
                     'report' => 1,
                 ]);
             }
             $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
-
         } else {
             return $this->redirect('/login');
         }
@@ -227,63 +243,68 @@ class Index extends Component
         } else {
             return $this->redirect('/login');
         }
-
     }
 
-    public function addToCart($id)
+    public function addToCart($id, Request $request)
     {
-        $productSeller = ProductSeller::find($id);
-        $carts = Cart::where('product_seller_id', $id)->first();
-        $userIp = Request::ip();
-        dd($carts);
-        if ($carts) {
-            $carts->update([
-                'count' => $this->product_count,
-            ]);
+        // $cartProductSeller = null;
+        $userIp = $request->ip();
+
+        if (auth()->check()) {
+            // dd(auth()->user()->id);
+            $cartProductSeller = Cart::where(['product_seller_id' => $id, 'user_id' => auth()->user()->id])->first();
+        } else {
+            $cartProductSeller = Cart::where(['product_seller_id' => $id, 'ip' => $userIp])->first();
+        }
+        // dd($cartProductSeller);
+
+        if ($cartProductSeller) {
+            $this->addToCart = true;
         } else {
             if ($userIp == '127.0.0.1') {
                 if (auth()->user()) {
                     $cart = Cart::create([
-                        'ip' => $userIp,
+                        // 'ip' => $userIp,
                         'user_id' => auth()->user()->id,
-                        'product_seller_id' => $productSeller->id,
-                        'product_id' => $productSeller->product_id,
-                        'count' => 1,
-                        'product_price' => $productSeller->price,
-                        'product_price_discount' => $productSeller->discount_price,
-                        'product_color' => $productSeller->color_id,
-                        'product_vendor' => $productSeller->vendor_id,
-                        'product_warranty' => $productSeller->warranty_id,
+                        'product_seller_id' => $this->product_seller_selected->id,
+                        'product_id' => $this->product_seller_selected->product_id,
+                        'count' =>  $this->product_count,
+                        'product_price' => $this->product_seller_selected->price,
+                        'product_price_discount' => $this->product_seller_selected->discount_price,
+                        'product_color' => $this->product_seller_selected->color_id,
+                        'product_vendor' => $this->product_seller_selected->vendor_id,
+                        'product_warranty' => $this->product_seller_selected->warranty_id,
                     ]);
+                    $this->addToCart = true;
                 } else {
                     $cart = Cart::create([
                         'ip' => $userIp,
-                        'product_seller_id' => $productSeller->id,
-                        'product_id' => $productSeller->product_id,
-                        'count' => 1,
-                        'product_price' => $productSeller->price,
-                        'product_price_discount' => $productSeller->discount_price,
-                        'product_color' => $productSeller->color_id,
-                        'product_vendor' => $productSeller->vendor_id,
-                        'product_warranty' => $productSeller->warranty_id,
+                        'product_seller_id' => $this->product_seller_selected->id,
+                        'product_id' => $this->product_seller_selected->product_id,
+                        'count' => $this->product_count,
+                        'product_price' => $this->product_seller_selected->price,
+                        'product_price_discount' => $this->product_seller_selected->discount_price,
+                        'product_color' => $this->product_seller_selected->color_id,
+                        'product_vendor' => $this->product_seller_selected->vendor_id,
+                        'product_warranty' => $this->product_seller_selected->warranty_id,
                     ]);
+                    $this->addToCart = true;
                 }
-
             } else {
-                $userIp2 = Request::ip();
+                $userIp2 = $request->ip();
                 $location = Location::get($userIp2);
                 if (auth()->user()) {
                     $cart = Cart::create([
                         'user_id' => auth()->user()->id,
                         'ip' => $userIp2,
-                        'product_seller_id' => $productSeller->id,
-                        'product_id' => $productSeller->product_id,
+                        'product_seller_id' => $this->product_seller_selected->id,
+                        'product_id' => $this->product_seller_selected->product_id,
                         'count' => 1,
-                        'product_price' => $productSeller->price,
-                        'product_price_discount' => $productSeller->discount_price,
-                        'product_color' => $productSeller->color_id,
-                        'product_vendor' => $productSeller->vendor_id,
-                        'product_warranty' => $productSeller->warranty_id,
+                        'product_price' => $this->product_seller_selected->price,
+                        'product_price_discount' => $this->product_seller_selected->discount_price,
+                        'product_color' => $this->product_seller_selected->color_id,
+                        'product_vendor' => $this->product_seller_selected->vendor_id,
+                        'product_warranty' => $this->product_seller_selected->warranty_id,
                         'countryName' => $location->countryName,
                         'regionName' => $location->regionName,
                         'cityName' => $location->cityName,
@@ -294,17 +315,18 @@ class Index extends Component
                         'latitude' => $location->latitude,
                         'longitude' => $location->longitude,
                     ]);
+                    $this->addToCart = true;
                 } else {
                     $cart = Cart::create([
                         'ip' => $userIp2,
-                        'product_seller_id' => $productSeller->id,
-                        'product_id' => $productSeller->product_id,
+                        'product_seller_id' => $this->product_seller_selected->id,
+                        'product_id' => $this->product_seller_selected->product_id,
                         'count' => 1,
-                        'product_price' => $productSeller->price,
-                        'product_price_discount' => $productSeller->discount_price,
-                        'product_color' => $productSeller->color_id,
-                        'product_vendor' => $productSeller->vendor_id,
-                        'product_warranty' => $productSeller->warranty_id,
+                        'product_price' => $this->product_seller_selected->price,
+                        'product_price_discount' => $this->product_seller_selected->discount_price,
+                        'product_color' => $this->product_seller_selected->color_id,
+                        'product_vendor' => $this->product_seller_selected->vendor_id,
+                        'product_warranty' => $this->product_seller_selected->warranty_id,
                         'countryName' => $location->countryName,
                         'regionName' => $location->regionName,
                         'cityName' => $location->cityName,
@@ -315,12 +337,10 @@ class Index extends Component
                         'latitude' => $location->latitude,
                         'longitude' => $location->longitude,
                     ]);
+                    $this->addToCart = true;
                 }
             }
         }
-
-        // return $this->redirect('/cart');
-
     }
     public function addToCartProductSeller($id)
     {
@@ -352,11 +372,18 @@ class Index extends Component
         $this->vendor_new = $seller;
     }
 
+    public function showNotificationForm()
+    {
+        if (auth()->check()) {
+            $this->show_form_notification = true;
+        } else {
+            return redirect('login');
+        }
+    }
     public function notificationReModal($id)
     {
         $this->validate();
-        $notification = Notification::where('product_id', $this->product->id)->
-            where('user_id', auth()->user()->id)->first();
+        $notification = Notification::where('product_id', $this->product->id)->where('user_id', auth()->user()->id)->first();
         if ($notification) {
 
             if ($this->notification->sms == null && $this->notification->email == null && $this->notification->system == null) {
@@ -375,24 +402,19 @@ class Index extends Component
                 $this->notification_show = true;
                 $this->show_form_notification = false;
             }
-
-
         } else {
             Notification::create([
                 'user_id' => auth()->user()->id,
                 'product_id' => $this->product->id,
-                'sms' => $this->notification->sms? 1 : 0,
-                'email' => $this->notification->email? 1 : 0,
-                'system' => $this->notification->system? 1 : 0,
+                'sms' => $this->notification->sms ? 1 : 0,
+                'email' => $this->notification->email ? 1 : 0,
+                'system' => $this->notification->system ? 1 : 0,
                 'type' => 'موجود شدن',
             ]);
             $this->notification_show = true;
             $this->show_form_notification = false;
-
         }
-
         $this->emit('toast', 'success', ' محصول ثبت شد و در صورت موجود بودن با روش های انتخابی اطلاع رسانی خواهد شد.');
-        //        return $this->redirect(request()->header('Referer'));
     }
 
     public function favoriteProduct($id)
@@ -403,7 +425,6 @@ class Index extends Component
                 $favorites->delete();
                 $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
                 $this->product->id == $id ? $this->favoriteProduct = false : null;
-
             } else {
                 Favorite::create([
                     'product_id' => $id,
@@ -425,7 +446,6 @@ class Index extends Component
                 $observed->delete();
                 $this->emit('toast', 'success', 'محصول از اطلاع رسانی ها حذف شد.');
                 $this->observedProduct = false;
-
             } else {
                 Observed::create([
                     'product_id' => $id,
@@ -455,8 +475,6 @@ class Index extends Component
                 } else {
                     return $this->redirect(route('compare.step1', $id));
                 }
-
-
             } else {
                 Compare::create([
                     'user_id' => auth()->user()->id,
@@ -465,22 +483,36 @@ class Index extends Component
 
                 return $this->redirect(route('compare.step1', $id));
             }
-
-
         } else {
             $this->redirect('/login');
         }
-
-
     }
 
-    public function ProductSellerSelected($id)
+    public function ProductSellerSelected($id,Request $request)
     {
         $this->product_seller_selected = ProductSeller::find($id);
+        if(auth()->check()){
+            $ps = Cart::where(['product_seller_id' => $id, 'user_id' => auth()->user()->id])->first();
+            if ($ps) {
+                $this->addToCart = true;
+            } else {
+                $this->addToCart = false;
+            }
+        }else{
+            $ip = $request->ip();
+            $ps = Cart::where(['product_seller_id' => $id, 'ip' => $ip])->first();
+            if ($ps) {
+                $this->addToCart = true;
+            } else {
+                $this->addToCart = false;
+            }
+        }
         $this->product_count = 1;
     }
     public function render()
     {
+
+
 
         $product = $this->product;
         $productGallerys = Gallery::where(['product_id' => $product->id, 'status' => 1])->get();
@@ -499,8 +531,7 @@ class Index extends Component
 
 
         if (auth()->check()) {
-            $userhistory = \App\Models\UserHistory::where('user_id', auth()->user()->id)->
-                where('product_id', $product->id)->first();
+            $userhistory = \App\Models\UserHistory::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
 
             if ($userhistory == null) {
                 \App\Models\UserHistory::create([
@@ -510,9 +541,7 @@ class Index extends Component
             }
         }
 
-        $c = Comment::where('status', 1)->
-            where('product_id', $product->id)->where('parent', 0)->
-            latest()->get();
+        $c = Comment::where('status', 1)->where('product_id', $product->id)->where('parent', 0)->latest()->get();
         // dd($c);
 
 
@@ -520,40 +549,32 @@ class Index extends Component
 
         // $productSeller = ProductSeller::where('product_id', $product->id)->get();
         // $productSeller = $productSeller->unique('color_id');
-        $productSeller_max_price = ProductSeller::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->get();
+        $productSeller_max_price = ProductSeller::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->get();
 
-        $productSeller_min_price_first = ProductSeller::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->first();
-        $productSeller_max_price_first = ProductSeller::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->first();
+        $productSeller_min_price_first = ProductSeller::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->first();
+        $productSeller_max_price_first = ProductSeller::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->first();
 
-        $productSeller_max_price_all = ProductSeller::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->take('3')->get();
-        $productSeller_max_price_all_init = ProductSeller::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->skip('3')->take(PHP_INT_MAX)->get();
+        $productSeller_max_price_all = ProductSeller::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->take('3')->get();
+        $productSeller_max_price_all_init = ProductSeller::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->skip('3')->take(PHP_INT_MAX)->get();
         $productSeller_count = ProductSeller::where('product_id', $product->id)->count();
 
 
 
         $priceDate = PriceDate::where('product_id', $product->id)->get();
 
-        $priceDate_min_price = PriceDate::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->get();
+        $priceDate_min_price = PriceDate::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->get();
 
         ///
-        $priceDate_min_price_first = PriceDate::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->first();
+        $priceDate_min_price_first = PriceDate::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->first();
 
-        $priceDate_min_price_first1 = PriceDate::where('product_id', $product->id)->
-            orderBy('discount_price', 'ASC')->get();
+        $priceDate_min_price_first1 = PriceDate::where('product_id', $product->id)->orderBy('discount_price', 'ASC')->get();
 
 
 
         // ;        if ($priceDate_min_price_first1) {
-//             // $date1 = $priceDate_min_price_first->created_at;
-//             $date2 = $priceDate_min_price_first1->created_at;
-//             $different = $date2->diff($date1);
+        //             // $date1 = $priceDate_min_price_first->created_at;
+        //             $date2 = $priceDate_min_price_first1->created_at;
+        //             $different = $date2->diff($date1);
 
         //         }
         // $day = $different->format('%d');
@@ -744,9 +765,7 @@ class Index extends Component
             ]);
 
 
-        $comments = $this->readyToLoad ? Comment::where('status', 1)->
-            where('product_id', $product->id)->where('parent', 0)->
-            latest()->paginate(15) : [];
+        $comments = $this->readyToLoad ? Comment::where('status', 1)->where('product_id', $product->id)->where('parent', 0)->latest()->paginate(15) : [];
         return view(
             'livewire.home.product.index',
             compact(
@@ -761,8 +780,7 @@ class Index extends Component
                 'productSeller_max_price_all',
                 'priceDate_min_price_first',
                 'productSeller_max_price_all_init',
-                'productSeller_min_price_first'
-                ,
+                'productSeller_min_price_first',
                 'comments'
             )
         )->layout('layouts.home1');

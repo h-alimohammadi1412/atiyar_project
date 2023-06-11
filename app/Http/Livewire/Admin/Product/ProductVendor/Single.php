@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Product\ProductVendor;
 
 use App\Http\Controllers\AdminControllerLivewire;
+use App\Models\PriceDate;
 use App\Models\ProductColor;
 use App\Models\ProductSeller;
 use Livewire\WithPagination;
@@ -23,7 +24,7 @@ class Single extends AdminControllerLivewire
     protected $rules = [
         'productSeller.product_id' => 'nullable',
         'productSeller.vendor_id' => 'required',
-        'productSeller.time' => 'required',
+        'productSeller.time' => 'nullable',
         'productSeller.warranty_id' => 'required',
         'productSeller.price' => 'required',
         'productSeller.discount_price' => 'required',
@@ -31,6 +32,7 @@ class Single extends AdminControllerLivewire
         'productSeller.product_count' => 'required',
         'productSeller.limit_order' => 'required',
         'productSeller.status' => 'nullable',
+        'productSeller.anbar' => 'nullable',
     ];
 
     public function updated($product_id)
@@ -48,10 +50,16 @@ class Single extends AdminControllerLivewire
         if (!$color) {
             $this->productSeller->product_id = $this->product->id;
             $this->productSeller->save();
+            PriceDate::create([
+                'seller_id' => $this->productSeller->vendor_id,
+                'product_id' => $this->productSeller->product_id,
+                'price' => $this->productSeller->price,
+                'discount_price' => $this->productSeller->discount_price,
+                'product_seller_id' => $this->productSeller->id,
+            ]);
             $this->createLog('تنوع قیمت', 'admin/productSeller', $this->product->title, 'ایجاد');
             setProductPrice($this->product->id);
-            $this->emit('toast', 'success', ' تنوع قیمت محصول با موفقیت ایجاد شد.');
-
+            
             $this->productSeller->product_id = '';
             $this->productSeller->vendor_id = '';
             $this->productSeller->time = '';
@@ -62,6 +70,7 @@ class Single extends AdminControllerLivewire
             $this->productSeller->product_count = '';
             $this->productSeller->limit_order = '';
             $this->productSeller->status = '';
+            $this->productSeller->anbar = '';
             return redirect()->back();
 
         } else {

@@ -1,18 +1,3 @@
-{{-- <div>
-    <main id="main">
-        <div id="HomePageTopBanner"></div>
-        <div id="content">
-            <section class="o-page c-cart-page">
-                <div class="container">
-                    @include('livewire.home.cart.allfile')
-                </div>
-            </section>
-        </div>
-        <div id="sidebar">
-            <aside></aside>
-        </div>
-    </main>
-</div> --}}
 @section('title','سبد خرید')
 <div>
     <div class="page-title-overlap bg-dark pt-4">
@@ -24,9 +9,6 @@
                         <li class="breadcrumb-item">
                             <a class="text-nowrap" href="{{ url("/") }}"><i class="ci-home"></i>آتی یار</a>
                         </li>
-                        {{-- <li class="breadcrumb-item text-nowrap">
-                            <a href="shop-grid-ls.html">فروشگاه</a>
-                        </li> --}}
                         <li class="breadcrumb-item text-nowrap active" aria-current="page">
                             لیست خرید بعدی
                         </li>
@@ -44,8 +26,6 @@
             <section class="col-lg-8">
                 <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
                     <h2 class="h6 text-light mb-0">لیست خرید بعدی</h2>
-                    {{-- <a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i
-                            class="ci-arrow-left me-2"></i>ادامه خرید</a> --}}
                 </div>
                 @if (sizeof($carts)>0)
                 @foreach ($carts as $cart)
@@ -61,9 +41,6 @@
                                     href="{{ url('/product/at-' . $cart->productSeller->product->id . '/' . $cart->productSeller->product->link) }}">{{
                                     $cart->productSeller->product->title }}</a>
                             </h3>
-                            {{-- <div class="fs-sm">
-                                <span class="text-muted me-2">سایز : </span>8.5
-                            </div> --}}
                             <div class="fs-sm">
                                 <span class="text-muted me-2">رنگ:</span>{{ $cart->productSeller->color->name }}
                             </div>
@@ -98,14 +75,6 @@
                     </div>
                     <div class="d-flex flex-wrap justify-content-center mx-auto mx-sm-0 ps-sm-3 pt-2 pt-sm-0 text-center text-sm-start"
                         style="max-width: 9rem">
-                        {{-- <div class="align-items-center border d-flex justify-content-between px-2 rounded-pill"
-                            style="width:120px;height: 40px">
-                            <i class="ci-add me-2" wire:click="updateCountProduct({{ $cart->id }},'add')"
-                                style="font-size: 13px;font-weight: bold;cursor:@if($cart->count < $cart->productSeller->limit_order) pointer; @else not-allowed;color: #7d879c6e !important; @endif"></i>
-                            <span>{{ $cart->count }}</span>
-                            <i class="ci-a me-2" wire:click="updateCountProduct({{ $cart->id }},'minus')"
-                                style="font-size: 33px;font-weight: bold;margin-top: -13px; cursor: @if($cart->count > 1) pointer; @else not-allowed;color: #7d879c6e !important; @endif">-</i>
-                        </div> --}}
                         <button class="btn btn-link fs-md px-0 py-2 text-danger"
                             wire:click="addToCartFromCartOther({{ $cart->id }})">
                             <i class="ci-cart me-2"></i><span class="fs-sm">اضافه به سبد خرید</span>
@@ -126,7 +95,6 @@
                 </button> --}}
             </section>
             <!-- Sidebar-->
-
             <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
                 <div class="bg-white rounded-3 shadow-lg p-4">
                     <div class="py-2 px-xl-2">
@@ -138,83 +106,8 @@
                                 کرده و خرید آن‌ها را تکمیل کنید.
                             </p>
                         </div>
-                        {{-- <div class="mb-3 mb-4">
-                            <label class="form-label mb-3" for="order-comments"><span
-                                    class="badge bg-info fs-xs me-2">متن</span><span class="fw-medium">توجه داشته
-                                    باشید</span></label>
-                            <textarea class="form-control" rows="6" id="order-comments"></textarea>
-                        </div>
-                        <div class="accordion" id="order-options">
-                            <div class="accordion-item">
-                                <h3 class="accordion-header">
-                                    <a class="accordion-button" href="#promo-code" role="button"
-                                        data-bs-toggle="collapse" aria-expanded="true" aria-controls="promo-code">اعمال
-                                        کد
-                                    </a>
-                                </h3>
-                                <div class="accordion-collapse collapse show" id="promo-code"
-                                    data-bs-parent="#order-options">
-                                    <form class="accordion-body needs-validation" method="post" novalidate>
-                                        <div class="mb-3">
-                                            <input class="form-control" type="text" placeholder="کد تخفیف" required />
-                                            <div class="invalid-feedback">
-                                                کد تخفیف را وارد کنید
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-outline-primary d-block w-100" type="submit">
-                                            اعمال کد
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h3 class="accordion-header">
-                                    <a class="accordion-button collapsed" href="#shipping-estimates" role="button"
-                                        data-bs-toggle="collapse" aria-expanded="true"
-                                        aria-controls="shipping-estimates">تخمین حمل و نقل</a>
-                                </h3>
-                                <div class="accordion-collapse collapse" id="shipping-estimates"
-                                    data-bs-parent="#order-options">
-                                    <div class="accordion-body">
-                                        <form class="needs-validation" novalidate>
-                                            <div class="mb-3">
-                                                <select class="form-select" required>
-                                                    <option value="">کشور</option>
-                                                    <option value="استرالیا">استرالیا</option>
-                                                    <option value="Belgium">فرانسه</option>
-                                                    <option value="کانادا">کانادا</option>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    لطفاً کشور خود را انتخاب کنید!
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <select class="form-select" required>
-                                                    <option value="">انتخاب شهر</option>
-                                                    <option value="Bern">یزد</option>
-                                                    <option value="Brussels">شهرکرد</option>
-                                                    <option value="Canberra">تهران</option>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    لطفاً شهر خود را انتخاب کنید!
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <input class="form-control" type="text" placeholder="کد پستی"
-                                                    required />
-                                                <div class="invalid-feedback">
-                                                    کد پستی را وارد کنید
-                                                </div>
-                                            </div>
-                                            <button class="btn btn-outline-primary d-block w-100" type="submit">
-                                                حمل و نقل را محاسبه کنید
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <p class="text-center"><span class="fw-bold"> {{ sizeof($carts) }} کالا </span>  در لیست خرید بعدی شماست</p>
+                        <p class="text-center"><span class="fw-bold"> {{ $carts->count() }} کالا </span> در لیست خرید
+                            بعدی شماست</p>
                         <a class="btn btn-primary btn-shadow d-block w-100 mt-4" wire:click="addAllToCart"><i
                                 class="ci-cart fs-lg me-2"></i>انتقال همه به سبد خرید</a>
                     </div>

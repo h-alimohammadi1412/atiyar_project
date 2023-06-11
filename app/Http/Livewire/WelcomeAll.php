@@ -4,11 +4,11 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class Welcome extends Component
+class WelcomeAll extends Component
 {
 
     public function render()
     {
-        return view('livewire.welcome');
+        return view('livewire.welcome-all');
     }
 }

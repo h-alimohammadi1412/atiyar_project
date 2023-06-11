@@ -14,7 +14,7 @@
                                     <ul class="widget-list">
                                         @foreach ($category->getChild as $categoryChild)
                                             <li class="widget-list-item pb-1">
-                                                <a class="widget-list-link"
+                                                <a target="_blank" class="widget-list-link"
                                                     href="{{ url('main/' . $categoryChild->link) }}">{{ $categoryChild->title }}</a>
                                             </li>
                                         @endforeach

@@ -104,6 +104,7 @@ Route::post('/newsletter', [PostController::class, 'newsletter'])->name('post.ne
 
 //cart
 Route::get('/cart', \App\Http\Livewire\Home\Cart\Index::class)->name('cart.index');
+Route::get('/next-cart', \App\Http\Livewire\Home\Cart\NextCart::class)->name('cart.index');
 //shopping
 Route::get('/shipping', \App\Http\Livewire\Home\Order\Shipping::class)
     ->name('order.shipping')->middleware('auth');

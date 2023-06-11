@@ -11,13 +11,13 @@
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title=""
                                 data-bs-original-title="اضافه کردن به علاقه مندی" aria-label="اضافه کردن به علاقه مندی"
-                                wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a
+                                wire:click="favoriteProduct({{ $product->id }})"><i class="ci-heart"></i></button><a target="_blank"
                                 class="card-img-top d-block overflow-hidden"
                                 href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}"><img
                                     src="/storage/{{ $product->img }}" alt="محصول"></a>
-                            <div class="card-body py-2 cart_body_product"><a class="product-meta d-block fs-xs pb-1"
+                            <div class="card-body py-2 cart_body_product"><a target="_blank" class="product-meta d-block fs-xs pb-1"
                                     href="{{ url('/main/' . $product->category->link) }}">{{ $product->category->title }}</a>
-                                <h3 class="product-title fs-sm"><a
+                                <h3 class="product-title fs-sm"><a target="_blank"
                                         href="{{ url('/product/at-' . $product->id . '/' . $product->link) }}">{{ substr($product->title, 50) . '...' }}</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">

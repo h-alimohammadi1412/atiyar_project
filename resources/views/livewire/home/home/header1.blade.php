@@ -1,18 +1,3 @@
-{{-- <header class="c-header   js-header">
-    <div class="container">
-        <div class="c-header__row js-header-sticky">
-            <div class="c-header__right-side">
-                @include('livewire.home.home.setting.header.logo')
-                @livewire('global-search')
-              @include('livewire.home.home.setting.header.search')
-            </div>
-            @include('livewire.home.home.setting.header.login')
-        </div>
-    </div>
-    @include('livewire.home.home.setting.header.navbar')
-</header>
-<div class="c-navi-categories__overlay js-navi-overlay"></div> --}}
-
 <div class="navbar-sticky bg-light">
     <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
@@ -53,7 +38,7 @@
                             {{-- <a class="dropdown-item" href="#">Another action</a> --}}
                             <form method="POST" action="{{ route('logout') }}"  x-data>
                                 @csrf
-                                <a  href="{{ route('logout') }}" @click.prevent="$root.submit();" class="dropdown-item">خروج از حساب کاربری</a>
+                                <a  href="{{ route('logout') }}" class="dropdown-item">خروج از حساب کاربری</a>
                             </form>
                         </div>
 
@@ -73,7 +58,7 @@
                         <span class="navbar-tool-label">4</span>
                         <i class="navbar-tool-icon ci-cart"></i>
                     </a>
-                    <a class="navbar-tool-text" href="shop-cart.html"><small>سبدخرید</small>1,247.00</a>
+                    <a class="navbar-tool-text" href="{{ url('/cart') }}"><small>سبدخرید</small>1,247.00</a>
                     <!-- Cart dropdown-->
                     <div class="dropdown-menu dropdown-menu-end">
                         <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">

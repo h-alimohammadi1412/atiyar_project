@@ -15,8 +15,9 @@ class CreatePriceDatesTable extends Migration
     {
         Schema::create('price_dates', function (Blueprint $table) {
             $table->id();
-            $table->string('product_seller_id');
-            $table->string('product_id');
+            $table->integer('seller_id');
+            $table->integer('product_seller_id');
+            $table->integer('product_id');
             $table->string('price')->nullable();
             $table->string('discount_price')->nullable();
             $table->timestamps();

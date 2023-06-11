@@ -35,6 +35,7 @@
                             <th>قیمت تخفیف خورده</th>
                             <th>زمان ارسال</th>
                             <th>وضعیت تنوع قیمت</th>
+                            <th>موجود در انبار فروشنده</th>
                             <th>عملیات</th>
                         </tr>
                         </thead>
@@ -75,6 +76,20 @@
                                             </button>
                                         @else
                                             <button wire:click="updateStatus('ProductSeller','productSeller','تنوع قیمت','status',{{ $productSeller->id }})"
+                                                    type="submit" class="badge-danger badge"
+                                                    style="background-color: red">
+                                                غیرفعال
+                                            </button>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($productSeller->anbar == 1)
+                                            <button wire:click="updateStatus('ProductSeller','productSeller','تنوع قیمت','anbar',{{ $productSeller->id }})"
+                                                    type="submit" class="badge-success badge"
+                                                    style="background-color: green">فعال
+                                            </button>
+                                        @else
+                                            <button wire:click="updateStatus('ProductSeller','productSeller','تنوع قیمت','anbar',{{ $productSeller->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال
@@ -203,6 +218,15 @@
                                     <input id="option10" type="checkbox" wire:model.defer="productSeller.status" name="status"
                                            class="form-control">
                                     <label for="option10">وضعیت محصول:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="notificationGroup">
+                                    <input id="option101" type="checkbox" wire:model.defer="productSeller.anbar" name="anbar"
+                                           class="form-control">
+                                    <label for="option101">موجود در انبار فروشنده:</label>
                                 </div>
                             </div>
                         </div>
