@@ -2,26 +2,19 @@
 
 namespace App\Http\Livewire\Admin\Discount;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Discount;
 use App\Models\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class IndexDiscount extends Component
+class IndexDiscount extends AdminControllerLivewire
 {
     use WithPagination;
 
     protected $listeners = [
         'category.added' => '$refresh'
     ];
-    protected $paginationTheme = 'bootstrap';
-
-    public $search;
-
-    protected $queryString = ['search'];
-
-    public $readyToLoad = false;
-
     public Discount $discount;
 
     public function mount()
@@ -36,8 +29,16 @@ class IndexDiscount extends Component
         'discount.product_id' => 'nullable',
         'discount.category_id' => 'nullable',
         'discount.vendor_id' => 'nullable',
-        'discount.date_expire' => 'nullable',
+        'discount.date_expire' => 'required',
         'discount.status' => 'nullable',
+        'discount.code' => 'nullable',
+    ];
+
+    protected $validationAttributes =[
+        'discount.price' => 'مبلغ',
+        'discount.percent' => 'درصد',
+        'discount.date_expire' => 'تاریخ انقضاء',
+        'discount.code' => 'کد',
     ];
 
     public function updated($code)
@@ -48,31 +49,34 @@ class IndexDiscount extends Component
 
     public function categoryForm()
     {
+        
+        // dd($this->validate());
+        $data =$this->validate()['discount'];
 
-        $this->validate();
-        $code = mt_rand(1000000000 ,  9999999999999);
+        $code = mt_rand(1000000000,  9999999999999);
         $gift = Discount::query()->create([
-            'date_expire' => $this->discount->date_expire,
-            'price' => $this->discount->price,
-            'percent' => $this->discount->percent,
-            'product_id' => $this->discount->product_id,
-            'category_id' => $this->discount->category_id,
-            'vendor_id' => $this->discount->vendor_id,
-            'code' => $code,
-            'status' => $this->discount->status ? true:false ,
+            'date_expire' =>  $data['date_expire'],
+            'price' =>  $data['price']=='' ? null : $data['price'],
+            'percent' =>  $data['percent'],
+            'product_id' =>  $data['product_id'],
+            'category_id' =>  $data['category_id'],
+            'vendor_id' =>  $data['vendor_id'],
+            'code' => $data['code'] ? $data['code'] : $code,
+            'status' =>  $data['status'] ? true : false,
         ]);
-        if ($this->discount->percent !=null) {
+        if ( $data['percent'] != null) {
             $gift->update([
-               'type'=>0
+                'type' => 0
             ]);
         }
-        if ($this->discount->price !=null) {
+        if ($this->discount->price != null) {
             $gift->update([
-               'type'=>1
+                'type' => 1
             ]);
         }
 
 
+        $this->discount->code = "";
         $this->discount->date_expire = "";
         $this->discount->price = "";
         $this->discount->percent = "";
@@ -80,55 +84,8 @@ class IndexDiscount extends Component
         $this->discount->category_id = "";
         $this->discount->vendor_id = "";
         $this->discount->status = false;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن کد تخفیف' . '-' . auth()->user()->name,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' کد تخفیف با موفقیت ایجاد شد.');
-
+        $this->createLog('کد تخفیف', 'admin/discount', auth()->user()->name, 'ایجاد');
     }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
-
-    public function disableStatus($id)
-    {
-        $discount = Discount::find($id);
-
-        $discount->update([
-           'status'=>0
-        ]);
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'غیرفعال کردن کد تخفیف' . '-' . $discount->code,
-                'actionType' => 'حذف'
-            ]);
-            $this->emit('toast', 'success', ' کد تخفیف با موفقیت غیرفعال شد.');
-
-    }
-
-
-    public function enableStatus($id)
-    {
-        $discount = Discount::find($id);
-
-        $discount->update([
-            'status'=>1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن کد تخفیف' . '-' . $discount->code,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' کد تخفیف با موفقیت فعال شد.');
-
-    }
-
 
     public function deleteGift($id)
     {
@@ -136,19 +93,13 @@ class IndexDiscount extends Component
 
         $discount->delete();
         $this->emit('toast', 'success', ' کد تخفیف با موفقیت حذف شد.');
-
     }
 
 
     public function render()
     {
 
-        $discounts = $this->readyToLoad ? Discount::where('code', 'LIKE', "%{$this->search}%")->
-        orWhere('price', 'LIKE', "%{$this->search}%")->
-        orWhere('percent', 'LIKE', "%{$this->search}%")->
-        orWhere('product_id', 'LIKE', "%{$this->search}%")->
-        orWhere('id', $this->search)->
-        latest()->paginate(15) : [];
-        return view('livewire.admin.discount.index-discount',compact('discounts'));
+        $discounts = $this->readyToLoad ? Discount::where('code', 'LIKE', "%{$this->search}%")->orWhere('price', 'LIKE', "%{$this->search}%")->orWhere('percent', 'LIKE', "%{$this->search}%")->orWhere('product_id', 'LIKE', "%{$this->search}%")->orWhere('id', $this->search)->latest()->paginate(15) : [];
+        return view('livewire.admin.discount.index-discount', compact('discounts'));
     }
 }
