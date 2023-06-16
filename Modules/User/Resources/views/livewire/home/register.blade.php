@@ -91,7 +91,7 @@
                         <div class="mb-3 pt-4">
                             <label class="form-label " for="si-email">لطفا شماره موبایل خود را وارد
                                 کنید</label>
-                            <input wire:model.lazy="user.phone" class="form-control" type="text" id="si-email"
+                            <input wire:model.lazy="user.mobile" class="form-control" type="text" id="si-email"
                                 placeholder="...09" required>
                             @if ($errors->any())
                                 <div class="alert alert-danger bg-body border-0 mt-2">

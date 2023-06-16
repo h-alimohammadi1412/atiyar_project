@@ -6,7 +6,6 @@ use Modules\User\Http\Controllers\AdminControllerLivewire;
 use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use App\Services\Notification\Notification;
-
 class Register extends AdminControllerLivewire
 {
 
@@ -25,7 +24,7 @@ class Register extends AdminControllerLivewire
 
 
     protected $rules = [
-        'user.phone' => 'required|max:11|min:11',
+        'user.mobile' => ['required','numeric' ,'digits:11','regex:/09([0-9]{9})/'],
     ];
     protected $listeners = ['sendCodeActive'];
     public function updated($phone)
@@ -37,7 +36,7 @@ class Register extends AdminControllerLivewire
     public function userForm()
     {
         $this->validate();
-        $user = User::where('mobile', $this->user->phone)->first();
+        $user = User::where('mobile', $this->user->mobile)->first();
         if ($user) {
             $this->sendActiveCode($user->id);
         } else {
@@ -54,7 +53,7 @@ class Register extends AdminControllerLivewire
             if ($this->input_active_code == $this->active_code) {
                 if ($this->user_id == 0) {
                     $user = User::create([
-                        'mobile' => $this->user->phone,
+                        'mobile' => $this->user->mobile,
                     ]);
                     auth()->loginUsingId($user->id);
                     $this->createLog('User', 'user/profile', 'کاربر جدید', 'افزودن');
@@ -65,10 +64,10 @@ class Register extends AdminControllerLivewire
                     return to_route('home.index');
                 }
             } else {
-                $this->addError('user.phone', 'کد وارد شده صحیح نیست.');
+                $this->addError('user.mobile', 'کد وارد شده صحیح نیست.');
             }
         } else {
-            $this->addError('user.phone', 'کد وارد شده صحیح نیست.');
+            $this->addError('user.mobile', 'کد وارد شده صحیح نیست.');
         }
 
 
@@ -79,7 +78,7 @@ class Register extends AdminControllerLivewire
             $this->user_id = $user_id;
         }
         $this->active_code = random_int(10000, 99999);
-        $res = (new Notification)->sendSms([$this->user->phone], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
+        $res = (new Notification)->sendSms($this->user->mobile, "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
         $this->show_send_code_form = true;
         $type = 'ایجاد حساب';
         SMS::create([
