@@ -72,7 +72,7 @@ class IndexUser extends AdminControllerLivewire
 
         $this->createLog('کاربر','admin/users',$this->user->name,'ایجاد');
 
-        $this->emit('toast', 'success', ' کاربر با موفقیت ایجاد شد.');
+        alert()->success(' کاربر با موفقیت ایجاد شد.', ' کاربر با موفقیت ایجاد شد.');
 
     }
 
@@ -89,7 +89,7 @@ class IndexUser extends AdminControllerLivewire
             'email_verified_at' => now()
         ]);
 
-        $this->emit('toast', 'success', 'ایمیل کاربر با موفقیت تایید شد.');
+        alert()->success('ایمیل کاربر با موفقیت تایید شد.', 'ایمیل کاربر با موفقیت تایید شد.');
     }
 
 
@@ -98,7 +98,7 @@ class IndexUser extends AdminControllerLivewire
         $user = user::find($id);
         $user->delete();
 
-        $this->emit('toast', 'success', ' کاربر با موفقیت حذف شد.');
+        alert()->success(' کاربر با موفقیت حذف شد.', ' کاربر با موفقیت حذف شد.');
 
     }
 

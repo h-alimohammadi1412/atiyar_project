@@ -50,7 +50,7 @@ class Index extends AdminControllerLivewire
         $this->attribute->position = null;
         $this->attribute->status = false;
         $this->createLog('مشخصه کالا', 'admin/attribute/product/'.$this->category->id, $this->attribute->title, 'ایجاد');
-        $this->emit('toast', 'success', ' مشخصات کالا با موفقیت ایجاد شد.');
+        alert()->success('مشخصات کالا با موفقیت ایجاد شد.', ' مشخصات کالا با موفقیت ایجاد شد.');
 
     }
 

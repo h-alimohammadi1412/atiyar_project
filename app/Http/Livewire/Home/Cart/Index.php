@@ -56,7 +56,7 @@ class Index extends Component
         if ($cart) {
             $cart->delete();
         }
-        $this->emit('toast', 'success', 'محصول از سبد شما حذف شد');
+        alert()->success('محصول از سبد شما حذف شد', 'محصول از سبد شما حذف شد');
     }
     public function addToCartOtherFromCart($id)
     {
@@ -66,7 +66,7 @@ class Index extends Component
                 'type' => 1
             ]);
         }
-        $this->emit('toast', 'success', 'محصول به لیست خرید بعدی شما اضافه شد.');
+        alert()->success('محصول به لیست خرید بعدی شما اضافه شد.', 'محصول به لیست خرید بعدی شما اضافه شد.');
     }
 
     public function addAllToCart()
@@ -82,7 +82,7 @@ class Index extends Component
                 'type' => 0
             ]);
         }
-        $this->emit('toast', 'success', ' تمام محصول به لیست خرید بعدی شما اضافه شدند.');
+        alert()->success('تمام محصول به لیست خرید بعدی شما اضافه شدند.', ' تمام محصول به لیست خرید بعدی شما اضافه شدند.');
     }
 
     public function updateBasket()
@@ -98,9 +98,9 @@ class Index extends Component
                 $cart->update([
                     'count' => $cart->count + 1
                 ]);
-                $this->emit('toast', 'success', 'محصول آپدیت شد');
+                $this->emit('محصول آپدیت شد', 'محصول آپدیت شد');
             } else {
-                $this->emit('toast', 'error', 'حداکثر تعداد سفارش برای این محصول ');
+                alert()->error('حداکثر تعداد سفارش برای این محصول ', 'حداکثر تعداد سفارش برای این محصول ');
             }
         } elseif ($operation == 'minus') {
             if ($cart->count > 1) {
@@ -108,7 +108,7 @@ class Index extends Component
                     'count' => $cart->count - 1
                 ]);
             }
-            $this->emit('toast', 'success', 'محصول آپدیت شد');
+            alert()->success('محصول آپدیت شد', 'محصول آپدیت شد');
         }
     }
     public function shipping()
@@ -163,7 +163,7 @@ class Index extends Component
 
                 return $this->redirect(route('order.shipping'));
             } else {
-                $this->emit('toast', 'error', ' هیچ محصولی در سبد خرید ندارید.');
+                alert()->error('هیچ محصولی در سبد خرید ندارید.', ' هیچ محصولی در سبد خرید ندارید.');
             }
         } else {
             return $this->redirect('/login');
@@ -171,7 +171,7 @@ class Index extends Component
     }
     function getCartProduct()
     {
-        
+
         $userIp = Request::ip();
         if (auth()->user()) {
             $cartIps = Cart::where('ip', $userIp)->get();
@@ -210,7 +210,7 @@ class Index extends Component
 
     public function render()
     {
-       
+
         $this->getCartProduct();
 
 
@@ -258,7 +258,7 @@ class Index extends Component
         //     , compact('carts', 'cart_others', 'cart_read_cart'))
         //     ->layout('layouts.home1');
         // }
-        // 
+        //
         // return view('livewire.home.cart.index')->layout('layouts.home');
     }
 }

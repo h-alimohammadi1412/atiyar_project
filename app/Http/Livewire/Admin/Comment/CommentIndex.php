@@ -37,7 +37,7 @@ class CommentIndex extends Component
             'status' => 0
         ]);
 
-        $this->emit('toast', 'success', 'وضعیت نظر با موفقیت غیرفعال شد.');
+        alert()->success('وضعیت نظر با موفقیت غیرفعال شد.', 'وضعیت نظر با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -78,14 +78,14 @@ class CommentIndex extends Component
 
 
 
-        $this->emit('toast', 'success', 'وضعیت نظر با موفقیت فعال شد.');
+        alert()->success('وضعیت نظر با موفقیت فعال شد.', 'وضعیت نظر با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
     {
         $comment = Comment::find($id);
         $comment->delete();
-            $this->emit('toast', 'success', ' نظر با موفقیت حذف شد.');
+            alert()->success(' نظر با موفقیت حذف شد.', ' نظر با موفقیت حذف شد.');
 
     }
 

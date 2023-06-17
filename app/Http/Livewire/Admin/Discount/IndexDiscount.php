@@ -49,7 +49,7 @@ class IndexDiscount extends AdminControllerLivewire
 
     public function categoryForm()
     {
-        
+
         // dd($this->validate());
         $data =$this->validate()['discount'];
 
@@ -92,7 +92,7 @@ class IndexDiscount extends AdminControllerLivewire
         $discount = Discount::find($id);
 
         $discount->delete();
-        $this->emit('toast', 'success', ' کد تخفیف با موفقیت حذف شد.');
+        alert()->success(' کد تخفیف با موفقیت حذف شد.', ' کد تخفیف با موفقیت حذف شد.');
     }
 
 

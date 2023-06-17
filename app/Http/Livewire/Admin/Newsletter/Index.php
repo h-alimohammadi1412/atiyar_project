@@ -44,7 +44,7 @@ class Index extends AdminControllerLivewire
 
         $this->newsletter->email = "";
         $this->createLog('صفحه سایت', 'admin/page', $this->newsletter->email , 'ایجاد');
-        $this->emit('toast', 'success', ' خبرنامه با موفقیت ایجاد شد.');
+        alert()->success('خبرنامه با موفقیت ایجاد شد.', ' خبرنامه با موفقیت ایجاد شد.');
 
     }
     public function render()

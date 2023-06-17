@@ -38,7 +38,7 @@ class Two extends AdminControllerLivewire
         ]);
         $this->footerLinkTwo->page_id = "";
         $this->createLog('صفحه فوتر سایت', 'admin/footer/link2', 'صفحه فوتر سایت', 'ایجاد');
-        $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
+        alert()->success('صفحه به فوتر سایت با موفقیت ایجاد شد.', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
 
     }
 

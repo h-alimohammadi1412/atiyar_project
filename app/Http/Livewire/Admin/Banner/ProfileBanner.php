@@ -69,7 +69,7 @@ class ProfileBanner extends AdminControllerLivewire
         $this->banner->discount = "";
         $this->img = null;
         $this->createLog('بنر پروفایل','admin/banner',$this->banner->title,'ایجاد');
-        $this->emit('toast', 'success', ' بنر پروفایل با موفقیت ایجاد شد.');
+        alert()->success(' بنر پروفایل با موفقیت ایجاد شد.', ' بنر پروفایل با موفقیت ایجاد شد.');
 
     }
 

@@ -57,7 +57,7 @@ class Product extends AdminControllerLivewire
         $this->childCategory_id = null;
         $this->status = false;
         $this->createLog(' محصول ','admin/categorypage/apparel', $this->title_id,'ایجاد');
-        $this->emit('toast', 'success', ' محصول با موفقیت ایجاد شد.');
+        alert()->success('محصول با موفقیت ایجاد شد.', ' محصول با موفقیت ایجاد شد.');
 
     }
 
@@ -76,7 +76,7 @@ class Product extends AdminControllerLivewire
             ->where('id', $id)->limit($id);
         $banner->delete();
         $this->createLog(' محصول ','admin/categorypage/apparel', $banner2->title_id,'حذف');
-        $this->emit('toast', 'success', ' محصول با موفقیت حذف شد.');
+        alert()->success('محصول با موفقیت حذف شد.', ' محصول با موفقیت حذف شد.');
 
     }
 

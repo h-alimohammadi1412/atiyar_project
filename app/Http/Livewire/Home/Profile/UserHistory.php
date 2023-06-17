@@ -17,7 +17,7 @@ class UserHistory extends Component
         $userHistory = \App\Models\UserHistory::find($id);
         $userHistory->delete();
         $this->userHistories = \App\Models\UserHistory::with(['product'])->where('user_id', auth()->user()->id)->latest()->get();
-        $this->emit('toast', 'success', ' تاریخچه بازدید شما با موفقیت حذف شد.');
+        alert()->success('تاریخچه بازدید شما با موفقیت حذف شد.', ' تاریخچه بازدید شما با موفقیت حذف شد.');
     }
     public function render()
     {

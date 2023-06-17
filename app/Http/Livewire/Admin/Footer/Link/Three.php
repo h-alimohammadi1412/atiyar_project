@@ -37,7 +37,7 @@ class Three extends AdminControllerLivewire
         $this->footerLinkThree->page_id = "";
         $this->createLog('صفحه فوتر سایت', 'admin/footer/link3', 'صفحه فوتر سایت', 'ایجاد');
 
-        $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
+        alert()->success('صفحه به فوتر سایت با موفقیت ایجاد شد.', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
 
     }
 

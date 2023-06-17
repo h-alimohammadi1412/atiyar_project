@@ -47,7 +47,7 @@ class Time extends AdminControllerLivewire
         $this->addressTime->time = "";
         $this->addressTime->date = "";
         $this->addressTime->price = "";
-        $this->emit('toast', 'success', ' زمان ارسال با موفقیت ایجاد شد.');
+        alert()->success('زمان ارسال با موفقیت ایجاد شد.', ' زمان ارسال با موفقیت ایجاد شد.');
     }
     public function render()
     {

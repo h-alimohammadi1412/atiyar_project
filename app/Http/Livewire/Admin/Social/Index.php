@@ -56,7 +56,7 @@ class Index extends AdminControllerLivewire
         $this->social->title = "";
         $this->social->link = "";
         $this->createLog('شبکه اجتماعی', 'admin/social', $this->social->title, 'ایجاد');
-        $this->emit('toast', 'success', ' شبکه اجتماعی با موفقیت ایجاد شد.');
+        alert()->success(' شبکه اجتماعی با موفقیت ایجاد شد.', ' شبکه اجتماعی با موفقیت ایجاد شد.');
 
     }
 

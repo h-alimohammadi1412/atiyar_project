@@ -60,7 +60,7 @@ class Index extends AdminControllerLivewire
         $this->slider->status = false;
         $this->img = null;
         $this->createLog('اسلایدر', 'admin/slider', $this->slider->title, 'ایجاد');
-        $this->emit('toast', 'success', ' اسلایدر با موفقیت ایجاد شد.');
+        alert()->success(' اسلایدر با موفقیت ایجاد شد.', ' اسلایدر با موفقیت ایجاد شد.');
 
     }
 

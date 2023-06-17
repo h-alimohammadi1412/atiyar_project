@@ -60,7 +60,7 @@ class ForgetPassword extends Component
             ]);
             return to_route('users.password.forgetPhone',$email->id);
         } else {
-            $this->emit('toast', 'error', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
+            $this->emit('شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
         }
     }
 

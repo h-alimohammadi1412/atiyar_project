@@ -48,7 +48,7 @@ class ConfirmPassword extends Component
             ]);
             return to_route('users.confirm.password.verify',$mobile->id);
         } else {
-            $this->emit('toast', 'error', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
+            alert()->error('شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
         }
     }
 

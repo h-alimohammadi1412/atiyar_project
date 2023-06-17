@@ -33,16 +33,16 @@ class Index extends Component
             $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
             if ($favorites) {
                 $favorites->delete();
-                $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
+                alert()->success('محصول از علاقه مندی ها حذف شد.', 'محصول از علاقه مندی ها حذف شد.');
             } else {
                 Favorite::create([
                     'product_id' => $id,
                     'user_id' => auth()->user()->id
                 ]);
-                $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+                alert()->success('محصول به علاقه مندی ها اضافه شد.', 'محصول به علاقه مندی ها اضافه شد.');
             }
         }else{
-            $this->emit('toast', 'success', 'برای اضافه کردن به علاقه مندی ها باید وارد شوید.');
+            alert()->success('برای اضافه کردن به علاقه مندی ها باید وارد شوید.', 'برای اضافه کردن به علاقه مندی ها باید وارد شوید.');
         }
     }
     public function render()

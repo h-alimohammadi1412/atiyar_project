@@ -36,14 +36,14 @@ class Trashed extends AdminControllerLivewire
         if ($category->img) {
             Storage::disk('public')->delete("storage", $category->img);
         }$category->forceDelete();
-        $this->emit('toast', 'success', ' دسته سطح چهارم به صورت کامل با موفقیت حذف شد.');
+        alert()->success('دسته سطح چهارم به صورت کامل با موفقیت حذف شد.', ' دسته سطح چهارم به صورت کامل با موفقیت حذف شد.');
     }
     public function trashedCategory($id)
     {
         $category = CategoryLevel4::withTrashed()->where('id', $id)->first();
         $category->restore();
         $this->createLog('دسته سطح چهارم','admin/categorylevel4', $category->title,'بازیابی');
-        $this->emit('toast', 'success', ' دسته سطح چهارم با موفقیت بازیابی شد.');
+        alert()->success('دسته سطح چهارم با موفقیت بازیابی شد.', ' دسته سطح چهارم با موفقیت بازیابی شد.');
     }
 
     public function render()

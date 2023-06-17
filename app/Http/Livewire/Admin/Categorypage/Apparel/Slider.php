@@ -52,7 +52,7 @@ class Slider extends AdminControllerLivewire
         $this->link = "";
         $this->img = null;
         $this->createLog(' اسلایدر','admin/categorypage/apparel',  $this->title,'ایجاد');
-        $this->emit('toast', 'success', ' اسلایدر با موفقیت ایجاد شد.');
+        alert()->success('اسلایدر با موفقیت ایجاد شد.', ' اسلایدر با موفقیت ایجاد شد.');
 
     }
 
@@ -73,7 +73,7 @@ class Slider extends AdminControllerLivewire
             Storage::disk('public')->delete("storage", $slider2->img);
         } $slider->delete();
         $this->createLog(' اسلایدر','admin/categorypage/apparel',  $slider2->title,'حذف');
-        $this->emit('toast', 'success', ' اسلایدر با موفقیت حذف شد.');
+        alert()->success('اسلایدر با موفقیت حذف شد.', ' اسلایدر با موفقیت حذف شد.');
 
     }
 
@@ -90,7 +90,7 @@ class Slider extends AdminControllerLivewire
             'status' => 0
         ]);
         $this->createLog(' اسلایدر','admin/categorypage/apparel',  $slider2->title,'غیرفعال');
-        $this->emit('toast', 'success', 'اسلایدر با موفقیت غیرفعال شد.');
+        alert()->success('اسلایدر با موفقیت غیرفعال شد.', 'اسلایدر با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -105,7 +105,7 @@ class Slider extends AdminControllerLivewire
             'status' => 1
         ]);
         $this->createLog(' اسلایدر','admin/categorypage/apparel',  $slider2->title,'فعال');
-        $this->emit('toast', 'success', 'اسلایدر با موفقیت فعال شد.');
+        alert()->success('اسلایدر با موفقیت فعال شد.', 'اسلایدر با موفقیت فعال شد.');
     }
 
     public function render()

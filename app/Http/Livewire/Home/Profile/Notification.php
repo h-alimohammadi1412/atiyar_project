@@ -20,7 +20,7 @@ class Notification extends Component
        foreach ($notifics as $not){
            $not->delete();
        }
-        $this->emit('toast', 'success', ' پیغام ها با موفقیت حذف شدند.');
+        alert()->success('پیغام ها با موفقیت حذف شدند.', ' پیغام ها با موفقیت حذف شدند.');
     }
 
 

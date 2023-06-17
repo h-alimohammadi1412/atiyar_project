@@ -60,7 +60,7 @@ class ReturnReason extends Component
             'url' => 'افزودن دلیل مرجوعی' .'-'. $this->returnReason->reason,
             'actionType' => 'ایجاد'
         ]);
-        $this->emit('toast', 'success', ' دلیل مرجوعی با موفقیت ایجاد شد.');
+        alert()->success('دلیل مرجوعی با موفقیت ایجاد شد.', ' دلیل مرجوعی با موفقیت ایجاد شد.');
 
     }
 
@@ -73,7 +73,7 @@ class ReturnReason extends Component
     {
         $reason = \App\Models\ReturnReason::find($id);
         $reason->delete();
-            $this->emit('toast', 'success', ' دلیل مرجوعی با موفقیت حذف شد.');
+            alert()->success('دلیل مرجوعی با موفقیت حذف شد.', ' دلیل مرجوعی با موفقیت حذف شد.');
 
     }
 

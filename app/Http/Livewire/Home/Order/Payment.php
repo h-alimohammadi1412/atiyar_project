@@ -77,7 +77,7 @@ class Payment extends Component
                     $dPercent = ($orders->sum('total_discount_price') * $this->discount_price) / 100;
 
                     $this->dTotalPercent = $orders->sum('total_discount_price') - $dPercent;
-                    $this->emit('toast', 'success', ' کد تخفیف وارد شده اعمال شد.');
+                    alert()->success(' کد تخفیف وارد شده اعمال شد.', ' کد تخفیف وارد شده اعمال شد.');
                 } else {
                     $order2 = Order::where('user_id', auth()->user()->id)->get();
                     $order_last = $order2->last();
@@ -174,7 +174,7 @@ class Payment extends Component
 
         $price = $payments[0]->total_price;
         if ($payments[0]->discount_code != null) {
-            $price = $price - $payments[0]->discount->price;   
+            $price = $price - $payments[0]->discount->price;
         }
         if ($payments[0]->gift_code != null) {
             $price = $price - $payments[0]->gift_code_price;

@@ -63,7 +63,7 @@ class Recip extends Component
             'url' => 'افزودن آدرس' .'-'. $this->receiptCenter->address,
             'actionType' => 'ایجاد'
         ]);
-        $this->emit('toast', 'success', ' آدرس با موفقیت ایجاد شد.');
+        alert()->success('آدرس با موفقیت ایجاد شد.', ' آدرس با موفقیت ایجاد شد.');
 
     }
 
@@ -77,7 +77,7 @@ class Recip extends Component
         $receiptCenter->update([
             'status' => 0
         ]);
-        $this->emit('toast', 'success', 'وضعیت آدرس انبار با موفقیت غیرفعال شد.');
+        alert()->success('وضعیت آدرس انبار با موفقیت غیرفعال شد.', 'وضعیت آدرس انبار با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -87,14 +87,14 @@ class Recip extends Component
             'status' => 1
         ]);
 
-        $this->emit('toast', 'success', 'وضعیت آدرس انبار با موفقیت فعال شد.');
+        alert()->success('وضعیت آدرس انبار با موفقیت فعال شد.', 'وضعیت آدرس انبار با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
     {
         $receiptCenter = ReceiptCenter::find($id);
         $receiptCenter->delete();
-            $this->emit('toast', 'success', ' آدرس با موفقیت حذف شد.');
+            alert()->success(' آدرس با موفقیت حذف شد.', ' آدرس با موفقیت حذف شد.');
 
     }
 

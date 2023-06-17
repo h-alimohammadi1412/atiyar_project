@@ -18,7 +18,7 @@ class Favorite extends Component
         $favorites = ModelsFavorite::where('id', $id)->firstOrFail();
         $favorites->delete();
         $this->favorites = ModelsFavorite::with(['product'=>['category','brand']])->where('user_id', auth()->user()->id)->get();
-        $this->emit('toast', 'success', 'محصول از لیست علاقه مندی های شما حذف شد.');
+        alert()->success('محصول از لیست علاقه مندی های شما حذف شد.', 'محصول از لیست علاقه مندی های شما حذف شد.');
     }
 
 

@@ -24,7 +24,7 @@ class Address extends  AdminControllerLivewire
         $address = \App\Models\Address::where('id',$id)->first();
         $address->delete();
 
-        $this->emit('toast', 'success', ' آدرس با موفقیت حذف شد.');
+        alert()->success('آدرس با موفقیت حذف شد.', ' آدرس با موفقیت حذف شد.');
     }
 
 

@@ -21,7 +21,7 @@ class Trashed extends AdminControllerLivewire
         $product = Product::withTrashed()->findOrFail($id);
         if ($product->img) {Storage::disk('public')->delete("storage",$product->img);}
         $product->forceDelete();
-        $this->emit('toast', 'success', ' محصول به صورت کامل با موفقیت حذف شد.');
+        alert()->success(' محصول به صورت کامل با موفقیت حذف شد.', ' محصول به صورت کامل با موفقیت حذف شد.');
     }
     public function trashedProduct($id)
     {
@@ -33,7 +33,7 @@ class Trashed extends AdminControllerLivewire
             'url'=>'admin/category',
             'actionType' => 'بازیابی'
         ]);
-        $this->emit('toast', 'success', ' محصول با موفقیت بازیابی شد.');
+        alert()->success('محصول با موفقیت بازیابی شد.', ' محصول با موفقیت بازیابی شد.');
     }
 
     public function render()

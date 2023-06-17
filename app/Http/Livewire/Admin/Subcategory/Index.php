@@ -76,7 +76,7 @@ class Index extends Component
             'url' => 'افزودن زیر دسته' .'-'. $this->subcategory->title,
             'actionType' => 'ایجاد'
         ]);
-        $this->emit('toast', 'success', ' زیردسته با موفقیت ایجاد شد.');
+        alert()->success('زیردسته با موفقیت ایجاد شد.', ' زیردسته با موفقیت ایجاد شد.');
 
     }
 
@@ -104,7 +104,7 @@ class Index extends Component
             'url' => 'غیرفعال کردن وضعیت زیر دسته' .'-'. $category->title,
             'actionType' => 'غیرفعال'
         ]);
-        $this->emit('toast', 'success', 'وضعیت زیر دسته با موفقیت غیرفعال شد.');
+        alert()->success('وضعیت زیر دسته با موفقیت غیرفعال شد.', 'وضعیت زیر دسته با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -118,7 +118,7 @@ class Index extends Component
             'url' => 'فعال کردن وضعیت زیر دسته' .'-'. $category->title,
             'actionType' => 'فعال'
         ]);
-        $this->emit('toast', 'success', 'وضعیت زیر دسته با موفقیت فعال شد.');
+        alert()->success('وضعیت زیر دسته با موفقیت فعال شد.', 'وضعیت زیر دسته با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
@@ -132,10 +132,10 @@ class Index extends Component
                 'url' => 'حذف کردن زیر دسته' .'-'. $category->title,
                 'actionType' => 'حذف'
             ]);
-            $this->emit('toast', 'success', ' زیر دسته با موفقیت حذف شد.');
+            alert()->success(' زیر دسته با موفقیت حذف شد.', ' زیر دسته با موفقیت حذف شد.');
         }else
         {
-            $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!');
+            alert()->success(' امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!', ' امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!');
         }
 
     }

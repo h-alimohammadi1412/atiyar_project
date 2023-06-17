@@ -41,7 +41,7 @@ class Title extends AdminControllerLivewire
            ]);
            $this->footerLinkTitle->page_id = "";
         $this->createLog('صفحه فوتر سایت', 'admin/footer/linktitle', 'صفحه فوتر سایت', 'ایجاد');
-           $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
+           alert()->success('صفحه به فوتر سایت با موفقیت ایجاد شد.', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
        }
 
 

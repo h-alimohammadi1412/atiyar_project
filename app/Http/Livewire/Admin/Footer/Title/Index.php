@@ -46,7 +46,7 @@ class Index extends Component
                 'url' => 'افزودن صفحه به فوتر سایت' .'-'. $this->footerTitle->title,
                 'actionType' => 'ایجاد'
             ]);
-            $this->emit('toast', 'success', ' عنوان فوتر سایت با موفقیت ایجاد شد.');
+            alert()->success('عنوان فوتر سایت با موفقیت ایجاد شد.', ' عنوان فوتر سایت با موفقیت ایجاد شد.');
         }
 
 

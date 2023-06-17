@@ -29,7 +29,7 @@ class ReturnReasonAccept extends Component
         $returnOrder->update([
             'status'=>1
         ]);
-        $this->emit('toast', 'success', ' مرجوعی کالا با موفقیت تایید شد.');
+        alert()->success('مرجوعی کالا با موفقیت تایید شد.', ' مرجوعی کالا با موفقیت تایید شد.');
 
     }
     public function render()

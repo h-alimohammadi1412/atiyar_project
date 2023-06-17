@@ -15,7 +15,7 @@ class NextCart extends Component
         if ($cart) {
             $cart->delete();
         }
-        $this->emit('toast', 'success', 'محصول از سبد شما حذف شد');
+        alert()->success('محصول از سبد شما حذف شد', 'محصول از سبد شما حذف شد');
     }
     public function addAllToCart()
     {
@@ -28,7 +28,7 @@ class NextCart extends Component
         foreach ($cart_others as $cart_other) {
             $cart_other->update(['type' => 0]);
         }
-        $this->emit('toast', 'success', ' تمام محصول به لیست خرید بعدی شما اضافه شدند.');
+        alert()->success('تمام محصول به لیست خرید بعدی شما اضافه شدند.', ' تمام محصول به لیست خرید بعدی شما اضافه شدند.');
     }
     public function addToCartFromCartOther($id)
     {
@@ -38,7 +38,7 @@ class NextCart extends Component
                 'type' => 0
             ]);
         }
-        $this->emit('toast', 'success', 'محصول به سبد اصلی خرید شما اضافه شد.');
+        alert()->success('محصول به سبد اصلی خرید شما اضافه شد.', 'محصول به سبد اصلی خرید شما اضافه شد.');
     }
     public function render()
     {

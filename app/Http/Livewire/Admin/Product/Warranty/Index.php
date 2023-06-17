@@ -51,7 +51,7 @@ class Index extends AdminControllerLivewire
         $this->warranty->name = "";
         $this->warranty->status = false;
         $this->createLog('گارانتی', 'admin/warranty', $this->warranty->name, 'ایجاد');
-        $this->emit('toast', 'success', ' گارانتی با موفقیت ایجاد شد.');
+        alert()->success(' گارانتی با موفقیت ایجاد شد.', ' گارانتی با موفقیت ایجاد شد.');
 
     }
 
