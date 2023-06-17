@@ -52,7 +52,7 @@ Route::get('/warranty/trashed',\App\Http\Livewire\Admin\Product\Warranty\Trashed
 //=======================================> //warranties//
 Route::get('/productVendor/update/{productSeller}',\App\Http\Livewire\Admin\Product\ProductVendor\Update::class)->name('productSeller.update');
 Route::get('/productVendor/trashed',\App\Http\Livewire\Admin\Product\ProductVendor\Trashed::class)->name('productVendor.trashed');
-Route::get('/productVendor/product/{product}',\App\Http\Livewire\Admin\Product\ProductVendor\Single::class)->name('product.productVendor');
+Route::get('/productVendor/product/{product}',\App\Http\Livewire\Admin\Product\ProductVendor\Single::class)->whereNumber('product')->name('product.productVendor');
 
 
 //=======================================> //Attribute//

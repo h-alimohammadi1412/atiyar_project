@@ -3,7 +3,7 @@
 
 <head>
     @include('livewire.home.home.head')
-   
+
 </head>
 
 <body class=" t-index">
@@ -92,15 +92,15 @@
                                                     style="background-image: url(img/shop/single/color-opt-1.png)"></span></label>
                                         </div>
                                         <div class="form-check form-option form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="color"
-                                                id="color2" data-bs-label="colorOptionText" value="سفید/سیاه">
+                                            <input class="form-check-input" type="radio" name="color" id="color2"
+                                                data-bs-label="colorOptionText" value="سفید/سیاه">
                                             <label class="form-option-label rounded-circle" for="color2"><span
                                                     class="form-option-color rounded-circle"
                                                     style="background-image: url(img/shop/single/color-opt-2.png)"></span></label>
                                         </div>
                                         <div class="form-check form-option form-check-inline mb-2">
-                                            <input class="form-check-input" type="radio" name="color"
-                                                id="color3" data-bs-label="colorOptionText" value="سفید/سیاه">
+                                            <input class="form-check-input" type="radio" name="color" id="color3"
+                                                data-bs-label="colorOptionText" value="سفید/سیاه">
                                             <label class="form-option-label rounded-circle" for="color3"><span
                                                     class="form-option-color rounded-circle"
                                                     style="background-image: url(img/shop/single/color-opt-3.png)"></span></label>
@@ -166,16 +166,18 @@
                 href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span
                     class="handheld-toolbar-label">علاقه مندی</span></a><a class="d-table-cell handheld-toolbar-item"
                 href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i
-                        class="ci-menu"></i></span><span class="handheld-toolbar-label">منو</span></a><a
-                class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span
-                    class="handheld-toolbar-icon"><i class="ci-cart"></i><span
+                onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span
+                    class="handheld-toolbar-label">منو</span></a><a class="d-table-cell handheld-toolbar-item"
+                href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span
                         class="badge bg-primary rounded-pill ms-1">4</span></span><span
                     class="handheld-toolbar-label">265.00</span></a></div>
     </div> --}}
     @include('livewire.home.home.home.top_button')
     </div>
     @include('livewire.home.home.script1')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+    <x-livewire-alert::flash />
 </body>
 
 </html>

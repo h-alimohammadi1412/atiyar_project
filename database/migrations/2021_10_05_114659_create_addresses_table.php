@@ -25,6 +25,7 @@ class CreateAddressesTable extends Migration
             $table->string('name')->nullable();
             $table->string('lname')->nullable();
             $table->string('mobile')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

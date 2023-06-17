@@ -17,6 +17,7 @@
             </div>
             <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
                 <h1 class="h3 text-light mb-0">لیست خرید بعدی</h1>
+               
             </div>
         </div>
     </div>
@@ -26,6 +27,8 @@
             <section class="col-lg-8">
                 <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
                     <h2 class="h6 text-light mb-0">لیست خرید بعدی</h2>
+                    <a class="btn btn-outline-primary btn-sm ps-2" href="{{ route('cart.index') }}"><i
+                        class="ci-arrow-left me-2"></i>سبد خرید</a>
                 </div>
                 @if (sizeof($carts)>0)
                 @foreach ($carts as $cart)

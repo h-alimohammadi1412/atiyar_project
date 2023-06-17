@@ -19639,3 +19639,10 @@ flex-direction: unset;
 .pcalBtn {
     z-index : 5;
 }
+
+.address_time_item.active{
+    border: 2px solid #fe696a !important;
+}
+.accordion_payments .accordion-button::after{
+    margin-right: 0 !important;
+}

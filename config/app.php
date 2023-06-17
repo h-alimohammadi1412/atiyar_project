@@ -178,6 +178,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        
     ],
 
     /*

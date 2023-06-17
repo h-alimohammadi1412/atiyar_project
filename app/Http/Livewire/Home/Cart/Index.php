@@ -114,7 +114,7 @@ class Index extends Component
     public function shipping()
     {
         if (auth()->user()) {
-            $carts = Cart::where('user_id', auth()->user()->id)
+            $carts = Cart::with('productSeller')->where('user_id', auth()->user()->id)
                 ->where('type', 0)->get();
 
             $userIp2 = Request::ip();
@@ -126,16 +126,16 @@ class Index extends Component
                         $orders =   Order::create([
                             'user_id' => auth()->user()->id,
                             'order_number' => $order->order_number + 1,
-                            'product_id' => $cart->product_id,
+                            'product_id' => $cart->productSeller->product_id,
                             'product_seller_id' => $cart->product_seller_id,
                             'payment' => 0,
-                            'product_color' => $cart->product_color,
-                            'total_price' => $cart->product_price,
-                            'total_discount_price' => $cart->product_price_discount,
+                            'product_color' => $cart->productSeller->color_id,
+                            'total_price' => $cart->productSeller->price,
+                            'total_discount_price' => $cart->productSeller->discount_price,
                             'ip' => $userIp2,
                             'count' => $cart->count,
                             'product_vendor' => $cart->product_vendor,
-                            'product_warranty' => $cart->product_warranty,
+                            'product_warranty' => $cart->productSeller->product_warranty,
 
                         ]);
                     }
@@ -145,16 +145,16 @@ class Index extends Component
                         $orders =    Order::create([
                             'user_id' => auth()->user()->id,
                             'order_number' => $number,
-                            'product_id' => $cart->product_id,
+                            'product_id' => $cart->productSeller->product_id,
                             'product_seller_id' => $cart->product_seller_id,
                             'payment' => 0,
-                            'product_color' => $cart->product_color,
-                            'total_price' => $cart->product_price,
-                            'total_discount_price' => $cart->product_price_discount,
+                            'product_color' => $cart->productSeller->color_id,
+                            'total_price' => $cart->productSeller->price,
+                            'total_discount_price' => $cart->productSeller->discount_price,
                             'ip' => $userIp2,
                             'count' => $cart->count,
                             'product_vendor' => $cart->product_vendor,
-                            'product_warranty' => $cart->product_warranty,
+                            'product_warranty' => $cart->productSeller->product_warranty,
 
                         ]);
                     }
@@ -165,8 +165,6 @@ class Index extends Component
             } else {
                 $this->emit('toast', 'error', ' هیچ محصولی در سبد خرید ندارید.');
             }
-
-            dd($carts);
         } else {
             return $this->redirect('/login');
         }
@@ -188,18 +186,13 @@ class Index extends Component
                 }
             }
             $this->cartProduct = Cart::with(['productSeller' => ['product', 'color', 'warranty', 'vendor']])->where(['user_id' => auth()->user()->id, 'type' => 0])->get();
-            // $cart_read_cart = Cart::where('user_id', auth()->user()->id)->where('type', 0)
-            //     ->where('read_cart', 0)->first();
-            // $cart_others = Cart::where('user_id', auth()->user()->id)->where('type', 1)->get();
         } else {
             $this->cartProduct = Cart::where('ip', $userIp)->where('type', 0)->get();
-            // $cart_others = Cart::where('ip', $userIp)->where('type', 1)->get();
-            // $cart_read_cart = Cart::where('ip', $userIp)->where('type', 0)
-            //     ->where('read_cart', 0)->first();
         }
         $this->total_price_products = 0;
         $this->total_price_cart = 0;
         $this->total_discount_price_cart = 0;
+        $changePrices=[];
         foreach ($this->cartProduct as $cart) {
             $this->total_price_products += ($cart->productSeller->price * $cart->count);
             $this->total_price_cart += ($cart->productSeller->discount_price * $cart->count);
@@ -249,7 +242,11 @@ class Index extends Component
         //     $mo = $different->format('%m');
 
         $carts = $this->cartProduct;
-        $userHistories = UserHistory::with('product')->where('user_id',auth()->user()->id)->get();
+        if(auth()->check()){
+            $userHistories = UserHistory::with('product')->where('user_id',auth()->user()->id)->get();
+        }else{
+            $userHistories =[];
+        }
         // dd($userHistories);
         return view(
             'livewire.home.cart.index',

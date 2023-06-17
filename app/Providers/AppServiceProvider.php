@@ -33,9 +33,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (auth()->user()) {
-            $carts = \App\Models\Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
+            $carts = Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
             $userIp2 = Request::ip();
-            $cart2s = \App\Models\Cart::where('ip',$userIp2)->get();
+            $cart2s = Cart::where('ip',$userIp2)->get();
             if ($cart2s) {
                 foreach ($cart2s as $cart){
                     $cart->update([
@@ -47,8 +47,13 @@ class AppServiceProvider extends ServiceProvider
         }else
         {
             $userIp = Request::ip();
-            $carts = \App\Models\Cart::where('ip', $userIp)->where('type', 0)->get();
+            $carts = Cart::with('productSeller.product')->where('ip', $userIp)->where('type', 0)->get();
         }
+        $totalPrice = 0;
+        foreach($carts as $cart){
+            $totalPrice += $cart->productSeller->discount_price;
+        }
+        $carts->totalPrice = $totalPrice;
         View::share('carts',$carts);
 
 
