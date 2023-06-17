@@ -53,7 +53,8 @@
 
 
                                             <td>
-                                                <a wire:click="deleteCategory({{$addressTime->id}})" type="submit"
+                                               
+                                                <a  wire:click="deletedFieldAsModel('AddressTime','admin/dashboard/address/time','زمان ارسال','{{ $addressTime->date }}','{{ $addressTime->id }}')"type="submit"
                                                    class="item-delete mlg-15" title="حذف"></a>
                                             </td>
                                         </tr>

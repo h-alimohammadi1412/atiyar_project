@@ -64,12 +64,12 @@ class IndexDiscount extends AdminControllerLivewire
             'code' => $data['code'] ? $data['code'] : $code,
             'status' =>  $data['status'] ? true : false,
         ]);
-        if ( $data['percent'] != null) {
+        if ( $data['percent'] != '') {
             $gift->update([
                 'type' => 0
             ]);
         }
-        if ($this->discount->price != null) {
+        if ($this->discount->price != '') {
             $gift->update([
                 'type' => 1
             ]);
