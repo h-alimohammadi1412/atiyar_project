@@ -30,7 +30,7 @@
                              alt="Digikala marketplace seller center logo">
                     </a>
 
-                    <h1 class="c-new-login__header">به مرکز فروشندگان دیجی‌کالا <br> خوش آمدید!</h1>
+                    <h1 class="c-new-login__header">به مرکز فروشندگان آتی یار <br> خوش آمدید!</h1>
                 </header>
             </div>
         </aside>
@@ -45,7 +45,7 @@
                     <a target="_blank" href="/fbs-courier/">ثبت رسید سفارش</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
-                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی دیجی‌کالا</a>
+                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی آتی یار</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
                     <a target="_blank" href="https://selleracademy.digikala.com/">مرکز آموزش فروشندگان</a>

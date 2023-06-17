@@ -9258,7 +9258,7 @@ var Main = {
             );
         }
     },
-    
+
     initCustomRequest: function () {
         var _ajax = $.ajax;
         if (_ajax) {
@@ -10441,7 +10441,7 @@ var Main = {
                 $naviOverlay.removeClass("is-active");
                 $megaMenuOptionsContainer.hide()
             });
-        
+
         $megaMenuCategory.hover(
             function () {
 
@@ -10460,7 +10460,7 @@ var Main = {
                 $(this).addClass('c-navi-new-list__inner-category--hovered');
                 $megaMenuOptionsContainer.find('#categories-' + $(this).data('index')).addClass('is-active');
             },
-            
+
             function () {
             }
         );
@@ -11096,7 +11096,7 @@ var Main = {
                     value
                 ) || /^\d+$/.test(value);
             },
-            'لطفا آدرس یا کد محصول دیجی‌کالا را وارد نمایید'
+            'لطفا آدرس یا کد محصول آتی یار را وارد نمایید'
         );
 
         $.validator.addMethod(
@@ -14564,7 +14564,7 @@ var Adro = {
       if (method === "POST") {
         headers["Content-Type"] = "application/json";
         headers["Accept"] = "application/json";
-        body = JSON.stringify(data); 
+        body = JSON.stringify(data);
       }
       return $.ajax(
         {
@@ -14619,8 +14619,8 @@ var Adro = {
       });
     }
   }
-} 
-  
+}
+
 
 
 

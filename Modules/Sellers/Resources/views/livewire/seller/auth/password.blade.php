@@ -52,12 +52,12 @@
 
         <footer class="c-new-login__main-footer">
             <div class="c-new-login__main-footer-row">
-                <div class="c-new-login__main-footer-contact">ارتباط با مرکز فروشندگان دیجی‌کالا</div>
+                <div class="c-new-login__main-footer-contact">ارتباط با مرکز فروشندگان آتی یار</div>
                 <div class="c-new-login__main-footer-contact c-new-login__main-footer-contact--phone">۶۱۹۳۰۶۰۰ - ۰۲۱</div>
                 <a href="mailto:>SellerSupport@digikala.com" class="c-new-login__main-footer-contact c-new-login__main-footer-contact--email">SellerSupport@digikala.com</a>
             </div>
             <div class="c-new-login__main-footer-row">
-                <div class="c-new-login__main-footer-copyright c-new-login__main-footer-copyright--bold">کليه حقوق اين سايت به <em>شرکت نوآوران فن آوازه (فروشگاه آنلاین دیجی‌کالا)</em> تعلق دارد.</div>
+                <div class="c-new-login__main-footer-copyright c-new-login__main-footer-copyright--bold">کليه حقوق اين سايت به <em>شرکت نوآوران فن آوازه (فروشگاه آنلاین آتی یار)</em> تعلق دارد.</div>
                 <div class="c-new-login__main-footer-copyright">Copyright © 2006 - 2022 Digikala.com</div>
             </div>
         </footer>

@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <textarea rows="5" wire:model.defer="product.description" placeholder="توضیح کوتاه محصول " tabindex="-1"
                             wire:key="description_create" class="form-control" id="description_create">
-                            
+
                             </textarea>
                     </div>
                     <div class="form-group">
@@ -69,7 +69,7 @@
                                             {{ $color->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>                        
+                            </div>
                         </div>
                         <div class="col-12">
                             <input type="text" wire:model.defer="product.weight" placeholder="وزن محصول "
@@ -103,7 +103,7 @@
                                         <div class="notificationGroup">
                                             <input id="option10" type="checkbox" wire:model.defer="product.shipment"
                                                 name="shipment" class="form-control">
-                                            <label for="option10">موجود در انبار دیجی کالا:</label>
+                                            <label for="option10">موجود در انبار آتی یار:</label>
                                         </div>
                                     </div>
                                 </div>

@@ -30,7 +30,7 @@
 
                         <div class="c-reg-steps__icon c-reg-steps__icon--checkout"></div>
                         <h2 class="c-reg-steps__header">۳. اتمام ثبت نام</h2>
-                        <p class="c-reg-steps__description">به جمع فروشندگان دیجی‌کالا خوش آمدید.</p>
+                        <p class="c-reg-steps__description">به جمع فروشندگان آتی یار خوش آمدید.</p>
                     </li>
                 </ul>
 
@@ -151,7 +151,7 @@
                     <a target="_blank" href="/fbs-courier/">ثبت رسید سفارش</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
-                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی دیجی‌کالا</a>
+                    <a target="_blank" href="http://www.digikala.com/">فروشگاه اینترنتی آتی یار</a>
                 </li>
                 <li class="c-new-login__content-footer-item">
                     <a target="_blank" href="https://selleracademy.digikala.com/">مرکز آموزش فروشندگان</a>

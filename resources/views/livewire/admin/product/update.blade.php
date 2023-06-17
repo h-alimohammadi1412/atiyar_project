@@ -28,13 +28,13 @@
                         <div class="form-group">
                             <textarea rows="5" wire:model.defer="product.description" placeholder="توضیح کوتاه محصول " tabindex="-1"
                                 wire:key="description_create" class="form-control" id="description_create">
-                                
+
                                 </textarea>
                         </div>
                         <div class="form-group">
                             <textarea wire:model.defer="product.body" name="body" placeholder="توضیح محصول " class="form-control"
                                 id="body_create">
-    
+
                                 </textarea>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                                 {{ $color->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>                        
+                                </div>
                             </div>
                             <div class="col-12">
                                 <input type="text" wire:model.defer="product.weight" placeholder="وزن محصول "
@@ -106,7 +106,7 @@
                                             <div class="notificationGroup">
                                                 <input id="option10" type="checkbox" wire:model.defer="product.shipment"
                                                     name="shipment" class="form-control">
-                                                <label for="option10">موجود در انبار دیجی کالا:</label>
+                                                <label for="option10">موجود در انبار آتی یار:</label>
                                             </div>
                                         </div>
                                     </div>
@@ -139,10 +139,10 @@
                                 x-on:livewire-upload-finish="isUploading = false"
                                 x-on:livewire-upload-error="isUploading = false"
                                 x-on:livewire-upload-progress="progress = $event.detail.progress">
-    
+
                                 <input type="file" id="resume" wire:model.defer="img" aria-label="Resume"
                                     class="form-control" />
-    
+
                                 <div wire:ignore class="progress mt-2" id="progressbar" style="display: none">
                                     <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
                                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use App\Models\User;
 use Carbon\Carbon;
@@ -9,7 +10,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class IndexUser extends Component
+class IndexUser extends AdminControllerLivewire
 {
     use WithFileUploads;
     use WithPagination;
@@ -58,7 +59,7 @@ class IndexUser extends Component
 
         if ($this->img) {
             $user->update([
-                'img' => $this->uploadImage()
+                'img' => $this->uploadImage('user')
             ]);
         }
 
@@ -69,24 +70,12 @@ class IndexUser extends Component
         $this->user->admin = false;
         $this->img = null;
 
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن کاربر' . '-' . $this->user->name,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('کاربر','admin/users',$this->user->name,'ایجاد');
+
         $this->emit('toast', 'success', ' کاربر با موفقیت ایجاد شد.');
 
     }
 
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "user/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
 
     public function loadUser()
     {

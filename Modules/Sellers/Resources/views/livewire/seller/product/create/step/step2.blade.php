@@ -401,7 +401,7 @@
                 </div>
                 <div class="c-content-modal__body c-content-modal__body--overflow">
                     <div class="c-content-modal__body-container">
-                        <div class="c-content-modal__intro">فروشگاه اینترنتی دیجی‌کالا
+                        <div class="c-content-modal__intro">فروشگاه اینترنتی آتی یار
                             این امکان را برای فروشنده فراهم
                             کرده
                             تا کالایش را با برند (نام
