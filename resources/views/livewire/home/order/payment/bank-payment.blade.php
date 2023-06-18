@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <main id="main">
         <div id="HomePageTopBanner"></div>
         <div id="content">
@@ -8,10 +8,18 @@
                         شما به‌زودی به درگاه انتخابی منتقل می‌شوید...
                     </div>
                     <form action="https://ipg.mydigipay.com/pay/a55c90881f2a48aea2c88181fd40188d" method="GET"
-                          id="form-send-to-bank"><input type="hidden" name="ticket"
-                                                        value="a55c90881f2a48aea2c88181fd40188d"></form>
+                        id="form-send-to-bank"><input type="hidden" name="ticket"
+                            value="a55c90881f2a48aea2c88181fd40188d"></form>
                 </div>
             </div>
         </div>
     </main>
+</div> --}}
+<div class="container">
+    <div class="alert alert-success" style="margin-top: 70px; margin-bottom: 50px;">
+        شما به‌زودی به درگاه بانکی منتقل می‌شوید...
+    </div>
+    <form action="https://ipg.mydigipay.com/pay/a55c90881f2a48aea2c88181fd40188d" method="GET" id="form-send-to-bank">
+        <input type="hidden" name="ticket" value="a55c90881f2a48aea2c88181fd40188d">
+    </form>
 </div>

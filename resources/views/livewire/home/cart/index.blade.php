@@ -1,5 +1,5 @@
 @section('title','سبد خرید')
-<div>
+<div >
     <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -21,19 +21,22 @@
         </div>
     </div>
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="row">
+        <div class="row"  wire:init="loaddingPage">
             <!-- List of items-->
-            <section class="col-lg-8">
+            <section class="col-lg-8 position-relative" style="min-height: 500px;">
                 <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
                     <h2 class="h6 text-light mb-0">محصولات</h2>
                     <a class="btn btn-outline-primary btn-sm ps-2" href="{{ route('cart.next') }}"><i
                             class="ci-arrow-left me-2"></i>لیست خرید بعدی</a>
                 </div>
-                {{-- <div class="alert alert-warning">
-                    <ul>
-                        <li></li>
-                    </ul>
-                </div> --}}
+                @if (!$readyToLoad)
+
+                <div class="align-items-center container-loader-atiyar d-flex justify-content-center position-absolute">
+                    <div class="position-absolute" style="opacity: .09;"><img src="{{ asset('img/weblogo.png') }}"
+                            alt=""></div>
+                    <div class="custom-loader-atiyar"></div>
+                </div>
+                @else
                 @if (sizeof($carts)>0)
                 @foreach ($carts as $cart)
 
@@ -46,30 +49,32 @@
                         </a>
                         <div class="pt-2">
                             @if ($cart->price_old != null && $cart->read_cart == 0)
-                                @if ($cart->productSeller->discount_price > $cart->product_price_discount_old)
-                                    
-                                    <span class="alert alert-warning d-block fs-md p-1" style="width: 460px;"><i class="ci-arrow-up-circle"></i>
-                                        قیمت این کالا {{ number_format(abs($cart->product_price_discount_old -
-                                        $cart->productSeller->discount_price)) }}
-                                        تومان افزایش یافته است.
-                                    </span>
-                                @else
-                               
-                                    <span class="alert alert-success d-block fs-md p-1" style="width: 460px;"> <i class="ci-arrow-down-circle"></i>
-                                        قیمت این کالا {{ number_format(abs($cart->product_price_discount_old -
-                                        $cart->productSeller->discount_price)) }}
-                                        تومان کاهش یافته است.
-                                    </span>
-                                @endif
+                            @if ($cart->productSeller->discount_price > $cart->product_price_discount_old)
+
+                            <span class="alert alert-warning d-block fs-md p-1" style="width: 460px;"><i
+                                    class="ci-arrow-up-circle"></i>
+                                قیمت این کالا {{ number_format(abs($cart->product_price_discount_old -
+                                $cart->productSeller->discount_price)) }}
+                                تومان افزایش یافته است.
+                            </span>
+                            @else
+
+                            <span class="alert alert-success d-block fs-md p-1" style="width: 460px;"> <i
+                                    class="ci-arrow-down-circle"></i>
+                                قیمت این کالا {{ number_format(abs($cart->product_price_discount_old -
+                                $cart->productSeller->discount_price)) }}
+                                تومان کاهش یافته است.
+                            </span>
+                            @endif
                             @endif
                             <h3 class="product-title fs-base mb-2">
                                 <a
                                     href="{{ url('/product/at-' . $cart->productSeller->product->id . '/' . $cart->productSeller->product->link) }}">{{
                                     $cart->productSeller->product->title }}</a>
                             </h3>
-                            {{-- <div class="fs-sm">
+                            <div class="fs-sm">
                                 <span class="text-muted me-2">سایز : </span>8.5
-                            </div> --}}
+                            </div>
                             <div class="fs-sm">
                                 <span class="text-muted me-2">رنگ:</span>{{ $cart->productSeller->color->name }}
                             </div>
@@ -130,16 +135,28 @@
         @else
         <div class="alert alert-warning text-center py-10">سبد خرید شما خالی است</div>
         @endif
-
         <button class="btn btn-outline-accent d-block w-100 mt-4" wire:click="updateBasket">
             <i class="ci-loading fs-base me-2"></i>به روز رسانی
         </button>
+        @endif
+
+
         </section>
         <!-- Sidebar-->
 
-        <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
-            <div class="bg-white rounded-3 shadow-lg p-4">
-                <div class="py-2 px-xl-2">
+        <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5 ">
+
+            <div class="bg-white rounded-3 shadow-lg p-4 position-relative">
+                <div class="py-2 px-xl-2" style="min-height: 300px;">
+                    @if (!$readyToLoad)
+                    <div
+                        class="align-items-center container-loader-atiyar d-flex justify-content-center position-absolute">
+                        <div class="position-absolute" style="opacity: .09;"><img src="{{ asset('img/weblogo.png') }}"
+                                alt=""></div>
+                        <div class="custom-loader-atiyar"></div>
+                    </div>
+
+                    @else
                     <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                         <h2 class="h6 mb-3 pb-1 fs-md">قیمت کالاها ({{ sizeof($carts) }})</h2>
                         <h3 class="fw-normal fs-md fw-bold">{{ number_format($total_price_products) }}</h3>
@@ -150,178 +167,19 @@
                     </div>
                     <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                         <h2 class="h6 mb-3 pb-1 fs-md">سود شما از خرید</h2>
-                        <h3 class="fw-normal fs-md fw-bold text-primary">{{ number_format($total_discount_price_cart) }}</h3>
+                        <h3 class="fw-normal fs-md fw-bold text-primary">{{ number_format($total_discount_price_cart) }}
+                        </h3>
                     </div>
                     <a class="btn btn-primary btn-shadow d-block w-100 mt-4" wire:click="shipping"></i>ثبت سفارش</a>
-                    <p class="text-center mt-4 fs-md">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها از
+                    <p class="text-center mt-4 fs-md">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها
+                        از
                         سبد حذف می‌شوند. </p>
+                    @endif
                 </div>
+
             </div>
         </aside>
     </div>
-
-    {{-- <section class="pt-5 pt-md-5">
-        <!-- Heading-->
-        <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-            <h2 class="h3 fs-5 mb-0 pt-3 me-3">خریداران این محصولات، محصولات زیر را هم خریده‌اند</h2>
-        </div>
-        <div class="tns-carousel tns-controls-static tns-controls-outside tns-nav-enabled pt-2 ltr">
-            <div class="tns-carousel-inner"
-                data-carousel-options="{&quot;items&quot;: 2, &quot;gutter&quot;: 16, &quot;controls&quot;: true, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1}, &quot;480&quot;:{&quot;items&quot;:2}, &quot;720&quot;:{&quot;items&quot;:3}, &quot;991&quot;:{&quot;items&quot;:2}, &quot;1140&quot;:{&quot;items&quot;:3}, &quot;1300&quot;:{&quot;items&quot;:4}, &quot;1500&quot;:{&quot;items&quot;:5}}}">
-                <!-- Product-->
-                <div>
-                    <div class="card product-card card-static rtl pb-3 "><span
-                            class="badge bg-danger badge-shadow">فروش</span>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="grocery-single.html"><img src="img/grocery/catalog/01.jpg" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">تخم مرغ</a>
-                            <h3 class="product-title fs-sm text-truncate"><a href="grocery-single.html">نارگیل ،
-                                    اندونزی (قطعه)</a></h3>
-                            <div class="product-price"><span class="text-accent">10<small>99</small></span>
-                                <del class="fs-sm text-muted">20<small>99</small></del>
-                            </div>
-                        </div>
-                        <div class="product-floating-btn">
-                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-                                    class="ci-cart fs-base ms-1"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product-->
-                <div>
-                    <div class="card product-card card-static rtl pb-3 rtl"><span
-                            class="badge bg-danger badge-shadow">فروش</span>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="grocery-single.html"><img src="img/grocery/catalog/02.jpg" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">میوه و
-                                سبزیحات</a>
-                            <h3 class="product-title fs-sm text-truncate"><a href="grocery-single.html">نارگیل ،
-                                    اندونزی (قطعه)</a></h3>
-                            <div class="product-price"><span class="text-accent">20<small>99</small></span>
-                                <del class="fs-sm text-muted">30<small>99</small></del>
-                            </div>
-                        </div>
-                        <div class="product-floating-btn">
-                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-                                    class="ci-cart fs-base ms-1"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product-->
-                <div>
-                    <div class="card product-card card-static rtl pb-3 rtl"><span
-                            class="badge bg-danger badge-shadow">فروش</span>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="grocery-single.html"><img src="img/grocery/catalog/03.jpg" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">نوشابه</a>
-                            <h3 class="product-title fs-sm text-truncate"><a href="grocery-single.html">نارگیل ،
-                                    اندونزی (قطعه)</a></h3>
-                            <div class="product-price"><span class="text-accent">10<small>00</small></span>
-                                <del class="fs-sm text-muted">10<small>25</small></del>
-                            </div>
-                        </div>
-                        <div class="product-floating-btn">
-                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-                                    class="ci-cart fs-base ms-1"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product-->
-                <div>
-                    <div class="card product-card card-static rtl pb-3 rtl"><span
-                            class="badge bg-danger badge-shadow">فروش</span>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="grocery-single.html"><img src="img/grocery/catalog/04.jpg" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">تخم مرغ</a>
-                            <h3 class="product-title fs-sm text-truncate"><a href="grocery-single.html">نارگیل ،
-                                    اندونزی (قطعه)</a></h3>
-                            <div class="product-price"><span class="text-accent">10<small>15</small></span>
-                                <del class="fs-sm text-muted">10<small>75</small></del>
-                            </div>
-                        </div>
-                        <div class="product-floating-btn">
-                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-                                    class="ci-cart fs-base ms-1"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product-->
-                <div>
-                    <div class="card product-card card-static rtl pb-3 rtl"><span
-                            class="badge bg-danger badge-shadow">فروش</span>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="grocery-single.html"><img src="img/grocery/catalog/05.jpg" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">بهداشت
-                                شخصی</a>
-                            <h3 class="product-title fs-sm text-truncate"><a href="grocery-single.html">نارگیل ،
-                                    اندونزی (قطعه)</a></h3>
-                            <div class="product-price"><span class="text-accent">40<small>20</small></span>
-                                <del class="fs-sm text-muted">50<small>99</small></del>
-                            </div>
-                        </div>
-                        <div class="product-floating-btn">
-                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-                                    class="ci-cart fs-base ms-1"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product-->
-                <div>
-                    <div class="card product-card card-static rtl pb-3 rtl"><span
-                            class="badge bg-danger badge-shadow">فروش</span>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="grocery-single.html"><img src="img/grocery/catalog/06.jpg" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">نارگیل ،
-                                اندونزی (قطعه)</a>
-                            <h3 class="product-title fs-sm text-truncate"><a href="grocery-single.html">خمیر شکلات
-                                    آجیل (750 گرم)</a></h3>
-                            <div class="product-price"><span class="text-accent">60<small>50</small></span>
-                                <del class="fs-sm text-muted">70<small>99</small></del>
-                            </div>
-                        </div>
-                        <div class="product-floating-btn">
-                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-                                    class="ci-cart fs-base ms-1"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product-->
-                <div>
-                    <div class="card product-card card-static rtl pb-3 rtl"><span
-                            class="badge bg-danger badge-shadow">فروش</span>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="اضافه کردن به علاقه مندی"><i
-                                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                            href="grocery-single.html"><img src="img/grocery/catalog/07.jpg" alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">میوه و
-                                سبزیحات</a>
-                            <h3 class="product-title fs-sm text-truncate"><a href="grocery-single.html">پنیر کوچک
-                                    موزارلا</a></h3>
-                            <div class="product-price"><span class="text-accent">30<small>50</small></span>
-                                <del class="fs-sm text-muted">40<small>99</small></del>
-                            </div>
-                        </div>
-                        <div class="product-floating-btn">
-                            <button class="btn btn-primary btn-shadow btn-sm" type="button">+<i
-                                    class="ci-cart fs-base ms-1"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
 
     @if (sizeof($userHistories) > 0)
     <section class="pt-5 pt-md-5">

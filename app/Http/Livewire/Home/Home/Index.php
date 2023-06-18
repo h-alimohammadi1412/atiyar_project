@@ -47,7 +47,7 @@ class Index extends Component
     }
     public function render()
     {
-        auth()->loginUsingId(1);
+        auth()->loginUsingId(75);
         if (!cache('categories')) {
             $categories = \App\Models\Category::where('parent_id', 0)->with('getChild.getChild')->get();
             cache(['categories' => $categories], now()->addDay(29));

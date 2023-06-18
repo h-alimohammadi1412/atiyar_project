@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Tdanandeh\SweetAlert\SweetAlertServiceProvider::class,
+        // Tdanandeh\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -238,7 +238,7 @@ return [
         // or
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
-        'Alert' => Tdanandeh\SweetAlert\SweetAlert::class,
+        // 'Alert' => Tdanandeh\SweetAlert\SweetAlert::class,
     ],
 
 ];

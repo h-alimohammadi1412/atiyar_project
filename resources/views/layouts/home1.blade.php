@@ -8,8 +8,7 @@
 
 <body class=" t-index">
     @include('sweet::alert')
-    <!-- ورود/ثبت نام modal-->
-    {{-- @include('livewire.home.home.home.login_register') --}}
+
     <main class="page-wrapper">
         <!-- Quick View Modal-->
         <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
@@ -174,10 +173,11 @@
     </div> --}}
     @include('livewire.home.home.home.top_button')
     </div>
-    @include('livewire.home.home.script1')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
     <x-livewire-alert::flash />
+    @include('livewire.home.home.script1')
+    <script src="{{ asset('js/turboLink.js') }}"></script>
 </body>
 
 </html>

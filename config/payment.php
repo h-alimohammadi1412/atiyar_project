@@ -230,7 +230,7 @@ return [
 
             'mode' => 'normal', // can be normal, sandbox, zaringate
             'merchantId' => env('MERCHECNT_ID_ZARRINPAL'),
-            'callbackUrl' => env('ZARRINPAL_CALLBACK'),
+            'callbackUrl' => env('CALLBACK_URL'),
             'description' => 'خرید از سایت آتی یار',
         ],
         'zibal' => [

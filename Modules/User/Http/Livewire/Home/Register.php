@@ -78,7 +78,7 @@ class Register extends AdminControllerLivewire
             $this->user_id = $user_id;
         }
         $this->active_code = random_int(10000, 99999);
-        $res = (new Notification)->sendSms($this->user->mobile, "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
+        $res = (new Notification)->sendSms([$this->user->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
         $this->show_send_code_form = true;
         $type = 'ایجاد حساب';
         SMS::create([

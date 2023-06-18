@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire\Home\Product;
 
-
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Cart;
 use App\Models\Gallery;
 use App\Models\Attribute;
-use App\Models\ProductColor;
 use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Compare;
@@ -23,12 +22,8 @@ use Artesaos\SEOTools\Facades\JsonLdMulti;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cookie;
-use Livewire\Component;
-use Stevebauman\Location\Facades\Location;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     public $product;
     public $product_count = 1;
@@ -68,7 +63,7 @@ class Index extends Component
         'direction' => 'desc'
     ];
 
-    public function mount($id,Request $request)
+    public function mount($id, Request $request)
     {
 
         $this->product = Product::with('category', 'brand')->where('id', $id)->firstOrFail();
@@ -93,8 +88,7 @@ class Index extends Component
                     $this->addToCart = false;
                 }
             }
-
-        }else{
+        } else {
             if ($this->product_seller_selected) {
                 $ip = $request->ip();
                 $ps = Cart::where(['product_seller_id' => $this->product_seller_selected->id, 'ip' => $ip])->first();
@@ -247,16 +241,12 @@ class Index extends Component
 
     public function addToCart($id, Request $request)
     {
-        // $cartProductSeller = null;
         $userIp = $request->ip();
-
         if (auth()->check()) {
-            // dd(auth()->user()->id);
             $cartProductSeller = Cart::where(['product_seller_id' => $id, 'user_id' => auth()->user()->id])->first();
         } else {
             $cartProductSeller = Cart::where(['product_seller_id' => $id, 'ip' => $userIp])->first();
         }
-        // dd($cartProductSeller);
 
         if ($cartProductSeller) {
             $this->addToCart = true;
@@ -264,78 +254,35 @@ class Index extends Component
             if ($userIp == '127.0.0.1') {
                 if (auth()->user()) {
                     $cart = Cart::create([
-                        // 'ip' => $userIp,
+                        'ip' => $userIp,
                         'user_id' => auth()->user()->id,
                         'product_seller_id' => $this->product_seller_selected->id,
-                        'product_id' => $this->product_seller_selected->product_id,
                         'count' =>  $this->product_count,
-                        'product_price' => $this->product_seller_selected->price,
-                        'product_price_discount' => $this->product_seller_selected->discount_price,
-                        'product_color' => $this->product_seller_selected->color_id,
-                        'product_vendor' => $this->product_seller_selected->vendor_id,
-                        'product_warranty' => $this->product_seller_selected->warranty_id,
                     ]);
                     $this->addToCart = true;
                 } else {
                     $cart = Cart::create([
                         'ip' => $userIp,
                         'product_seller_id' => $this->product_seller_selected->id,
-                        'product_id' => $this->product_seller_selected->product_id,
                         'count' => $this->product_count,
-                        'product_price' => $this->product_seller_selected->price,
-                        'product_price_discount' => $this->product_seller_selected->discount_price,
-                        'product_color' => $this->product_seller_selected->color_id,
-                        'product_vendor' => $this->product_seller_selected->vendor_id,
-                        'product_warranty' => $this->product_seller_selected->warranty_id,
                     ]);
                     $this->addToCart = true;
                 }
             } else {
                 $userIp2 = $request->ip();
-                $location = Location::get($userIp2);
                 if (auth()->user()) {
                     $cart = Cart::create([
                         'user_id' => auth()->user()->id,
                         'ip' => $userIp2,
                         'product_seller_id' => $this->product_seller_selected->id,
-                        'product_id' => $this->product_seller_selected->product_id,
                         'count' => 1,
-                        'product_price' => $this->product_seller_selected->price,
-                        'product_price_discount' => $this->product_seller_selected->discount_price,
-                        'product_color' => $this->product_seller_selected->color_id,
-                        'product_vendor' => $this->product_seller_selected->vendor_id,
-                        'product_warranty' => $this->product_seller_selected->warranty_id,
-                        'countryName' => $location->countryName,
-                        'regionName' => $location->regionName,
-                        'cityName' => $location->cityName,
-                        'countryCode' => $location->countryCode,
-                        'regionCode' => $location->regionCode,
-                        'zipCode' => $location->zipCode,
-                        'areaCode' => $location->areaCode,
-                        'latitude' => $location->latitude,
-                        'longitude' => $location->longitude,
                     ]);
                     $this->addToCart = true;
                 } else {
                     $cart = Cart::create([
                         'ip' => $userIp2,
                         'product_seller_id' => $this->product_seller_selected->id,
-                        'product_id' => $this->product_seller_selected->product_id,
                         'count' => 1,
-                        'product_price' => $this->product_seller_selected->price,
-                        'product_price_discount' => $this->product_seller_selected->discount_price,
-                        'product_color' => $this->product_seller_selected->color_id,
-                        'product_vendor' => $this->product_seller_selected->vendor_id,
-                        'product_warranty' => $this->product_seller_selected->warranty_id,
-                        'countryName' => $location->countryName,
-                        'regionName' => $location->regionName,
-                        'cityName' => $location->cityName,
-                        'countryCode' => $location->countryCode,
-                        'regionCode' => $location->regionCode,
-                        'zipCode' => $location->zipCode,
-                        'areaCode' => $location->areaCode,
-                        'latitude' => $location->latitude,
-                        'longitude' => $location->longitude,
                     ]);
                     $this->addToCart = true;
                 }
@@ -488,17 +435,17 @@ class Index extends Component
         }
     }
 
-    public function ProductSellerSelected($id,Request $request)
+    public function ProductSellerSelected($id, Request $request)
     {
         $this->product_seller_selected = ProductSeller::find($id);
-        if(auth()->check()){
+        if (auth()->check()) {
             $ps = Cart::where(['product_seller_id' => $id, 'user_id' => auth()->user()->id])->first();
             if ($ps) {
                 $this->addToCart = true;
             } else {
                 $this->addToCart = false;
             }
-        }else{
+        } else {
             $ip = $request->ip();
             $ps = Cart::where(['product_seller_id' => $id, 'ip' => $ip])->first();
             if ($ps) {
