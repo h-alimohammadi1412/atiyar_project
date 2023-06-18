@@ -17,19 +17,26 @@
             </div>
             <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
                 <h1 class="h3 text-light mb-0">لیست خرید بعدی</h1>
-               
+
             </div>
         </div>
     </div>
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="row">
+        <div class="row" wire:init="loadingPage">
             <!-- List of items-->
-            <section class="col-lg-8">
+            <section class="col-lg-8 position-relative " style="min-height: 500px;">
                 <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
                     <h2 class="h6 text-light mb-0">لیست خرید بعدی</h2>
                     <a class="btn btn-outline-primary btn-sm ps-2" href="{{ route('cart.index') }}"><i
-                        class="ci-arrow-left me-2"></i>سبد خرید</a>
+                            class="ci-arrow-left me-2"></i>سبد خرید</a>
                 </div>
+                @if (!$readyToLoad)
+                <div class="align-items-center container-loader-atiyar d-flex justify-content-center position-absolute">
+                    <div class="position-absolute" style="opacity: .09;"><img src="{{ asset('img/weblogo.png') }}"
+                            alt=""></div>
+                    <div class="custom-loader-atiyar"></div>
+                </div>
+                @else
                 @if (sizeof($carts)>0)
                 @foreach ($carts as $cart)
                 <!-- Item-->
@@ -92,6 +99,7 @@
                 @else
                 <div class="alert alert-warning text-center py-10">لیست خرید بعدی شما خالی است</div>
                 @endif
+                @endif
 
                 {{-- <button class="btn btn-outline-accent d-block w-100 mt-4" wire:click="updateBasket">
                     <i class="ci-loading fs-base me-2"></i>به روز رسانی
@@ -99,8 +107,17 @@
             </section>
             <!-- Sidebar-->
             <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
-                <div class="bg-white rounded-3 shadow-lg p-4">
-                    <div class="py-2 px-xl-2">
+                <div class="bg-white rounded-3 shadow-lg p-4 position-relative">
+                    <div class="py-2 px-xl-2"  style="min-height: 300px;">
+                        @if (!$readyToLoad)
+                        <div
+                            class="align-items-center container-loader-atiyar d-flex justify-content-center position-absolute">
+                            <div class="position-absolute" style="opacity: .09;"><img
+                                    src="{{ asset('img/weblogo.png') }}" alt=""></div>
+                            <div class="custom-loader-atiyar"></div>
+                        </div>
+
+                        @else
                         <div class="text-center mb-4 pb-3 border-bottom">
                             <h6 class="fw-normal">لیست خرید بعدی چیست؟</h6>
                             <p>
@@ -114,6 +131,7 @@
                         <a class="btn btn-primary btn-shadow d-block w-100 mt-4" wire:click="addAllToCart"><i
                                 class="ci-cart fs-lg me-2"></i>انتقال همه به سبد خرید</a>
                     </div>
+                    @endif
                 </div>
             </aside>
         </div>
