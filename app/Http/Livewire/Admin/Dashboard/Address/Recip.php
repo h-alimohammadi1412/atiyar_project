@@ -57,12 +57,7 @@ class Recip extends AdminControllerLivewire
 
         $this->receiptCenter->address = "";
         $this->receiptCenter->status = false;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن آدرس' .'-'. $this->receiptCenter->address,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('آدرس انبار', 'admin/dashboard/address/recip', $this->receiptCenter->address, 'ایجاد');
         alert()->success('آدرس با موفقیت ایجاد شد.', ' آدرس با موفقیت ایجاد شد.');
 
     }

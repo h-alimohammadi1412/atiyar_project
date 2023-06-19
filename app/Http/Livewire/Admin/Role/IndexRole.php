@@ -57,12 +57,7 @@ class IndexRole extends AdminControllerLivewire
         $this->role->name = "";
         $this->role->def = "";
         $this->permissions = false;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن مقام' .'-'. $this->role->name,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('مقام', 'admin/role', $this->role->name, 'ایجاد');
         alert()->success('مقام با موفقیت ایجاد شد.', ' مقام با موفقیت ایجاد شد.');
 
     }
@@ -77,11 +72,8 @@ class IndexRole extends AdminControllerLivewire
     {
         $role = Role::find($id);
             $role->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن مقام' .'-'. $role->name,
-                'actionType' => 'حذف'
-            ]);
+        $this->createLog('مقام', 'admin/role', $this->role->name, 'حذف');
+
             alert()->success('مقام با موفقیت حذف شد.', ' مقام با موفقیت حذف شد.');
 
 

@@ -56,11 +56,8 @@ class Index extends AdminControllerLivewire
         $this->attribute->product_id = null;
         $this->attribute->value = "";
         $this->attribute->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن مقدار مشخصات کالا' .'-'. $this->attribute->value,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' مقدار مشخصات کالا', 'admin/attributeValue',$this->attribute->value, 'ایجاد');
+
         alert()->success(' مقدار مشخصات کالا با موفقیت ایجاد شد.', ' مقدار مشخصات کالا با موفقیت ایجاد شد.');
 
     }
@@ -75,11 +72,8 @@ class Index extends AdminControllerLivewire
     {
         $attribute = AttributeValue::find($id);
         $attribute->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن مقدار مشخصات کالا' .'-'. $attribute->value,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' مقدار مشخصات کالا', 'admin/attributeValue',$this->attribute->value, 'حذف');
+
         alert()->success('مقدار مشخصات کالا با موفقیت حذف شد.', ' مقدار مشخصات کالا با موفقیت حذف شد.');
     }
 

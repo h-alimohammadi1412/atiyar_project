@@ -28,11 +28,8 @@ class FavlistProfile extends AdminControllerLivewire
         $favlists = \App\Models\FavList::where('id',$id)->first();
 
         $favlists->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن لیست عمومی' . '-' . $id,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog('لیست عمومی', 'admin/dashboard/favlist', $id, 'حذف');
+
         alert()->success(' با موفقیت از لیست های عمومی حذف شد !', ' با موفقیت از لیست های عمومی حذف شد ! ');
 
     }

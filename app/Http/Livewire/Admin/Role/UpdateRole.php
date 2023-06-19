@@ -35,11 +35,8 @@ class UpdateRole extends AdminControllerLivewire
                 'role_id' => $this->role->id,
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت مقام' .'-'. $this->role->def,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('مقام', 'admin/role', $this->role->name, 'آپدیت');
+
         alert()->success('مقام با موفقیت ایجاد شد.', 'مقام آپدیت شد.');
 
         return redirect(route('role.index'));

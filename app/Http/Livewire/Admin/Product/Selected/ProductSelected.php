@@ -58,11 +58,7 @@ class ProductSelected extends AdminControllerLivewire
         $this->product->subCategory_id = null;
         $this->product->childCategory_id = null;
         $this->product->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن محصول منتخب' . '-' . $this->product->product_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' محصول منتخب', 'admin/index/productselected', $this->product->product_id, 'ایجاد');
         alert()->success('محصول منتخب با موفقیت ایجاد شد.', ' محصول منتخب با موفقیت ایجاد شد.');
 
     }
@@ -77,11 +73,8 @@ class ProductSelected extends AdminControllerLivewire
     {
         $category = \App\Models\ProductSelected::find($id);
         $category->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن محصول منتخب' . '-' . $category->category_id,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' محصول منتخب', 'admin/index/productselected', $this->product->product_id, 'ایجاد');
+
         alert()->success(' محصول منتخب با موفقیت حذف شد.', ' محصول منتخب با موفقیت حذف شد.');
 
     }

@@ -58,11 +58,8 @@ class Index extends AdminControllerLivewire
         $this->menu->subCategory_id = null;
         $this->menu->childCategory_id = null;
         $this->menu->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن منو' . '-' . $this->menu->category_id,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog('منو', 'admin/menu', $this->menu->category_id, 'ایجاد');
+
         alert()->success('منو با موفقیت ایجاد شد.', ' منو با موفقیت ایجاد شد.');
 
     }
@@ -79,11 +76,8 @@ class Index extends AdminControllerLivewire
         $childCategory = Menu::where('subCategory_id', $id)->first();
         if ($childCategory == null) {
             $category->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن منو' . '-' . $category->category_id,
-                'actionType' => 'حذف'
-            ]);
+            $this->createLog('منو', 'admin/menu', $this->menu->category_id, 'حذف');
+
             alert()->success('منو با موفقیت حذف شد.', ' منو با موفقیت حذف شد.');
         } else {
             alert()->success('امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!', ' امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!');

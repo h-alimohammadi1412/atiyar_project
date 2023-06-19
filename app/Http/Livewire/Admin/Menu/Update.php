@@ -28,11 +28,8 @@ class Update extends AdminControllerLivewire
                 'status' => 0
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت منو' .'-'. $this->menu->category_id,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('منو', 'admin/menu', $this->menu->category_id, 'آپدیت');
+
         alert()->success('منو با موفقیت ایجاد شد.', 'منو آپدیت شد.');
         return redirect(route('menu.index'));
 

@@ -35,11 +35,8 @@ class Index extends AdminControllerLivewire
         $product = Product::where('vendor_id',$id)->first();
         if ($product == null){
             $seller->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن فروشنده' .'-'. $this->seller->title,
-                'actionType' => 'حذف'
-            ]);
+            $this->createLog('فروشنده', 'admin/role', $this->seller->title, 'حذف');
+
             alert()->success('فروشنده با موفقیت حذف شد.', ' فروشنده با موفقیت حذف شد.');
         }else
         {

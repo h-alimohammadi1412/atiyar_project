@@ -47,12 +47,8 @@ class IndexPermission extends AdminControllerLivewire
 
         $this->permission->name = "";
         $this->permission->def = "";
+        $this->createLog(' دسترسی', 'admin/permission',$this->permission->name, 'ایجاد');
 
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن دسترسی' .'-'. $this->permission->name,
-            'actionType' => 'ایجاد'
-        ]);
         alert()->success('دسترسی با موفقیت ایجاد شد.', ' دسترسی با موفقیت ایجاد شد.');
 
     }
@@ -67,11 +63,8 @@ class IndexPermission extends AdminControllerLivewire
     {
         $role = Permission::find($id);
         $role->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن دسترسی' .'-'. $role->name,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' دسترسی', 'admin/permission',$this->permission->name, 'حذف');
+
         alert()->success('دسترسی با موفقیت حذف شد.', ' دسترسی با موفقیت حذف شد.');
 
 

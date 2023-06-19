@@ -54,12 +54,8 @@ class ReturnReason extends AdminControllerLivewire
 
 
         $this->returnReason->reason = "";
+        $this->createLog('دلیل مرجوعی', 'admin/orders/returnreson', $this->returnReason->reason, 'ایجاد');
 
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن دلیل مرجوعی' .'-'. $this->returnReason->reason,
-            'actionType' => 'ایجاد'
-        ]);
         alert()->success('دلیل مرجوعی با موفقیت ایجاد شد.', ' دلیل مرجوعی با موفقیت ایجاد شد.');
 
     }
@@ -73,7 +69,9 @@ class ReturnReason extends AdminControllerLivewire
     {
         $reason = \App\Models\ReturnReason::find($id);
         $reason->delete();
-            alert()->success('دلیل مرجوعی با موفقیت حذف شد.', ' دلیل مرجوعی با موفقیت حذف شد.');
+        $this->createLog('دلیل مرجوعی', 'admin/orders/returnreson', $this->returnReason->reason, 'حذف');
+
+        alert()->success('دلیل مرجوعی با موفقیت حذف شد.', ' دلیل مرجوعی با موفقیت حذف شد.');
 
     }
 

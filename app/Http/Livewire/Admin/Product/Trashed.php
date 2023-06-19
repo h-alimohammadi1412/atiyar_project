@@ -27,12 +27,7 @@ class Trashed extends AdminControllerLivewire
     {
         $product = Product::withTrashed()->where('id', $id)->first();
         $product->restore();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'بازیابی محصول' .'-'. $product->title,
-            'url'=>'admin/category',
-            'actionType' => 'بازیابی'
-        ]);
+        $this->createLog(' محصول ', 'admin/product', $product->title, 'بازیابی');
         alert()->success('محصول با موفقیت بازیابی شد.', ' محصول با موفقیت بازیابی شد.');
     }
 

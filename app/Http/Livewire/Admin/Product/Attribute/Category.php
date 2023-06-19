@@ -63,11 +63,8 @@ class Category extends AdminControllerLivewire
         $this->attribute->title = "";
         $this->attribute->position = null;
         $this->attribute->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن مشخصات کالا' .'-'. $this->attribute->title,
-            'actionType' => 'ایجاد'
-        ]);
+        $this->createLog(' مشخصات کالا', 'admin/attribute',$this->attribute->title, 'ایجاد');
+
         alert()->success('مشخصات کالا با موفقیت ایجاد شد.', ' مشخصات کالا با موفقیت ایجاد شد.');
         return redirect()->back();
     }
@@ -80,11 +77,8 @@ class Category extends AdminControllerLivewire
     {
         $attribute = Attribute::find($id);
         $attribute->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن مشخصات کالا' .'-'. $this->attribute->childCategory,
-            'actionType' => 'حذف'
-        ]);
+        $this->createLog(' مشخصات کالا', 'admin/attribute',$this->attribute->title, 'حذف');
+
         alert()->success(' مشخصات کالا با موفقیت حذف شد.', ' مشخصات کالا با موفقیت حذف شد.');
     }
 

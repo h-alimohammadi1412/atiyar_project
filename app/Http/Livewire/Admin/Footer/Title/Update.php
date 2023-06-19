@@ -18,11 +18,7 @@ class Update extends AdminControllerLivewire
     {
         $this->validate();
         $this->footer_title->update($this->validate());
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت عنوان فوتر صفحه سایت' .'-'. $this->footer_title->page_id,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('صفحه فوتر سایت', 'admin/footer/title', $this->footerTitle->title, 'آپدیت');
         alert()->success('عنوان فوتر صفحه سایت با موفقیت ایجاد شد.', 'عنوان فوتر صفحه سایت آپدیت شد.');
 
         return redirect(route('footer_title.index'));

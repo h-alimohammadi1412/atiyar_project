@@ -41,11 +41,7 @@ class Index extends AdminControllerLivewire
                 'title' => $this->footerTitle->title,
             ]);
             $this->footerTitle->title = "";
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'افزودن صفحه به فوتر سایت' .'-'. $this->footerTitle->title,
-                'actionType' => 'ایجاد'
-            ]);
+            $this->createLog('صفحه فوتر سایت', 'admin/footer/title', $this->footerTitle->title, 'ایجاد');
             alert()->success('عنوان فوتر سایت با موفقیت ایجاد شد.', ' عنوان فوتر سایت با موفقیت ایجاد شد.');
         }
 
