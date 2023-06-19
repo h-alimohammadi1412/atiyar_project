@@ -25,10 +25,10 @@ use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Stevebauman\Location\Facades\Location;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     public $product;
     public $product_count = 1;

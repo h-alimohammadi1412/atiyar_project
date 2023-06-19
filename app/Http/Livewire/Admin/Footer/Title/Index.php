@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Admin\Footer\Title;
 
 use App\Models\FooterTitle;
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     public $readyToLoad = false;
 

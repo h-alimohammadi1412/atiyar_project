@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Admin\Dashboard;
 
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class FavlistProfile extends Component
+class FavlistProfile extends AdminControllerLivewire
 {
     use WithPagination;
 

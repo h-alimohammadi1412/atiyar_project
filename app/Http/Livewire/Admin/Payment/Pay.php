@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Admin\Payment;
 
 use App\Models\BankPayment;
 use App\Models\Payment;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Pay extends Component
+class Pay extends AdminControllerLivewire
 {
     use WithPagination;
 

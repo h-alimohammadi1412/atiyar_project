@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Product\AttributeValue;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -69,33 +69,7 @@ class Index extends Component
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryDisable($id)
-    {
-        $attribute = AttributeValue::find($id);
-        $attribute->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت مقدار مشخصات کالا' .'-'. $attribute->value,
-            'actionType' => 'غیرفعال'
-        ]);
-        alert()->success('وضعیت مقدار مشخصات کالا با موفقیت غیرفعال شد.', 'وضعیت مقدار مشخصات کالا با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
-    {
-        $attribute = AttributeValue::find($id);
-        $attribute->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت مقدار مشخصات کالا' .'-'. $attribute->title,
-            'actionType' => 'فعال'
-        ]);
-        alert()->success('وضعیت مقدار مشخصات کالا با موفقیت فعال شد.', 'وضعیت مقدار مشخصات کالا با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {

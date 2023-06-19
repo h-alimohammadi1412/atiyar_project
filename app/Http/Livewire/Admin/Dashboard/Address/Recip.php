@@ -6,11 +6,11 @@ use App\Models\Category;
 use App\Models\Log;
 use App\Models\ReceiptCenter;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Recip extends Component
+class Recip extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -70,24 +70,6 @@ class Recip extends Component
     public function loadCategory()
     {
         $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $receiptCenter = ReceiptCenter::find($id);
-        $receiptCenter->update([
-            'status' => 0
-        ]);
-        alert()->success('وضعیت آدرس انبار با موفقیت غیرفعال شد.', 'وضعیت آدرس انبار با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $receiptCenter = ReceiptCenter::find($id);
-        $receiptCenter->update([
-            'status' => 1
-        ]);
-
-        alert()->success('وضعیت آدرس انبار با موفقیت فعال شد.', 'وضعیت آدرس انبار با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)

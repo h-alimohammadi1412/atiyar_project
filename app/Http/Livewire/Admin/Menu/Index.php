@@ -6,10 +6,10 @@ use App\Models\ChildCategory;
 use App\Models\Log;
 use App\Models\Menu;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -71,33 +71,7 @@ class Index extends Component
         $this->readyToLoad = true;
     }
 
-    public function updateCategoryDisable($id)
-    {
-        $category = Menu::find($id);
-        $category->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت منو' . '-' . $category->category_id,
-            'actionType' => 'غیرفعال'
-        ]);
-        alert()->success('وضعیت منو با موفقیت غیرفعال شد.', 'وضعیت منو با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
-    {
-        $category = Menu::find($id);
-        $category->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت منو' . '-' . $category->category_id,
-            'actionType' => 'فعال'
-        ]);
-        alert()->success('وضعیت منو با موفقیت فعال شد.', 'وضعیت منو با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {

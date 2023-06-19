@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Product\Selected;
 use App\Models\CategoryIndex;
 use App\Models\Log;
 use App\Models\ProductNewSelected;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class NewProduct extends Component
+class NewProduct extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -72,33 +72,7 @@ class NewProduct extends Component
         $this->readyToLoad = true;
     }
 
-    public function updateCategoryDisable($id)
-    {
-        $category = ProductNewSelected::find($id);
-        $category->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت محصول منتخب' . '-' . $category->category_id,
-            'actionType' => 'غیرفعال'
-        ]);
-        alert()->success('وضعیت محصول منتخب با موفقیت غیرفعال شد.', 'وضعیت محصول منتخب با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
-    {
-        $category = ProductNewSelected::find($id);
-        $category->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت محصول دسته های صفحه اصلی' . '-' . $category->category_id,
-            'actionType' => 'فعال'
-        ]);
-        alert()->success('وضعیت محصول منتخب با موفقیت فعال شد.', 'وضعیت محصول منتخب با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {

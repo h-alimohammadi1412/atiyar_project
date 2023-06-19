@@ -6,9 +6,9 @@ use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Request;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class ConfirmPasswordVerify extends Component
+class ConfirmPasswordVerify extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;

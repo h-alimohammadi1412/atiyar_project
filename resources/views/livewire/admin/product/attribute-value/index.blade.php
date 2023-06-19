@@ -67,12 +67,13 @@
                                     <td><a href="">{{$attribute->value}}</a></td>
                                     <td>
                                         @if($attribute->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$attribute->id}})"
+
+                                            <button wire:click="updateStatus('AttributeValue','attribute','مشخصات کالا','status',{{$attribute->id}})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                             </button>
                                         @else
-                                            <button wire:click="updateCategoryEnable({{$attribute->id}})"
+                                            <button wire:click="updateStatus('AttributeValue','attribute','مشخصات کالا','status',{{$attribute->id}})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال

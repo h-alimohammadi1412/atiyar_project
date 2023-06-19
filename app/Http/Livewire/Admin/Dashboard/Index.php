@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Admin\Dashboard;
 
 use App\Models\Notification;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
 
     public function render()

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Home\Profile;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class UserHistory extends Component
+class UserHistory extends AdminControllerLivewire
 {
     public  $userHistories;
     public function mount()

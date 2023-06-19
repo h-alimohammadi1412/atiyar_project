@@ -5,9 +5,9 @@ namespace Modules\User\Http\Livewire\Home;
 use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class ConfirmPassword extends Component
+class ConfirmPassword extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;

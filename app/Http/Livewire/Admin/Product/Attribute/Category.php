@@ -6,10 +6,10 @@ use App\Models\Attribute;
 use App\Models\ChildCategory;
 use App\Models\Log;
 use App\Models\ProductSeller;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Category extends Component
+class Category extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -74,33 +74,6 @@ class Category extends Component
     public function loadCategory()
     {
         $this->readyToLoad = true;
-    }
-    public function updateCategoryDisable($id)
-    {
-        $attribute = Attribute::find($id);
-        $attribute->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت مشخصات کالا' .'-'. $this->attribute->childCategory,
-            'actionType' => 'غیرفعال'
-        ]);
-        alert()->success('وضعیت مشخصات کالا با موفقیت غیرفعال شد.', 'وضعیت مشخصات کالا با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $attribute = Attribute::find($id);
-        $attribute->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت مشخصات کالا' .'-'. $this->attribute->childCategory,
-            'actionType' => 'فعال'
-        ]);
-        alert()->success('وضعیت مشخصات کالا با موفقیت فعال شد.', 'وضعیت مشخصات کالا با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)

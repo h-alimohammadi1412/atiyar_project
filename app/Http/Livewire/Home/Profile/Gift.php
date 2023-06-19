@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Home\Profile;
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Component;
 
 class Gift extends AdminControllerLivewire
 {

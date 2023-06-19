@@ -7,9 +7,9 @@ use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class ForgetPassword extends Component
+class ForgetPassword extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;

@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Home\Profile;
 use App\Models\SMS;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class PersonalInfo extends Component
+class PersonalInfo extends AdminControllerLivewire
 {
     public User $user;
 

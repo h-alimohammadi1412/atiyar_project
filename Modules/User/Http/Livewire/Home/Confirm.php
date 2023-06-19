@@ -5,9 +5,9 @@ namespace Modules\User\Http\Livewire\Home;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Confirm extends Component
+class Confirm extends AdminControllerLivewire
 {
     public User $user;
 

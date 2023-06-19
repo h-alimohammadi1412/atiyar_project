@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Home\Compare;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Step1 extends Component
+class Step1 extends AdminControllerLivewire
 {
     public Product $product;
 

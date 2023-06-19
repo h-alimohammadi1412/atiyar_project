@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Admin\Footer\Title;
 use App\Models\FooterLinkTitle;
 use App\Models\FooterTitle;
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     public FooterTitle $footer_title;
 

@@ -6,7 +6,6 @@ use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\User;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class UpdateUser extends AdminControllerLivewire

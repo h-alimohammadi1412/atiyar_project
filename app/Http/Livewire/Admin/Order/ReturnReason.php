@@ -5,11 +5,11 @@ namespace App\Http\Livewire\Admin\Order;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class ReturnReason extends Component
+class ReturnReason extends AdminControllerLivewire
 {
     use WithPagination;
 

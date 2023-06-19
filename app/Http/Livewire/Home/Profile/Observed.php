@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\Home\Profile;
 
 use App\Models\Observed as ModelObserved;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Observed extends Component
+class Observed extends AdminControllerLivewire
 {
     public $observeds;
 

@@ -7,11 +7,11 @@ use App\Models\Log;
 use App\Models\PermissionRole;
 use App\Models\Role;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class IndexRole extends Component
+class IndexRole extends AdminControllerLivewire
 {
     use WithPagination;
     public $permissions;

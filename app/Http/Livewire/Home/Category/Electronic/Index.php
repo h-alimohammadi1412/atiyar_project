@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Home\Category\Electronic;
 
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     public function render()
     {

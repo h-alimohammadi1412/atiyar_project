@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\Home\Profile;
 
 use App\Models\Favorite as ModelsFavorite;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Favorite extends Component
+class Favorite extends AdminControllerLivewire
 {
     public $favorites;
 

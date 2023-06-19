@@ -7,7 +7,6 @@ use App\Models\Log;
 use App\Models\Product;
 use App\Models\Seller;
 use App\Models\TitleCategoryIndex;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 

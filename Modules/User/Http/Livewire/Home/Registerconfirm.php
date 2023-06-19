@@ -6,10 +6,10 @@ use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Request;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use function GuzzleHttp\Promise\rejection_for;
 
-class Registerconfirm extends Component
+class Registerconfirm extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;

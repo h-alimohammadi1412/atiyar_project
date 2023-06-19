@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Home\Profile;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class FavlistShow extends Component
+class FavlistShow extends AdminControllerLivewire
 {
     public function render()
     {

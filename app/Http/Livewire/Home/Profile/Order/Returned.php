@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Home\Profile\Order;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Returned extends Component
+class Returned extends AdminControllerLivewire
 {
     public function render()
     {

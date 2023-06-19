@@ -61,6 +61,8 @@ Route::get('/attribute/{category}',\App\Http\Livewire\Admin\Product\Attribute\In
 Route::get('/attribute/update/{attribute}',\App\Http\Livewire\Admin\Product\Attribute\Update::class)->name('attribute.update');
 
 //=======================================> //Attribute//
+//Route::get('/attributeValue',\App\Http\Livewire\Admin\Product\AttributeValue\Index::class)->name('attributeValue.index');
+
 Route::get('/attributeValue/update/{attribute}',\App\Http\Livewire\Admin\Product\AttributeValue\Update::class)->name('attributeValue.update');
 Route::get('/attributeValue/trashed',\App\Http\Livewire\Admin\Product\AttributeValue\Trashed::class)->name('attributeValue.trashed');
 Route::get('/attribute/product/{product}',\App\Http\Livewire\Admin\Product\Attribute\Product::class)->name('product.attribute');

@@ -21,10 +21,10 @@ use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Mail;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
 
     public function favoriteProduct($id)

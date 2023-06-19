@@ -6,10 +6,10 @@ use App\Models\CategoryLevel4;
 use App\Models\Log;
 use App\Models\PermissionRole;
 use App\Models\Role;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 
-class UpdateRole extends Component
+class UpdateRole extends AdminControllerLivewire
 {
     public $permissions;
 

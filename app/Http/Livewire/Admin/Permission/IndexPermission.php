@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Permission;
 use App\Models\Log;
 use App\Models\Permission;
 use App\Models\Role;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class IndexPermission extends Component
+class IndexPermission extends AdminControllerLivewire
 {
     use WithPagination;
     protected $listeners = [

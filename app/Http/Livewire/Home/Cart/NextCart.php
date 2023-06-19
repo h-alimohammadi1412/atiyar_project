@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Home\Cart;
 
 use App\Models\Cart;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class NextCart extends Component
+class NextCart extends AdminControllerLivewire
 {
 
     public function deleteCartProduct($id)

@@ -7,7 +7,6 @@ use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\ChildCategory;
 use App\Models\Log;
-use Livewire\Component;
 use Livewire\WithPagination;
 
 class Product extends AdminControllerLivewire

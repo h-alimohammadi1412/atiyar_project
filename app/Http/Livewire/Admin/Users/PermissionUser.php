@@ -7,9 +7,9 @@ use App\Models\PermissionRole;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class PermissionUser extends Component
+class PermissionUser extends AdminControllerLivewire
 {
     public $permissions;
     public $roles;

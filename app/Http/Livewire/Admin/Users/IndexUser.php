@@ -6,7 +6,6 @@ use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use App\Models\User;
 use Carbon\Carbon;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 

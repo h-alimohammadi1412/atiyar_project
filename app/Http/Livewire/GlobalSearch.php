@@ -7,9 +7,9 @@ use App\Models\ChildCategory;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class GlobalSearch extends Component
+class GlobalSearch extends AdminControllerLivewire
 {
     public string $search = '';
     public array $results = [];

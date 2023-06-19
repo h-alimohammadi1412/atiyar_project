@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Footer\Link;
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\FooterLinkTitle;
 use App\Models\Log;
-use Livewire\Component;
 
 class Title extends AdminControllerLivewire
 {

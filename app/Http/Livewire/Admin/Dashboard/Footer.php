@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Admin\Dashboard;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Footer extends Component
+class Footer extends AdminControllerLivewire
 {
     public function render()
     {

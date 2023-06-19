@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Home\Profile;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Address extends Component
+class Address extends AdminControllerLivewire
 {
     public \App\Models\Address $address;
     public $addresses;

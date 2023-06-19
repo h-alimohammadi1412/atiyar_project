@@ -6,7 +6,6 @@ use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\FooterLinkOne;
 use App\Models\FooterPartner;
 use App\Models\Log;
-use Livewire\Component;
 
 class Partner extends AdminControllerLivewire
 {

@@ -6,9 +6,9 @@ use App\Charts\OrderChart;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class UserChart extends Component
+class UserChart extends AdminControllerLivewire
 {
     public $chartDatasets = [[]];
     public $chartLabels = [];

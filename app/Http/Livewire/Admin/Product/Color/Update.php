@@ -6,7 +6,6 @@ use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Log;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class Update extends AdminControllerLivewire

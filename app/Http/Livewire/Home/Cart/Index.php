@@ -9,10 +9,10 @@ use App\Models\PriceDate;
 use App\Models\ProductSeller;
 use App\Models\UserHistory;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Stevebauman\Location\Facades\Location;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     //    public \App\Models\Gift $gift;
     //

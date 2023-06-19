@@ -10,10 +10,10 @@ use App\Models\SMS;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class IndexUpdate extends Component
+class IndexUpdate extends AdminControllerLivewire
 {
     use WithPagination;
 

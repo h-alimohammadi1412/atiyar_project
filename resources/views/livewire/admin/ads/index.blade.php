@@ -49,12 +49,12 @@
 
                                     <td>
                                         @if($ads->status == 1)
-                                            <button wire:click="updateCategoryDisable({{$ads->id}})"
+                                            <button wire:click="updateStatus('Ads','ads','تبلیغات','status',{{ $ads->id }})"
                                                     type="submit" class="badge-success badge"
                                                     style="background-color: green">فعال
                                             </button>
                                         @else
-                                            <button wire:click="updateCategoryEnable({{$ads->id}})"
+                                            <button wire:click="updateStatus('Ads','ads','تبلیغات','status',{{ $ads->id }})"
                                                     type="submit" class="badge-danger badge"
                                                     style="background-color: red">
                                                 غیرفعال

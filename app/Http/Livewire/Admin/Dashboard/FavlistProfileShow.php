@@ -6,10 +6,10 @@ use App\Models\FavList;
 use App\Models\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class FavlistProfileShow extends Component
+class FavlistProfileShow extends AdminControllerLivewire
 {
     use WithPagination;
 

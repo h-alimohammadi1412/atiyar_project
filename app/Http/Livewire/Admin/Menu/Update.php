@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Menu;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Menu;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 
-class Update extends Component
+class Update extends AdminControllerLivewire
 {
     public $status = null;
 

@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Admin\Order;
 
 use App\Models\Order;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Cancel extends Component
+class Cancel extends AdminControllerLivewire
 {
     use WithPagination;
 

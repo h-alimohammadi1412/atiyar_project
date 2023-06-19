@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Home\Profile\Order;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Cancel extends Component
+class Cancel extends AdminControllerLivewire
 {
     public function render()
     {

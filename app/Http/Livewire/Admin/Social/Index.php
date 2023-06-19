@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Social;
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 use App\Models\Social;
-use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends AdminControllerLivewire

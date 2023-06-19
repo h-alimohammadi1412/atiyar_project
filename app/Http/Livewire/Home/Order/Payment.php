@@ -9,9 +9,9 @@ use App\Models\Discount;
 use App\Models\Gift;
 use App\Models\Order;
 use App\Models\ReturnOrder;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Payment extends Component
+class Payment extends AdminControllerLivewire
 {
     public $discount_price;
     public $discount_type;

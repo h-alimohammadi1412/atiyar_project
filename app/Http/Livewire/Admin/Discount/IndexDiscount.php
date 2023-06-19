@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Discount;
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Discount;
 use App\Models\Log;
-use Livewire\Component;
 use Livewire\WithPagination;
 
 class IndexDiscount extends AdminControllerLivewire

@@ -9,9 +9,9 @@ use App\Models\Order;
 use App\Models\ReceiptCenter;
 use Illuminate\Support\Facades\Request;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Shipping extends Component
+class Shipping extends AdminControllerLivewire
 {
     use LivewireAlert;
     public \App\Models\Address $address;

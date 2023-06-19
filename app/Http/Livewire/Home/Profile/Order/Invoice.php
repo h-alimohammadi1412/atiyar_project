@@ -6,9 +6,9 @@ namespace App\Http\Livewire\Home\Profile\Order;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Invoice extends Component
+class Invoice extends AdminControllerLivewire
 {
     public function render()
     {
