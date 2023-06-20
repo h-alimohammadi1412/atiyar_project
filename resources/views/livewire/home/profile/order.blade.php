@@ -15,16 +15,14 @@
                 اساس وضعیت :</label>
             <label class="d-lg-none fs-sm text-nowrap opacity-75 me-2" for="order-sort">مرتب سازی:</label>
             <select class="form-select" id="order-sort" wire:change="ordering($event.target.value)">
-                <option value="1" wire:click='ordering(1)'>در انتظار پرداخت</option>
-                <option value="2" wire:click='ordering(2)'>درحال پردازش</option>
-                <option value="3" wire:click='ordering(3)'>تحویل شده </option>
+                <option value="1" wire:click='ordering(1)'> در انتظار پرداخت</option>
+                <option value="2" wire:click='ordering(2)'> درحال پردازش</option>
+                <option value="3" wire:click='ordering(3)'> تحویل شده </option>
                 {{-- <option wire:click='ordering(1)'>تحویل داده شده</option> --}}
-                <option value="4" wire:click='ordering(4)'>مرجوعی</option>
-                <option value="5" wire:click='ordering(5)'>کنسل</option>
+                <option value="4" wire:click='ordering(4)'> مرجوعی</option>
+                <option value="5" wire:click='ordering(5)'> لغو شده</option>
             </select>
-            {{ $order }}
-        </div><a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i
-                class="ci-sign-out me-2"></i>خروج</a>
+        </div>
     </div>
     <!-- Orders list-->
     <div class="table-responsive fs-md mb-4 position-relative" style="min-height: 300px;">
@@ -60,7 +58,7 @@
                     </td>
                     <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
                     <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
-                    <td class="text-center"><a href="{{ url('/') }}"><i class="ci-eye fs-2"></i></a></td>
+                    <td class="text-center"><a href="{{ route('order.profile.detail',['order_number'=>$payment->order_number ]) }}"><i class="ci-eye fs-2"></i></a></td>
                     <div class="btn-group">
                         <td class="text-center">
                             <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">پرداخت</a>
@@ -69,11 +67,12 @@
                 </tr>
                 <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
                     <td colspan="6">
+                        @foreach ($payment->order as $order)
                         <div class="swiper swiper_slider my-2">
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
-                                @foreach ($payment->order->orderProducts as $order_item)
+                                @foreach ($order->orderProducts as $order_item)
                                 <div class="swiper-slide">
                                     <a target="_blank"
                                         href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
@@ -88,6 +87,7 @@
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-button-next"></div>
                         </div>
+                        @endforeach
                         @if ($payment->status == 'wait')
 
                         <div class="align-items-center d-flex py-2 w-100">
@@ -105,7 +105,7 @@
                     </td>
                     <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
                     <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
-                    <td class="text-center"><a href="{{ url('/') }}"><i class="ci-eye fs-2"></i></a></td>
+                    <td class="text-center"><a href="{{ route('order.profile.detail',['order_number'=>$payment->order_number ]) }}"><i class="ci-eye fs-2"></i></a></td>
 
                     @if($payment->status == 'delivered')
                     <td class="text-center">
@@ -126,11 +126,12 @@
                 </tr>
                 <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
                     <td colspan="6">
+                        @foreach ($payment->order as $order)   
                         <div class="swiper swiper_slider my-2">
                             <!-- Additional required wrapper -->
                             <div class="swiper-wrapper">
                                 <!-- Slides -->
-                                @foreach ($payment->order->orderProducts as $order_item)
+                                @foreach ($order->orderProducts as $order_item)
                                 <div class="swiper-slide">
                                     <a target="_blank"
                                         href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
@@ -145,6 +146,7 @@
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-button-next"></div>
                         </div>
+                        @endforeach
                     </td>
                 </tr>
                 @endif

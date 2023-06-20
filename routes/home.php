@@ -70,11 +70,11 @@ Route::middleware('web')->prefix('profile')->middleware('auth')->group(function 
     Route::get('/notification', \App\Http\Livewire\Home\Profile\Notification::class)->name('notification.index');
     Route::get('/giftcards', \App\Http\Livewire\Home\Profile\Gift::class)->name('gift.index');
     Route::get('/orders', \App\Http\Livewire\Home\Profile\Order::class)->name('order.profile.index');
-    Route::get('/my-orders/paid-in-progress', \App\Http\Livewire\Home\Profile\Order\Paid::class)->name('order.profile.paid');
-    Route::get('/my-orders/delivered', \App\Http\Livewire\Home\Profile\Order\Delivered::class)->name('order.profile.delivered');
-    Route::get('/my-orders/returned', \App\Http\Livewire\Home\Profile\Order\Returned::class)->name('order.profile.returned');
-    Route::get('/my-orders/canceled', \App\Http\Livewire\Home\Profile\Order\Cancel::class)->name('order.profile.canceled');
-    Route::get('/my-orders/{order_number}', \App\Http\Livewire\Home\Profile\Order\Detail::class)->name('order.profile.detail');
+    Route::get('/orders/order-{order_number}', \App\Http\Livewire\Home\Profile\Order\Detail::class)->name('order.profile.detail');
+    // Route::get('/my-orders/paid-in-progress', \App\Http\Livewire\Home\Profile\Order\Paid::class)->name('order.profile.paid');
+    // Route::get('/my-orders/delivered', \App\Http\Livewire\Home\Profile\Order\Delivered::class)->name('order.profile.delivered');
+    // Route::get('/my-orders/returned', \App\Http\Livewire\Home\Profile\Order\Returned::class)->name('order.profile.returned');
+    // Route::get('/my-orders/canceled', \App\Http\Livewire\Home\Profile\Order\Cancel::class)->name('order.profile.canceled');
     Route::get('/orders-return/{order_number}/items-info', \App\Http\Livewire\Home\Profile\Order\Detail\ItemInfo::class)
         ->name('returned.itemInfo');
     Route::get('/orders-return/{order_number}/select-items', \App\Http\Livewire\Home\Profile\Order\Detail\Returned::class)

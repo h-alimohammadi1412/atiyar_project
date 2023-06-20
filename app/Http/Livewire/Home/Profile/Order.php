@@ -54,7 +54,8 @@ class Order extends AdminControllerLivewire
     }
     public function render()
     {
-            $payments = Payment::with('order.orderProducts')->where(['status' => $this->order, 'user_id' => auth()->user()->id])->paginate(15);
+            $payments = Payment::with('order.orderProducts')->where(['status' => $this->order, 'user_id' => auth()->user()->id])->paginate(10);
+            // dd($payments);
         $this->dispatchBrowserEvent('onContentChanged');
         return view('livewire.home.profile.order', compact('payments'))->layout('layouts.home1');
     }
