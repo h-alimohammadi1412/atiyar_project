@@ -1,6 +1,6 @@
 @section('title','سبد خرید')
 <div>
-    <div class="page-title-overlap bg-dark pt-4">
+    <div class="page-title-overlap bg-dark pt-4" wire:init='loadingPage'>
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
@@ -21,7 +21,7 @@
     </div>
     <div class="container pb-5 mb-2 mb-md-4">
         <div class="row">
-            <section class="col-lg-8">
+            <section class="col-lg-8 position-relative" style="min-height: 500px;">
                 <!-- Steps-->
                 <div class="steps steps-light pt-2 pb-3 mb-5">
                     <a class="step-item active" href="{{ route('cart.index') }}">
@@ -36,29 +36,26 @@
                         <div class="step-progress"><span class="step-count">3</span></div>
                         <div class="step-label"><i class="ci-card"></i>پرداخت</div>
                     </a>
-                    {{-- <a class="step-item" href="checkout-payment.html">
-                        <div class="step-progress"><span class="step-count">4</span></div>
-                        <div class="step-label"><i class="ci-card"></i>پرداخت</div>
-                    </a>
-                    <a class="step-item" href="checkout-review.html">
-                        <div class="step-progress"><span class="step-count">5</span></div>
-                        <div class="step-label"><i class="ci-check-circle"></i>مرور</div>
-                    </a> --}}
                 </div>
+                @if (!$readyToLoad)
+
+                <div class="align-items-center container-loader-atiyar d-flex justify-content-center position-absolute">
+                    <div class="position-absolute" style="opacity: .09;"><img src="{{ asset('img/weblogo.png') }}"
+                            alt=""></div>
+                    <div class="custom-loader-atiyar"></div>
+                </div>
+                @else
                 <!-- Autor info-->
                 <div class=" bg-secondary p-4 rounded-3 mb-grid-gutter border">
                     <h6 class="mb-3 py-3 border-bottom">آدرس تحویل سفارش</h6>
                     @if (sizeof($addresses) > 0)
-                    @foreach ($addresses as $address)
-                    @if ($address->status == 1)
                     <div class="d-flex align-items-center">
                         <i class="ci-location"></i>
-                        <p class="p-0 m-0 ms-2"> {{ $address->state }} - {{ $address->city }} - {{ $address->address }}
+                        <p class="p-0 m-0 ms-2"> {{ $address_use->state }} - {{ $address_use->city }} - {{
+                            $address_use->address }}
                         </p>
                     </div>
-                    <span class="d-block ms-4 mt-3">{{ $address->name }} {{ $address->lname }}</span>
-                    @endif
-                    @endforeach
+                    <span class="d-block ms-4 mt-3">{{ $address_use->name }} {{ $address_use->lname }}</span>
                     @else
                     <div class="alert alert-warning">هیچ آدرسی انتخاب نشده است.</div>
                     @endif
@@ -76,7 +73,8 @@
                         <div class="ms-3">
                             <div>
                                 <span>ارسال عادی</span><span class="ms-2 p-1"
-                                    style="background: #ccc;border-radius: 7px;font-size: 13px;">{{ $orders->count() }}
+                                    style="background: #ccc;border-radius: 7px;font-size: 13px;">{{
+                                    $order->orderProducts->count() }}
                                     کالا</span>
                             </div>
                             <span>1 روز</span>
@@ -86,25 +84,26 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            @foreach ($orders as $order)
+                            @foreach ($order->orderProducts as $order_item)
                             <div class="swiper-slide">
                                 <a target="_blank"
-                                    href="{{ url('/product/at-' . $order->product->id . '/' . $order->product->link) }}">
-                                    <img src="/storage/{{ $order->product->img }}">
+                                    href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
+                                    <img src="/storage/{{ $order_item->product->img }}">
                                 </a>
                                 <div class="d-flex justify-content-between">
-                                    @if ($order->color != null)
+                                    @if ($order_item->color)
                                     <div class="d-flex align-items-center mt-3">
                                         <div class="border rounded-circle" style="padding: 2px">
                                             <span class="d-block rounded-circle"
-                                                style="background-color: {{ $order->color->value }};width:15px;height:15px"></span>
+                                                style="background-color: {{ $order_item->color->value }};width:15px;height:15px"></span>
                                         </div>
-                                        <span class="ms-1" style="font-size: 12px;">{{ $order->color->name }}</span>
+                                        <span class="ms-1" style="font-size: 12px;">{{ $order_item->color->name
+                                            }}</span>
                                     </div>
                                     @endif
                                     <div class="d-flex align-items-center mt-3">
                                         <span class="ms-1" style="font-size: 12px;">تعداد : </span>
-                                        <span class="ms-1" style="font-size: 12px;">{{ $order->count}}</span>
+                                        <span class="ms-1" style="font-size: 12px;">{{ $order_item->count_cart}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -113,6 +112,8 @@
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
+
+
                     <div class="d-flex align-items-center mt-4 mb-2 fw-bold">
                         <i class="ci-time"></i>
                         <span class="ms-2 ">انتخاب زمان ارسال</span>
@@ -121,8 +122,8 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             @foreach (\App\Models\AddressTime::all() as $key=>$adressTime)
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link @if($key == 0) active @endif" id="home-tab" data-bs-toggle="tab"
-                                    data-bs-target="#tab-pane-{{ $key }}" type="button" role="tab"
+                                <button wire:ignore class="nav-link @if($key == $show_id) active @endif" id="home-tab"
+                                    data-bs-toggle="tab" data-bs-target="#tab-pane-{{ $key }}" type="button" role="tab"
                                     aria-controls="home-tab-pane" aria-selected="true">
                                     <div class="d-flex flex-column justify-content-center">
                                         <span class="fs-6">{{ $adressTime->day }}</span>
@@ -135,11 +136,11 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             @foreach (\App\Models\AddressTime::all() as $key=>$adressTime)
-                            <div class="tab-pane fade show @if($key == 0) active @endif" id="tab-pane-{{ $key }}"
+                            <div class="tab-pane fade show @if($key == $show_id) active @endif" id="tab-pane-{{ $key }}"
                                 role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                 <div class="address_time_item border p-2 rounded @if($address_time && $address_time->id == $adressTime->id) active @endif"
                                     style="width: 100px;cursor: pointer;"
-                                    wire:click="selectAddressTime({{ $adressTime->id }})">
+                                    wire:click="selectAddressTime({{ $adressTime->id }},{{ $key }})">
                                     <div class="d-flex justify-content-around">
                                         <span>بازه</span>
                                         <span>{{ $adressTime->time }}</span>
@@ -152,66 +153,66 @@
                         </div>
                     </div>
                 </div>
-                <!-- Navigation (desktop)-->
-                {{-- <div class="d-none d-lg-flex pt-4 mt-3">
-                    <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="shop-cart.html"><i
-                                class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">برگشت به سبد
-                                خرید</span><span class="d-inline d-sm-none">برگشت</span></a></div>
-                    <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="checkout-shipping.html"><span
-                                class="d-none d-sm-inline">روش ارسال</span><span
-                                class="d-inline d-sm-none">بعدی</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a>
-                    </div>
-                </div> --}}
+                @endif
             </section>
             <!-- Sidebar-->
             <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
-                <div class="bg-white rounded-3 shadow-lg p-4">
-                    <div class="py-2 px-xl-2">
+                <div class="bg-white rounded-3 shadow-lg p-4  position-relative">
+                    <div class="py-2 px-xl-2" style="min-height: 300px;">
+                        @if (!$readyToLoad)
+                        <div
+                            class="align-items-center container-loader-atiyar d-flex justify-content-center position-absolute">
+                            <div class="position-absolute" style="opacity: .09;"><img
+                                    src="{{ asset('img/weblogo.png') }}" alt=""></div>
+                            <div class="custom-loader-atiyar"></div>
+                        </div>
+
+                        @else
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
-                            <h2 class="h6 mb-3 pb-1 fs-md ">قیمت کالاها ({{ sizeof($orders) }})</h2>
-                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($total_price_orders) }} <span
+                            <h2 class="h6 mb-3 pb-1 fs-md ">قیمت کالاها ({{ $order->orderProducts->count() }})</h2>
+                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($order->total_price) }} <span
                                     style="font-size: 13px">تومان</span></h3>
                         </div>
-                        {{-- {{ $total_price_discount_orders }} --}}
                         @php
-                        $darsad = ABS(($total_price_discount_orders/ $total_price_orders)*100) ;
+                        $total_price_discount_orders = ABS($order->total_discount_price - $order->total_price);
+                        $darsad = ABS(($total_price_discount_orders / $order->total_price)*100) ;
                         @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md text-primary">تخفیف کالا ها</h2>
-                            <h3 class="fw-normal fs-md fw-bold text-primary"><span class="">({{ ceil($darsad) }}%)</span> {{
-                                number_format(ABS($total_price_discount_orders)) }} <span
+                            <h3 class="fw-normal fs-md fw-bold text-primary"><span class="">({{ ceil($darsad)
+                                    }}%)</span> {{
+                                number_format(ABS($order->total_discount_price - $order->total_price)) }} <span
                                     style="font-size: 13px">تومان</span></h3>
                         </div>
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md ">جمع </h2>
-                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($total_price_orders_discount) }}
-                                <span style="font-size: 13px">تومان</span></h3>
+                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($order->total_discount_price) }}
+                                <span style="font-size: 13px">تومان</span>
+                            </h3>
                         </div>
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md ">هزینه ارسال</h2>
                             <h3 class="fw-normal fs-md fw-bold">@if($address_time) {{
-                                number_format($address_time->price) }} <span style="font-size: 13px">تومان</span>@else رایگان @endif </h3>
+                                number_format($address_time->price) }} <span style="font-size: 13px">تومان</span>@else
+                                رایگان @endif </h3>
                         </div>
                         @php
-                        $totp = $address_time != null ? ($address_time->price + $total_price_orders_discount) :
-                        $total_price_orders_discount;
+                        $totp = $address_time != null ? ($address_time->price + $order->total_discount_price) :
+                        $order->total_discount_price;
                         @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md text-primary">مبلغ قابل پرداخت </h2>
                             <h3 class="fw-normal fs-md fw-bold text-primary">{{ number_format($totp) }} <span
                                     style="font-size: 13px">تومان</span></h3>
                         </div>
-                        <a class="btn btn-primary btn-shadow d-block w-100 mt-4" wire:click="addToPayment({{ $orders->sum('total_discount_price') }},{{ ABS($total_price_discount_orders )}})"></i>ثبت سفارش
+                        <a class="btn btn-primary btn-shadow d-block w-100 mt-4" wire:click="addToPayment({{ $totp }})"></i>ثبت سفارش
                         </a>
-                      
-
-                        {{-- <p class="text-center mt-4">هزینه این سفارش هنوز پرداخت نشده‌ و در صورت اتمام موجودی، کالاها از
-                            سبد حذف می‌شوند. </p> --}}
+                        @endif
                     </div>
                 </div>
             </aside>
         </div>
-        <!-- Navigation (mobile)-->
+        {{-- <!-- Navigation (mobile)-->
         <div class="row d-lg-none">
             <div class="col-lg-8">
                 <div class="d-flex pt-4 mt-3">
@@ -224,7 +225,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <form class="needs-validation modal fade @if ($show) show @endif" @if ($show)
         style="display: block; background: rgba(0,0,0,.5);" @endif id="add-address" tabindex="-1" novalidate>
@@ -378,33 +379,25 @@
 </div>
 @section('script')
 <script>
-    // document.addEventListener('click','.address_time_item',function(){
-    //     alert('ssss');
-    // });
-    document.addEventListener('DOMContentLoaded', () => {
-        document.addEventListener('click','.address_time_item',function(){
-            alert('ssss');
+    function setSwiperSlider(){
+            const swiper = new Swiper('.swiper_slider', {
+                // loop: true,
+                slidesPerView: 5,
+                spaceBetween: 50,
+                touchReleaseOnEdges:true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 5000
+                },
+            });
+        }
+        window.addEventListener('onContentChanged', () => {
+            setSwiperSlider();
         });
-    });
-//     Livewire.on('click','.address_time_item', postId => {
-//     alert('A post was added with the id of: ' + postId);
-// })
-//     window.addEventListener('click','.address_time_item', event => {
-//     alert('Name updated to: ');
-// })
-    const swiper = new Swiper('.swiper_slider', {
-            // loop: true,
-            slidesPerView: 5,
-            spaceBetween: 50,
-            touchReleaseOnEdges:true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            autoplay: {
-                delay: 5000
-            },
-        });
+        setSwiperSlider();
         
 </script>
 @endsection

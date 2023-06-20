@@ -119,7 +119,7 @@ Route::get('/payment/bank/order-{order_number}', \App\Http\Livewire\Home\Order\P
     ->name('bank.payment')->middleware('auth');
 
 //payment Bank
-Route::get('/payment/bank/pay', [\App\Http\Controllers\PayController::class, 'pay'])
+Route::get('/payment/bank/pay/order-{order_number}', [\App\Http\Controllers\PayController::class, 'pay'])
     ->name('bank.pay')->middleware('auth');
 //payment Bank
 Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class, 'callback'])

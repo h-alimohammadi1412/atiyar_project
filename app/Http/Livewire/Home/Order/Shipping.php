@@ -2,37 +2,48 @@
 
 namespace App\Http\Livewire\Home\Order;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Address;
 use App\Models\AddressTime;
-use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\ReceiptCenter;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
 
-class Shipping extends Component
+class Shipping extends AdminControllerLivewire
 {
     use LivewireAlert;
     public \App\Models\Address $address;
     public $address_use;
     public $address_time;
     public $order;
+    public $order_number;
     public $orders;
     public $addresses;
     public $dPrice;
     public $dateId;
+    public $show_id = 0;
     public $show = false;
     public $show_add_address_form = false;
-    public $total_price_orders = 0;
-    public $total_price_orders_discount = 0;
-    public $total_price_discount_orders = 0;
     protected $listeners = ['adtime' => '$refresh'];
 
-    public function mount()
+    public function mount(HttpRequest $request)
     {
+        if ($request->has('order_id')) {
+            $this->order_number = $request->get('order_id');
+        } else {
+            abort(404);
+        }
         $this->address = new \App\Models\Address();
         $this->addresses = Address::where(['user_id' => auth()->user()->id])->orderBy('status', 'DESC')->get();
+        foreach ($this->addresses as $item) {
+            if ($item->status == 1) {
+                $this->address_use = $item;
+            }
+        }
     }
     protected $validationAttributes = [
         'address.code_posti' => 'کد پستی',
@@ -75,9 +86,7 @@ class Shipping extends Component
             'state' => $this->address->state,
             'mahale' => $this->address->mahale,
             'status' =>  $status,
-
         ]);
-
         if ($status == 1) {
             foreach ($this->addresses as $address) {
                 $address->status = 0;
@@ -87,19 +96,7 @@ class Shipping extends Component
         }
         $this->address = new \App\Models\Address();
         $this->show_add_address_form = false;
-        // return $this->redirect(request()->header('Referer'));
     }
-    public function checkout_address($id)
-    {
-        $address = Address::find($id);
-        $this->address_use = $address;
-        foreach ($this->orders as $order) {
-            $order->update([
-                'address_id' => $address->id,
-            ]);
-        }
-    }
-
     public function deleteAddress($id)
     {
         $address = Address::find($id);
@@ -125,11 +122,7 @@ class Shipping extends Component
         }
         $this->addresses[$key]->status = 1;
         $this->addresses[$key]->save();
-        foreach ($this->orders as $order) {
-            $order->update([
-                'address_id' => $this->addresses[$key]->id,
-            ]);
-        }
+        $this->address_use = $this->addresses[$key];
         $this->show = false;
     }
     public function showAddAddressForm()
@@ -139,68 +132,47 @@ class Shipping extends Component
         $this->show_add_address_form = true;
     }
 
-    public function addToPayment($data, $discount_price)
+    public function addToPayment($total_price)
     {
-        // dd($data);
         if ($this->address_time == null) {
             $this->helperAlert('success', 'لطفا زمان ارسال را انتخاب کنید.');
-        } else {
-            foreach ($this->orders as $order) {
-                \App\Models\Payment::create([
-                    'user_id' => auth()->user()->id,
-                    'order_id' => $order->id,
-                    'total_price' => $data + $this->address_time->price,
-                    'discount_price' => $discount_price,
-                    'time_id' =>  $this->address_time->id,
-                    'shipping_price' => $this->address_time->price,
-                    'order_number' => $order->order_number,
-                ]);
-                if ($order->address_id == null) {
-                    $address = Address::where('user_id', auth()->user()->id)->first();
-                    $order->update([
-                        'address_id' => $address->id,
-                    ]);
-                }
-            }
-            $carts = Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
-            foreach ($carts as $cart) {
-                $cart->delete();
-            }
-            return $this->redirect(route('order.payment'));
+            return;
         }
+        $payment = Payment::create([
+            'user_id' => auth()->user()->id,
+            'order_id' => $this->order->id,
+            'total_price' => $total_price,
+            'discount_price' => ABS($this->order->total_price - $this->order->total_discount_price),
+            'time_id' =>  $this->address_time->id,
+            'shipping_price' => $this->address_time->price,
+            'order_number' => $this->order->order_number,
+        ]);
+        $this->order->update([
+            'address_id' => $this->address_use->id,
+        ]);
+        // $carts = Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
+        // foreach ($carts as $cart) {
+        //     $cart->delete();
+        // }
+        Cookie::make('payment_id',$payment->id);
+        return $this->redirect(route('order.payment'));
     }
 
-    public function selectAddressTime($id)
+    public function selectAddressTime($id, $key)
     {
         $adsTime = AddressTime::find($id);
         if ($adsTime) {
             $this->address_time = $adsTime;
         }
+        $this->show_id = $key;
     }
     public function render()
     {
-        $this->total_price_orders = 0;
-        $this->total_price_discount_orders = 0;
-        $this->total_price_orders_discount = 0;
-        $order = Order::with(['product', 'color'])->where('user_id', auth()->user()->id)->get();
-        $order_last = $order->last();
-        $order_number = $order->last()->order_number;
-        $orders = Order::where('order_number', $order_number)->get();
-
-        foreach ($orders as $order) {
-            $this->total_price_orders += $order->total_price;
-            $this->total_price_orders_discount += $order->total_discount_price;
-            $this->total_price_discount_orders += ($order->total_discount_price - $order->total_price);
-        }
-        $this->orders = $orders;
-        $carts = Cart::where('user_id', auth()->user()->id)
-            ->where('type', 0)->get();
-
-
-        // dd($order);
+        $order = Order::with(['orderProducts' => ['product', 'color']])->where('order_number', $this->order_number)->first();
+        $this->order = $order;
+        $this->dispatchBrowserEvent('onContentChanged');
         return view(
-            'livewire.home.order.shipping',
-            compact('order_last')
+            'livewire.home.order.shipping'
         )->layout('layouts.home1');
     }
 }
