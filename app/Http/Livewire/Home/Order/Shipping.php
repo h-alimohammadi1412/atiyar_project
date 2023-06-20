@@ -150,11 +150,7 @@ class Shipping extends AdminControllerLivewire
         $this->order->update([
             'address_id' => $this->address_use->id,
         ]);
-        // $carts = Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
-        // foreach ($carts as $cart) {
-        //     $cart->delete();
-        // }
-        Cookie::make('payment_id',$payment->id);
+        
         return $this->redirect(route('order.payment'));
     }
 

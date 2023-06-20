@@ -53,12 +53,10 @@ class PayController extends Controller
     {
         $Authority = \request()->Authority;
         $status = \request()->Status;
-        if ($status == "NOK") {
+        if ($status == "OK") {
             $payment = \App\Models\Payment::where(['transactionId' => $Authority, 'user_id' => auth()->user()->id])->first();
             $bank_payment = BankPayment::where(['order_number' => $payment->order_number, 'user_id' => auth()->user()->id])->first();
             $order = Order::where(['order_number' => $payment->order_number, 'user_id' => auth()->user()->id])->first();
-            // dd( $order);
-            // dd($payments);
             $payment->update([
                 'status' => 1
             ]);

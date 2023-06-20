@@ -2,25 +2,60 @@
 
 namespace App\Http\Livewire\Home\Profile;
 
-use App\Http\Livewire\Home\Order\Payment\BankPayment;
-use App\Models\Order as ModelsOrder;
 use App\Models\Payment;
 use App\Http\Controllers\AdminControllerLivewire;
+use DateTime;
+use Livewire\WithPagination;
 
 class Order extends AdminControllerLivewire
 {
-    public $orders ;
-
-    public function mount(){
-        $this->orders = Payment::where('user_id', auth()->user()->id)->get();
+    use WithPagination;
+    public $order = 'wait';
+    public function ordering($key)
+    {
+        switch ($key) {
+            case 1:
+                $this->order = 'wait';
+                break;
+            case 2:
+                $this->order = 'paid';
+                break;
+            case 3:
+                $this->order = 'delivered';
+                break;
+            case 4:
+                $this->order = 'returned';
+                break;
+            case 5:
+                $this->order = 'canceled';
+                break;
+            default:
+                # code...
+                break;
+        }
+        
     }
-    public function PaymentBank($id)
+    public function paymentBank($id)
     {
         $payment = Payment::find($id);
-        return $this->redirect('/payment/bank/order-'. $payment->order_number);
+        if ($payment) {
+            $date1 = new DateTime(\Illuminate\Support\Carbon::now());
+            $date2 = new DateTime($payment->updated_at);
+            $diff = $date2->diff($date1);
+            $time = $diff->format('%i');
+            if ($time > 60) {
+                $payment->delete();
+                $this->helperAlert('warning', 'محلت پرداخت این سفارش به پایان رسیده است.');
+                return;
+            }
+            return $this->redirect('/payment/bank/order-' . $payment->order_number);
+        }
+        $this->helperAlert('warning', 'سفارش با این مشخصات وجود ندارد');
     }
     public function render()
     {
-        return view('livewire.home.profile.order')->layout('layouts.home1');
+            $payments = Payment::with('order.orderProducts')->where(['status' => $this->order, 'user_id' => auth()->user()->id])->paginate(15);
+        $this->dispatchBrowserEvent('onContentChanged');
+        return view('livewire.home.profile.order', compact('payments'))->layout('layouts.home1');
     }
 }

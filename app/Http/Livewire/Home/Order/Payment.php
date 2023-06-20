@@ -151,6 +151,7 @@ class Payment extends AdminControllerLivewire
                 
                 $this->payment->gift_code = $this->gift_code_price->code;
                 $this->payment->gift_code_price = $price;
+                
                 $this->payment->save();
                 $price = 0;
             } else {
@@ -170,7 +171,9 @@ class Payment extends AdminControllerLivewire
         if ($price ==  0) {
 
             $this->payment->update([
-                'status' => 1
+                // 'status' => 1,
+                'status' => 'paid',
+                'total_price' => $price
             ]);
             $this->payment->order->update([
                 'status' => 'paid',
@@ -185,6 +188,10 @@ class Payment extends AdminControllerLivewire
             'order_number' => $this->payment->order_number,
             'price' => $price,
             'status' => 0,
+        ]);
+        $this->payment->update([
+            'total_price' => $price,
+            'status' => 'wait',
         ]);
         $this->payment->order->update([
             'status' => 'wait'

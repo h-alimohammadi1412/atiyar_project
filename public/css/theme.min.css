@@ -19673,3 +19673,9 @@ flex-direction: unset;
 @keyframes s7 {
   100% {transform: rotate(1turn)}
 }
+
+
+#table_orders .table-hover>tbody>tr:hover>* {
+    --bs-table-accent-bg: inherit;
+    color: inherit;
+}
