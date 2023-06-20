@@ -24,8 +24,9 @@ class CreatePaymentsTable extends Migration
             $table->string('total_price')->nullable();
             $table->string('shipping_price')->nullable();
             $table->string('type_payment')->default('1')->nullable();
-            $table->string('discount_code')->nullable();
             $table->string('discount_price')->nullable();
+            $table->string('discount_code')->nullable();
+            $table->string('discount_code_price')->nullable();
             $table->string('gift_code')->nullable();
             $table->string('gift_code_price')->nullable();
             $table->string('status')->nullable();

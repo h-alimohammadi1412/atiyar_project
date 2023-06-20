@@ -22,7 +22,9 @@ class AdminControllerLivewire extends Component
     {
         $this->readyToLoad = true;
     }
-
+    public function loadingPage(){
+        $this->readyToLoad = true;
+    }
     public function uploadImage($dir)
     {
         $year = now()->year;

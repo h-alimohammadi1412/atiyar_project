@@ -12,7 +12,7 @@ class Order extends Component
     public $orders ;
 
     public function mount(){
-        $this->orders = ModelsOrder::where('user_id', auth()->user()->id)->get();
+        $this->orders = Payment::where('user_id', auth()->user()->id)->get();
     }
     public function PaymentBank($id)
     {

@@ -17,18 +17,12 @@ class Order extends Model
         ,'zipCode','latitude','longitude','areaCode','type','status','proPriceCount',
         'time_day','time_month','time_time'];
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class,'product_id','id');
-    }
+   
     public function address()
     {
         return $this->belongsTo(Address::class,'address_id','id');
     }
-    public function color()
-    {
-        return $this->belongsTo(Color::class,'product_color','id');
-    }
+  
 
     public function vendor()
     {
@@ -45,5 +39,9 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id','id');
+    }
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class,'order_id','id');
     }
 }

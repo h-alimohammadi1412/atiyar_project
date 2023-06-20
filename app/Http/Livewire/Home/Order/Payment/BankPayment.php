@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Home\Order\Payment;
 
+use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 
 class BankPayment extends Component
@@ -10,10 +11,17 @@ class BankPayment extends Component
 
     public function render()
     {
-        $bank = \App\Models\BankPayment::where('user_id',auth()->user()->id)
+        $order_number = explode('-', Request::segment(3))[1];
+        $bank = \App\Models\BankPayment::where(['order_number' => $order_number, 'user_id' => auth()->user()->id])
             ->get()->last();
-            header("refresh:2;url=/payment/bank/pay");
-        return view('livewire.home.order.payment.bank-payment'
-        ,compact('bank')) ->layout('layouts.home');
+        if ($bank) {
+            header("refresh:2;url=/payment/bank/pay/order-$order_number");
+        } else {
+            $this->redirect(route('home.index'));
+        }
+        return view(
+            'livewire.home.order.payment.bank-payment',
+            compact('bank')
+        )->layout('layouts.home1');
     }
 }

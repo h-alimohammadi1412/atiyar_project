@@ -177,7 +177,7 @@
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
     <x-livewire-alert::flash />
     @include('livewire.home.home.script1')
-    <script src="{{ asset('js/turboLink.js') }}"></script>
+    {{-- <script src="{{ asset('js/turboLink.js') }}"></script> --}}
 </body>
 
 </html>

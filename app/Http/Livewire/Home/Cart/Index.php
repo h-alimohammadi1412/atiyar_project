@@ -8,7 +8,6 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\UserHistory;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
 
 class Index extends AdminControllerLivewire
 {
@@ -77,9 +76,10 @@ class Index extends AdminControllerLivewire
             $this->emit('toast', 'success', 'محصول آپدیت شد');
         }
     }
-    public function shipping($carts)
+    public function shipping()
     {
-        dd($this->cartProduct);
+        $carts = $this->cartProduct;
+
         if (auth()->user()) {
             $userIp2 = Request::ip();
             if (sizeof($carts) > 0) {
@@ -88,7 +88,7 @@ class Index extends AdminControllerLivewire
                 if ($order) {
                     $order_number = $order->order_number + 1;
                 }
-                $order =   Order::create([
+                $order = Order::create([
                     'user_id' => auth()->user()->id,
                     'order_number' => $order_number,
                     'payment' => 0,
@@ -100,7 +100,7 @@ class Index extends AdminControllerLivewire
                 foreach ($carts as $cart) {
                     $this->CreateOrderProduct($cart, $order);
                 }
-                return $this->redirect(route('order.shipping'));
+                return $this->redirect(url('/shipping?order_id=' . $order_number));
             }
 
             $this->helperAlert('warning', ' هیچ محصولی در سبد خرید ندارید.');
@@ -113,17 +113,17 @@ class Index extends AdminControllerLivewire
         OrderProduct::create([
             'order_id' =>  $order->id,
             'order_number' =>  $order->order_number,
-            'product_seller_id' => $cart['product_seller']['id'],
-            'product_id' => $cart['product_seller']['product_id'],
-            'color_id' => $cart['product_seller']['color_id'],
-            'warranty_id' => $cart['product_seller']['warranty_id'],
-            'seller_id' => $cart['product_seller']['vendor_id'],
-            'price' => $cart['product_seller']['price'],
-            'discount_price' => $cart['product_seller']['discount_price'],
-            'anbar_id' => $cart['product_seller']['anbar'],
-            'product_available_count' => $cart['product_seller']['product_count'],
-            'product_sale_count' => $cart['product_seller']['limit_order'],
-            'count_cart' => $cart['count'],
+            'product_seller_id' => $cart->productSeller->id,
+            'product_id' => $cart->productSeller->product_id,
+            'color_id' => $cart->productSeller->color_id,
+            'warranty_id' => $cart->productSeller->warranty_id,
+            'seller_id' => $cart->productSeller->vendor_id,
+            'price' => $cart->productSeller->price,
+            'discount_price' => $cart->productSeller->discount_price,
+            'anbar_id' => $cart->productSeller->anbar,
+            'product_available_count' => $cart->productSeller->product_count,
+            'product_sale_count' => $cart->productSeller->limit_order,
+            'count_cart' => $cart->count
         ]);
     }
     public function CalPricesCart($carts)
@@ -131,8 +131,8 @@ class Index extends AdminControllerLivewire
         $total_price = 0;
         $total_discount_price = 0;
         foreach ($carts as $cart) {
-            $total_price += $cart['product_seller']['price'] * $cart['count'];
-            $total_discount_price += $cart['product_seller']['discount_price'] * $cart['count'];
+            $total_price += $cart->productSeller->price * $cart->count;
+            $total_discount_price += $cart->productSeller->discount_price * $cart->count;
         }
 
         return ['total_price' => $total_price, 'total_discount_price' => $total_discount_price];
@@ -175,18 +175,14 @@ class Index extends AdminControllerLivewire
             }
         }
     }
-    public function loaddingPage(){
-        $this->readyToLoad = true;
-    }
-
     public function render()
     {
-        if($this->readyToLoad){
+        if ($this->readyToLoad) {
             $this->getCartProduct();
-        }else{
+        } else {
             $this->cartProduct = [];
         }
-       
+
         $carts = $this->cartProduct;
         if (auth()->check()) {
             $userHistories = UserHistory::with('product')->where('user_id', auth()->user()->id)->get();

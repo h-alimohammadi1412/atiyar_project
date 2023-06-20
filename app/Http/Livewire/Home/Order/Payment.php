@@ -2,22 +2,29 @@
 
 namespace App\Http\Livewire\Home\Order;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Address;
 use App\Models\BankPayment;
 use App\Models\Cart;
 use App\Models\Discount;
 use App\Models\Gift;
 use App\Models\Order;
+use App\Models\Payment as ModelsPayment;
 use App\Models\ReturnOrder;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
-class Payment extends Component
+class Payment extends AdminControllerLivewire
 {
-    public $discount_price;
-    public $discount_type;
-    public $dTotalPercent;
-    public $dgift;
+    public $discount_price = null;
+    public $discount_type = null;
+    public $dTotalPercent = null;
+    public $gift_code_price = null;
+    public $gift_code_remaining = null;
     public $sumPrice;
+    public $payment;
+
 
     public Discount $discount;
     public Gift $gift;
@@ -41,50 +48,24 @@ class Payment extends Component
     public function checkDiscountCode()
     {
         $this->validate();
-
+        $cal_price_discount = $this->payment->order->total_discount_price;
+        if($this->gift_code_remaining != null){
+            $this->helperAlert('warning', ' مبلغ پرداختی شما صفر است.');
+            return;
+        }
         if ($this->discount->code != null) {
-            $code_discount = Discount::where(['code' => $this->discount->code, 'status' => 1])->first();
+            $code_discount = Discount::where(['code' => $this->discount->code, 'status' => 0])->first();
             if ($code_discount) {
-                if ($code_discount->type == 1) {
-                    $this->discount_price = $code_discount->price;
-                    $this->discount_type = $code_discount->type;
-                    $order2 = Order::where('user_id', auth()->user()->id)->get();
-                    $order_last = $order2->last();
-                    $order_number = $order2->last()->order_number;
-                    $orders = Order::where('order_number', $order_number)->get();
-                    $payments = \App\Models\Payment::where('order_number', $order_number)->get();
-                    foreach ($payments as $payment) {
-                        $payment->update([
-                            'discount_code' => $code_discount->code,
-                            // 'discount_price' => $code_discount->price,
-                        ]);
-                    }
-                    $this->helperAlert('success', 'کد تخفیف وارد شده اعمال شد.');
-                } elseif ($code_discount->type == 0) {
-                    $this->discount_price = $code_discount->percent;
-                    $this->discount_type = 0;
-                    $order2 = Order::where('user_id', auth()->user()->id)->get();
-                    $order_last = $order2->last();
-                    $order_number = $order2->last()->order_number;
-                    $orders = Order::where('order_number', $order_number)->get();
-                    $payments = \App\Models\Payment::where('order_number', $order_number)->get();
-                    foreach ($payments as $payment) {
-                        $payment->update([
-                            'discount_code' => $code_discount->code,
-                            // 'discount_price' => $code_discount->percent,
-                        ]);
-                    }
-                    $dPercent = ($orders->sum('total_discount_price') * $this->discount_price) / 100;
-
-                    $this->dTotalPercent = $orders->sum('total_discount_price') - $dPercent;
-                    $this->emit('toast', 'success', ' کد تخفیف وارد شده اعمال شد.');
-                } else {
-                    $order2 = Order::where('user_id', auth()->user()->id)->get();
-                    $order_last = $order2->last();
-                    $order_number = $order2->last()->order_number;
-                    $orders = Order::where('order_number', $order_number)->get();
-                    $this->sumPrice = $orders->sum('total_discount_price');
+                if ($code_discount->type == 0) {
+                    $this->discount_price = $code_discount;
+                } elseif ($code_discount->type == 1) {
+                    $this->discount_price = $code_discount;
+                    $dPercent = ($cal_price_discount * $this->discount_price->percent) / 100;
+                    $this->dTotalPercent = $cal_price_discount - $dPercent;
+                    $this->discount->code = null;
                 }
+                // dd($this->discount_price);
+                $this->helperAlert('success', ' کد تخفیف وارد شده اعمال شد.');
             } else {
                 $this->helperAlert('warning', 'کد تخفیف وارد شده وجود ندارد.');
             }
@@ -97,44 +78,22 @@ class Payment extends Component
         $this->validate();
         if ($this->gift->code != null) {
 
-
             $gift_code = Gift::where('code', $this->gift->code)->first();
             if ($gift_code) {
+
+                $cal_price_discount = $this->payment->order->total_discount_price;
+                if ($this->discount_price != null) {
+                    $cal_price_discount = $this->payment->order->total_discount_price - $this->discount_price->price;
+                }
                 if ($gift_code->type == 0) {
-
-                    $order2 = Order::where('user_id', auth()->user()->id)->get();
-                    $order_last = $order2->last();
-                    $order_number = $order2->last()->order_number;
-                    $orders = Order::where('order_number', $order_number)->get();
-                    $payments = \App\Models\Payment::with('discount')->where('order_number', $order_number)->get();
-                    $total_price = $payments[0]->total_price;
-                    if ($payments[0]->discount_code) {
-                        $total_price = $payments[0]->total_price - $payments[0]->discount->price;
-                    }
-                    if ($gift_code->value_price < $total_price) {
-                        foreach ($payments as $payment) {
-                            $payment->update([
-                                'gift_code' => $gift_code->code,
-                                'gift_code_price' => $gift_code->value_price,
-                            ]);
-                        }
-                        $gift_code->update([
-                            'type' => 1,
-                            'value_price' => 0,
-                        ]);
+                    if ($gift_code->value_price < $cal_price_discount) {
+                        $this->gift_code_price = $gift_code;
                     } else {
-                        foreach ($payments as $payment) {
-                            $payment->update([
-                                'gift_code' => $gift_code->code,
-                                'gift_code_price' =>  $total_price,
-                            ]);
-                        }
-                        $gift_code->update([
-                            'type' => 0,
-                            'value_price' => ABS($total_price  - $gift_code->value_price),
-                        ]);
+                        $gift_code->value_price = ABS($cal_price_discount - $gift_code->value_price);
+                        $this->gift_code_price = $gift_code;
+                        $this->gift_code_remaining = $cal_price_discount;
                     }
-
+                    $this->gift->code = null;
                     $this->helperAlert('success', ' کارت هدیه شما با موفقیت  ثبت شد.');
                 } elseif ($gift_code->type == 1) {
                     $this->helperAlert('warning', ' کد هدیه شما استفاده شده است.');
@@ -167,64 +126,92 @@ class Payment extends Component
         }
     }
 
-    public function continuePayment($order_number)
+    public function continuePayment()
     {
-        $orders = Order::where('order_number', $order_number)->get();
-        $payments = \App\Models\Payment::with('discount')->where('order_number', $order_number)->get();
 
-        $price = $payments[0]->total_price;
-        if ($payments[0]->discount_code != null) {
-            $price = $price - $payments[0]->discount->price;   
+        $price = $this->payment->order->total_discount_price;
+        $price = $price + $this->payment->shipping_price;
+        if ($this->discount_price != null) {
+            $price = $price - $this->discount_price->price;
+            $this->discount_price->update([
+                'status' => 1
+            ]);
+            $this->payment->discount_code = $this->gift_code_price->code;
+            $this->payment->discount_code_price = $this->gift_code_price->price;
+            $this->payment->save();
         }
-        if ($payments[0]->gift_code != null) {
-            $price = $price - $payments[0]->gift_code_price;
+
+        if ($this->gift_code_price != null) {
+            if ($this->gift_code_remaining != null) {
+
+                $value_price = $this->gift_code_price->value_price - $this->gift_code_remaining;
+                $this->gift_code_price->user_id = auth()->user()->id;
+                $this->gift_code_price->value_price =  $value_price;
+                $this->gift_code_price->save();
+                
+                $this->payment->gift_code = $this->gift_code_price->code;
+                $this->payment->gift_code_price = $price;
+                $this->payment->save();
+                $price = 0;
+            } else {
+
+                $price = $price - $this->gift_code_price->value_price;
+                $this->gift_code_price->user_id = auth()->user()->id;
+                $this->gift_code_price->value_price = 0;
+                $this->gift_code_price->type = 1;
+                $this->gift_code_price->save();
+                
+                $this->payment->gift_code = $this->gift_code_price->code;
+                $this->payment->gift_code_price = $this->gift_code_price->price;
+                $this->payment->save();
+            }
+
         }
-        // dd($price);
-        $bankPayment = BankPayment::create([
+        if ($price ==  0) {
+
+            $this->payment->update([
+                'status' => 1
+            ]);
+            $this->payment->order->update([
+                'status' => 'paid',
+                'transaction_id' => 'no-price',
+                'payment' => 1,
+            ]);
+            return redirect(route('profile.index'));
+        }
+
+        BankPayment::create([
             'user_id' => auth()->user()->id,
-            'order_number' => $payments[0]->order_number,
+            'order_number' => $this->payment->order_number,
             'price' => $price,
             'status' => 0,
         ]);
+        $this->payment->order->update([
+            'status' => 'wait'
+        ]);
 
-        // if ($this->dgift != null) {
-        //     $gift = Gift::where('code', $this->gift->code)->first();
-        //     if ($gift->value_price > $orders->sum('total_discount_price')) {
-        //         $gift->update([
-        //             'value_price' => $gift->value_price - $orders->sum('total_discount_price')
-        //         ]);
-        //     } elseif ($gift->value_price < $orders->sum('total_discount_price')) {
-        //         $gift->update([
-        //             'value_price' => 0
-        //         ]);
-        //     }
-        // }
         // foreach ($orders as $order) {
-        //     $order->update([
-        //         'status' => 'wait'
-        //     ]);
         //     $returnedPayment = ReturnOrder::create([
         //         'user_id' => auth()->user()->id,
         //         'order_number' => $order->order_number,
         //         'order_id' => $order->id,
         //     ]);
         // }
-        return $this->redirect(route('bank.payment', $payments[0]->order_number));
+         $carts = Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
+        foreach ($carts as $cart) {
+            $cart->delete();
+        }
+        return $this->redirect(route('bank.payment', $this->payment->order_number));
     }
 
     public function render()
     {
-        $order2 = Order::where('user_id', auth()->user()->id)->get();
-        $order_last = $order2->last();
-        $order_number = $order2->last()->order_number;
-        $orders = Order::with('product')->where('order_number', $order_number)->get();
-        $payments = \App\Models\Payment::with('discount', 'times')->where('order_number', $order_number)->get();
-        $addresses = Address::where('user_id', auth()->user()->id)->get();
-
-        // dd($payments);
+        $payment = ModelsPayment::with(['order' => ['orderProducts' => ['product', 'color']], 'discount', 'times'])->where(['user_id' => auth()->user()->id, 'status' => null])->get()->last();
+        $this->payment = $payment;
+        $this->dispatchBrowserEvent('onContentChanged');
         return view(
             'livewire.home.order.payment',
-            compact('order_number', 'payments', 'orders', 'order_last')
+            compact('payment')
         )
             ->layout('layouts.home1');
     }
