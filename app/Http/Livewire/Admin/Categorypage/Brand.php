@@ -45,7 +45,7 @@ class Brand extends AdminControllerLivewire
         $this->brand_id = null;
         $this->c_id = false;
         $this->createLog(' محصول ','admin/categorypage', $this->brand_id,'ایجاد');
-        $this->emit('toast', 'success', ' محصول با موفقیت ایجاد شد.');
+        alert()->success('محصول با موفقیت ایجاد شد.', ' محصول با موفقیت ایجاد شد.');
 
     }
 
@@ -65,7 +65,7 @@ class Brand extends AdminControllerLivewire
             ->where('id', $id)->limit($id);
         $banner->delete();
         $this->createLog(' محصول ','admin/categorypage', $banner2->brand_id,'حذف');
-        $this->emit('toast', 'success', ' محصول با موفقیت حذف شد.');
+        alert()->success('محصول با موفقیت حذف شد.', ' محصول با موفقیت حذف شد.');
 
     }
 

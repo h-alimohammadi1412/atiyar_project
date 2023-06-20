@@ -14,7 +14,6 @@ use App\Models\SMS;
 use DB;
 use Illuminate\Support\Facades\Mail;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class Update extends AdminControllerLivewire
@@ -52,7 +51,7 @@ class Update extends AdminControllerLivewire
         } else {
             unset($data['img']);
         }
-      
+
         $this->product->update($data);
         if ($this->color_id) {
             DB::table('product_color')->where('product_id', $this->product->id)->delete();

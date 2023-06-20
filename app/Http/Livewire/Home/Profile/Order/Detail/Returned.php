@@ -7,9 +7,9 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\ReturnOrder;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Returned extends Component
+class Returned extends AdminControllerLivewire
 {
     public $order_price;
     public $status = [];

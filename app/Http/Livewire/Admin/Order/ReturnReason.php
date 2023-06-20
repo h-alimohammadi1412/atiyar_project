@@ -5,11 +5,11 @@ namespace App\Http\Livewire\Admin\Order;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class ReturnReason extends Component
+class ReturnReason extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -54,13 +54,9 @@ class ReturnReason extends Component
 
 
         $this->returnReason->reason = "";
+        $this->createLog('دلیل مرجوعی', 'admin/orders/returnreson', $this->returnReason->reason, 'ایجاد');
 
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن دلیل مرجوعی' .'-'. $this->returnReason->reason,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' دلیل مرجوعی با موفقیت ایجاد شد.');
+        alert()->success('دلیل مرجوعی با موفقیت ایجاد شد.', ' دلیل مرجوعی با موفقیت ایجاد شد.');
 
     }
 
@@ -73,7 +69,9 @@ class ReturnReason extends Component
     {
         $reason = \App\Models\ReturnReason::find($id);
         $reason->delete();
-            $this->emit('toast', 'success', ' دلیل مرجوعی با موفقیت حذف شد.');
+        $this->createLog('دلیل مرجوعی', 'admin/orders/returnreson', $this->returnReason->reason, 'حذف');
+
+        alert()->success('دلیل مرجوعی با موفقیت حذف شد.', ' دلیل مرجوعی با موفقیت حذف شد.');
 
     }
 

@@ -39,7 +39,7 @@ class Index extends AdminControllerLivewire
         $this->footerInnerBox->page_id = "";
         $this->footerInnerBox->top = false;
         $this->createLog('صفحه فوتر سایت', 'admin/footer', $this->footerInnerBox->title, 'ایجاد');
-        $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
+        alert()->success('صفحه به فوتر سایت با موفقیت ایجاد شد.', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
     }
     public function render()
     {

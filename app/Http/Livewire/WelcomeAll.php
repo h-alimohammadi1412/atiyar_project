@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class WelcomeAll extends Component
+class WelcomeAll extends AdminControllerLivewire
 {
 
     public function render()

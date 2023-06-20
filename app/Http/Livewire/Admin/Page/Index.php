@@ -51,7 +51,7 @@ class Index extends AdminControllerLivewire
         $this->site_page->link = "";
         $this->img = null;
         $this->createLog('صفحه سایت', 'admin/page', $this->site_page->title, 'ایجاد');
-        $this->emit('toast', 'success', ' صفحه سایت با موفقیت ایجاد شد.');
+        alert()->success('صفحه سایت با موفقیت ایجاد شد.', ' صفحه سایت با موفقیت ایجاد شد.');
 
     }
 

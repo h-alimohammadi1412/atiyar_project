@@ -1,5 +1,5 @@
 <head>
-    <title>آدرس و زمان ارسال | فروشگاه اینترنتی دیجی‌کالا</title>
+    <title>آدرس و زمان ارسال | فروشگاه اینترنتی آتی یار</title>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/plugins/ua/ec.js"></script>
     <script type="text/javascript" async=""
             src="https://cdn.mouseflow.com/projects/a787d411-e24b-41e7-9e5d-4fc0c5fde0a8.js"></script>

@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Admin\Dashboard;
 
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class FavlistProfile extends Component
+class FavlistProfile extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -28,12 +28,9 @@ class FavlistProfile extends Component
         $favlists = \App\Models\FavList::where('id',$id)->first();
 
         $favlists->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن لیست عمومی' . '-' . $id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' با موفقیت از لیست های عمومی حذف شد ! ');
+        $this->createLog('لیست عمومی', 'admin/dashboard/favlist', $id, 'حذف');
+
+        alert()->success(' با موفقیت از لیست های عمومی حذف شد !', ' با موفقیت از لیست های عمومی حذف شد ! ');
 
     }
 

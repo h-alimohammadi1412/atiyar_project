@@ -6,11 +6,11 @@ use App\Models\Category;
 use App\Models\Log;
 use App\Models\ReceiptCenter;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Recip extends Component
+class Recip extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -57,13 +57,8 @@ class Recip extends Component
 
         $this->receiptCenter->address = "";
         $this->receiptCenter->status = false;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن آدرس' .'-'. $this->receiptCenter->address,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' آدرس با موفقیت ایجاد شد.');
+        $this->createLog('آدرس انبار', 'admin/dashboard/address/recip', $this->receiptCenter->address, 'ایجاد');
+        alert()->success('آدرس با موفقیت ایجاد شد.', ' آدرس با موفقیت ایجاد شد.');
 
     }
 
@@ -71,30 +66,12 @@ class Recip extends Component
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryDisable($id)
-    {
-        $receiptCenter = ReceiptCenter::find($id);
-        $receiptCenter->update([
-            'status' => 0
-        ]);
-        $this->emit('toast', 'success', 'وضعیت آدرس انبار با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $receiptCenter = ReceiptCenter::find($id);
-        $receiptCenter->update([
-            'status' => 1
-        ]);
-
-        $this->emit('toast', 'success', 'وضعیت آدرس انبار با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {
         $receiptCenter = ReceiptCenter::find($id);
         $receiptCenter->delete();
-            $this->emit('toast', 'success', ' آدرس با موفقیت حذف شد.');
+            alert()->success(' آدرس با موفقیت حذف شد.', ' آدرس با موفقیت حذف شد.');
 
     }
 

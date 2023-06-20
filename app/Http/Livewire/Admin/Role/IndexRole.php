@@ -7,11 +7,11 @@ use App\Models\Log;
 use App\Models\PermissionRole;
 use App\Models\Role;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class IndexRole extends Component
+class IndexRole extends AdminControllerLivewire
 {
     use WithPagination;
     public $permissions;
@@ -57,13 +57,8 @@ class IndexRole extends Component
         $this->role->name = "";
         $this->role->def = "";
         $this->permissions = false;
-
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن مقام' .'-'. $this->role->name,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' مقام با موفقیت ایجاد شد.');
+        $this->createLog('مقام', 'admin/role', $this->role->name, 'ایجاد');
+        alert()->success('مقام با موفقیت ایجاد شد.', ' مقام با موفقیت ایجاد شد.');
 
     }
 
@@ -77,12 +72,9 @@ class IndexRole extends Component
     {
         $role = Role::find($id);
             $role->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن مقام' .'-'. $role->name,
-                'actionType' => 'حذف'
-            ]);
-            $this->emit('toast', 'success', ' مقام با موفقیت حذف شد.');
+        $this->createLog('مقام', 'admin/role', $this->role->name, 'حذف');
+
+            alert()->success('مقام با موفقیت حذف شد.', ' مقام با موفقیت حذف شد.');
 
 
     }

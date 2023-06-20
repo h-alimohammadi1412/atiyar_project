@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Home\Profile;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Address extends Component
+class Address extends AdminControllerLivewire
 {
     public \App\Models\Address $address;
     public $addresses;
@@ -94,7 +94,7 @@ class Address extends Component
         $address = \App\Models\Address::findOrFail($id);
         $address->delete();
         $this->addresses = \App\Models\Address::where('user_id', auth()->user()->id)->latest()->get();
-        $this->emit('toast', 'success', ' آدرس با موفقیت حذف شد.');
+        alert()->success(' آدرس با موفقیت حذف شد.', ' آدرس با موفقیت حذف شد.');
     }
 
     public function editForm($address)

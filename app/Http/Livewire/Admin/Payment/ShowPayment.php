@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Admin\Payment;
 
 use App\Models\Order;
 use App\Models\Payment;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class ShowPayment extends Component
+class ShowPayment extends AdminControllerLivewire
 {
     public Payment $payment;
 

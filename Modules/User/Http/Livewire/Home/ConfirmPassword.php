@@ -5,9 +5,9 @@ namespace Modules\User\Http\Livewire\Home;
 use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class ConfirmPassword extends Component
+class ConfirmPassword extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;
@@ -48,7 +48,7 @@ class ConfirmPassword extends Component
             ]);
             return to_route('users.confirm.password.verify',$mobile->id);
         } else {
-            $this->emit('toast', 'error', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
+            alert()->error('شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
         }
     }
 

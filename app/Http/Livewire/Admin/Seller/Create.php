@@ -6,7 +6,6 @@ use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Log;
 
 use App\Models\Seller;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class Create extends AdminControllerLivewire

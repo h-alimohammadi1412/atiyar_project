@@ -7,7 +7,6 @@ use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\ChildCategory;
 use App\Models\Log;
-use Livewire\Component;
 use Livewire\WithPagination;
 
 class Product extends AdminControllerLivewire
@@ -49,7 +48,7 @@ class Product extends AdminControllerLivewire
         $this->attribute->value = "";
         $this->attribute->status = false;
         $this->createLog('مشخصه کالا', 'admin/attribute/product/'.$this->product->id, $this->attribute->value, 'ایجاد');
-        $this->emit('toast', 'success', ' مقدار مشخصه کالا با موفقیت ایجاد شد.');
+        alert()->success('مقدار مشخصه کالا با موفقیت ایجاد شد.', ' مقدار مشخصه کالا با موفقیت ایجاد شد.');
         return redirect()->back();
     }
 

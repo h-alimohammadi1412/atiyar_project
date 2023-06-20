@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Home\Profile;
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Component;
 
 class Gift extends AdminControllerLivewire
 {
@@ -38,7 +37,7 @@ class Gift extends AdminControllerLivewire
                 'user_id' => auth()->user()->id,
                 'type' => 1,
             ]);
-            $this->emit('toast', 'success', ' کد هدیه وارد شده ثبت شد.');
+            alert()->success(' کد هدیه وارد شده ثبت شد.', ' کد هدیه وارد شده ثبت شد.');
             $this->show = false;
         } else {
             $this->addError('کارت هدیه', ' کد هدیه وارد شده وجود ندارد.');

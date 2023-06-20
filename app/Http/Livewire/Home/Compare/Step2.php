@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Home\Compare;
 use App\Models\Compare;
 use App\Models\Product;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Step2 extends Component
+class Step2 extends AdminControllerLivewire
 {
 
     public function pic1($id)

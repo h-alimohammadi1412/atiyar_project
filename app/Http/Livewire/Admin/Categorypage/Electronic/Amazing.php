@@ -51,7 +51,7 @@ public $property2;
         $this->property1 = null;
         $this->property2 = false;
         $this->createLog('پیشنهاد شگفت انگیز','admin/categorypage/electronic', $this->product_id,'ایجاد');
-        $this->emit('toast', 'success', ' پیشنهاد شگفت انگیز با موفقیت ایجاد شد.');
+        alert()->success('پیشنهاد شگفت انگیز با موفقیت ایجاد شد.', ' پیشنهاد شگفت انگیز با موفقیت ایجاد شد.');
 
     }
     public function loadCategory()
@@ -71,7 +71,7 @@ public $property2;
             'status' => 0
         ]);
         $this->createLog('وضعیت پیشنهاد شگفت انگیز','admin/categorypage/electronic', $category2->category_id,'غیرفعال');
-        $this->emit('toast', 'success', 'وضعیت پیشنهاد شگفت انگیز با موفقیت غیرفعال شد.');
+        alert()->success('وضعیت پیشنهاد شگفت انگیز با موفقیت غیرفعال شد.', 'وضعیت پیشنهاد شگفت انگیز با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -86,7 +86,7 @@ public $property2;
             'status' => 1
         ]);
         $this->createLog('وضعیت پیشنهاد شگفت انگیز','admin/categorypage/electronic', $category2->category_id,'فعال');
-        $this->emit('toast', 'success', 'وضعیت پیشنهاد شگفت انگیز با موفقیت فعال شد.');
+        alert()->success('وضعیت پیشنهاد شگفت انگیز با موفقیت فعال شد.', 'وضعیت پیشنهاد شگفت انگیز با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
@@ -99,7 +99,7 @@ public $property2;
             ->where('id',$id)->limit($id);
         $amazing->delete();
         $this->createLog(' پیشنهاد شگفت انگیز','admin/categorypage/electronic', $amazing2->category_id,'حذف');
-        $this->emit('toast', 'success', ' پیشنهاد شگفت انگیز با موفقیت حذف شد.');
+        alert()->success(' پیشنهاد شگفت انگیز با موفقیت حذف شد.', ' پیشنهاد شگفت انگیز با موفقیت حذف شد.');
 
     }
 

@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Banner;
 use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use App\Http\controller;
-use Livewire\Component;
 use App\Models\Banner;
 use App\Models\Log;
 
@@ -69,7 +68,7 @@ class ProfileBanner extends AdminControllerLivewire
         $this->banner->discount = "";
         $this->img = null;
         $this->createLog('بنر پروفایل','admin/banner',$this->banner->title,'ایجاد');
-        $this->emit('toast', 'success', ' بنر پروفایل با موفقیت ایجاد شد.');
+        alert()->success(' بنر پروفایل با موفقیت ایجاد شد.', ' بنر پروفایل با موفقیت ایجاد شد.');
 
     }
 

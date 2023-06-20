@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Home\Profile;
 use App\Http\Livewire\Home\Order\Payment\BankPayment;
 use App\Models\Order as ModelsOrder;
 use App\Models\Payment;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Order extends Component
+class Order extends AdminControllerLivewire
 {
     public $orders ;
 

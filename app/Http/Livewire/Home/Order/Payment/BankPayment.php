@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Home\Order\Payment;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 
-class BankPayment extends Component
+class BankPayment extends AdminControllerLivewire
 {
     public \App\Models\BankPayment $bankPayment;
 

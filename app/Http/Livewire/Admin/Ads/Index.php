@@ -60,24 +60,6 @@ class Index extends AdminControllerLivewire
 
     }
 
-    public function updateCategoryDisable($id)
-    {
-        $brand = AdsCategory::find($id);
-        $brand->update([
-            'status' => 0
-        ]);
-        $this->createLog(' وضعیت تبلیغات دسته','admin/Ads',$this->ads->title,'غیرفعال ');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $brand = AdsCategory::find($id);
-        $brand->update([
-            'status' => 1
-        ]);
-        $this->createLog('وضعیت تبلیغات دسته','admin/Ads',$this->ads->title,'فعال ');
-    }
-
     public function deleteCategory($id)
     {
         $brand = AdsCategory::find($id);

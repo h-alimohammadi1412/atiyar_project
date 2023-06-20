@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Home\Profile;
 
 use App\Models\Notification as ModelsNotification;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Notification extends Component
+class Notification extends AdminControllerLivewire
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -20,7 +20,7 @@ class Notification extends Component
        foreach ($notifics as $not){
            $not->delete();
        }
-        $this->emit('toast', 'success', ' پیغام ها با موفقیت حذف شدند.');
+        alert()->success('پیغام ها با موفقیت حذف شدند.', ' پیغام ها با موفقیت حذف شدند.');
     }
 
 

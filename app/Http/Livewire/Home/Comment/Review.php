@@ -18,10 +18,10 @@ use Artesaos\SEOTools\Facades\JsonLdMulti;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Stevebauman\Location\Facades\Location;
 
-class Review extends Component
+class Review extends AdminControllerLivewire
 {
 
     public $product;

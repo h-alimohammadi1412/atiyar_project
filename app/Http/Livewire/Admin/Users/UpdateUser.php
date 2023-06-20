@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
+use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\User;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class UpdateUser extends Component
+class UpdateUser extends AdminControllerLivewire
 {
     use WithFileUploads;
     public $img;
@@ -26,7 +26,7 @@ class UpdateUser extends Component
 
         $this->validate();
         if ($this->img) {
-            $this->user->img = $this->uploadImage();
+            $this->user->img = $this->uploadImage('user');
         }
         $this->user->update($this->validate());
 //        if (!$this->user->status) {
@@ -39,15 +39,7 @@ class UpdateUser extends Component
         return redirect(route('users.index'));
 
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "user/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
+
     public User $user;
 
     public function render()

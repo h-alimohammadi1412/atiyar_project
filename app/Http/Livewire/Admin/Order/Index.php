@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Admin\Order;
 
 use App\Models\Order;
 use App\Models\ReceiptCenter;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 

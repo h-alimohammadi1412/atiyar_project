@@ -558,7 +558,7 @@ DO NOT REPLACE THIS FILE WITHOUT CONSIDERATION.
             self._clearFrames();
 
             var step = 0;
-            
+
             //calculate base top,left,bottom,right
             var containerDim = self.containerDim,
                 imageDim = self.imageDim;
@@ -582,20 +582,20 @@ DO NOT REPLACE THIS FILE WITHOUT CONSIDERATION.
                     imgHeight = self.imageDim.h * tickZoom / 100,
                     newLeft = -((point.x - curLeft) * ratio - point.x),
                     newTop = -((point.y - curTop) * ratio - point.y);
-                
+
                 //fix for left and top
                 newLeft = Math.min(newLeft, baseLeft);
                 newTop = Math.min(newTop, baseTop);
-                
+
                 //fix for right and bottom
                 if((newLeft + imgWidth) < baseRight){
                     newLeft = baseRight - imgWidth; //newLeft - (newLeft + imgWidth - baseRight)
                 }
-                
-                if((newTop + imgHeight) < baseBottom){            
+
+                if((newTop + imgHeight) < baseBottom){
                     newTop =  baseBottom - imgHeight; //newTop + (newTop + imgHeight - baseBottom)
                 }
-                
+
 
                 curImg.css({
                     height: imgHeight + 'px',
@@ -2547,7 +2547,7 @@ var IndexAction = {
             messages: {
                 'feedback_survey[6]': {
                     'required': 'فیلد الزامی است',
-                    'dK_product': 'لطفا آدرس یا کد محصول دیجی‌کالا را وارد نمایید'
+                    'dK_product': 'لطفا آدرس یا کد محصول آتی یار را وارد نمایید'
                 },
             }
         });

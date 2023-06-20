@@ -74,7 +74,7 @@ class Index extends AdminControllerLivewire
         $this->img = null;
         $this->createLog('دسته سطح 4','admin/categorylevel4', $this->categorylevel4->title,'ایجاد');
 
-        $this->emit('toast', 'success', ' دسته سطح 4 با موفقیت ایجاد شد.');
+        alert()->success('دسته سطح 4 با موفقیت ایجاد شد.', ' دسته سطح 4 با موفقیت ایجاد شد.');
 
     }
 
@@ -90,7 +90,7 @@ class Index extends AdminControllerLivewire
         ]);
         $this->createLog('دسته سطح 4','admin/categorylevel4', $category->title,'غیرفعال');
 
-        $this->emit('toast', 'success', 'وضعیت دسته سطح 4 با موفقیت غیرفعال شد.');
+        alert()->success('وضعیت دسته سطح 4 با موفقیت غیرفعال شد.', 'وضعیت دسته سطح 4 با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -100,7 +100,7 @@ class Index extends AdminControllerLivewire
             'status' => 1
         ]);
         $this->createLog('دسته سطح 4','admin/categorylevel4', $category->title,'فعال');
-        $this->emit('toast', 'success', 'وضعیت دسته سطح 4 با موفقیت فعال شد.');
+        alert()->success('وضعیت دسته سطح 4 با موفقیت فعال شد.', 'وضعیت دسته سطح 4 با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
@@ -110,10 +110,10 @@ class Index extends AdminControllerLivewire
         if ($product == null){
             $category->delete();
             $this->createLog('دسته سطح 4','admin/categorylevel4', $category->title,'حذف');
-            $this->emit('toast', 'success', ' دسته سطح 4 با موفقیت حذف شد.');
+            alert()->success(' دسته سطح 4 با موفقیت حذف شد.', ' دسته سطح 4 با موفقیت حذف شد.');
         }else
         {
-            $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا این دسته، شامل محصول است!');
+            alert()->error(' امکان حذف وجود ندارد زیرا این دسته، شامل محصول است!', ' امکان حذف وجود ندارد زیرا این دسته، شامل محصول است!');
         }
 
     }

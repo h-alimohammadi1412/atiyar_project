@@ -3,7 +3,7 @@
     <meta name="turbolinks-cache-control" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>دیجی کالا | @yield('title')</title>
+    <title>آتی یار | @yield('title')</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.rtl.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive_991.css')}}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{asset('css/responsive_768.css')}}" media="(max-width:768px)">
@@ -14,12 +14,12 @@
     <link href="{{asset('css/select2-bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    
+
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 {{--    <link rel="stylesheet" href="{{asset('css/bootstrap-iconpicker.min.css')}}">--}}
    <script>
-  
+
   </script>
 
     <livewire:styles />

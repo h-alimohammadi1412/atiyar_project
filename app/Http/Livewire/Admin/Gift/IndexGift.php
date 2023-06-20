@@ -60,7 +60,7 @@ class IndexGift extends AdminControllerLivewire
     {
         $gift = \App\Models\Gift::find($id);
         if ($gift->type == 1) {
-            $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا کارت هدیه توسط کاربر استفاده شده است!');
+            alert()->success('امکان حذف وجود ندارد زیرا کارت هدیه توسط کاربر استفاده شده است!', ' امکان حذف وجود ندارد زیرا کارت هدیه توسط کاربر استفاده شده است!');
 
         } else {
             $gift->delete();

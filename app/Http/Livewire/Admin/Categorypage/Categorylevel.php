@@ -43,7 +43,7 @@ class Categorylevel extends AdminControllerLivewire
         $this->categorylevel4_id = null;
         $this->property = null;
         $this->createLog(' دسته های زیردسته ها ','admin/categorypage', $this->category_id,'ایجاد');
-        $this->emit('toast', 'success', ' دسته های زیردسته ها با موفقیت ایجاد شد.');
+        alert()->success('دسته های زیردسته ها با موفقیت ایجاد شد.', ' دسته های زیردسته ها با موفقیت ایجاد شد.');
 
     }
 
@@ -62,7 +62,7 @@ class Categorylevel extends AdminControllerLivewire
             'status' => 0
         ]);
         $this->createLog('وضعیت دسته های زیردسته ها ','admin/categorypage',$category2->category_id,'غیرفعال');
-        $this->emit('toast', 'success', 'وضعیت دسته های زیردسته ها با موفقیت غیرفعال شد.');
+        alert()->success('وضعیت دسته های زیردسته ها با موفقیت غیرفعال شد.', 'وضعیت دسته های زیردسته ها با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -75,7 +75,7 @@ class Categorylevel extends AdminControllerLivewire
             'status' => 1
         ]);
         $this->createLog('وضعیت دسته های زیردسته ها ','admin/categorypage',$category2->category_id,'فعال');
-        $this->emit('toast', 'success', 'وضعیت دسته های زیردسته ها با موفقیت فعال شد.');
+        alert()->success('وضعیت دسته های زیردسته ها با موفقیت فعال شد.', 'وضعیت دسته های زیردسته ها با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
@@ -86,7 +86,7 @@ class Categorylevel extends AdminControllerLivewire
             ->where('id', $id)->limit($id);
         $amazing->delete();
         $this->createLog(' دسته های زیردسته ها ','admin/categorypage',$amazing2->category_id,'حذف');
-        $this->emit('toast', 'success', ' دسته های زیردسته ها با موفقیت حذف شد.');
+        alert()->success(' دسته های زیردسته ها با موفقیت حذف شد.', ' دسته های زیردسته ها با موفقیت حذف شد.');
 
     }
 

@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Footer\Link;
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\FooterLinkTitle;
 use App\Models\Log;
-use Livewire\Component;
 
 class Title extends AdminControllerLivewire
 {
@@ -41,7 +40,7 @@ class Title extends AdminControllerLivewire
            ]);
            $this->footerLinkTitle->page_id = "";
         $this->createLog('صفحه فوتر سایت', 'admin/footer/linktitle', 'صفحه فوتر سایت', 'ایجاد');
-           $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
+           alert()->success('صفحه به فوتر سایت با موفقیت ایجاد شد.', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
        }
 
 

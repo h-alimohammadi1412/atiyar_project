@@ -35,7 +35,7 @@ class Trashed extends Component
         if ($category->img) {
             Storage::disk('public')->delete("storage", $category->img);
         }$category->forceDelete();
-        $this->emit('toast', 'success', ' زیردسته به صورت کامل با موفقیت حذف شد.');
+        alert()->success(' زیردسته به صورت کامل با موفقیت حذف شد.', ' زیردسته به صورت کامل با موفقیت حذف شد.');
     }
 
     public function trashedCategory($id)
@@ -47,7 +47,7 @@ class Trashed extends Component
             'url' => 'بازیابی زیر دسته' .'-'. $category->title,
             'actionType' => 'بازیابی'
         ]);
-        $this->emit('toast', 'success', ' زیر دسته با موفقیت بازیابی شد.');
+        alert()->success(' زیر دسته با موفقیت بازیابی شد.', ' زیر دسته با موفقیت بازیابی شد.');
     }
 
     public function render()

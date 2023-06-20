@@ -38,7 +38,7 @@ class Title extends AdminControllerLivewire
         $this->link = "";
         $this->c_id = false;
         $this->createLog(' عناوین','admin/category', $this->title,'ایجاد');
-        $this->emit('toast', 'success', ' عناوین با موفقیت ایجاد شد.');
+        alert()->success(' عناوین با موفقیت ایجاد شد.', ' عناوین با موفقیت ایجاد شد.');
 
     }
 
@@ -58,7 +58,7 @@ class Title extends AdminControllerLivewire
             ->where('id', $id)->limit($id);
         $banner->delete();
         $this->createLog(' عناوین','admin/category', $banner2->title,'حذف');
-        $this->emit('toast', 'success', ' عناوین با موفقیت حذف شد.');
+        alert()->success('عناوین با موفقیت حذف شد.', ' عناوین با موفقیت حذف شد.');
 
     }
 

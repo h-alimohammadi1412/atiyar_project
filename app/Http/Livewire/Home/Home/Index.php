@@ -21,10 +21,10 @@ use Artesaos\SEOTools\Facades\TwitterCard;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Mail;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
 
     public function favoriteProduct($id)
@@ -33,16 +33,16 @@ class Index extends Component
             $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
             if ($favorites) {
                 $favorites->delete();
-                $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
+                alert()->success('محصول از علاقه مندی ها حذف شد.', 'محصول از علاقه مندی ها حذف شد.');
             } else {
                 Favorite::create([
                     'product_id' => $id,
                     'user_id' => auth()->user()->id
                 ]);
-                $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+                alert()->success('محصول به علاقه مندی ها اضافه شد.', 'محصول به علاقه مندی ها اضافه شد.');
             }
         }else{
-            $this->emit('toast', 'success', 'برای اضافه کردن به علاقه مندی ها باید وارد شوید.');
+            alert()->success('برای اضافه کردن به علاقه مندی ها باید وارد شوید.', 'برای اضافه کردن به علاقه مندی ها باید وارد شوید.');
         }
     }
     public function render()
@@ -177,9 +177,9 @@ class Index extends Component
         SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
         //        $this->seo()
 //            ->setTitle(' ')
-//            ->setDescription('هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!')
+//            ->setDescription('هر آنچه که نیاز دارید با بهترین قیمت از آتی یار بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!')
 //        ;
-//        SEOMeta::addKeyword(['فروشگاه اینترنتی', 'خرید آنلاین', 'تبلت', 'لپ تاپ', 'تلویزیون', 'کامپیوتر', 'دوربین', 'کتاب','لوازم' , 'عطر و ادکلن', 'فروش اینترنتی','دیجی‌کالا']);
+//        SEOMeta::addKeyword(['فروشگاه اینترنتی', 'خرید آنلاین', 'تبلت', 'لپ تاپ', 'تلویزیون', 'کامپیوتر', 'دوربین', 'کتاب','لوازم' , 'عطر و ادکلن', 'فروش اینترنتی','آتی یار']);
         return view('livewire.home.home.index1')->layout('layouts.home1');
     }
 }

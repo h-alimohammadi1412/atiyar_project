@@ -6,10 +6,10 @@ use App\Models\ChildCategory;
 use App\Models\Log;
 use App\Models\Menu;
 use App\Models\SubCategory;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -58,12 +58,9 @@ class Index extends Component
         $this->menu->subCategory_id = null;
         $this->menu->childCategory_id = null;
         $this->menu->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن منو' . '-' . $this->menu->category_id,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' منو با موفقیت ایجاد شد.');
+        $this->createLog('منو', 'admin/menu', $this->menu->category_id, 'ایجاد');
+
+        alert()->success('منو با موفقیت ایجاد شد.', ' منو با موفقیت ایجاد شد.');
 
     }
     public function loadCategory()
@@ -71,33 +68,7 @@ class Index extends Component
         $this->readyToLoad = true;
     }
 
-    public function updateCategoryDisable($id)
-    {
-        $category = Menu::find($id);
-        $category->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت منو' . '-' . $category->category_id,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت منو با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
-    {
-        $category = Menu::find($id);
-        $category->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت منو' . '-' . $category->category_id,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت منو با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {
@@ -105,14 +76,11 @@ class Index extends Component
         $childCategory = Menu::where('subCategory_id', $id)->first();
         if ($childCategory == null) {
             $category->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن منو' . '-' . $category->category_id,
-                'actionType' => 'حذف'
-            ]);
-            $this->emit('toast', 'success', ' منو با موفقیت حذف شد.');
+            $this->createLog('منو', 'admin/menu', $this->menu->category_id, 'حذف');
+
+            alert()->success('منو با موفقیت حذف شد.', ' منو با موفقیت حذف شد.');
         } else {
-            $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!');
+            alert()->success('امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!', ' امکان حذف وجود ندارد زیرا این دسته، شامل دسته کودک است!');
         }
 
     }

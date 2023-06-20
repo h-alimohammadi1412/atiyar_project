@@ -56,7 +56,7 @@ class Banner extends AdminControllerLivewire
         $this->type = false;
         $this->img = null;
         $this->createLog(' بنر ','admin/categorypage/apparel', $this->title,'ایجاد');
-        $this->emit('toast', 'success', ' بنر با موفقیت ایجاد شد.');
+        alert()->success(' بنر با موفقیت ایجاد شد.', ' بنر با موفقیت ایجاد شد.');
 
     }
 
@@ -77,7 +77,7 @@ class Banner extends AdminControllerLivewire
             Storage::disk('public')->delete("storage", $banner2->img);
         }$banner->delete();
         $this->createLog('  بنر','admin/categorypage/apparel', $banner2->title,'حذف');
-        $this->emit('toast', 'success', ' بنر با موفقیت حذف شد.');
+        alert()->success('بنر با موفقیت حذف شد.', ' بنر با موفقیت حذف شد.');
 
     }
     public function render()

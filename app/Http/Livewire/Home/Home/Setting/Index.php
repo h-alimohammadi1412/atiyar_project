@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Home\Home\Setting;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     public function render()
     {

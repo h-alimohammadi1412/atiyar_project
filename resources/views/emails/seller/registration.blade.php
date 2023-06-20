@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>مرکز فروشندگان دیجی‌کالا - اعتبارسنجی
+    <title>مرکز فروشندگان آتی یار - اعتبارسنجی
     </title>
 </head>
 <body>
@@ -30,7 +30,7 @@
                                                             rel="nofollow noopener noreferrer" target="_blank"
                                                             href="https://seller.digikala.com"><img
                                                                 src="https://ecp.yusercontent.com/mail?url=https%3A%2F%2Fseller.digikala.com%2Fstatic%2Ffiles%2F60679ac0.png&amp;t=1644928713&amp;ymreqid=acaf8295-2cdc-7db8-1c88-b7000401f200&amp;sig=HDeufL3WhpGiRoXVJtJPzw--~D"
-                                                                width="214" alt="دیجی‌کالا"></a></td>
+                                                                width="214" alt="آتی یار"></a></td>
                                                 </tr>
                                                 </tbody>
                                             </table>

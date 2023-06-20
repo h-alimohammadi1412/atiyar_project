@@ -7,7 +7,6 @@ use App\Models\Log;
 use App\Models\Product;
 use App\Models\Seller;
 use App\Models\TitleCategoryIndex;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
@@ -24,7 +23,7 @@ class Address extends  AdminControllerLivewire
         $address = \App\Models\Address::where('id',$id)->first();
         $address->delete();
 
-        $this->emit('toast', 'success', ' آدرس با موفقیت حذف شد.');
+        alert()->success('آدرس با موفقیت حذف شد.', ' آدرس با موفقیت حذف شد.');
     }
 
 

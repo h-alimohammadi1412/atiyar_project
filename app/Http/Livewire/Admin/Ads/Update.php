@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Admin\Ads;
 use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use App\Models\AdsCategory;
-use Livewire\Component;
 use App\Models\Log;
 
 

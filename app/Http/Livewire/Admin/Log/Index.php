@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Admin\Log;
 
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -24,7 +24,7 @@ class Index extends Component
         $this->readyToLoad = true;
     }
 
-    
+
 
     public function render()
     {

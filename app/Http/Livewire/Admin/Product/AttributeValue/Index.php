@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Product\AttributeValue;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -56,12 +56,9 @@ class Index extends Component
         $this->attribute->product_id = null;
         $this->attribute->value = "";
         $this->attribute->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن مقدار مشخصات کالا' .'-'. $this->attribute->value,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' مقدار مشخصات کالا با موفقیت ایجاد شد.');
+        $this->createLog(' مقدار مشخصات کالا', 'admin/attributeValue',$this->attribute->value, 'ایجاد');
+
+        alert()->success(' مقدار مشخصات کالا با موفقیت ایجاد شد.', ' مقدار مشخصات کالا با موفقیت ایجاد شد.');
 
     }
 
@@ -69,44 +66,15 @@ class Index extends Component
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryDisable($id)
-    {
-        $attribute = AttributeValue::find($id);
-        $attribute->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت مقدار مشخصات کالا' .'-'. $attribute->value,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت مقدار مشخصات کالا با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
-    {
-        $attribute = AttributeValue::find($id);
-        $attribute->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت مقدار مشخصات کالا' .'-'. $attribute->title,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت مقدار مشخصات کالا با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {
         $attribute = AttributeValue::find($id);
         $attribute->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن مقدار مشخصات کالا' .'-'. $attribute->value,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' مقدار مشخصات کالا با موفقیت حذف شد.');
+        $this->createLog(' مقدار مشخصات کالا', 'admin/attributeValue',$this->attribute->value, 'حذف');
+
+        alert()->success('مقدار مشخصات کالا با موفقیت حذف شد.', ' مقدار مشخصات کالا با موفقیت حذف شد.');
     }
 
 

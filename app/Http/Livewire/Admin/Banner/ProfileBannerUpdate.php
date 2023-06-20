@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Admin\Banner;
 
 use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
-use Livewire\Component;
 use App\Models\Banner;
 use App\Models\Log;
 

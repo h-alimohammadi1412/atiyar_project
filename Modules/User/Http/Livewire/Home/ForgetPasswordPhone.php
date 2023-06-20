@@ -5,9 +5,9 @@ namespace Modules\User\Http\Livewire\Home;
 use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class ForgetPasswordPhone extends Component
+class ForgetPasswordPhone extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;
@@ -43,12 +43,13 @@ class ForgetPasswordPhone extends Component
                 return to_route('users.password.reset', $this->user->id);
             } else {
 
-                $this->emit('toast', 'error', ' کد وارد شده اشتباه است!');
+                alert()->error('کد وارد شده اشتباه است!', ' کد وارد شده اشتباه است!');
+
             }
 
         } else {
 
-            $this->emit('toast', 'error', ' کد وارد شده اشتباه است!');
+            alert()->error(' کد وارد شده اشتباه است!', ' کد وارد شده اشتباه است!');
         }
     }
 
@@ -67,7 +68,7 @@ class ForgetPasswordPhone extends Component
             'type' => $type,
             'user_id' => $mobile->id,
         ]);
-        $this->emit('toast', 'success', 'کد تایید دوباره ارسال شد!');
+        alert()->success('کد تایید دوباره ارسال شد!', 'کد تایید دوباره ارسال شد!');
         return $this->redirect(request()->header('Referer'));
     }
 

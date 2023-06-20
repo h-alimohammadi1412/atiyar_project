@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Admin\Seller;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Trashed extends Component
+class Trashed extends AdminControllerLivewire
 {
     public function render()
     {

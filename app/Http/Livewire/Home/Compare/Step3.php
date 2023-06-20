@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Home\Compare;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Step3 extends Component
+class Step3 extends AdminControllerLivewire
 {
     public function render()
     {

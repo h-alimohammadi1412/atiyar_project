@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Permission;
 use App\Models\Log;
 use App\Models\Permission;
 use App\Models\Role;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class IndexPermission extends Component
+class IndexPermission extends AdminControllerLivewire
 {
     use WithPagination;
     protected $listeners = [
@@ -47,13 +47,9 @@ class IndexPermission extends Component
 
         $this->permission->name = "";
         $this->permission->def = "";
+        $this->createLog(' دسترسی', 'admin/permission',$this->permission->name, 'ایجاد');
 
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن دسترسی' .'-'. $this->permission->name,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' دسترسی با موفقیت ایجاد شد.');
+        alert()->success('دسترسی با موفقیت ایجاد شد.', ' دسترسی با موفقیت ایجاد شد.');
 
     }
 
@@ -67,12 +63,9 @@ class IndexPermission extends Component
     {
         $role = Permission::find($id);
         $role->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن دسترسی' .'-'. $role->name,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' دسترسی با موفقیت حذف شد.');
+        $this->createLog(' دسترسی', 'admin/permission',$this->permission->name, 'حذف');
+
+        alert()->success('دسترسی با موفقیت حذف شد.', ' دسترسی با موفقیت حذف شد.');
 
 
     }

@@ -5,9 +5,9 @@ namespace Modules\User\Http\Livewire\Home;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Confirm extends Component
+class Confirm extends AdminControllerLivewire
 {
     public User $user;
 
@@ -39,7 +39,7 @@ class Confirm extends Component
             }
             return to_route('/');
         } else {
-            $this->emit('toast', 'error', ' رمز عبور وارد شده اشتباه است!');
+            alert()->error('رمز عبور وارد شده اشتباه است!', ' رمز عبور وارد شده اشتباه است!');
         }
 
     }

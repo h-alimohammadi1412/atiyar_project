@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Admin\Users;
 
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class CreateUser extends Component
+class CreateUser extends AdminControllerLivewire
 {
     public function render()
     {

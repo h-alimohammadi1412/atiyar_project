@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Admin\Order;
 
 use App\Models\Order;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Progress extends Component
+class Progress extends AdminControllerLivewire
 {
     use WithPagination;
 

@@ -75,7 +75,7 @@ class Index extends AdminControllerLivewire
         $this->childcategory->status = false;
         $this->img = null;
         $this->createLog(' دسته کودک','admin/childcategory', $this->childcategory->title,'ایجاد');
-        $this->emit('toast', 'success', ' دسته کودک با موفقیت ایجاد شد.');
+        alert()->success('دسته کودک با موفقیت ایجاد شد.', ' دسته کودک با موفقیت ایجاد شد.');
 
     }
 
@@ -90,7 +90,7 @@ class Index extends AdminControllerLivewire
             'status' => 0
         ]);
         $this->createLog(' وضعیت دسته کودک','admin/childcategory', $category->title,'غیرفعال');
-        $this->emit('toast', 'success', 'وضعیت دسته کودک با موفقیت غیرفعال شد.');
+        alert()->success('وضعیت دسته کودک با موفقیت غیرفعال شد.', 'وضعیت دسته کودک با موفقیت غیرفعال شد.');
     }
 
     public function updateCategoryEnable($id)
@@ -100,7 +100,7 @@ class Index extends AdminControllerLivewire
             'status' => 1
         ]);
         $this->createLog(' وضعیت دسته کودک','admin/childcategory', $category->title,'فعال');
-        $this->emit('toast', 'success', 'وضعیت دسته کودک با موفقیت فعال شد.');
+        alert()->success('وضعیت دسته کودک با موفقیت فعال شد.', 'وضعیت دسته کودک با موفقیت فعال شد.');
     }
 
     public function deleteCategory($id)
@@ -110,10 +110,10 @@ class Index extends AdminControllerLivewire
         if ($product == null){
             $category->delete();
             $this->createLog('  دسته کودک','admin/childcategory', $category->title,'حذف');
-            $this->emit('toast', 'success', ' دسته کودک با موفقیت حذف شد.');
+            alert()->success(' دسته کودک با موفقیت حذف شد.', ' دسته کودک با موفقیت حذف شد.');
         }else
         {
-            $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا این دسته، شامل محصول است!');
+            alert()->success(' ', ' امکان حذف وجود ندارد زیرا این دسته، شامل محصول است!');
         }
 
     }

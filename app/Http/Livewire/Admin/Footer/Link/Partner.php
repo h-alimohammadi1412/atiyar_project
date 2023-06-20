@@ -6,7 +6,6 @@ use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\FooterLinkOne;
 use App\Models\FooterPartner;
 use App\Models\Log;
-use Livewire\Component;
 
 class Partner extends AdminControllerLivewire
 {
@@ -39,7 +38,7 @@ class Partner extends AdminControllerLivewire
         ]);
         $this->footerLinkOne->page_id = "";
         $this->createLog('صفحه فوتر سایت', 'admin/footer/partner', 'صفحه فوتر سایت', 'ایجاد');
-        $this->emit('toast', 'success', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
+        alert()->success('صفحه به فوتر سایت با موفقیت ایجاد شد.', ' صفحه به فوتر سایت با موفقیت ایجاد شد.');
 
     }
 

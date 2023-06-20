@@ -7,11 +7,11 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\ReturnOrder;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class ItemInfo extends Component
+class ItemInfo extends AdminControllerLivewire
 {
     public $o_number;
     use WithFileUploads;
@@ -52,15 +52,7 @@ class ItemInfo extends Component
         }
    return redirect(route('order.profile.canceled'));
     }
-    public function uploadImage()
-    {
-        $year = now()->year;
-        $month = now()->month;
-        $directory = "order/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
-        return "$directory/$name";
-    }
+
 
     public function render()
     {

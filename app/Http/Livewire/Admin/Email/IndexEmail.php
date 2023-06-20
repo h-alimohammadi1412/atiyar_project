@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Email;
 use App\Models\Attribute;
 use App\Models\ChildCategory;
 use App\Models\Email;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class IndexEmail extends Component
+class IndexEmail extends AdminControllerLivewire
 {
     use WithPagination;
 

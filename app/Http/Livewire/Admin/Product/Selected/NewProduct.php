@@ -5,10 +5,10 @@ namespace App\Http\Livewire\Admin\Product\Selected;
 use App\Models\CategoryIndex;
 use App\Models\Log;
 use App\Models\ProductNewSelected;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class NewProduct extends Component
+class NewProduct extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -59,12 +59,8 @@ class NewProduct extends Component
         $this->product->subCategory_id = null;
         $this->product->childCategory_id = null;
         $this->product->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن محصول منتخب' . '-' . $this->product->product_id,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' محصول منتخب با موفقیت ایجاد شد.');
+        $this->createLog(' محصول منتخب', 'admin/index/newselected',$this->product->product_id, 'ایجاد');
+        alert()->success('محصول منتخب با موفقیت ایجاد شد.', ' محصول منتخب با موفقیت ایجاد شد.');
 
     }
     public function loadCategory()
@@ -72,44 +68,15 @@ class NewProduct extends Component
         $this->readyToLoad = true;
     }
 
-    public function updateCategoryDisable($id)
-    {
-        $category = ProductNewSelected::find($id);
-        $category->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت محصول منتخب' . '-' . $category->category_id,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت محصول منتخب با موفقیت غیرفعال شد.');
-    }
 
-    public function updateCategoryEnable($id)
-    {
-        $category = ProductNewSelected::find($id);
-        $category->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت محصول دسته های صفحه اصلی' . '-' . $category->category_id,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت محصول منتخب با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {
         $category = ProductNewSelected::find($id);
         $category->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن محصول منتخب' . '-' . $category->category_id,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' محصول منتخب با موفقیت حذف شد.');
+        $this->createLog(' محصول منتخب', 'admin/index/newselected',$this->product->product_id, 'حذف');
+
+        alert()->success(' محصول منتخب با موفقیت حذف شد.', ' محصول منتخب با موفقیت حذف شد.');
 
     }
 

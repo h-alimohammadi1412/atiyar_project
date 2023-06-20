@@ -75,10 +75,10 @@ class Index extends AdminControllerLivewire
         if ($product == null){
             $brand->delete();
             $this->createLog('برند','admin/brand',$this->brand->name,'حذف');
-            $this->emit('toast', 'success', ' برند با موفقیت حذف شد.');
+            alert()->success(' برند با موفقیت حذف شد.', ' برند با موفقیت حذف شد.');
         }else
         {
-            $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا برند، شامل محصول است!');
+            alert()->success('امکان حذف وجود ندارد زیرا برند، شامل محصول است!', ' امکان حذف وجود ندارد زیرا برند، شامل محصول است!');
         }
 
     }

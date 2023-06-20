@@ -3,9 +3,9 @@
 namespace Modules\User\Http\Livewire\Home;
 
 use Modules\User\Entities\User;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class RegisterConfirm2 extends Component
+class RegisterConfirm2 extends AdminControllerLivewire
 {
     public User $user;
 

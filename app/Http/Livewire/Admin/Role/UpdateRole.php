@@ -6,10 +6,10 @@ use App\Models\CategoryLevel4;
 use App\Models\Log;
 use App\Models\PermissionRole;
 use App\Models\Role;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithFileUploads;
 
-class UpdateRole extends Component
+class UpdateRole extends AdminControllerLivewire
 {
     public $permissions;
 
@@ -35,11 +35,8 @@ class UpdateRole extends Component
                 'role_id' => $this->role->id,
             ]);
         }
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'آپدیت مقام' .'-'. $this->role->def,
-            'actionType' => 'آپدیت'
-        ]);
+        $this->createLog('مقام', 'admin/role', $this->role->name, 'آپدیت');
+
         alert()->success('مقام با موفقیت ایجاد شد.', 'مقام آپدیت شد.');
 
         return redirect(route('role.index'));

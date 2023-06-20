@@ -6,9 +6,9 @@ use Modules\User\Entities\SMS;
 use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class PasswordReset extends Component
+class PasswordReset extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;
@@ -53,7 +53,8 @@ class PasswordReset extends Component
             }
             return to_route('/');
         } else {
-            $this->emit('toast', 'error', ' پسورد وارد شده با هم مطابقت ندارد!');
+            alert()->error(' پسورد وارد شده با هم مطابقت ندارد!', ' پسورد وارد شده با هم مطابقت ندارد!');
+
         }
 
     }

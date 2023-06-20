@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Admin\Footer\Title;
 
 use App\Models\FooterTitle;
 use App\Models\Log;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class Index extends Component
+class Index extends AdminControllerLivewire
 {
     public $readyToLoad = false;
 
@@ -41,12 +41,8 @@ class Index extends Component
                 'title' => $this->footerTitle->title,
             ]);
             $this->footerTitle->title = "";
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'افزودن صفحه به فوتر سایت' .'-'. $this->footerTitle->title,
-                'actionType' => 'ایجاد'
-            ]);
-            $this->emit('toast', 'success', ' عنوان فوتر سایت با موفقیت ایجاد شد.');
+            $this->createLog('صفحه فوتر سایت', 'admin/footer/title', $this->footerTitle->title, 'ایجاد');
+            alert()->success('عنوان فوتر سایت با موفقیت ایجاد شد.', ' عنوان فوتر سایت با موفقیت ایجاد شد.');
         }
 
 

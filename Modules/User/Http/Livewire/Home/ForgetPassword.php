@@ -7,9 +7,9 @@ use Modules\User\Entities\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Kavenegar\KavenegarApi;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 
-class ForgetPassword extends Component
+class ForgetPassword extends AdminControllerLivewire
 {
     public User $user;
     public SMS $sms;
@@ -60,7 +60,7 @@ class ForgetPassword extends Component
             ]);
             return to_route('users.password.forgetPhone',$email->id);
         } else {
-            $this->emit('toast', 'error', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
+            $this->emit('شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!', ' شماره موبایل وجود ندارد. به قسمت ایجاد حساب مراجعه فرمایید!');
         }
     }
 

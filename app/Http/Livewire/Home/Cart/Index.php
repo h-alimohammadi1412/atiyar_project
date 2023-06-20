@@ -9,6 +9,7 @@ use App\Models\OrderProduct;
 use App\Models\UserHistory;
 use Illuminate\Support\Facades\Request;
 
+
 class Index extends AdminControllerLivewire
 {
     public $total_price_products = 0;
@@ -21,7 +22,7 @@ class Index extends AdminControllerLivewire
         if ($cart) {
             $cart->delete();
         }
-        $this->emit('toast', 'success', 'محصول از سبد شما حذف شد');
+        alert()->success('محصول از سبد شما حذف شد', 'محصول از سبد شما حذف شد');
     }
     public function addToCartOtherFromCart($id)
     {
@@ -31,7 +32,7 @@ class Index extends AdminControllerLivewire
                 'type' => 1
             ]);
         }
-        $this->emit('toast', 'success', 'محصول به لیست خرید بعدی شما اضافه شد.');
+        alert()->success('محصول به لیست خرید بعدی شما اضافه شد.', 'محصول به لیست خرید بعدی شما اضافه شد.');
     }
 
     public function addAllToCart()
@@ -47,7 +48,7 @@ class Index extends AdminControllerLivewire
                 'type' => 0
             ]);
         }
-        $this->emit('toast', 'success', ' تمام محصول به لیست خرید بعدی شما اضافه شدند.');
+        alert()->success('تمام محصول به لیست خرید بعدی شما اضافه شدند.', ' تمام محصول به لیست خرید بعدی شما اضافه شدند.');
     }
 
     public function updateBasket()
@@ -63,9 +64,9 @@ class Index extends AdminControllerLivewire
                 $cart->update([
                     'count' => $cart->count + 1
                 ]);
-                $this->emit('toast', 'success', 'محصول آپدیت شد');
+                $this->emit('محصول آپدیت شد', 'محصول آپدیت شد');
             } else {
-                $this->emit('toast', 'error', 'حداکثر تعداد سفارش برای این محصول ');
+                alert()->error('حداکثر تعداد سفارش برای این محصول ', 'حداکثر تعداد سفارش برای این محصول ');
             }
         } elseif ($operation == 'minus') {
             if ($cart->count > 1) {
@@ -73,7 +74,7 @@ class Index extends AdminControllerLivewire
                     'count' => $cart->count - 1
                 ]);
             }
-            $this->emit('toast', 'success', 'محصول آپدیت شد');
+            alert()->success('محصول آپدیت شد', 'محصول آپدیت شد');
         }
     }
     public function shipping()
@@ -101,6 +102,7 @@ class Index extends AdminControllerLivewire
                     $this->CreateOrderProduct($cart, $order);
                 }
                 return $this->redirect(url('/shipping?order_id=' . $order_number));
+
             }
 
             $this->helperAlert('warning', ' هیچ محصولی در سبد خرید ندارید.');

@@ -19,7 +19,7 @@
             <input type="hidden" name="find_product[itemsPerPage]" value="10" id="searchItemsPerPage">
 
             <div class="c-card__body c-card__body--content">
-                <label for="" class="search-form__action-label">جستجوی کالا در میان کالاهای دیجی‌کالا بر
+                <label for="" class="search-form__action-label">جستجوی کالا در میان کالاهای آتی یار بر
                     اساس:</label>
                 <div class="search-form__autocomplete-container">
                     <div class="search-form__autocomplete js-autosuggest-box">

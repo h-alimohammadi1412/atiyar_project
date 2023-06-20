@@ -11199,7 +11199,7 @@ var Main = {
                     value
                 ) || /^\d+$/.test(value);
             },
-            'لطفا آدرس یا کد محصول دیجی‌کالا را وارد نمایید'
+            'لطفا آدرس یا کد محصول آتی یار را وارد نمایید'
         );
 
         $.validator.addMethod(
@@ -14909,7 +14909,7 @@ var Adro = {
       if (method === "POST") {
         headers["Content-Type"] = "application/json";
         headers["Accept"] = "application/json";
-        body = JSON.stringify(data); 
+        body = JSON.stringify(data);
       }
       return $.ajax(
         {
@@ -14964,8 +14964,8 @@ var Adro = {
       });
     }
   }
-} 
-  
+}
+
 
 
 

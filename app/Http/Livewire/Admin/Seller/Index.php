@@ -35,15 +35,12 @@ class Index extends AdminControllerLivewire
         $product = Product::where('vendor_id',$id)->first();
         if ($product == null){
             $seller->delete();
-            Log::create([
-                'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن فروشنده' .'-'. $this->seller->title,
-                'actionType' => 'حذف'
-            ]);
-            $this->emit('toast', 'success', ' فروشنده با موفقیت حذف شد.');
+            $this->createLog('فروشنده', 'admin/role', $this->seller->title, 'حذف');
+
+            alert()->success('فروشنده با موفقیت حذف شد.', ' فروشنده با موفقیت حذف شد.');
         }else
         {
-            $this->emit('toast', 'success', ' امکان حذف وجود ندارد زیرا فروشنده، شامل محصول است!');
+            alert()->success('امکان حذف وجود ندارد زیرا فروشنده، شامل محصول است!', ' امکان حذف وجود ندارد زیرا فروشنده، شامل محصول است!');
         }
 
     }
@@ -73,7 +70,7 @@ class Index extends AdminControllerLivewire
         ]);
 
         Mail::to($seller->email)->send(new OrderSubmit($email));
-        $this->emit('toast', 'success', ' فروشنده با موفقیت تایید شد.');
+        alert()->success('فروشنده با موفقیت تایید شد.', ' فروشنده با موفقیت تایید شد.');
     }
 
 

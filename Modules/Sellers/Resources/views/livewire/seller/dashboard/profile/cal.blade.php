@@ -101,7 +101,7 @@
                                                         justify-content: space-between;
                                                         align-items: center;
                                                         margin-bottom: 15px;'>
-                                                        <span style='color: #a1a3a8'>تعهد ارسال به دیجی‌کالا</span>
+                                                        <span style='color: #a1a3a8'>تعهد ارسال به آتی یار</span>
                                                         <span style='font-size: 14px' class='em'>{orderCommitmentDetail.ShipByDigikalaCount}</span>
                                                     </p>
                                                     <p style='display: flex;

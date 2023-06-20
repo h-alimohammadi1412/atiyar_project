@@ -47,12 +47,12 @@
 
                                         <td>
                                             @if($receiptCenter->status == 1)
-                                                <button wire:click="updateCategoryDisable({{$receiptCenter->id}})"
+                                                <button wire:click="updateStatus('ReceiptCenter','receiptCenter','آدرس انبار','status',{{$receiptCenter->id}})"
                                                         type="submit" class="badge-success badge"
                                                         style="background-color: green">فعال
                                                 </button>
                                             @else
-                                                <button wire:click="updateCategoryEnable({{$receiptCenter->id}})"
+                                                <button wire:click="updateStatus('ReceiptCenter','receiptCenter','آدرس انبار','status',{{$receiptCenter->id}})"
                                                         type="submit" class="badge-danger badge"
                                                         style="background-color: red">
                                                     غیرفعال

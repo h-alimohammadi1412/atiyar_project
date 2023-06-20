@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Admin\Order;
 
 use App\Models\Log;
 use App\Models\ReturnOrder;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class ReturnReasonAccept extends Component
+class ReturnReasonAccept extends AdminControllerLivewire
 {
     use WithPagination;
     protected $listeners = [
@@ -29,7 +29,7 @@ class ReturnReasonAccept extends Component
         $returnOrder->update([
             'status'=>1
         ]);
-        $this->emit('toast', 'success', ' مرجوعی کالا با موفقیت تایید شد.');
+        alert()->success('مرجوعی کالا با موفقیت تایید شد.', ' مرجوعی کالا با موفقیت تایید شد.');
 
     }
     public function render()

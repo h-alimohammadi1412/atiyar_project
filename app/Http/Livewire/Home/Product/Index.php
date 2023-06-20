@@ -122,7 +122,7 @@ class Index extends AdminControllerLivewire
                 ->where('product_id', $com->product_id)->first();
             if ($rate) {
                 $rate->delete();
-                $this->emit('toast', 'success', ' امتیاز شما حذف شد.');
+                alert()->success(' امتیاز شما حذف شد.', ' امتیاز شما حذف شد.');
             } else {
                 Rate::create([
                     'user_id' => auth()->user()->id,
@@ -131,7 +131,7 @@ class Index extends AdminControllerLivewire
                     'like' => 1,
                 ]);
             }
-            $this->emit('toast', 'success', ' امتیاز شما ثبت شد.');
+            alert()->success('امتیاز شما ثبت شد.', ' امتیاز شما ثبت شد.');
         } else {
             return $this->redirect('/login');
         }
@@ -143,13 +143,13 @@ class Index extends AdminControllerLivewire
             $com = Comment::find($id);
 
             if ($com->report == 1) {
-                $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
+                alert()->success(' گزارش شما ثبت شد.', ' گزارش شما ثبت شد.');
             } else {
                 $com->update([
                     'report' => 1
                 ]);
             }
-            $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
+            alert()->success(' گزارش شما ثبت شد.', ' گزارش شما ثبت شد.');
         } else {
             return $this->redirect('/login');
         }
@@ -168,7 +168,7 @@ class Index extends AdminControllerLivewire
                 ->where('product_id', $review->product_id)->first();
             if ($rate) {
                 $rate->delete();
-                $this->emit('toast', 'success', ' امتیاز شما حذف شد.');
+                alert()->success(' امتیاز شما حذف شد.', ' امتیاز شما حذف شد.');
             } else {
                 Rate::create([
                     'user_id' => auth()->user()->id,
@@ -178,7 +178,7 @@ class Index extends AdminControllerLivewire
                 ]);
             }
 
-            $this->emit('toast', 'success', ' امتیاز شما ثبت شد.');
+            alert()->success(' امتیاز شما ثبت شد.', ' امتیاز شما ثبت شد.');
         } else {
             return $this->redirect('/login');
         }
@@ -192,7 +192,7 @@ class Index extends AdminControllerLivewire
                 'liked' => 0,
                 'dislike' => 1
             ]);
-            $this->emit('toast', 'success', ' امتیاز شما ثبت شد.');
+            alert()->success(' امتیاز شما ثبت شد.', ' امتیاز شما ثبت شد.');
         } else {
             return $this->redirect('/login');
         }
@@ -205,13 +205,13 @@ class Index extends AdminControllerLivewire
 
 
             if ($review->report == 1) {
-                $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
+                alert()->success('گزارش شما ثبت شد.', ' گزارش شما ثبت شد.');
             } else {
                 $review->update([
                     'report' => 1,
                 ]);
             }
-            $this->emit('toast', 'success', ' گزارش شما ثبت شد.');
+            alert()->success(' گزارش شما ثبت شد.', ' گزارش شما ثبت شد.');
         } else {
             return $this->redirect('/login');
         }
@@ -220,7 +220,7 @@ class Index extends AdminControllerLivewire
 
     public function addQuestion()
     {
-        dd('addQuestion');
+       // dd('addQuestion');
         if (auth()->user()) {
             Comment::create([
                 'user_id' => auth()->user()->id,
@@ -231,7 +231,7 @@ class Index extends AdminControllerLivewire
                 'parent' => 0,
                 'status' => 0,
             ]);
-            $this->emit('toast', 'success', ' نظر شما با موفقیت ثبت شد و پس از تایید مدیریت نمایش داده خواهد شد.');
+            alert()->success('نظر شما با موفقیت ثبت شد و پس از تایید مدیریت نمایش داده خواهد شد.', ' نظر شما با موفقیت ثبت شد و پس از تایید مدیریت نمایش داده خواهد شد.');
 
             return back();
         } else {
@@ -361,7 +361,7 @@ class Index extends AdminControllerLivewire
             $this->notification_show = true;
             $this->show_form_notification = false;
         }
-        $this->emit('toast', 'success', ' محصول ثبت شد و در صورت موجود بودن با روش های انتخابی اطلاع رسانی خواهد شد.');
+        alert()->success(' محصول ثبت شد و در صورت موجود بودن با روش های انتخابی اطلاع رسانی خواهد شد.', ' محصول ثبت شد و در صورت موجود بودن با روش های انتخابی اطلاع رسانی خواهد شد.');
     }
 
     public function favoriteProduct($id)
@@ -370,7 +370,7 @@ class Index extends AdminControllerLivewire
             $favorites = Favorite::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
             if ($favorites) {
                 $favorites->delete();
-                $this->emit('toast', 'success', 'محصول از علاقه مندی ها حذف شد.');
+                alert()->success('محصول از علاقه مندی ها حذف شد.', 'محصول از علاقه مندی ها حذف شد.');
                 $this->product->id == $id ? $this->favoriteProduct = false : null;
             } else {
                 Favorite::create([
@@ -379,7 +379,7 @@ class Index extends AdminControllerLivewire
                 ]);
 
                 $this->product->id == $id ? $this->favoriteProduct = true : null;
-                $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+                alert()->success('محصول به علاقه مندی ها اضافه شد.', 'محصول به علاقه مندی ها اضافه شد.');
             }
         } else {
             return $this->redirect('login');
@@ -391,7 +391,7 @@ class Index extends AdminControllerLivewire
             $observed = Observed::where('product_id', $id)->where('user_id', auth()->user()->id)->first();
             if ($observed) {
                 $observed->delete();
-                $this->emit('toast', 'success', 'محصول از اطلاع رسانی ها حذف شد.');
+                alert()->success('محصول از اطلاع رسانی ها حذف شد.', 'محصول از اطلاع رسانی ها حذف شد.');
                 $this->observedProduct = false;
             } else {
                 Observed::create([
@@ -400,7 +400,7 @@ class Index extends AdminControllerLivewire
                 ]);
 
                 $this->observedProduct = true;
-                $this->emit('toast', 'success', 'محصول به علاقه مندی ها اضافه شد.');
+                alert()->success('محصول به علاقه مندی ها اضافه شد.', 'محصول به علاقه مندی ها اضافه شد.');
             }
         } else {
             return $this->redirect('login');

@@ -21,19 +21,14 @@ class Trashed extends AdminControllerLivewire
         $product = Product::withTrashed()->findOrFail($id);
         if ($product->img) {Storage::disk('public')->delete("storage",$product->img);}
         $product->forceDelete();
-        $this->emit('toast', 'success', ' محصول به صورت کامل با موفقیت حذف شد.');
+        alert()->success(' محصول به صورت کامل با موفقیت حذف شد.', ' محصول به صورت کامل با موفقیت حذف شد.');
     }
     public function trashedProduct($id)
     {
         $product = Product::withTrashed()->where('id', $id)->first();
         $product->restore();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'title' => 'بازیابی محصول' .'-'. $product->title,
-            'url'=>'admin/category',
-            'actionType' => 'بازیابی'
-        ]);
-        $this->emit('toast', 'success', ' محصول با موفقیت بازیابی شد.');
+        $this->createLog(' محصول ', 'admin/product', $product->title, 'بازیابی');
+        alert()->success('محصول با موفقیت بازیابی شد.', ' محصول با موفقیت بازیابی شد.');
     }
 
     public function render()

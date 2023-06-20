@@ -6,10 +6,10 @@ use App\Models\Attribute;
 use App\Models\ChildCategory;
 use App\Models\Log;
 use App\Models\ProductSeller;
-use Livewire\Component;
+use App\Http\Controllers\AdminControllerLivewire;
 use Livewire\WithPagination;
 
-class Category extends Component
+class Category extends AdminControllerLivewire
 {
     use WithPagination;
 
@@ -63,56 +63,23 @@ class Category extends Component
         $this->attribute->title = "";
         $this->attribute->position = null;
         $this->attribute->status = false;
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'افزودن مشخصات کالا' .'-'. $this->attribute->title,
-            'actionType' => 'ایجاد'
-        ]);
-        $this->emit('toast', 'success', ' مشخصات کالا با موفقیت ایجاد شد.');
+        $this->createLog(' مشخصات کالا', 'admin/attribute',$this->attribute->title, 'ایجاد');
+
+        alert()->success('مشخصات کالا با موفقیت ایجاد شد.', ' مشخصات کالا با موفقیت ایجاد شد.');
         return redirect()->back();
     }
     public function loadCategory()
     {
         $this->readyToLoad = true;
     }
-    public function updateCategoryDisable($id)
-    {
-        $attribute = Attribute::find($id);
-        $attribute->update([
-            'status' => 0
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'غیرفعال کردن وضعیت مشخصات کالا' .'-'. $this->attribute->childCategory,
-            'actionType' => 'غیرفعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت مشخصات کالا با موفقیت غیرفعال شد.');
-    }
-
-    public function updateCategoryEnable($id)
-    {
-        $attribute = Attribute::find($id);
-        $attribute->update([
-            'status' => 1
-        ]);
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'فعال کردن وضعیت مشخصات کالا' .'-'. $this->attribute->childCategory,
-            'actionType' => 'فعال'
-        ]);
-        $this->emit('toast', 'success', 'وضعیت مشخصات کالا با موفقیت فعال شد.');
-    }
 
     public function deleteCategory($id)
     {
         $attribute = Attribute::find($id);
         $attribute->delete();
-        Log::create([
-            'user_id' => auth()->user()->id,
-            'url' => 'حذف کردن مشخصات کالا' .'-'. $this->attribute->childCategory,
-            'actionType' => 'حذف'
-        ]);
-        $this->emit('toast', 'success', ' مشخصات کالا با موفقیت حذف شد.');
+        $this->createLog(' مشخصات کالا', 'admin/attribute',$this->attribute->title, 'حذف');
+
+        alert()->success(' مشخصات کالا با موفقیت حذف شد.', ' مشخصات کالا با موفقیت حذف شد.');
     }
 
 
