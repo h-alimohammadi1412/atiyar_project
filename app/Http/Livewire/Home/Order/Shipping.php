@@ -141,6 +141,7 @@ class Shipping extends AdminControllerLivewire
         $payment = Payment::create([
             'user_id' => auth()->user()->id,
             'order_id' => $this->order->id,
+            'address_id' => $this->address_use->id,
             'total_price' => $total_price,
             'discount_price' => ABS($this->order->total_price - $this->order->total_discount_price),
             'time_id' =>  $this->address_time->id,

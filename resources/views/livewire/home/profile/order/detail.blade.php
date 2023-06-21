@@ -58,41 +58,89 @@
                             $payment->address->address}}</p>
                     </div>
                 </div>
-                <div class="border-bottom border-top d-flex px-2 py-3">
-                    <div class="d-flex flex-column">
+                <div class="border-bottom border-top px-2 py-3">
+                    <div class="align-items-start d-flex justify-content-between">
                         <div class="d-flex flex-column">
-                            <div class="d-flex ">
-                                <div>
-                                    <span>مبلغ</span>
-                                    <span class="fw-bold">
-                                        @if ($payment->status == 'paid')
-                                        {{ number_format($payment->total_price) }}
-                                        @else
-                                        0
-                                        @endif
-                                    </span>
-                                    <span>تومان</span>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex ">
+                                    <div>
+                                        <span>مبلغ</span>
+                                        <span class="fw-bold">
+                                            @if ($payment->status == 'paid' || $payment->status == 'delivered')
+                                            {{ number_format($payment->total_price) }}
+                                            @else
+                                            0
+                                            @endif
+                                        </span>
+                                        <span>تومان</span>
+                                    </div>
+                                    @if ($payment->status == 'paid' || $payment->status == 'delivered')
+                                    <div class="me-5 ms-5">
+                                        <span>سود شما از خرید :</span>
+                                        <span class="fw-bold">{{ number_format($payment->discount_price) }}</span>
+                                        <span>تومان</span>
+                                    </div>
+                                    @endif
+                                    <div class="ms-4">پرداخت اینترنتی</div>
                                 </div>
-                                @if ($payment->status == 'paid')
-                                <div class="me-5 ms-5">
-                                    <span>سود شما از خرید :</span>
-                                    <span class="fw-bold">{{ number_format($payment->discount_price) }}</span>
-                                    <span>تومان</span>
-                                </div>
-                                @endif
+                            </div>
+                            @if ($payment->status == 'paid' || $payment->status == 'delivered')
+                            <div class="mt-4">
+                                <span>هزینه ارسال (بر اساس وزن و حجم) :</span>
+                                <span class="fw-bold">{{ number_format($payment->times->price) }}</span>
+                                <span>تومان</span>
+                            </div>
+                            @endif
+
+                        </div>
+
+                        <button class="bg-none border-0 collapsed text-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <span>تاریخ تراکنش ها</span><i class="ci-arrow ci-arrow-down fs-ms px-2"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="collapse mt-4" id="collapseExample">
+                            <div class="card card-body">
+                                <table class="table">
+                                    {{-- <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                        </tr>
+                                    </thead> --}}
+                                    <tbody>
+                                        @foreach ($bankPayments as $bankPayment)
+                                        <tr class="fw-bold">
+                                            <td class="align-items-center d-flex">
+                                                @if ($bankPayment->status == 0)
+                                                <i class="ci-close-circle fw-bold me-2 text-danger"></i>
+                                                <span>مبلغ سفارش -</span>
+                                                <span>پرداخت ناموفق</span>
+                                                @else
+                                                <i class="ci-close-circle fw-bold me-2 text-success"></i>
+                                                <span>مبلغ سفارش -</span>
+                                                <span>پرداخت موفق</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <span>{{ jdate($bankPayment->created_at)->format('%d %B %Y') }}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{ number_format($bankPayment->price) }}</span>
+                                                <span>تومان</span>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        @if ($payment->status == 'paid')
-                        <div class="mt-4">
-                            <span>هزینه ارسال (بر اساس وزن و حجم) :</span>
-                            <span class="fw-bold">{{ number_format($payment->times->price) }}</span>
-                            <span>تومان</span>
-                        </div>
-                        @endif
-
                     </div>
-                    <div class="ms-4">پرداخت اینترنتی</div>
                 </div>
+
 
                 @foreach ($payment->order as $key => $order)
                 <div class="border mt-4 p-4 rounded-3">
@@ -168,12 +216,20 @@
                             <div>
                                 <span class="d-block fw-bold">{{ $product->productSeller->product->title }}</span>
                                 @if ($product->productSeller->color)
-                                <div class="mt-3"><i class="ci-add me-2"></i><span>{{
-                                        $product->productSeller->color->name }}</span></div>
+                                <div class="d-flex align-items-center mt-3">
+                                    <div class="border rounded-circle" style="padding: 2px">
+                                        <span class="d-block rounded-circle"
+                                            style="background-color: {{ $product->productSeller->color->value }};width:15px;height:15px"></span>
+                                    </div>
+                                    <span class="ms-1" style="font-size: 12px;">{{ $product->productSeller->color->name
+                                        }}</span>
+                                </div>
+                                {{-- <div class="mt-3"><i class="ci-add me-2"></i><span>{{
+                                        $product->productSeller->color->name }}</span></div> --}}
                                 @endif
-                                <div class="mt-2"><i class="ci-add me-2"></i><span>{{
+                                <div class="mt-2"><i class="ci-security-check me-2"></i><span>{{
                                         $product->productSeller->warranty->name }}</span></div>
-                                <div class="mt-2"><i class="ci-add me-2"></i><span>{{
+                                <div class="mt-2"><i class="ci-store me-2"></i><span>{{
                                         $product->productSeller->vendor->name }}</span></div>
                                 <div class="mt-3 text-primary"><span>{{
                                         number_format(ABS($product->productSeller->discount_price -
