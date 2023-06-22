@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/atiyar/public_html/test
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp * $DEPLOYPATH
