@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->integer('total_price')->nullable();
             $table->integer('total_discount_price')->nullable();
             $table->integer('address_id')->nullable();
+            $table->integer('time_send')->nullable();
             $table->integer('time_day')->nullable();
             $table->integer('time_month')->nullable();
             $table->integer('time_time')->nullable();

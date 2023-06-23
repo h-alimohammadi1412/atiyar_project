@@ -44,4 +44,8 @@ class Order extends Model
     {
         return $this->hasMany(OrderProduct::class,'order_id','id');
     }
+    public function timeSend()
+    {
+        return  $this->belongsTo(AddressTime::class,'time_send','id');
+    }
 }

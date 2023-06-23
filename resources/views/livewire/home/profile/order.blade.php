@@ -44,113 +44,128 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($payments as $payment)
-                @php
-                $date1 = new DateTime(\Illuminate\Support\Carbon::now());
-                $date2 = new DateTime($payment->updated_at);
-                $diff=$date2->diff($date1);
-                $time = 60 - $diff->format('%i') ;
-                $statTime = $time > 1 ? true : false;
-                @endphp
-                @if ($payment->status == 'wait' && $time > 1)
-                <tr style="border: 1px solid #4b566b3d;border-radius: 26px;">
-                    <td class="py-3 text-center"><span class="fs-sm fw-bold">ATC-{{ $payment->order_number }}</span>
-                    </td>
-                    <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
-                    <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
-                    <td class="text-center"><a href="{{ route('order.profile.detail',['order_number'=>$payment->order_number ]) }}"><i class="ci-eye fs-2"></i></a></td>
-                    <div class="btn-group">
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">پرداخت</a>
-                        </td>
-                    </div>
-                </tr>
-                <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
-                    <td colspan="6">
-                        @foreach ($payment->order as $order)
-                        <div class="swiper swiper_slider my-2">
-                            <!-- Additional required wrapper -->
-                            <div class="swiper-wrapper">
-                                <!-- Slides -->
-                                @foreach ($order->orderProducts as $order_item)
-                                <div class="swiper-slide">
-                                    <a target="_blank"
-                                        href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
-                                        <img src="/storage/{{ $order_item->product->img }}">
-                                    </a>
-                                    <div class="d-flex justify-content-between">
-                                       
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                        @endforeach
-                        @if ($payment->status == 'wait')
-
-                        <div class="align-items-center d-flex py-2 w-100">
-                            <i class="ci-announcement text-primary text-warning"></i>
-                            <span class="fs-sm ms-2 text-danger">سفارش در صورت عدم پرداخت تا {{ $time }} دقیقه دیگر لغو
-                                خواهد شد.</span>
-                        </div>
-                        @endif
-
+                @if (sizeof($payments) == 0)
+                <tr>
+                    <td colspan="5">
+                        <p class="alert alert-warning text-center">تراکنشی برای شما ثبت نشده است.</p>
                     </td>
                 </tr>
                 @else
-                <tr style="border: 1px solid #4b566b3d;border-radius: 26px;">
-                    <td class="py-3 text-center"><span class="fs-sm fw-bold">ATC-{{ $payment->order_number }}</span>
-                    </td>
-                    <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
-                    <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
-                    <td class="text-center"><a href="{{ route('order.profile.detail',['order_number'=>$payment->order_number ]) }}"><i class="ci-eye fs-2"></i></a></td>
-
-                    @if($payment->status == 'delivered')
-                    <td class="text-center">
+                    @foreach ($payments as $payment)
+                    @php
+                    $date1 = new DateTime(\Illuminate\Support\Carbon::now());
+                    $date2 = new DateTime($payment->updated_at);
+                    $diff=$date2->diff($date1);
+                    $time = 60 - $diff->format('%i') ;
+                    $statTime = $time > 1 ? true : false;
+                    @endphp
+                    @if ($payment->status == 'wait' && $time > 1)
+                    <tr style="border: 1px solid #4b566b3d;border-radius: 26px;">
+                        <td class="py-3 text-center"><span class="fs-sm fw-bold">ATC-{{ $payment->order_number }}</span>
+                        </td>
+                        <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
+                        <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
+                        <td class="text-center"><a
+                                href="{{ route('order.profile.detail',['order_number'=>$payment->order_number ]) }}"><i
+                                    class="ci-eye fs-2"></i></a></td>
                         <div class="btn-group">
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">پرداخت</a>
+                            </td>
+                        </div>
+                    </tr>
+                    <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
+                        <td colspan="6">
+
+                            @foreach ($payment->orders as $order)
+                            <div class="swiper swiper_slider my-2">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    @foreach ($order->orderProducts as $order_item)
+                                    <div class="swiper-slide">
+                                        <a target="_blank"
+                                            href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
+                                            <img src="/storage/{{ $order_item->product->img }}">
+                                        </a>
+                                        <div class="d-flex justify-content-between">
+
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                            @endforeach
+                            @if ($payment->status == 'wait')
+
+                            <div class="align-items-center d-flex py-2 w-100">
+                                <i class="ci-announcement text-primary text-warning"></i>
+                                <span class="fs-sm ms-2 text-danger">سفارش در صورت عدم پرداخت تا {{ $time }} دقیقه دیگر لغو
+                                    خواهد شد.</span>
+                            </div>
+                            @endif
+
+
+                        </td>
+                    </tr>
+                    @else
+                    <tr style="border: 1px solid #4b566b3d;border-radius: 26px;">
+                        <td class="py-3 text-center"><span class="fs-sm fw-bold">ATC-{{ $payment->order_number }}</span>
+                        </td>
+                        <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
+                        <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
+                        <td class="text-center"><a
+                                href="{{ route('order.profile.detail',['order_number'=>$payment->order_number ]) }}"><i
+                                    class="ci-eye fs-2"></i></a></td>
+
+                        @if($payment->status == 'delivered')
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">مشاهده
+                                    فاکتور</a>
+                                <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">ثبت
+                                    مرجوعی</a>
+                            </div>
+                        </td>
+                        @elseif ($payment->status == 'returned')
+                        <td class="text-center">
                             <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">مشاهده
                                 فاکتور</a>
-                            <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">ثبت
-                                مرجوعی</a>
-                        </div>
-                    </td>
-                    @elseif ($payment->status == 'returned')
-                    <td class="text-center">
-                        <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">مشاهده
-                            فاکتور</a>
-                    </td>
-                    @endif
+                        </td>
+                        @endif
 
-                </tr>
-                <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
-                    <td colspan="6">
-                        @foreach ($payment->order as $order)   
-                        <div class="swiper swiper_slider my-2">
-                            <!-- Additional required wrapper -->
-                            <div class="swiper-wrapper">
-                                <!-- Slides -->
-                                @foreach ($order->orderProducts as $order_item)
-                                <div class="swiper-slide">
-                                    <a target="_blank"
-                                        href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
-                                        <img src="/storage/{{ $order_item->product->img }}">
-                                    </a>
-                                    <div class="d-flex justify-content-between">
-                                       
+                    </tr>
+                    <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
+                        <td colspan="6">
+                            @foreach ($payment->orders as $order)
+                            <div class="swiper swiper_slider my-2">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    @foreach ($order->orderProducts as $order_item)
+                                    <div class="swiper-slide">
+                                        <a target="_blank"
+                                            href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
+                                            <img src="/storage/{{ $order_item->product->img }}">
+                                        </a>
+                                        <div class="d-flex justify-content-between">
+
+                                        </div>
                                     </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
                             </div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                        @endforeach
-                    </td>
-                </tr>
+                            @endforeach
+                        </td>
+                    </tr>
+                    @endif
+                    @endforeach
                 @endif
-                @endforeach
+                
             </tbody>
         </table>
     </div>

@@ -24,4 +24,8 @@ class OrderProduct extends Model
     {
         return $this->belongsTo(Color::class,'color_id','id');
     }
+    public function seller()
+    {
+        return $this->belongsTo(User::class,'seller_id','id');
+    }
 }
