@@ -9,11 +9,11 @@ class Payment extends Model
 {
     use HasFactory;
     protected $fillable=['user_id','order_id','time_id','type_payment','discount_code','discount_price','gift_code',
-        'gift_code_price','total_price','shipping_price','status','order_number','transactionId','driver'];
+        'gift_code_price','total_price','shipping_price','status','order_number','transactionId','driver','address_id'];
 
-    public function order()
+    public function orders()
     {
-        return  $this->hasMany(Order::class,'id','order_id');
+        return  $this->hasMany(Order::class,'order_number','order_number');
     }
     public function address()
     {

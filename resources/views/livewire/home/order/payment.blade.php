@@ -49,7 +49,7 @@
                     <h6 class="mb-3 py-3 border-bottom">شیوه پرداخت</h6>
                     <div class="d-flex align-items-center">
                         <input class="form-check-input" type="radio" checked id="select_paymet1" name="radio"
-                            wire:click="paymentTypeInternet({{ $payment->order->order_number }})">
+                            wire:click="paymentTypeInternet({{ $payment->order_number }})">
                         <label for="select_paymet1" class="d-flex align-items-center ms-3">
                             <i class="ci-card fs-2"></i>
                             <span class="ms-2"> پرداخت اینترنتی</span>
@@ -59,29 +59,30 @@
                 </div>
                 <div class=" p-4 rounded-3 mb-grid-gutter border">
                     <h6 class="mb-3 py-3 border-bottom">خلاصه سفارش</h6>
-                    <div class="accordion" id="accordionExample">
+                    @foreach ($payment->orders as $key=>$order)
+                    <div class="accordion" id="accordionExample_{{ $key }}">
                         <div class="accordion-item accordion_payments">
                             <h2 class="accordion-header ">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <i class="ci-truck fs-2 me-3 text-primary"></i>
-                                    <span class="me-2 ">{{ $payment->times->day }} {{ $payment->times->date }} -
-                                        بازه {{ $payment->times->time }}</span>
+                                    <span class="me-2 ">{{ $order->timeSend->day }} {{ $order->timeSend->date }} -
+                                        بازه {{ $order->timeSend->time }}</span>
                                     <span class="fs-ms p-1 rounded" style="background-color: #ccc;">{{
-                                        $payment->order->orderProducts->count()
+                                        $order->orderProducts->count()
                                         }} کالا</span>
 
                                     <span class="fs-ms ms-auto">جزئیات سفارش</span>
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionExample">
+                                data-bs-parent="#accordionExample_{{ $key }}">
                                 <div class="accordion-body">
                                     <div class="swiper swiper_slider mt-5">
                                         <!-- Additional required wrapper -->
                                         <div class="swiper-wrapper">
                                             <!-- Slides -->
-                                            @foreach ( $payment->order->orderProducts as $item)
+                                            @foreach ( $order->orderProducts as $item)
                                             <div class="swiper-slide">
                                                 <a target="_blank"
                                                     href="{{ url('/product/at-' . $item->product->id . '/' . $item->product->link) }}">
@@ -114,7 +115,7 @@
                                 </div>
                                 <div class="p-4">
                                     <span>مبلغ مرسوله : </span>
-                                    <span class="ms-1">{{ number_format($payment->total_price) }}</span>
+                                    <span class="ms-1">{{ number_format($order->total_discount_price) }}</span>
                                     <span>تومان</span>
                                 </div>
                             </div>
@@ -123,6 +124,7 @@
                         </div>
 
                     </div>
+                    @endforeach
                 </div>
                 @endif
 
@@ -141,29 +143,33 @@
 
                         @else
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
-                            <h2 class="h6 mb-3 pb-1 fs-md">قیمت کالاها ({{ sizeof($payment->order->orderProducts) }})
+                            @php
+                            $countOrderProducts=0;
+                            foreach ($payment->orders as $key => $order) {
+                            $countOrderProducts += $order->orderProducts->count();
+                            }
+                            @endphp
+                            <h2 class="h6 mb-3 pb-1 fs-md">قیمت کالاها ({{ $countOrderProducts }})
                             </h2>
-                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($payment->order->total_price) }} <span
+                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($payment->total_price) }} <span
                                     style="font-size: 13px">تومان</span>
                             </h3>
                         </div>
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md">هزینه ارسال</h2>
-                            <h3 class="fw-normal fs-md fw-bold text-muted">@if(is_null($payment->time_id)) رایگان
-                                @else {{ number_format($payment->times->price) }} <span
+                            <h3 class="fw-normal fs-md fw-bold text-muted">@if( $payment->shipping_price == 0) رایگان
+                                @else {{ number_format( $payment->shipping_price ) }} <span
                                     style="font-size: 13px">تومان</span>@endif </h3>
                         </div>
                         @php
-                        $total_price_discount_orders = ABS($payment->order->total_discount_price -
-                        $payment->order->total_price);
-                        $darsad = ABS(($total_price_discount_orders / $payment->order->total_price)*100) ;
-                        // $darsad = ABS(($payments[0]->discount_price/ $payments[0]->total_price)*100);
+                        $total_price_discount_orders = ABS($payment->discount_price - $payment->total_price);
+                        $darsad = ABS(($total_price_discount_orders / $payment->total_price)*100) ;
+                        // $darsad = ABS(($payment->discount_price/ $payment->total_price)*100);
                         @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center ">
                             <h2 class="h6 mb-3 pb-1 fs-md text-primary">سود شما از خرید</h2>
                             <h3 class="fw-normal fs-md fw-bold text-primary"><span class="">({{ ceil($darsad)
-                                    }}%)</span> {{
-                                number_format( $total_price_discount_orders) }} <span
+                                    }}%)</span> {{ number_format( $total_price_discount_orders) }} <span
                                     style="font-size: 13px">تومان</span>
                             </h3>
                         </div>
@@ -195,7 +201,7 @@
                                 @elseif ($this->discount_price->type == 1)
                                 {{ $this->discount_price->percent }}%
                                 @endif
-                               
+
                             </h3>
                         </div>
                         @endif
@@ -211,7 +217,7 @@
                                 $cal_price_discount = $cal_price_discount - $this->discount_price->price;
                                 }elseif($this->discount_price->type == 1){
                                 $dPercent = ($cal_price_discount * $this->discount_price->percent) / 100;
-                                $cal_price_discount =$cal_price_discount - $dPercent; 
+                                $cal_price_discount =$cal_price_discount - $dPercent;
                                 }
                                 @endphp
                                 @endif

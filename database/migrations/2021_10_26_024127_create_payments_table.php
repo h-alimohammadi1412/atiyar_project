@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->string('driver')->nullable();
             $table->string('order_id')->nullable();
             $table->string('order_number')->nullable();
+            $table->string('payment_number')->nullable();
             $table->string('time_id')->nullable();
             $table->string('total_price')->nullable();
             $table->string('shipping_price')->nullable();

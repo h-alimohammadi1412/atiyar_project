@@ -48,8 +48,12 @@ class Payment extends AdminControllerLivewire
     public function checkDiscountCode()
     {
         $this->validate();
-        $cal_price_discount = $this->payment->order->total_discount_price;
-        if($this->gift_code_remaining != null){
+        $total_discount_price = 0;
+        foreach ($this->payment->orders as $order) {
+            $total_discount_price += $order->total_discount_price;
+        }
+        $cal_price_discount =$total_discount_price;
+        if ($this->gift_code_remaining != null) {
             $this->helperAlert('warning', ' مبلغ پرداختی شما صفر است.');
             return;
         }
@@ -79,11 +83,14 @@ class Payment extends AdminControllerLivewire
         if ($this->gift->code != null) {
 
             $gift_code = Gift::where('code', $this->gift->code)->first();
+            $total_discount_price = 0;
             if ($gift_code) {
-
-                $cal_price_discount = $this->payment->order->total_discount_price;
+                foreach ($this->payment->orders as $order) {
+                    $total_discount_price += $order->total_discount_price;
+                }
+                $cal_price_discount = $total_discount_price;
                 if ($this->discount_price != null) {
-                    $cal_price_discount = $this->payment->order->total_discount_price - $this->discount_price->price;
+                    $cal_price_discount = $total_discount_price - $this->discount_price->price;
                 }
                 if ($gift_code->type == 0) {
                     if ($gift_code->value_price < $cal_price_discount) {
@@ -128,9 +135,14 @@ class Payment extends AdminControllerLivewire
 
     public function continuePayment()
     {
-
-        $price = $this->payment->order->total_discount_price;
-        $price = $price + $this->payment->shipping_price;
+        $price = 0;
+        $time_send_price = 0;
+        foreach ($this->payment->orders as $order) {
+            $price += $order->total_discount_price;
+            $time_send_price += $order->timeSend->price;
+        }
+        $price = $this->payment->discount_price;
+        $price = $price + $time_send_price;
         if ($this->discount_price != null) {
             $price = $price - $this->discount_price->price;
             $this->discount_price->update([
@@ -148,10 +160,10 @@ class Payment extends AdminControllerLivewire
                 $this->gift_code_price->user_id = auth()->user()->id;
                 $this->gift_code_price->value_price =  $value_price;
                 $this->gift_code_price->save();
-                
+
                 $this->payment->gift_code = $this->gift_code_price->code;
                 $this->payment->gift_code_price = $price;
-                
+
                 $this->payment->save();
                 $price = 0;
             } else {
@@ -161,25 +173,25 @@ class Payment extends AdminControllerLivewire
                 $this->gift_code_price->value_price = 0;
                 $this->gift_code_price->type = 1;
                 $this->gift_code_price->save();
-                
+
                 $this->payment->gift_code = $this->gift_code_price->code;
                 $this->payment->gift_code_price = $this->gift_code_price->price;
                 $this->payment->save();
             }
-
         }
         if ($price ==  0) {
 
             $this->payment->update([
-                // 'status' => 1,
                 'status' => 'paid',
-                'total_price' => $price
+                'discount_price' => $price
             ]);
-            $this->payment->order->update([
-                'status' => 'paid',
-                'transaction_id' => 'no-price',
-                'payment' => 1,
-            ]);
+            foreach( $this->payment->orders as $item){
+                $order->status ='paid';
+                $order->transaction_id = 'no-price';
+                $order->payment = 1;
+                $order->save();
+            }
+          
             return redirect(route('profile.index'));
         }
 
@@ -193,10 +205,10 @@ class Payment extends AdminControllerLivewire
             'total_price' => $price,
             'status' => 'wait',
         ]);
-        $this->payment->order->update([
-            'status' => 'wait'
-        ]);
-
+        foreach( $this->payment->orders as $item){
+            $item->status ='wait';
+            $item->save();
+        }
         // foreach ($orders as $order) {
         //     $returnedPayment = ReturnOrder::create([
         //         'user_id' => auth()->user()->id,
@@ -204,7 +216,7 @@ class Payment extends AdminControllerLivewire
         //         'order_id' => $order->id,
         //     ]);
         // }
-         $carts = Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
+        $carts = Cart::where('user_id', auth()->user()->id)->where('type', 0)->get();
         foreach ($carts as $cart) {
             $cart->delete();
         }
@@ -213,13 +225,12 @@ class Payment extends AdminControllerLivewire
 
     public function render()
     {
-        $payment = ModelsPayment::with(['order' => ['orderProducts' => ['product', 'color']], 'discount', 'times'])->where(['user_id' => auth()->user()->id, 'status' => null])->get()->last();
+        $payment = ModelsPayment::with(['orders' => ['orderProducts' => ['product', 'color'], 'timeSend'], 'discount', 'times'])->where(['user_id' => auth()->user()->id, 'status' => null])->get()->last();
+        // if($payment){
+        //     return $this->redirect(route('order.profile.index'));
+        // }
         $this->payment = $payment;
         $this->dispatchBrowserEvent('onContentChanged');
-        return view(
-            'livewire.home.order.payment',
-            compact('payment')
-        )
-            ->layout('layouts.home1');
+        return view('livewire.home.order.payment', compact('payment'))->layout('layouts.home1');
     }
 }

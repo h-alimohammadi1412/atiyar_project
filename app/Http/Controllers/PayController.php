@@ -53,45 +53,46 @@ class PayController extends Controller
     {
         $Authority = \request()->Authority;
         $status = \request()->Status;
-        if ($status == "OK") {
-            $payment = \App\Models\Payment::where(['transactionId' => $Authority, 'user_id' => auth()->user()->id])->first();
-            $bank_payment = BankPayment::where(['order_number' => $payment->order_number, 'user_id' => auth()->user()->id])->first();
+        if ($status == 'OK') {
+            $payment = \App\Models\Payment::with(['orders'])->where(['transactionId' => $Authority, 'user_id' => auth()->user()->id])->first();
+            $bank_payment = BankPayment::where(['order_number' => $payment->order_number, 'user_id' => auth()->user()->id])->last();
+            
             $order = Order::where(['order_number' => $payment->order_number, 'user_id' => auth()->user()->id])->first();
             $payment->update([
-                'status' => 1
+                'status' => 'paid'
             ]);
             $bank_payment->update([
                 'status' => 1
             ]);
-            $order->update([
-                'payment' => 1,
-                'transaction_id' => $Authority,
-                'status' => 'paid'
-            ]);
-
-            $type = 'سفارش شما ثبت شد';
-            //مشتری
-            Notification::create([
-                'user_id' => $order->user_id,
-                'product_id' => $order->product_id,
-                'type' => $type,
-                'sms' => 1,
-                'email' => 1,
-                'system' => 1,
-                'text' => $order->product->title,
-            ]);
-            //فروشنده
-            $type = 'سفارش جدیدی برای شما ثبت شد';
-            Notification::create([
-                'user_id' => $order->product_seller_id,
-                'product_id' => $order->product_id,
-                'type' => $type,
-                'sms' => 1,
-                'email' => 1,
-                'system' => 1,
-                'text' => $order->product->title,
-            ]);
-            //ادمین
+            foreach($payment->orders as $order){
+                $order->payment = 1;
+                $order->transaction_id =$Authority;
+                $order->status ='paid';
+                $order->save();
+            }
+            // $type = 'سفارش شما ثبت شد';
+            // //مشتری
+            // Notification::create([
+            //     'user_id' => $payment->user_id,
+            //     'product_id' => $order->product_id,
+            //     'type' => $type,
+            //     'sms' => 1,
+            //     'email' => 1,
+            //     'system' => 1,
+            //     'text' => $order->product->title,
+            // ]);
+            // //فروشنده
+            // $type = 'سفارش جدیدی برای شما ثبت شد';
+            // Notification::create([
+            //     'user_id' => $order->product_seller_id,
+            //     'product_id' => $order->product_id,
+            //     'type' => $type,
+            //     'sms' => 1,
+            //     'email' => 1,
+            //     'system' => 1,
+            //     'text' => $order->product->title,
+            // ]);
+            // //ادمین
             // $type = 'سفارش جدیدی در سایت ثبت شد';
             // Notification::create([
             //     'user_id' => 1,
@@ -102,17 +103,17 @@ class PayController extends Controller
             //     'system' => 1,
             //     'text' => $order->product->title,
             // ]);
-            $type2 = 'سفارش جدیدی برای شما ثبت شد';
-            $seller = User::where('id', $order->user_id)->first();
-            $name = $seller->name . $seller->lname;
-            $res = (new NotificationNotification)->sendSms([$seller->mobile], "فروشنده گرامی ، شما سفارش جدیدی از طرف {$name} در پنل فروشگاهی خود دریافت نموده اید");
-            dd($res); //سفارش محصولی در سایت آتی یار برای شما ثبت شد.
-            $code = random_int(10000, 99999);
-            SMS::create([
-                'code' => $code,
-                'type' => $type2,
-                'user_id' => $order->product_seller_id,
-            ]);
+            // $type2 = 'سفارش جدیدی برای شما ثبت شد';
+            // $seller = User::where('id', $order->user_id)->first();
+            // $name = $seller->name . $seller->lname;
+            // $res = (new NotificationNotification)->sendSms([$seller->mobile], "فروشنده گرامی ، شما سفارش جدیدی از طرف {$name} در پنل فروشگاهی خود دریافت نموده اید");
+            // dd($res); //سفارش محصولی در سایت آتی یار برای شما ثبت شد.
+            // $code = random_int(10000, 99999);
+            // SMS::create([
+            //     'code' => $code,
+            //     'type' => $type2,
+            //     'user_id' => $order->product_seller_id,
+            // ]);
 
             // foreach ($orders as $order) {
                 /////////////////////////////////sms
