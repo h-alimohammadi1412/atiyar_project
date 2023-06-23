@@ -18,15 +18,15 @@ class Shipping extends AdminControllerLivewire
     use LivewireAlert;
     public \App\Models\Address $address;
     public $address_use;
-    public $address_time;
+    public $address_time =[];
     public $order;
     public $order_number;
     public $orders;
     public $addresses;
     public $dPrice;
     public $dateId;
-    public $show_id = 0;
-    public $show = false;
+    public $show_id = [];
+    public $show_select_address = false;
     public $show_add_address_form = false;
     protected $listeners = ['adtime' => '$refresh'];
 
@@ -123,50 +123,64 @@ class Shipping extends AdminControllerLivewire
         $this->addresses[$key]->status = 1;
         $this->addresses[$key]->save();
         $this->address_use = $this->addresses[$key];
-        $this->show = false;
+        $this->show_select_address = false;
     }
     public function showAddAddressForm()
     {
 
-        $this->show = false;
+        $this->show_select_address = false;
         $this->show_add_address_form = true;
     }
 
-    public function addToPayment($total_price)
+    public function addToPayment()
     {
-        if ($this->address_time == null) {
+        if (sizeof($this->address_time) < sizeof($this->orders)) {
             $this->helperAlert('success', 'لطفا زمان ارسال را انتخاب کنید.');
             return;
         }
+        $total_price = 0;
+        $total_discount_price = 0;
+        $shipping_price = 0;
+        foreach($this->orders as $order){
+            if(isset($this->address_time[$order->id])){
+                $order->time_send = $this->address_time[$order->id]['id'];
+                $order->save();
+                $shipping_price += $this->address_time[$order->id]['price'];
+            }
+            $total_price += $order->total_price;
+            $total_discount_price += $order->total_discount_price;
+        }
+        $payment_number = 11111111111;
+        $p= Payment::all()->last();
+        if($p){
+            $payment_number =  $p->payment_number + 1;
+        }
         $payment = Payment::create([
+            'address_id' => $this->address_use->id,
             'user_id' => auth()->user()->id,
-            'order_id' => $this->order->id,
-            'address_id' => $this->address_use->id,
             'total_price' => $total_price,
-            'discount_price' => ABS($this->order->total_price - $this->order->total_discount_price),
-            'time_id' =>  $this->address_time->id,
-            'shipping_price' => $this->address_time->price,
-            'order_number' => $this->order->order_number,
+            'discount_price' =>  $total_discount_price ,
+            'order_number' => $this->orders[0]->order_number,
+            'payment_number' =>  $payment_number,
+            'shipping_price' => $shipping_price,
         ]);
-        $this->order->update([
-            'address_id' => $this->address_use->id,
-        ]);
+        // dd($payment);
         
         return $this->redirect(route('order.payment'));
     }
 
-    public function selectAddressTime($id, $key)
+    public function selectAddressTime($orderId,$id, $key)
     {
         $adsTime = AddressTime::find($id);
         if ($adsTime) {
-            $this->address_time = $adsTime;
+            $this->address_time[$orderId] = $adsTime;
         }
-        $this->show_id = $key;
+        $this->show_id[$orderId] = $key;
     }
     public function render()
     {
-        $order = Order::with(['orderProducts' => ['product', 'color']])->where('order_number', $this->order_number)->first();
-        $this->order = $order;
+        $orders = Order::with(['orderProducts' => ['product', 'color']])->where('order_number', $this->order_number)->get();
+        $this->orders = $orders;
         $this->dispatchBrowserEvent('onContentChanged');
         return view(
             'livewire.home.order.shipping'

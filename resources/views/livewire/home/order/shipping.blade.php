@@ -46,7 +46,7 @@
                 </div>
                 @else
                 <!-- Autor info-->
-                <div class=" bg-secondary p-4 rounded-3 mb-grid-gutter border">
+                <div class=" bg-secondary p-4 rounded-3 mb-grid-gutter border ">
                     <h6 class="mb-3 py-3 border-bottom">آدرس تحویل سفارش</h6>
                     @if (sizeof($addresses) > 0)
                     <div class="d-flex align-items-center">
@@ -61,97 +61,106 @@
                     @endif
 
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-outline-primary btn-sm ps-2" wire:click="$set('show',true)">تغییر یا افزودن
+                        <a class="btn btn-outline-primary btn-sm ps-2" wire:click="$set('show_select_address',true)">تغییر یا افزودن
                             آدرس</a>
                     </div>
                 </div>
-                <div class=" p-4 rounded-3 mb-grid-gutter border">
-                    <div class="d-flex border-bottom align-items-center py-3">
-                        <span>
-                            <i class="ci-truck fs-2 text-primary"></i>
-                        </span>
-                        <div class="ms-3">
-                            <div>
-                                <span>ارسال عادی</span><span class="ms-2 p-1"
-                                    style="background: #ccc;border-radius: 7px;font-size: 13px;">{{
-                                    $order->orderProducts->count() }}
-                                    کالا</span>
+                <div class=" p-4 rounded-3 mb-grid-gutter border @if(sizeof($orders)>1) border-bottom @endif"
+                    style="border-color: #bdc3c8">
+                    @foreach ($orders as $order)
+                    <div>
+                        <div class="d-flex border-bottom align-items-center py-3">
+                            <span>
+                                <i class="ci-truck fs-2 text-primary"></i>
+                            </span>
+                            <div class="ms-3">
+                                <div>
+                                    <span>ارسال عادی</span><span class="ms-2 p-1"
+                                        style="background: #ccc;border-radius: 7px;font-size: 13px;">{{$order->orderProducts->count()
+                                        }}
+                                        کالا</span>
+                                </div>
+                                <span>1 روز</span>
                             </div>
-                            <span>1 روز</span>
                         </div>
-                    </div>
-                    <div class="swiper swiper_slider mt-5">
-                        <!-- Additional required wrapper -->
-                        <div class="swiper-wrapper">
-                            <!-- Slides -->
-                            @foreach ($order->orderProducts as $order_item)
-                            <div class="swiper-slide">
-                                <a target="_blank"
-                                    href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
-                                    <img src="/storage/{{ $order_item->product->img }}">
-                                </a>
-                                <div class="d-flex justify-content-between">
-                                    @if ($order_item->color)
-                                    <div class="d-flex align-items-center mt-3">
-                                        <div class="border rounded-circle" style="padding: 2px">
-                                            <span class="d-block rounded-circle"
-                                                style="background-color: {{ $order_item->color->value }};width:15px;height:15px"></span>
+                        <div class="swiper swiper_slider mt-5">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                @foreach ($order->orderProducts as $order_item)
+                                <div class="swiper-slide">
+                                    <a target="_blank"
+                                        href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
+                                        <img src="/storage/{{ $order_item->product->img }}">
+                                    </a>
+                                    <div class="d-flex justify-content-between">
+                                        @if ($order_item->color)
+                                        <div class="d-flex align-items-center mt-3">
+                                            <div class="border rounded-circle" style="padding: 2px">
+                                                <span class="d-block rounded-circle"
+                                                    style="background-color: {{ $order_item->color->value }};width:15px;height:15px"></span>
+                                            </div>
+                                            <span class="ms-1" style="font-size: 12px;">{{ $order_item->color->name
+                                                }}</span>
                                         </div>
-                                        <span class="ms-1" style="font-size: 12px;">{{ $order_item->color->name
-                                            }}</span>
-                                    </div>
-                                    @endif
-                                    <div class="d-flex align-items-center mt-3">
-                                        <span class="ms-1" style="font-size: 12px;">تعداد : </span>
-                                        <span class="ms-1" style="font-size: 12px;">{{ $order_item->count_cart}}</span>
+                                        @endif
+                                        <div class="d-flex align-items-center mt-3">
+                                            <span class="ms-1" style="font-size: 12px;">تعداد : </span>
+                                            <span class="ms-1" style="font-size: 12px;">{{
+                                                $order_item->count_cart}}</span>
+                                        </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            @endforeach
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
                         </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
 
 
-                    <div class="d-flex align-items-center mt-4 mb-2 fw-bold">
-                        <i class="ci-time"></i>
-                        <span class="ms-2 ">انتخاب زمان ارسال</span>
-                    </div>
-                    <div class=" p-4 rounded-3 mb-grid-gutter border">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            @foreach (\App\Models\AddressTime::all() as $key=>$adressTime)
-                            <li class="nav-item" role="presentation">
-                                <button wire:ignore class="nav-link @if($key == $show_id) active @endif" id="home-tab"
-                                    data-bs-toggle="tab" data-bs-target="#tab-pane-{{ $key }}" type="button" role="tab"
-                                    aria-controls="home-tab-pane" aria-selected="true">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <span class="fs-6">{{ $adressTime->day }}</span>
-                                        <span class="text-muted " style="font-size: 14px;">{{ $adressTime->date
-                                            }}</span>
+                        <div class="d-flex align-items-center mt-4 mb-2 fw-bold">
+                            <i class="ci-time"></i>
+                            <span class="ms-2 ">انتخاب زمان ارسال</span>
+                        </div>
+                        <div class=" p-4 rounded-3 mb-grid-gutter border">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                @foreach (\App\Models\AddressTime::all() as $key=>$adressTime)
+
+                                <li class="nav-item" role="presentation">
+                                    <button wire:ignore
+                                        class="nav-link @if(isset($show_id[$order->id]) && $key == $show_id[$order->id]) active @else @if($key==0) active @endif @endif"
+                                        id="home-tab" data-bs-toggle="tab" data-bs-target="#tab-pane-{{ $key }}"
+                                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <span class="fs-6">{{ $adressTime->day }}</span>
+                                            <span class="text-muted " style="font-size: 14px;">{{ $adressTime->date
+                                                }}</span>
+                                        </div>
+                                    </button>
+                                </li>
+                                @endforeach
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                @foreach (\App\Models\AddressTime::all() as $key=>$adressTime)
+
+                                <div class="tab-pane fade show @if(isset($show_id[$order->id]) && $key == $show_id[$order->id]) active  @endif"
+                                    id="tab-pane-{{ $key }}" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                    <div class="address_time_item border p-2 rounded @if(isset($address_time[$order->id]) && $address_time[$order->id]->id == $adressTime->id) active @endif"
+                                        style="width: 100px;cursor: pointer;"
+                                        wire:click="selectAddressTime({{ $order->id }},{{ $adressTime->id }},{{ $key }})">
+                                        <div class="d-flex justify-content-around">
+                                            <span>بازه</span>
+                                            <span>{{ $adressTime->time }}</span>
+                                        </div>
+                                        <span class="d-block mt-2 text-center text-primary">{{
+                                            number_format($adressTime->price) }}</span>
                                     </div>
-                                </button>
-                            </li>
-                            @endforeach
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            @foreach (\App\Models\AddressTime::all() as $key=>$adressTime)
-                            <div class="tab-pane fade show @if($key == $show_id) active @endif" id="tab-pane-{{ $key }}"
-                                role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                <div class="address_time_item border p-2 rounded @if($address_time && $address_time->id == $adressTime->id) active @endif"
-                                    style="width: 100px;cursor: pointer;"
-                                    wire:click="selectAddressTime({{ $adressTime->id }},{{ $key }})">
-                                    <div class="d-flex justify-content-around">
-                                        <span>بازه</span>
-                                        <span>{{ $adressTime->time }}</span>
-                                    </div>
-                                    <span class="d-block mt-2 text-center text-primary">{{
-                                        number_format($adressTime->price) }}</span>
                                 </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 @endif
             </section>
@@ -168,51 +177,83 @@
                         </div>
 
                         @else
+                        @php
+                        $orderTotalPrises = 0;
+                        $orderTotalCount = 0;
+                        foreach ($orders as $order) {
+                        $orderTotalCount += $order->orderProducts->count();
+                        foreach ($order->orderProducts as $value) {
+                        $orderTotalPrises += $value->price;
+
+                        }
+                        }
+                        @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
-                            <h2 class="h6 mb-3 pb-1 fs-md ">قیمت کالاها ({{ $order->orderProducts->count() }})</h2>
-                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($order->total_price) }} <span
+                            <h2 class="h6 mb-3 pb-1 fs-md ">قیمت کالاها ({{ $orderTotalCount }})</h2>
+                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($orderTotalPrises ) }} <span
                                     style="font-size: 13px">تومان</span></h3>
                         </div>
                         @php
-                        $total_price_discount_orders = ABS($order->total_discount_price - $order->total_price);
-                        $darsad = ABS(($total_price_discount_orders / $order->total_price)*100) ;
+                        $a =0;
+                        $b =0;
+                        foreach ($orders as $order) {
+                            $a += ABS($order->total_discount_price - $order->total_price);
+                            $b += $order->total_price;
+                        }
+                        // $total_price_discount_orders = ABS($order->total_discount_price - $order->total_price);
+                        $darsad = ($a / $b)*100;
                         @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md text-primary">تخفیف کالا ها</h2>
                             <h3 class="fw-normal fs-md fw-bold text-primary"><span class="">({{ ceil($darsad)
                                     }}%)</span> {{
-                                number_format(ABS($order->total_discount_price - $order->total_price)) }} <span
+                                number_format(ABS( $a )) }} <span
                                     style="font-size: 13px">تومان</span></h3>
                         </div>
+                        @php
+                        $totalDiscountpriceOrders = 0;
+                        foreach($orders as $order) {
+                        $totalDiscountpriceOrders += $order->total_discount_price;
+                        }
+
+                        @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md ">جمع </h2>
-                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($order->total_discount_price) }}
+                            <h3 class="fw-normal fs-md fw-bold">{{ number_format($totalDiscountpriceOrders) }}
                                 <span style="font-size: 13px">تومان</span>
                             </h3>
                         </div>
+
+                        @php
+                        $address_time_price =0;
+                        foreach ($address_time as $value) {
+                        $address_time_price = $value->price;
+                        }
+                        @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md ">هزینه ارسال</h2>
-                            <h3 class="fw-normal fs-md fw-bold">@if($address_time) {{
-                                number_format($address_time->price) }} <span style="font-size: 13px">تومان</span>@else
+                            <h3 class="fw-normal fs-md fw-bold">@if(sizeof($address_time) > 0) {{
+                                number_format($address_time_price) }} <span style="font-size: 13px">تومان</span>@else
                                 رایگان @endif </h3>
                         </div>
                         @php
-                        $totp = $address_time != null ? ($address_time->price + $order->total_discount_price) :
-                        $order->total_discount_price;
+                        $totp = ($address_time_price + $order->total_discount_price)
                         @endphp
                         <div class="align-items-center border-bottom d-flex justify-content-between mb-2 text-center">
                             <h2 class="h6 mb-3 pb-1 fs-md text-primary">مبلغ قابل پرداخت </h2>
                             <h3 class="fw-normal fs-md fw-bold text-primary">{{ number_format($totp) }} <span
                                     style="font-size: 13px">تومان</span></h3>
                         </div>
-                        <a class="btn btn-primary btn-shadow d-block w-100 mt-4" wire:click="addToPayment({{ $totp }})"></i>ثبت سفارش
+                        <a class="btn btn-primary btn-shadow d-block w-100 mt-4"
+                            wire:click="addToPayment"></i>ثبت سفارش
                         </a>
                         @endif
                     </div>
                 </div>
             </aside>
         </div>
-        {{-- <!-- Navigation (mobile)-->
+        {{--
+        <!-- Navigation (mobile)-->
         <div class="row d-lg-none">
             <div class="col-lg-8">
                 <div class="d-flex pt-4 mt-3">
@@ -227,14 +268,14 @@
             </div>
         </div> --}}
     </div>
-    <form class="needs-validation modal fade @if ($show) show @endif" @if ($show)
+    <form class="needs-validation modal fade @if ($show_select_address) show @endif" @if ($show_select_address)
         style="display: block; background: rgba(0,0,0,.5);" @endif id="add-address" tabindex="-1" novalidate>
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">انتخاب آدرس</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
-                        wire:click="$set('show',false)"></button>
+                        wire:click="$set('show_select_address',false)"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row gx-4 gy-3">
@@ -276,7 +317,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"
-                        wire:click="$set('show',false)">بستن</button>
+                        wire:click="$set('show_select_address',false)">بستن</button>
                 </div>
             </div>
         </div>
