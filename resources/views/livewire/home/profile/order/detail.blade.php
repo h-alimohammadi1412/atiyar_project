@@ -14,7 +14,6 @@
     </main>
 </div> --}}
 @extends('livewire.home.profile.profile_layout')
-
 @section('title')
 سفارشات-{{ auth()->user()->name }}
 @endsection
@@ -41,7 +40,7 @@
                 <div class="fs-4 fw-bold"> جزئیات سفارش</div>
                 <div class="d-flex flex-column justify-content-start py-4">
                     <div class="align-items-center border-bottom d-flex py-4">
-                        <div class="me-5"><span>کد پیگیری سفارش :</span> <span class="fw-bold">{{ $payment->order_number
+                        <div class="me-5"><span>کد پیگیری سفارش :</span> <span class="fw-bold">{{ $payment->payment_number
                                 }}</span>
                         </div>
                         <div><span>تاریخ ثبت سفارش :</span> <span class="fw-bold">{{
@@ -87,17 +86,23 @@
                             @if ($payment->status == 'paid' || $payment->status == 'delivered')
                             <div class="mt-4">
                                 <span>هزینه ارسال (بر اساس وزن و حجم) :</span>
-                                <span class="fw-bold">{{ number_format($payment->times->price) }}</span>
+                                <span class="fw-bold">{{ number_format($payment->shipping_price) }}</span>
                                 <span>تومان</span>
                             </div>
                             @endif
 
                         </div>
 
-                        <button class="bg-none border-0 collapsed text-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            <span>تاریخ تراکنش ها</span><i class="ci-arrow ci-arrow-down fs-ms px-2"></i>
-                        </button>
+                        <div class="d-flex flex-column">
+                            @if ($payment->status == 'delivered')
+                            <a href="{{ route('order.profile.returned2',['order_number'=>$payment->order_number]) }}" class="btn btn-primary btn-sm">ثبت مرجوعی</a>
+                            @endif
+                            <button class="bg-none border-0 collapsed text-primary  @if ($payment->status == 'delivered') mt-3  @endif" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                <span>تاریخ تراکنش ها</span><i class="ci-arrow ci-arrow-down fs-ms px-2"></i>
+                            </button>
+                        </div>
                     </div>
                     <div>
                         <div class="collapse mt-4" id="collapseExample">
@@ -142,7 +147,7 @@
                 </div>
 
 
-                @foreach ($payment->order as $key => $order)
+                @foreach ($payment->orders as $key => $order)
                 <div class="border mt-4 p-4 rounded-3">
                     <div class="border-bottom d-flex pb-4">
                         <div class="" style="width: 65%;">
@@ -150,7 +155,7 @@
                                 <span class="fw-bold">مرسوله
                                     {{ $key+1 }}
                                     از
-                                    {{ sizeof($payment->order) }}
+                                    {{ sizeof($payment->orders) }}
                                 </span>
                                 <div class="fw-bold ms-5">
                                     <i></i>
@@ -158,11 +163,11 @@
                                 </div>
                             </div>
                             <div class="me-5 mt-4"><span>زمان تحویل :</span> <span class="fw-bold">{{
-                                    $payment->times->day.' '.$payment->times->date . ' بازه ' . $payment->times->time
+                                    $order->timeSend->day.' '.$order->timeSend->date . ' بازه ' . $order->timeSend->time
                                     }}</span></div>
                             <div class="d-flex mt-4">
                                 <div class="me-5"><span>هزینه ارسال :</span> <span class="fw-bold">{{
-                                        number_format($payment->times->price) }}</span>
+                                        number_format($order->timeSend->price) }}</span>
                                 </div>
                                 <div class="me-5"><span>مبلغ مرسوله :</span> <span class="fw-bold">{{
                                         number_format($order->total_price) }}</span><span class="ms-1">تومان</span>
@@ -211,7 +216,9 @@
                         @foreach ($order->orderProducts as $key => $product)
                         <div class="d-flex py-5 @if($key+1 < sizeof($order->orderProducts)) border-bottom @endif">
                             <div class="p-4">
-                                <img width="150px" src="/storage/{{ $product->productSeller->product->img }}" alt="">
+                                <a href="{{ url('/product/at-' . $product->productSeller->product->id . '/' . $product->productSeller->product->link) }}">
+                                    <img width="150px" src="/storage/{{ $product->productSeller->product->img }}" alt="">
+                                </a>
                             </div>
                             <div>
                                 <span class="d-block fw-bold">{{ $product->productSeller->product->title }}</span>
@@ -247,126 +254,8 @@
             </div>
 
         </div>
-        {{-- <table class="table table-hover mb-0">
-            <thead>
-                <tr>
-                    <th class="text-center fw-bold">کد سفارش</th>
-                    <th class="text-center fw-bold">تاریخ خرید</th>
-                    <th class="text-center fw-bold">مبلغ کل </th>
-                    <th class="text-center fw-bold">مشاهده سفارش</th>
-                    <th class="text-center fw-bold"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($payments as $payment)
-                @php
-                $date1 = new DateTime(\Illuminate\Support\Carbon::now());
-                $date2 = new DateTime($payment->updated_at);
-                $diff=$date2->diff($date1);
-                $time = 60 - $diff->format('%i') ;
-                $statTime = $time > 1 ? true : false;
-                @endphp
-                @if ($payment->status == 'wait' && $time > 1)
-                <tr style="border: 1px solid #4b566b3d;border-radius: 26px;">
-                    <td class="py-3 text-center"><span class="fs-sm fw-bold">ATC-{{ $payment->order_number }}</span>
-                    </td>
-                    <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
-                    <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
-                    <td class="text-center"><a href="{{ url('/') }}"><i class="ci-eye fs-2"></i></a></td>
-                    <div class="btn-group">
-                        <td class="text-center">
-                            <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">پرداخت</a>
-                        </td>
-                    </div>
-                </tr>
-                <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
-                    <td colspan="6">
-                        <div class="swiper swiper_slider my-2">
-                            <!-- Additional required wrapper -->
-                            <div class="swiper-wrapper">
-                                <!-- Slides -->
-                                @foreach ($payment->order->orderProducts as $order_item)
-                                <div class="swiper-slide">
-                                    <a target="_blank"
-                                        href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
-                                        <img src="/storage/{{ $order_item->product->img }}">
-                                    </a>
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                        @if ($payment->status == 'wait')
-
-                        <div class="align-items-center d-flex py-2 w-100">
-                            <i class="ci-announcement text-primary text-warning"></i>
-                            <span class="fs-sm ms-2 text-danger">سفارش در صورت عدم پرداخت تا {{ $time }} دقیقه دیگر لغو
-                                خواهد شد.</span>
-                        </div>
-                        @endif
-
-                    </td>
-                </tr>
-                @else
-                <tr style="border: 1px solid #4b566b3d;border-radius: 26px;">
-                    <td class="py-3 text-center"><span class="fs-sm fw-bold">ATC-{{ $payment->order_number }}</span>
-                    </td>
-                    <td class="py-3 text-center">{{ jdate($payment->created_at)->format('%d %B %Y') }}</td>
-                    <td class="py-3 text-center">{{ number_format($payment->total_price) }} تومان</td>
-                    <td class="text-center"><a href="{{ url('/') }}"><i class="ci-eye fs-2"></i></a></td>
-
-                    @if($payment->status == 'delivered')
-                    <td class="text-center">
-                        <div class="btn-group">
-                            <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">مشاهده
-                                فاکتور</a>
-                            <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">ثبت
-                                مرجوعی</a>
-                        </div>
-                    </td>
-                    @elseif ($payment->status == 'returned')
-                    <td class="text-center">
-                        <a class="btn btn-sm btn-primary" wire:click="paymentBank({{ $payment->id }})">مشاهده
-                            فاکتور</a>
-                    </td>
-                    @endif
-
-                </tr>
-                <tr style="border-top: none;border: 1px solid #4b566b42;overflow: hidden;">
-                    <td colspan="6">
-                        <div class="swiper swiper_slider my-2">
-                            <!-- Additional required wrapper -->
-                            <div class="swiper-wrapper">
-                                <!-- Slides -->
-                                @foreach ($payment->order->orderProducts as $order_item)
-                                <div class="swiper-slide">
-                                    <a target="_blank"
-                                        href="{{ url('/product/at-' . $order_item->product->id . '/' . $order_item->product->link) }}">
-                                        <img src="/storage/{{ $order_item->product->img }}">
-                                    </a>
-                                    <div class="d-flex justify-content-between">
-
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                    </td>
-                </tr>
-                @endif
-                @endforeach
-            </tbody>
-        </table> --}}
+     
     </div>
-    <!-- Pagination-->
-    {{-- {{ $payments->links() }} --}}
-
     @endif
 </section>
 @endsection

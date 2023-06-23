@@ -14,6 +14,7 @@ class Returned extends AdminControllerLivewire
     public $order_price;
     public $status = [];
     public $newPrice;
+    public $products;
     public $order_number;
 
     public ReturnOrder $returnOrder;
@@ -62,13 +63,21 @@ class Returned extends AdminControllerLivewire
     {
         $order_number = Request::segment(3);
         $this->order_number = $order_number;
-        $orders = Order::where('order_number', $order_number)->get();
+        $orders = Order::with(['orderProducts'=>['product','seller']])->where('order_number', $order_number)->get();
+        $products = [];
+        foreach($orders as $order){
+            foreach ($order->orderProducts as $key => $orderProduct) {
+                $products[] = $orderProduct;
+            }
+        }
+        $this->products = $products;
+        // dd($products);
         $payment_first = Payment::where('order_number', $order_number)->first();
         $payments = Payment::where('order_number', $order_number)->get();
         $order_first = Order::where('order_number', $order_number)->first();
         $returnedPayments = ReturnOrder::where('order_number', $order_number)->get();
         return view('livewire.home.profile.order.detail.returned_detail'
             , compact('order_number', 'orders', 'payments', 'payment_first','returnedPayments'))
-            ->layout('layouts.home');
+            ->layout('layouts.home1');
     }
 }

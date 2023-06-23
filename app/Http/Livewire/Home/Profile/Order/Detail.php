@@ -16,7 +16,7 @@ class Detail extends AdminControllerLivewire
     }
     public function render()
     {
-        $payment = Payment::with(['order'=>['address','orderProducts'=>['productSeller'=>['color','warranty','product','vendor']]],'times','user','address'])->where(['order_number'=>$this->order_number,'user_id'=>auth()->user()->id])->first();
+        $payment = Payment::with(['orders'=>['address','orderProducts'=>['productSeller'=>['color','warranty','product','vendor']]],'times','user','address'])->where(['order_number'=>$this->order_number,'user_id'=>auth()->user()->id])->first();
         $bankPayments = BankPayment::where(['order_number'=>$this->order_number,'user_id'=>auth()->user()->id])->orderBy('status','ASC')->get();
         // $payment_first = Payment::where('order_number', $order_number)->first();
         // $order_first = Order::where('order_number', $order_number)->first();
