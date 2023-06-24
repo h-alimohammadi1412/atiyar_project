@@ -47,14 +47,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('Marketers', '/Routes/home.php'));
+        // Route::middleware('web')
+        //     ->namespace($this->moduleNamespace)
+        //     ->group(module_path('Marketers', '/Routes/home.php'));
 
-        Route::middleware(['web','auth.seller'])
-            ->prefix('Marketers')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path( 'Marketers', 'routes/marketer.php'));
+        // Route::middleware(['web','auth.seller'])
+        //     ->prefix('Marketers')
+        //     ->namespace($this->moduleNamespace)
+        //     ->group(module_path( 'Marketers', 'routes/marketer.php'));
     }
 
     /**
