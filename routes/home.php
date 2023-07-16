@@ -128,34 +128,17 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 
 
 //seller register
-// Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
-//     ->name('seller.register');
-// Route::get('/seller/registration/email/{seller}', App\Http\Livewire\Seller\Auth\Register\Email::class)
-//     ->name('seller.register.email');
+Route::get('/seller/registration',App\Http\Livewire\Seller\Auth\Register::class)
+    ->name('seller.register');
+Route::get('/seller/registration/email/{seller}',App\Http\Livewire\Seller\Auth\Register\Email::class)
+    ->name('seller.register.email');
 
-// Route::get('/seller/registration/business-details/{seller}', App\Http\Livewire\Seller\Auth\Register\Detail::class)
-//     ->name('seller.register.detail');
+Route::get('/seller/registration/business-details/{seller}',App\Http\Livewire\Seller\Auth\Register\Detail::class)
+    ->name('seller.register.detail');
 
-// //seller Login
-// Route::get('/seller/account/login', App\Http\Livewire\Seller\Auth\Login::class)
-//     ->name('seller.login');
-// //seller Login
-// Route::get('/seller/account/forgotpassword/', App\Http\Livewire\Seller\Auth\Password::class)
-//     ->name('seller.password');
-
-
-// //marketer register
-// Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
-//     ->name('marketer.register');
-// Route::get('/marketer/registration/email/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Email::class)
-//     ->name('marketer.register.email');
-
-// Route::get('/marketer/registration/business-details/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Detail::class)
-//     ->name('marketer.register.detail');
-
-// //marketer Login
-// Route::get('/marketer/account/login', App\Http\Livewire\Marketer\Auth\Login::class)
-//     ->name('marketer.login');
-// //marketer Login
-// Route::get('/marketer/account/forgotpassword/', App\Http\Livewire\Marketer\Auth\Password::class)
-//     ->name('marketer.password');
+//seller Login
+Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
+    ->name('seller.login');
+//seller Login
+Route::get('/seller/account/forgotpassword/',App\Http\Livewire\Seller\Auth\Password::class)
+    ->name('seller.password');

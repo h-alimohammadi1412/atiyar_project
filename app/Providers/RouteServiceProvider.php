@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
 
-    protected $namespaceAdmin = '\App\Http\Livewire\Admin';
-    //    protected $namespaceSeller = '';
+    protected $namespaceAdmin = '';
+    protected $namespaceSeller = '';
     //    protected $namespaceMarketer = '';
     /**
      * The path to the "home" route for your application.
@@ -51,24 +51,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/home.php'));
 
-            Route::middleware(['web', 'auth.admin', 'auth'])
+            Route::middleware(['web','auth'])
                 ->prefix('admin')
                 ->namespace($this->namespaceAdmin)
                 ->group(base_path('routes/admin.php'));
 
-            // Route::fallback(function () {
-            //     return 'hiii';
-            // });
-
-            //            Route::middleware(['web','auth.seller'])
-            //                ->prefix('seller')
-            //                ->namespace($this->namespaceSeller)
-            //                ->group(base_path('routes/seller.php'));
-            //            Route::middleware(['web'])
-            //                ->prefix('marketer')
-            //                ->namespace($this->namespaceMarketer)
-            //                ->group(base_path('routes/marketer.php'));
-            // Route::group([],base_path('routes/marketer.php'));
+            Route::middleware(['web','auth.seller'])
+                ->prefix('seller')
+                ->namespace($this->namespaceSeller)
+                ->group(base_path('routes/seller.php'));
         });
     }
 

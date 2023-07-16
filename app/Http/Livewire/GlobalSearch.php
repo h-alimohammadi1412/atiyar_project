@@ -8,8 +8,9 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Http\Controllers\AdminControllerLivewire;
+use Livewire\Component;
 
-class GlobalSearch extends AdminControllerLivewire
+class GlobalSearch extends Component
 {
     public string $search = '';
     public array $results = [];
