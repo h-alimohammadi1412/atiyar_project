@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SMS extends Model
 {
     use HasFactory;
-    protected $fillable=['type','code','user_id'];
+    protected $fillable=['type','code','user_id','seller_id'];
 }

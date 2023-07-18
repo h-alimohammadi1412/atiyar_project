@@ -104,6 +104,7 @@
                             @endif
                             <button class="btn btn-primary btn-shadow d-block w-100"
                                 style="margin-top: 4rem !important;" type="submit">ورود</button>
+                        </div>
                     </form>
                 @else
                     <form wire:submit.prevent="userActiveCode" class="needs-validation tab-pane fade show active"

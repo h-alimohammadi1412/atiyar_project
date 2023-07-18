@@ -15,7 +15,8 @@ class CreateSMSTable extends Migration
     {
         Schema::create('s_m_s', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->string('user_id')->nullable();
+            $table->string('seller_id')->nullable();
             $table->string('code');
             $table->string('type')->nullable();
             $table->timestamps();

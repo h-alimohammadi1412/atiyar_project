@@ -27,9 +27,9 @@ class Register extends AdminControllerLivewire
         'user.mobile' => ['required','numeric' ,'digits:11','regex:/09([0-9]{9})/'],
     ];
     protected $listeners = ['sendCodeActive'];
-    public function updated($phone)
+    public function updated($mobile)
     {
-        $this->validateOnly($phone);
+        $this->validateOnly($mobile);
     }
 
 

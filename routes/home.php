@@ -127,7 +127,7 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 
 
 
-//seller register
+/*//seller register
 Route::get('/seller/registration',App\Http\Livewire\Seller\Auth\Register::class)
     ->name('seller.register');
 Route::get('/seller/registration/email/{seller}',App\Http\Livewire\Seller\Auth\Register\Email::class)
@@ -141,4 +141,38 @@ Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
     ->name('seller.login');
 //seller Login
 Route::get('/seller/account/forgotpassword/',App\Http\Livewire\Seller\Auth\Password::class)
-    ->name('seller.password');
+    ->name('seller.password');*/
+//seller Login
+Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
+    ->name('seller.login');
+
+
+/*//seller register
+Route::get('/seller/registration',function () {
+    return redirect(route('seller.login-register'));
+})->name('seller.register');
+Route::get('/seller/registration/email/{seller}',function () {
+    return redirect(route('seller.login-register'));
+})->name('seller.register.email');
+
+Route::get('/seller/registration/business-details/{seller}',function () {
+    return redirect(route('seller.login-register'));
+})->name('seller.register.detail');
+
+//seller Login
+Route::get('/seller/account/login',function () {
+    return redirect(route('seller.login-register'));
+})->name('seller.login');
+//seller Login
+Route::get('/seller/account/forgotpassword/',function () {
+    return redirect(route('seller.login-register'));
+})->name('seller.password');
+
+
+Route::middleware(['web','guest'])->prefix('seller')->group(function () {
+    Route::get('/login-register', Register::class)->name('seller.login-register');
+    Route::get('/logout', function () {
+        auth()->logout();
+        return redirect('/');
+    });
+});*/
