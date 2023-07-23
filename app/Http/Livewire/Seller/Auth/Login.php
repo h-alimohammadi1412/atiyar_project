@@ -20,10 +20,13 @@ class Login extends AdminControllerLivewire
     public $user_id=0;
     public $seller_id=0;
     public Seller $seller;
+    public User $user;
 
     public function mount()
     {
         $this->seller = new Seller();
+        $this->user = new User();
+
     }
 
     protected $rules = [
@@ -41,7 +44,7 @@ class Login extends AdminControllerLivewire
         $this->validate();
         $seller = Seller::where('mobile', $this->seller->mobile)->first();
         if ($seller) {
-            $this->sendActiveCode($seller->user_id);
+            $this->sendActiveCode($seller->id);
         } else {
             $this->sendActiveCode();
         }
@@ -55,30 +58,37 @@ class Login extends AdminControllerLivewire
     {
         if (strlen($this->input_active_code) == 5) {
             if ($this->input_active_code == $this->active_code) {
-                if ($this->user_id == 0 && $this->seller->id == 0) {
+                if ($this->user_id == 0 && $this->seller_id == 0) {
                     $user = User::create([
-                        'mobile' => $this->seller->mobile,
-                        'seller' => 1,
+                            'mobile' => $this->user->mobile,
+                            'seller' => 1,
                     ]);
                     $seller = Seller::create([
                         'mobile' => $this->seller->mobile,
                         'user_id' => $user->id,
+
                     ]);
                     auth()->loginUsingId($seller->user_id);
-                    // $this->createLog('User', 'user/profile', 'فروشنده جدید', 'افزودن');
+                 //   $this->createLog('User', 'user/profile', 'کاربر جدید', 'افزودن');
                     return to_route('seller.dashboard.profile');
-                } elseif ($this->seller->id == 0){
+                }elseif ($this->seller_id == 0){
                     $seller = Seller::create([
                         'mobile' => $this->seller->mobile,
+                        'user_id' =>  $this->user_id,
+
                     ]);
                     auth()->loginUsingId($seller->user_id);
-                    // $this->createLog('Seller', 'seller/profile', 'فروشنده جدید', 'افزودن');
+                    //   $this->createLog('User', 'user/profile', 'کاربر جدید', 'افزودن');
                     return to_route('seller.dashboard.profile');
+
+
+
                 } else {
-                    auth()->loginUsingId($this->seller->user_id);
-                    //$this->createLog('Seller', 'seller/profile', 'کاربر جدید', 'ورود');
+                    auth()->loginUsingId($this->user_id);
+                  //  $this->createLog('User', 'user/profile', 'کاربر جدید', 'ورود');
                     return to_route('seller.dashboard.profile');
                 }
+
             } else {
                 $this->addError('user.mobile', 'کد وارد شده صحیح نیست.');
             }
@@ -86,8 +96,11 @@ class Login extends AdminControllerLivewire
             $this->addError('user.mobile', 'کد وارد شده صحیح نیست.');
         }
     }
-    public function sendActiveCode($seller_id = 0)
+    public function sendActiveCode($user_id = 0,$seller_id = 0)
     {
+        if($user_id != 0){
+            $this->user_id = $user_id;
+        }
         if($seller_id != 0){
             $this->seller->user_id = $seller_id;
         }
@@ -98,8 +111,8 @@ class Login extends AdminControllerLivewire
         SMS::create([
             'code' => $this->active_code,
             'type' => $type,
-            'user_id' => $this->seller->user_id,
-            'seller_id' => $this->seller->id,
+            'user_id' => $this->user_id,
+            'seller_id' => $this->seller_id,
         ]);
 
     }
