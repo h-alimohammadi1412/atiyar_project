@@ -44,15 +44,8 @@
                 </tr>
             </thead>
             <tbody>
-                @if (sizeof($payments) == 0)
-                <tr>
-                    <td colspan="5">
-                        <p class="alert alert-warning text-center">تراکنشی برای شما ثبت نشده است.</p>
-                    </td>
-                </tr>
-                @else
-                    @foreach ($payments as $payment)
-                    @php
+                    @forelse ($payments as $payment)
+                      @php
                     $date1 = new DateTime(\Illuminate\Support\Carbon::now());
                     $date2 = new DateTime($payment->updated_at);
                     $diff=$date2->diff($date1);
@@ -162,10 +155,14 @@
                             @endforeach
                         </td>
                     </tr>
-                    @endif
-                    @endforeach
-                @endif
-                
+                    @endif   
+                    @empty
+                    <tr>
+                        <td colspan="5">
+                            <p class="alert alert-warning text-center">تراکنشی برای شما ثبت نشده است.</p>
+                        </td>
+                    </tr>
+                    @endforelse 
             </tbody>
         </table>
     </div>

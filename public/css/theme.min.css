@@ -19679,3 +19679,13 @@ flex-direction: unset;
     --bs-table-accent-bg: inherit;
     color: inherit;
 }
+
+.form-control.form-control-solid {
+    background-color: #f3f6f9;
+    border-color: #f3f6f9;
+    color: #3f4254;
+    -webkit-transition: color .15s ease,background-color .15s ease,border-color .15s ease,-webkit-box-shadow .15s ease;
+    transition: color .15s ease,background-color .15s ease,border-color .15s ease,-webkit-box-shadow .15s ease;
+    transition: color .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .15s ease;
+    transition: color .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .15s ease,-webkit-box-shadow .15s ease;
+}

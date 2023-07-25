@@ -18,10 +18,6 @@ class IndexRole extends AdminControllerLivewire
     protected $listeners = [
         'category.added' => '$refresh'
     ];
-    protected $paginationTheme = 'bootstrap';
-    public $search;
-    protected $queryString = ['search'];
-    public $readyToLoad = false;
     public Role $role;
     public function mount()
     {
@@ -61,12 +57,6 @@ class IndexRole extends AdminControllerLivewire
         alert()->success('مقام با موفقیت ایجاد شد.', ' مقام با موفقیت ایجاد شد.');
 
     }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
 
     public function deleteRole($id)
     {

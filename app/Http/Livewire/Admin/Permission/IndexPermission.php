@@ -14,10 +14,6 @@ class IndexPermission extends AdminControllerLivewire
     protected $listeners = [
         'category.added' => '$refresh'
     ];
-    protected $paginationTheme = 'bootstrap';
-    public $search;
-    protected $queryString = ['search'];
-    public $readyToLoad = false;
     public Permission $permission;
     public function mount()
     {
@@ -52,12 +48,6 @@ class IndexPermission extends AdminControllerLivewire
         alert()->success('دسترسی با موفقیت ایجاد شد.', ' دسترسی با موفقیت ایجاد شد.');
 
     }
-
-    public function loadCategory()
-    {
-        $this->readyToLoad = true;
-    }
-
 
     public function deleteRole($id)
     {

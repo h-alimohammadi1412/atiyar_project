@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Mail\OrderSubmit;
-use App\Models\Notification;
-use App\Models\Order;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Spatie\Sitemap\SitemapGenerator;
 
@@ -17,20 +17,28 @@ use Spatie\Sitemap\SitemapGenerator;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('ma',function (){
-//    $order = Order::where('user_id',auth()->user()->id)->get()->last();
-//    $type = 'سفارش شما ثبت شد';
-//    Notification::create([
-//        'user_id' =>$order->user_id,
-//        'product_id' =>$order->product_id,
-//        'type' =>$type,
-//        'sms' =>1,
-//        'email' =>1,
-//        'system' =>1,
-//        'text' =>$order->product->title,
-//    ]);
-//
-//});
+
+// Route::get('/test', function (Request $request, Response $response) {
+//     // $minutes = 60;
+//     // $response = new Response('Set Cookie55');
+//     // $response->withCookie(cookie('nameffffff', 'fffffffffff', $minutes));
+//     // $response->withoutCookie('nameffffff');
+//     // return $response;
+//     // $value = $value = 1;
+//     $minutes = 15;
+//     $value = 1;
+//     Cookie::queue('online_payment_idvvvv', '55', $minutes);
+//     // $d  = $request->cookie('online_payment_id');
+
+//     return redirect('/test1');
+
+//     // $value = $request->cookie('namedd');
+//     // echo $value;
+// });
+Route::get('/test1', function (Request $request) {
+    return $request->cookie('online_payment_idvvvv');
+});
+
 Route::get('/logout', function () {
     auth()->logout();
     return redirect('/');
@@ -44,9 +52,9 @@ Route::get('/', \App\Http\Livewire\Home\Home\Index::class)->name('home.index');
 Route::middleware('web')->prefix('main')->group(function () {
     Route::get('/{category}', \App\Http\Livewire\Home\Category\Index::class);
     //Route::get('/electronic-devices',\App\Http\Livewire\Home\Category\Electronic\Index::class)->name('category.electronic.index');
-//Route::get('/vehicles',\App\Http\Livewire\Home\Category\Vehicle\Index::class)->name('category.electronic.index');
-//Route::get('/apparel',\App\Http\Livewire\Home\Category\Apparel\Index::class)->name('category.apparel.index');
-//Route::get('/mother-and-child/',\App\Http\Livewire\Home\Category\Child\Index::class)->name('category.child.index');
+    //Route::get('/vehicles',\App\Http\Livewire\Home\Category\Vehicle\Index::class)->name('category.electronic.index');
+    //Route::get('/apparel',\App\Http\Livewire\Home\Category\Apparel\Index::class)->name('category.apparel.index');
+    //Route::get('/mother-and-child/',\App\Http\Livewire\Home\Category\Child\Index::class)->name('category.child.index');
 });
 Route::middleware('web')->prefix('search')->group(function () {
     Route::get('/{category}', \App\Http\Livewire\Home\SubCategory\Index::class);
@@ -58,23 +66,23 @@ Route::middleware('web')->prefix('product')->group(function () {
 Route::get('/product/comment/at-{id}/{product}', \App\Http\Livewire\Home\Comment\Review::class)->middleware('auth');
 
 
-Route::middleware('web')->prefix('profile')->middleware('auth')->group(function () {
-    Route::get('/', \App\Http\Livewire\Home\Profile\Index::class)->name('profile.index');
-    Route::get('/personal-info', \App\Http\Livewire\Home\Profile\PersonalInfo::class)->name('profile.personal-info');
-    Route::get('/favorites', \App\Http\Livewire\Home\Profile\Favorite::class)->name('profile.favorite');
-    Route::get('/observed', \App\Http\Livewire\Home\Profile\Observed::class)->name('profile.observed');
-    Route::get('/wishlist/{favlist}/details/', \App\Http\Livewire\Home\Profile\FavlistShow::class)->name('profile.fav;ist.show');
+Route::name('profile.')->middleware(['web', 'auth'])->prefix('profile')->group(function () {
+    Route::get('/', \App\Http\Livewire\Home\Profile\Index::class)->name('index');
+    Route::get('/personal-info', \App\Http\Livewire\Home\Profile\PersonalInfo::class)->name('personal-info');
+    Route::get('/favorites', \App\Http\Livewire\Home\Profile\Favorite::class)->name('favorite');
+    Route::get('/observed', \App\Http\Livewire\Home\Profile\Observed::class)->name('observed');
+    Route::get('/wishlist/{favlist}/details/', \App\Http\Livewire\Home\Profile\FavlistShow::class)->name('favlist.show');
+});
+Route::middleware(['web', 'auth'])->prefix('profile')->group(function () {
     Route::get('/addresses', \App\Http\Livewire\Home\Profile\Address::class)->name('address.index');
     // Route::get('/addresses/edit/{address}', \App\Http\Livewire\Home\Profile\AddressEdit::class)->name('address.edit');
     Route::get('/user-history', \App\Http\Livewire\Home\Profile\UserHistory::class)->name('user-history.index');
+    Route::get('/seller', \App\Http\Livewire\Home\Profile\Seller::class)->name('profile.seller.index');
+    Route::get('/marketer', \App\Http\Livewire\Home\Profile\Marketer::class)->name('profile.marketer.index');
     Route::get('/notification', \App\Http\Livewire\Home\Profile\Notification::class)->name('notification.index');
     Route::get('/giftcards', \App\Http\Livewire\Home\Profile\Gift::class)->name('gift.index');
     Route::get('/orders', \App\Http\Livewire\Home\Profile\Order::class)->name('order.profile.index');
     Route::get('/orders/order-{order_number}', \App\Http\Livewire\Home\Profile\Order\Detail::class)->name('order.profile.detail');
-    // Route::get('/my-orders/paid-in-progress', \App\Http\Livewire\Home\Profile\Order\Paid::class)->name('order.profile.paid');
-    // Route::get('/my-orders/delivered', \App\Http\Livewire\Home\Profile\Order\Delivered::class)->name('order.profile.delivered');
-    // Route::get('/my-orders/returned', \App\Http\Livewire\Home\Profile\Order\Returned::class)->name('order.profile.returned');
-    // Route::get('/my-orders/canceled', \App\Http\Livewire\Home\Profile\Order\Cancel::class)->name('order.profile.canceled');
     Route::get('/orders-return/{order_number}/items-info', \App\Http\Livewire\Home\Profile\Order\Detail\ItemInfo::class)
         ->name('returned.itemInfo');
     Route::get('/orders-return/{order_number}/select-items', \App\Http\Livewire\Home\Profile\Order\Detail\Returned::class)
@@ -127,52 +135,35 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 
 
 
-/*//seller register
-Route::get('/seller/registration',App\Http\Livewire\Seller\Auth\Register::class)
-    ->name('seller.register');
-Route::get('/seller/registration/email/{seller}',App\Http\Livewire\Seller\Auth\Register\Email::class)
-    ->name('seller.register.email');
+//seller register
+// Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
+//     ->name('seller.register');
+// Route::get('/seller/registration/email/{seller}', App\Http\Livewire\Seller\Auth\Register\Email::class)
+//     ->name('seller.register.email');
 
-Route::get('/seller/registration/business-details/{seller}',App\Http\Livewire\Seller\Auth\Register\Detail::class)
-    ->name('seller.register.detail');
+// Route::get('/seller/registration/business-details/{seller}', App\Http\Livewire\Seller\Auth\Register\Detail::class)
+//     ->name('seller.register.detail');
 
-//seller Login
-Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
-    ->name('seller.login');
-//seller Login
-Route::get('/seller/account/forgotpassword/',App\Http\Livewire\Seller\Auth\Password::class)
-    ->name('seller.password');*/
-//seller Login
-Route::get('/seller/account/login',App\Http\Livewire\Seller\Auth\Login::class)
-    ->name('seller.login');
+// //seller Login
+// Route::get('/seller/account/login', App\Http\Livewire\Seller\Auth\Login::class)
+//     ->name('seller.login');
+// //seller Login
+// Route::get('/seller/account/forgotpassword/', App\Http\Livewire\Seller\Auth\Password::class)
+//     ->name('seller.password');
 
 
-/*//seller register
-Route::get('/seller/registration',function () {
-    return redirect(route('seller.login-register'));
-})->name('seller.register');
-Route::get('/seller/registration/email/{seller}',function () {
-    return redirect(route('seller.login-register'));
-})->name('seller.register.email');
+// //marketer register
+// Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
+//     ->name('marketer.register');
+// Route::get('/marketer/registration/email/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Email::class)
+//     ->name('marketer.register.email');
 
-Route::get('/seller/registration/business-details/{seller}',function () {
-    return redirect(route('seller.login-register'));
-})->name('seller.register.detail');
+// Route::get('/marketer/registration/business-details/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Detail::class)
+//     ->name('marketer.register.detail');
 
-//seller Login
-Route::get('/seller/account/login',function () {
-    return redirect(route('seller.login-register'));
-})->name('seller.login');
-//seller Login
-Route::get('/seller/account/forgotpassword/',function () {
-    return redirect(route('seller.login-register'));
-})->name('seller.password');
-
-
-Route::middleware(['web','guest'])->prefix('seller')->group(function () {
-    Route::get('/login-register', Register::class)->name('seller.login-register');
-    Route::get('/logout', function () {
-        auth()->logout();
-        return redirect('/');
-    });
-});*/
+// //marketer Login
+// Route::get('/marketer/account/login', App\Http\Livewire\Marketer\Auth\Login::class)
+//     ->name('marketer.login');
+// //marketer Login
+// Route::get('/marketer/account/forgotpassword/', App\Http\Livewire\Marketer\Auth\Password::class)
+//     ->name('marketer.password');

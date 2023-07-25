@@ -70,20 +70,19 @@
             </thead>
             @if ($readyToLoad)
             <tbody>
-                @if (sizeof($giftCarts )>0)
-                @foreach ($giftCarts as $giftCart)
+                @forelse ($giftCarts as $giftCart)
                 <tr>
                     <td class="py-3"><span>{{ $giftCart->code }}</span></td>
                     <td class="py-3">{{ jdate($giftCart->data_expire)->format(' %d / %m / %Y') }}</td>
                     <td class="py-3"><span class="">{{ number_format($giftCart->price) }}</span></td>
                     <td class="py-3">{{ number_format($giftCart->value_price) }}</td>
                 </tr>
-                @endforeach
-                @else
+                @empty
                 <tr>
                     <td colspan="4">شما هیچ کارت هدیه ای ندارید.</td>
                 </tr>
-                @endif
+                @endforelse
+
 
 
             </tbody>
@@ -93,7 +92,7 @@
             </div>
 
 
-        @endif
+            @endif
         </table>
 
     </div>

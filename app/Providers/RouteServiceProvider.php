@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
 
-    protected $namespaceAdmin = '';
+    protected $namespaceAdmin = "App\Http\Livewire\Admin";
     protected $namespaceSeller = '';
     //    protected $namespaceMarketer = '';
     /**

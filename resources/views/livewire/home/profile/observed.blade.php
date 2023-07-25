@@ -12,9 +12,8 @@
             <h6 class="fs-base text-light mb-0">مواردی که به لیست اطلاع رسانی ها اضافه کردید:</h6>
         </div>
         <!-- Wishlist-->
-        @if (sizeof($observeds) > 0)
-            @foreach ($observeds as $observed)
-                <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
+        @forelse($observeds as $observed)
+             <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
                     <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a
                             class="d-block flex-shrink-0 mx-auto me-sm-4" href="{{ url('/product/at-' . $observed->product->id . '/' . $observed->product->link) }}" style="width: 10rem;"><img
                                 src="/storage/{{ $observed->product->img }}" alt="محصول"></a>
@@ -33,11 +32,11 @@
                                 class="ci-trash me-2"></i>حذف</button>
                     </div>
                 </div>
-            @endforeach
-        @else
-            <div class="alert alert-warning text-center">
+        @empty
+             <div class="alert alert-warning text-center">
                 هیچ محصولی در لیست اطلاع رسانی های شما وجود ندارد.
             </div>
-        @endif
+        @endforelse
+        
     </section>
 @endsection
