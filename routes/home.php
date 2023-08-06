@@ -136,8 +136,8 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 
 
 //seller register
-// Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
-//     ->name('seller.register');
+Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
+    ->name('seller.register');
 // Route::get('/seller/registration/email/{seller}', App\Http\Livewire\Seller\Auth\Register\Email::class)
 //     ->name('seller.register.email');
 
