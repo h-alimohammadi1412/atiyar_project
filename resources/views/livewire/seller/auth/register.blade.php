@@ -44,7 +44,7 @@
                                             به فروشندگان را مطالعه کرده و می پذیرم .</span></p>
                                 </label></div>
                         </div>
-                        {{-- <span wire:click="resendCode">{{ $active ? 'll' : 'iiii' }}</span> --}}
+                        <span wire:click="$emit('resendCode')">{{ $active ? 'll' : 'iiii' }}</span>
                       
 
                         <div class="form-group" >

@@ -175,6 +175,7 @@
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
+    @yield('jsfooter')
     <x-livewire-alert::flash />
     @include('livewire.home.home.script1')
     {{-- <script src="{{ asset('js/turboLink.js') }}"></script> --}}

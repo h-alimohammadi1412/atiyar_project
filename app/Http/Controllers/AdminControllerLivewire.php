@@ -34,6 +34,9 @@ class AdminControllerLivewire extends Component
         $this->img->storeAs($directory, $name);
         return "$directory/$name";
     }
+    public function helperAlert($method,$message){
+        $this->alert($method, $message);
+    }
 
     public function updateStatus($model, $route, $title, $field, $id)
     {

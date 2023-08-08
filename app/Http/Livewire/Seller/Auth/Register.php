@@ -8,6 +8,7 @@ use App\Models\Email;
 use App\Models\Seller;
 use App\Models\SMS;
 use App\Models\User;
+use App\Services\Notification\Notification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Kavenegar\KavenegarApi;
@@ -53,24 +54,28 @@ class Register extends AdminControllerLivewire
 
     public function registerSellerForm()
     {
-        // dd($this->phone);
-        // if ($this->phone == '' || $this->password == '' || $this->confirmPassword == ''){
-        //     $this->addError('تکمیل اطلاعات','لطفا اطلاعات خود را تکمیل نمایید.');
-        //     return;
-        // }
+        if ($this->phone == '' || $this->password == '' || $this->confirmPassword == ''){
+            $this->addError('تکمیل اطلاعات','لطفا اطلاعات خود را تکمیل نمایید.');
+            return;
+        }
+        if(auth()->check() && auth()->user()->mobile != $this->phone){
+            $this->helperAlert('warning', 'کاربری با این شماره تلفن وجود ندارد.');
+            return;
+        }
 
-        // if ($this->rule) {
+        if ($this->rule) {
             $this->active = false;
-        // } else {
-        //     $this->helperAlert('warning', 'لطفا موافقت خود با قوانین را ثبت کنید.');
-        // }
-
+        } else {
+            $this->helperAlert('warning', 'لطفا موافقت خود با قوانین را ثبت کنید.');
+        }
+        
+        $code = random_int(1000, 9999);
+        // (new Notification)->sendSms('');
         // $seller = Seller::create([
         //     'email' => $this->seller->email,
         //     'mobile' => $this->seller->phone,
         //     'password' => $this->seller->password,
         // ]);
-        // $code = random_int(1000, 9999);
 
         // $email = Email::create([
         //     'user_id' => $seller->id,
