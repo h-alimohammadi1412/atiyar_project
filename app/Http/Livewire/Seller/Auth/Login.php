@@ -15,6 +15,7 @@ class Login extends AdminControllerLivewire
     public $password;
     public $show_send_code_form = false;
     public $active_code = false;
+    public $active_code_input = false;
     public $active_code22 = 'sssssssss';
     public $input_active_code;
     public $user_id=0;

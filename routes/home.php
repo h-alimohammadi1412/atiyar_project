@@ -152,9 +152,9 @@ Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class
 //     ->name('seller.password');
 
 
-// //marketer register
-// Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
-//     ->name('marketer.register');
+//marketer register
+Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
+    ->name('marketer.register');
 // Route::get('/marketer/registration/email/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Email::class)
 //     ->name('marketer.register.email');
 

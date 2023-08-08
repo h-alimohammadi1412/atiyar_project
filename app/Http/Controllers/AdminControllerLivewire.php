@@ -9,9 +9,11 @@ use DB;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class AdminControllerLivewire extends Component
 {
+    use LivewireAlert;
     public $search;
 
     protected $queryString = ['search'];
@@ -35,7 +37,12 @@ class AdminControllerLivewire extends Component
         return "$directory/$name";
     }
     public function helperAlert($method,$message){
-        $this->alert($method, $message);
+        $this->alert($method, $message,[
+            // 'toast' => false,
+            'position' => 'top',
+            'timer' => '6000',
+            'timerProgressBar' => true,
+        ]);
     }
 
     public function updateStatus($model, $route, $title, $field, $id)

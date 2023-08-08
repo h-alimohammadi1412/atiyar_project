@@ -17,10 +17,12 @@ use Livewire\Component;
 class Register extends AdminControllerLivewire
 {
     public Seller $seller;
-    public $phone = '';
-    public $password = '';
-    public $confirmPassword = '';
-    public $active = 'true';
+    public $phone = null;
+    public $password = null;
+    public $active_code = null;
+    public $active_code_input = null;
+    public $confirmPassword = null;
+    public $active = true;
     public $rule = false;
     public function mount()
     {
@@ -39,38 +41,54 @@ class Register extends AdminControllerLivewire
     {
         $this->rule = !$this->rule;
     }
-    public function resendCode()
-    {
-        dd('sssss');
-        // $this->active = true;
-        // $this->active = false;
-        $this->emit('countdown');
-    }
+   
+    protected $listeners = ['resendCode1' => 'resendCode'];
+
     protected $rules = [
         'seller.phone' => 'required',
         'seller.password' => 'required',
         // 'seller.confirmPassword' => 'nullable',
     ];
+    public function checkData(){
+        if($this->phone == null || $this->password == null ) {
+            $this->addError('تکمیل اطلاعات','لطفا اطلاعات خود را تکمیل نمایید.');
+            return  false;
+        }
+        if( strlen($this->password) < 8  ) {
+            $this->addError('تکمیل اطلاعات','پسورد وارد شده تایید نشد.');
+            return false;
+        };
+        if($this->password != $this->confirmPassword ) {
+            $this->addError('تکمیل اطلاعات','پسوردهای وارد شده باهم مطابقت ندارد.');
+            return false;
+        };
+        return true;
+    }
+    public function resendCode()
+    {
+        $this->active_code = random_int(10000, 99999);
+        $res = (new Notification)->sendSms([auth()->user()->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
 
+
+    }
     public function registerSellerForm()
     {
-        if ($this->phone == '' || $this->password == '' || $this->confirmPassword == ''){
-            $this->addError('تکمیل اطلاعات','لطفا اطلاعات خود را تکمیل نمایید.');
-            return;
-        }
-        if(auth()->check() && auth()->user()->mobile != $this->phone){
-            $this->helperAlert('warning', 'کاربری با این شماره تلفن وجود ندارد.');
-            return;
-        }
-
+        // if(!$this->checkData()){
+        //     return ;
+        // }
+        // if(auth()->check() && auth()->user()->mobile != $this->phone){
+        //     $this->helperAlert('warning', 'شماره همراه وارد شده با شماره همراه ثبت شده مطابقت ندارد.');
+        //     return;
+        // }
         if ($this->rule) {
             $this->active = false;
         } else {
             $this->helperAlert('warning', 'لطفا موافقت خود با قوانین را ثبت کنید.');
         }
-        
-        $code = random_int(1000, 9999);
-        // (new Notification)->sendSms('');
+        $this->active_code = random_int(10000, 99999);
+        $res = (new Notification)->sendSms([auth()->user()->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
+
+
         // $seller = Seller::create([
         //     'email' => $this->seller->email,
         //     'mobile' => $this->seller->phone,
@@ -96,6 +114,25 @@ class Register extends AdminControllerLivewire
 
 
         // return $this->redirect(route('seller.register.email', $seller->id));
+    }
+    
+    public function activeSeller(){
+        if($this->active_code != $this->active_code_input){
+            $this->helperAlert('warning', 'کد تایید وارد شده صحیح نمی باشد.');
+            return;
+        }
+
+        $user = User::find(auth()->user()->id);
+        $user->seller =1;
+        $user->save();
+        $seller = Seller::create([
+            'user_id' => $user->id,
+            'mobile' =>  $user->mobile,
+            'password' => $this->password,
+        ]);
+        $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
+        
+
     }
 
     public function render()
