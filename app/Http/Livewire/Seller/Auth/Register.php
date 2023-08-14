@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Kavenegar\KavenegarApi;
 use Livewire\Component;
-
+use Illuminate\Support\Facades\Auth;
 class Register extends AdminControllerLivewire
 {
     public Seller $seller;
@@ -24,6 +24,8 @@ class Register extends AdminControllerLivewire
     public $confirmPassword = null;
     public $active = true;
     public $rule = false;
+    public $user_id=0;
+    public $seller_id=0;
     public function mount()
     {
         $this->seller = new Seller();
@@ -41,7 +43,7 @@ class Register extends AdminControllerLivewire
     {
         $this->rule = !$this->rule;
     }
-   
+
     protected $listeners = ['resendCode1' => 'resendCode'];
 
     protected $rules = [
@@ -71,7 +73,7 @@ class Register extends AdminControllerLivewire
 
 
     }
-    public function registerSellerForm()
+    public function registerSellerForm($user_id = 0,$seller_id = 0)
     {
         // if(!$this->checkData()){
         //     return ;
@@ -86,8 +88,26 @@ class Register extends AdminControllerLivewire
             $this->helperAlert('warning', 'لطفا موافقت خود با قوانین را ثبت کنید.');
         }
         $this->active_code = random_int(10000, 99999);
-        $res = (new Notification)->sendSms([auth()->user()->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
-
+        if (Auth::user()) {
+            $res = (new Notification)->sendSms([auth()->user()->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
+        }else{
+            if($user_id != 0){
+                $this->user_id = $user_id;
+            }
+            if($seller_id != 0){
+                $this->seller->user_id = $seller_id;
+            }
+            $this->active_code = random_int(10000, 99999);
+            $res = (new Notification)->sendSms([$this->seller->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
+            $this->show_send_code_form = true;
+            $type = 'ایجاد حساب';
+            \Modules\User\Entities\SMS::create([
+                'code' => $this->active_code,
+                'type' => $type,
+                'user_id' => $this->user_id,
+                'seller_id' => $this->seller_id,
+            ]);
+        }
 
         // $seller = Seller::create([
         //     'email' => $this->seller->email,
@@ -115,28 +135,45 @@ class Register extends AdminControllerLivewire
 
         // return $this->redirect(route('seller.register.email', $seller->id));
     }
-    
+
     public function activeSeller(){
         if($this->active_code != $this->active_code_input){
             $this->helperAlert('warning', 'کد تایید وارد شده صحیح نمی باشد.');
             return;
         }
 
-        $user = User::find(auth()->user()->id);
-        $user->seller =1;
-        $user->save();
-        $seller = Seller::create([
-            'user_id' => $user->id,
-            'mobile' =>  $user->mobile,
-            'password' => $this->password,
-        ]);
-        $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
-        
+        if (Auth::user()) {
+            $user = User::find(auth()->user()->id);
+            $user->seller = 1;
+            $user->save();
+            $seller = Seller::create([
+                'user_id' => $user->id,
+                'mobile' => $user->mobile,
+                'password' => $this->password,
+            ]);
+            $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
+            return to_route('seller.dashboard.profile');
+        }else {
+            $user = \Modules\User\Entities\User::create([
+                'mobile' => $this->seller->mobile,
+            ]);
+            auth()->loginUsingId($user->id);
+            $user = User::find(auth()->user()->id);
+            $user->seller = 1;
+            $user->save();
+            $seller = Seller::create([
+                'user_id' => $user->id,
+                'mobile' => $user->mobile,
+                'password' => $this->password,
+            ]);
+            $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
+            return to_route('seller.dashboard.profile');
+        }
 
     }
 
     public function render()
     {
-        return view('livewire.seller.auth.register')->layout('layouts.seller');
+        return view('livewire.seller.auth.register')->layout('layouts.seller_aty');
     }
 }
