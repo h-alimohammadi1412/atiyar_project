@@ -157,6 +157,9 @@ Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class
 // marketer register
 Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
     ->name('marketer.register');
+//marketer register
+/*Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
+    ->name('marketer.register');*/
 // Route::get('/marketer/registration/email/{marketer}', App\Http\Livewire\Marketer\Auth\Register\Email::class)
 //     ->name('marketer.register.email');
 
@@ -164,8 +167,8 @@ Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::c
 //     ->name('marketer.register.detail');
 
 // //marketer Login
-// Route::get('/marketer/account/login', App\Http\Livewire\Marketer\Auth\Login::class)
-//     ->name('marketer.login');
+ Route::get('/marketer/account/login', App\Http\Livewire\Marketer\Auth\Login::class)
+     ->name('marketer.login');
 // //marketer Login
 // Route::get('/marketer/account/forgotpassword/', App\Http\Livewire\Marketer\Auth\Password::class)
 //     ->name('marketer.password');

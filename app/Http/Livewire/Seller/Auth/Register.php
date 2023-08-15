@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Kavenegar\KavenegarApi;
 use Livewire\Component;
-
+use Illuminate\Support\Facades\Auth;
 class Register extends AdminControllerLivewire
 {
     public Seller $seller;
@@ -24,6 +24,8 @@ class Register extends AdminControllerLivewire
     public $confirmPassword = null;
     public $active = true;
     public $rule = false;
+    public $user_id=0;
+    public $seller_id=0;
     public function mount()
     {
         $this->seller = new Seller();
@@ -41,7 +43,7 @@ class Register extends AdminControllerLivewire
     {
         $this->rule = !$this->rule;
     }
-   
+
     protected $listeners = ['resendCode1' => 'resendCode'];
 
     protected $rules = [
@@ -71,7 +73,7 @@ class Register extends AdminControllerLivewire
 
 
     }
-    public function registerSellerForm()
+    public function registerSellerForm($user_id = 0,$seller_id = 0)
     {
         if(!$this->checkData()){
             return ;
@@ -88,8 +90,34 @@ class Register extends AdminControllerLivewire
         $this->active_code = random_int(10000, 99999);
         $res = (new Notification)->sendSms([auth()->user()->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
 
+
+        // $seller = Seller::create([
+        //     'email' => $this->seller->email,
+        //     'mobile' => $this->seller->phone,
+        //     'password' => $this->seller->password,
+        // ]);
+
+        // $email = Email::create([
+        //     'user_id' => $seller->id,
+        //     'user_email' => $seller->email,
+        //     'user_mobile' => $seller->mobile,
+        //     'title' => 'ثبت نام فروشنده جدید',
+        //     'text' => 'فروشنده با ایمیل فوق درخواست ثبت نام جدیدی را دارد.',
+        //     'code' => $code,
+        // ]);
+        // $user = User::create([
+        //     'seller' => 1,
+        //     'email' => $this->seller->email,
+        //     'mobile' => $this->seller->phone,
+        //     'password' => Hash::make($this->seller->password),
+
+        // ]);
+        // Mail::to($seller->email)->send(new SellerRegister($email));
+
+
+        // return $this->redirect(route('seller.register.email', $seller->id));
     }
-    
+
     public function activeSeller(){
         if($this->active_code != $this->active_code_input){
             $this->helperAlert('warning', 'کد تایید وارد شده صحیح نمی باشد.');
@@ -106,12 +134,11 @@ class Register extends AdminControllerLivewire
         ]);
         $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
         
-        
 
     }
 
     public function render()
     {
-        return view('livewire.seller.auth.register')->layout('layouts.seller');
+        return view('livewire.seller.auth.register')->layout('layouts.seller_aty');
     }
 }
