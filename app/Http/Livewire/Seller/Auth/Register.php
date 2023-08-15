@@ -73,7 +73,7 @@ class Register extends AdminControllerLivewire
 
 
     }
-    public function registerSellerForm($user_id = 0,$seller_id = 0)
+    public function registerSellerForm()
     {
         if(!$this->checkData()){
             return ;
@@ -86,9 +86,11 @@ class Register extends AdminControllerLivewire
             $this->active = false;
         } else {
             $this->helperAlert('warning', 'لطفا موافقت خود با قوانین را ثبت کنید.');
+            return;
         }
         $this->active_code = random_int(10000, 99999);
         $res = (new Notification)->sendSms([auth()->user()->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
+        // dd('ffff');
 
 
         // $seller = Seller::create([
@@ -134,6 +136,7 @@ class Register extends AdminControllerLivewire
         ]);
         $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
         
+        return $this->redirect(route('seller.dashboard.profile'));
 
     }
 

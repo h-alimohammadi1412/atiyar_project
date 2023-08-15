@@ -20,17 +20,17 @@
                         @include('errors.error')
                         <input type="hidden" name="ref" id="ref" >
                         <div class="form-group fv-plugins-icon-container"><input type="text" maxlength="11" placeholder=" شماره موبایل   ...09" autocomplete="off"
-                                name="last_name" wire:model='phone'
+                                name="last_name" wire:model.lazy='phone'
                                 class="form-control form-control-solid rounded-pill border-0 h-auto mt-2 px-8">
                             <div class="fv-plugins-message-container"></div>
                         </div>
                         <div class="form-group fv-plugins-icon-container"><input type="text" placeholder="رمز عبور"  autocomplete="off"
-                                name="last_name" wire:model='password'
+                                name="last_name" wire:model.lazy='password'
                                 class="form-control form-control-solid rounded-pill border-0 h-auto mt-2 px-8">
                             <div class="fv-plugins-message-container"></div>
                         </div>
                         <div class="form-group fv-plugins-icon-container"><input type="text"  autocomplete="off"
-                                placeholder="تکرار رمز عبور" name="last_name" wire:model='confirmPassword'
+                                placeholder="تکرار رمز عبور" name="last_name" wire:model.lazy='confirmPassword'
                                 class="form-control form-control-solid rounded-pill border-0 h-auto mt-2 px-8">
                             <div class="fv-plugins-message-container"></div>
                         </div>

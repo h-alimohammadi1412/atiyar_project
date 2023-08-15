@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AuthenticateSeller
+class AuthSeller
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,11 @@ class AuthenticateSeller
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()) {
-            if (auth()->user()->seller == 1) {
-                return $next($request);
-            }
-        }
+        if(auth()->check() && auth()->user()->seller == 1){
+            return redirect()->route('seller.dashboard.profile');
+        }else{
 
-       return redirect(route('seller.register'));
+            return $next($request);
+        }
     }
 }

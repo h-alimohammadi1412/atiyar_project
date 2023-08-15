@@ -77,8 +77,8 @@ Route::middleware(['web', 'auth'])->prefix('profile')->group(function () {
     Route::get('/addresses', \App\Http\Livewire\Home\Profile\Address::class)->name('address.index');
     // Route::get('/addresses/edit/{address}', \App\Http\Livewire\Home\Profile\AddressEdit::class)->name('address.edit');
     Route::get('/user-history', \App\Http\Livewire\Home\Profile\UserHistory::class)->name('user-history.index');
-    Route::get('/seller', \App\Http\Livewire\Home\Profile\Seller::class)->name('profile.seller.index');
-    Route::get('/marketer', \App\Http\Livewire\Home\Profile\Marketer::class)->name('profile.marketer.index');
+    Route::get('/seller', \App\Http\Livewire\Home\Profile\Seller::class)->name('profile.seller.index')->middleware('auth.seller');
+    Route::get('/marketer', \App\Http\Livewire\Home\Profile\Marketer::class)->name('profile.marketer.index')->middleware('auth.seller');
     Route::get('/notification', \App\Http\Livewire\Home\Profile\Notification::class)->name('notification.index');
     Route::get('/giftcards', \App\Http\Livewire\Home\Profile\Gift::class)->name('gift.index');
     Route::get('/orders', \App\Http\Livewire\Home\Profile\Order::class)->name('order.profile.index');
@@ -137,9 +137,9 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 
 //seller register
 Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
-    ->name('seller.register');
-    Route::get('/profile',App\Http\Livewire\Seller\Dashboard\Profile::class)
-    ->name('seller.dashboard.profile');
+    ->name('seller.register')->middleware('auth.seller');
+    Route::get('/seller/profile',App\Http\Livewire\Seller\Dashboard\Profile::class)
+    ->name('seller.dashboard.profile')->middleware('authenticate.seller');
 // Route::get('/seller/registration/email/{seller}', App\Http\Livewire\Seller\Auth\Register\Email::class)
 //     ->name('seller.register.email');
 
@@ -167,8 +167,8 @@ Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::c
 //     ->name('marketer.register.detail');
 
 // //marketer Login
- Route::get('/marketer/account/login', App\Http\Livewire\Marketer\Auth\Login::class)
-     ->name('marketer.login');
+//  Route::get('/marketer/account/login', App\Http\Livewire\Marketer\Auth\Login::class)
+//      ->name('marketer.login');
 // //marketer Login
 // Route::get('/marketer/account/forgotpassword/', App\Http\Livewire\Marketer\Auth\Password::class)
 //     ->name('marketer.password');
