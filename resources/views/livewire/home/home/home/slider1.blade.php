@@ -6,7 +6,7 @@
             @foreach (cache('slider') as $slider)
                 <div class="swiper-slide">
                   <a href="{{ $slider->link }}" target="_blank">
-                    <img src="/storage/{{ $slider->img }}" style="height: 500px; object-fit: cover;">
+                    <img  src="/storage/{{ $slider->img }}" style="height: 500px; object-fit: cover;">
                   </a>
                 </div>
             @endforeach
@@ -38,8 +38,8 @@
             },
         });
         const swiper1 = new Swiper('.swiper_specials', {
-            slidesPerView: 5,
-            spaceBetween: 50,
+            slidesPerView: 6,
+            spaceBetween: 20,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -67,8 +67,8 @@
               },
               // when window width is >= 640px
               1300: {
-                slidesPerView: 5,
-                spaceBetween: 50
+                slidesPerView: 6,
+                spaceBetween: 10
               }
             }
         });

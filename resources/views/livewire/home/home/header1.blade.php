@@ -3,7 +3,7 @@
     <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="/">
-                <img src="{{ asset('img/weblogo.png') }}" width="142" alt="آتی یار">
+                <img src="{{ asset('img/weblogo.png') }}" width="80" alt="آتی یار">
             </a>
             <a class="navbar-brand d-sm-none me-2" href="index-2.html"><img src="img/logo-icon.png" width="74"
                     alt="کارتزیلا"></a>
@@ -39,6 +39,7 @@
                         <a class="border-bottom dropdown-item text-accent" href="{{ route('admin.index') }}">پنل ادمین</a>
                         @endif
     
+                        <a class="dropdown-item" href="{{ url('/profile') }}">پروفایل کاربری</a>
                         <a class="dropdown-item" href="{{ url('/profile/orders') }}">سفارش های من</a>
                         {{-- <a class="dropdown-item" href="#">Another action</a> --}}
                         <form method="POST" action="{{ route('logout') }}" x-data>

@@ -19611,7 +19611,7 @@ html:not([dir=rtl]) .range-slider-ui.noUi-horizontal .noUi-handle {
 
 }
 .card-img-top img{
-    height: 100% !important;
+    height: 75% !important;
 
 }
 .cart_body_product{

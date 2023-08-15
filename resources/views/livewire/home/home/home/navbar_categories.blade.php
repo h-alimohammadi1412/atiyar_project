@@ -1,6 +1,6 @@
 <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"><i class="ci-menu align-middle mt-n1 me-2"></i>{{ $headers6->title }}</a>
+            data-bs-auto-close="outside"><i class="ci-menu align-middle mt-n1 me-2"></i>فروشگاه</a>
         <ul class="dropdown-menu">
             @foreach (cache('categories') as $category)
                 <li class="dropdown mega-dropdown">
