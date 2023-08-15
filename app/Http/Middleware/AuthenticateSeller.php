@@ -16,12 +16,12 @@ class AuthenticateSeller
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()) {
-            if (auth()->user()->seller == 1) {
-                return $next($request);
-            }
-        }
+        // if (auth()->user()) {
+        //     if (auth()->user()->seller == 1) {
+        //         return $next($request);
+        //     }
+        // }
 
-       return redirect(route('seller.login'));
+    //    return redirect(route('seller.login'));
     }
 }

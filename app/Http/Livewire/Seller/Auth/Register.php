@@ -106,6 +106,7 @@ class Register extends AdminControllerLivewire
         ]);
         $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
         
+        
 
     }
 
