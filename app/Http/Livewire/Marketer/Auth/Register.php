@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Seller\Auth;
+namespace App\Http\Livewire\Marketer\Auth;
 
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Mail\SellerRegister;
@@ -73,13 +73,13 @@ class Register extends AdminControllerLivewire
     }
     public function registerSellerForm()
     {
-        if(!$this->checkData()){
-            return ;
-        }
-        if(auth()->check() && auth()->user()->mobile != $this->phone){
-            $this->helperAlert('warning', 'شماره همراه وارد شده با شماره همراه ثبت شده مطابقت ندارد.');
-            return;
-        }
+        // if(!$this->checkData()){
+        //     return ;
+        // }
+        // if(auth()->check() && auth()->user()->mobile != $this->phone){
+        //     $this->helperAlert('warning', 'شماره همراه وارد شده با شماره همراه ثبت شده مطابقت ندارد.');
+        //     return;
+        // }
         if ($this->rule) {
             $this->active = false;
         } else {
@@ -88,6 +88,32 @@ class Register extends AdminControllerLivewire
         $this->active_code = random_int(10000, 99999);
         $res = (new Notification)->sendSms([auth()->user()->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
 
+
+        // $seller = Seller::create([
+        //     'email' => $this->seller->email,
+        //     'mobile' => $this->seller->phone,
+        //     'password' => $this->seller->password,
+        // ]);
+
+        // $email = Email::create([
+        //     'user_id' => $seller->id,
+        //     'user_email' => $seller->email,
+        //     'user_mobile' => $seller->mobile,
+        //     'title' => 'ثبت نام فروشنده جدید',
+        //     'text' => 'فروشنده با ایمیل فوق درخواست ثبت نام جدیدی را دارد.',
+        //     'code' => $code,
+        // ]);
+        // $user = User::create([
+        //     'seller' => 1,
+        //     'email' => $this->seller->email,
+        //     'mobile' => $this->seller->phone,
+        //     'password' => Hash::make($this->seller->password),
+
+        // ]);
+        // Mail::to($seller->email)->send(new SellerRegister($email));
+
+
+        // return $this->redirect(route('seller.register.email', $seller->id));
     }
     
     public function activeSeller(){
@@ -111,6 +137,6 @@ class Register extends AdminControllerLivewire
 
     public function render()
     {
-        return view('livewire.seller.auth.register')->layout('layouts.seller');
+        return view('livewire.marketer.auth.register')->layout('layouts.seller');
     }
 }
