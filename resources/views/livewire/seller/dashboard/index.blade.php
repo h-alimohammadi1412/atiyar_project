@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <div id="report-guide-modal" class="uk-modal-container uk-modal-container--message uk-modal" uk-modal="">
         <div class="uk-modal-dialog uk-modal-dialog--flex" style="max-width: 850px !important;">
             <button class="uk-modal-close-default uk-close uk-icon" type="button" uk-close=""><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" ratio="1"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button>
@@ -1107,4 +1107,6 @@
             <div class="c-walkthrough js-walkthrough"></div>
         </div>
     </main>
-</div>
+</div> --}}
+
+

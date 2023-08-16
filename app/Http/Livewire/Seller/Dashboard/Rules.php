@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Seller\Dashboard;
 
 use Livewire\Component;
 
-class Profile extends Component
+class Rules extends Component
 {
     public function render()
     {
-        return view('livewire.seller.dashboard.profile')->layout('layouts.home1');
+        return view('livewire.seller.dashboard.rules')->layout('layouts.home1');
     }
 }

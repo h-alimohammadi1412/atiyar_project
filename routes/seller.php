@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',App\Http\Livewire\Seller\Dashboard\Index::class)
     ->name('seller.dashboard.index');
 //======================================>seller/profile
-Route::get('/profile',App\Http\Livewire\Seller\Dashboard\Profile::class)
-    ->name('seller.dashboard.profile');
+Route::get('/desk',App\Http\Livewire\Seller\Dashboard\Desk::class)
+    ->name('seller.dashboard.desk');
 
 //======================================>seller/find/product
 Route::get('/content/find/product',App\Http\Livewire\Seller\Product\Find::class)
@@ -36,3 +36,10 @@ Route::get('/content/create/product',App\Http\Livewire\Seller\Product\Create::cl
     ->name('seller.product.create');
 
 
+    Route::get('/profile', App\Http\Livewire\Seller\Dashboard\Profile::class)
+    ->name('seller.dashboard.profile')->middleware('authenticate.seller');
+
+    Route::get('/training', App\Http\Livewire\Seller\Dashboard\Training::class)
+    ->name('seller.dashboard.training')->middleware('authenticate.seller');
+    Route::get('/rules', App\Http\Livewire\Seller\Dashboard\Rules::class)
+    ->name('seller.dashboard.rules')->middleware('authenticate.seller');

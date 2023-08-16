@@ -138,8 +138,10 @@ Route::get('/payment/bank/callback', [\App\Http\Controllers\PayController::class
 //seller register
 Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class)
     ->name('seller.register')->middleware('auth.seller');
-    Route::get('/seller/profile',App\Http\Livewire\Seller\Dashboard\Profile::class)
-    ->name('seller.dashboard.profile')->middleware('authenticate.seller');
+// Route::get('/seller/desk', App\Http\Livewire\Seller\Dashboard\Desk::class)
+//     ->name('seller.dashboard.desk')->middleware('authenticate.seller');
+// Route::get('/seller/profile', App\Http\Livewire\Seller\Dashboard\Profile::class)
+//     ->name('seller.dashboard.profile')->middleware('authenticate.seller');
 // Route::get('/seller/registration/email/{seller}', App\Http\Livewire\Seller\Auth\Register\Email::class)
 //     ->name('seller.register.email');
 

@@ -1,78 +1,27 @@
-<div class="c-grid__row">
-    <div class="c-grid__col">
-        <div class="c-card c-RD-profile__bdrs-bottom-0">
-            <div class="c-card__body c-card__body--pd-0">
-                <div class="">
-                    <nav
-                        class="uk-navbar-container uk-navbar-transparent c-RD-profile--h-70 c-profile-responsive-navbar uk-navbar"
-                        uk-navbar=""
-                        style="border-bottom: 1px solid #e6e9ed;margin-bottom: 15px; height: 57px">
-                        <div class="uk-navbar-left">
-                            <ul class="uk-navbar-nav">
-                                <li class="c-profile-nav--menu-links js-profile-navbar uk-flex uk-flex-column"
-                                    data-content="businessInfo"
-                                    style="padding-top: 5px; padding-bottom: 5px; pointer-events: none;">
-                                    <a class="c-RD-profile__menu-text" href="#businessInfo"
-                                       style="color: rgb(98, 102, 109) !important;">اطلاعات
-                                        فروشنده</a>
-                                    <div class="c-RD-profile__selected-nav"
-                                         style="display: block;">&nbsp;
-                                    </div>
-                                </li>
-                                <li class="c-profile-nav--menu-links js-profile-navbar uk-flex uk-flex-column"
-                                    data-content="bankInfo"
-                                    style="padding-top: 5px; padding-bottom: 5px; pointer-events: all;">
-                                    <a class="c-RD-profile__menu-text" href="#bankInfo"
-                                       style="color: rgb(161, 163, 168) !important;">اطلاعات
-                                        حساب بانکی</a>
-                                    <div class="c-RD-profile__selected-nav"
-                                         style="display: none;">&nbsp;
-                                    </div>
-                                </li>
-                                <li class="c-profile-nav--menu-links js-profile-navbar uk-flex uk-flex-column"
-                                    data-content="contactInfo"
-                                    style="padding-top: 5px; padding-bottom: 5px; pointer-events: all;">
-                                    <a class="c-RD-profile__menu-text" href="#contactInfo"
-                                       style="color: rgb(161, 163, 168) !important;">اطلاعات
-                                        تماس و آدرس</a>
-                                    <div class="c-RD-profile__selected-nav"
-                                         style="display: none;">&nbsp;
-                                    </div>
-                                </li>
-                                <li class="c-profile-nav--menu-links js-profile-navbar uk-flex uk-flex-column"
-                                    data-content="contractInfo"
-                                    style="padding-top: 5px; padding-bottom: 5px; pointer-events: all;">
-                                    <a class="c-RD-profile__menu-text" href="#contractInfo"
-                                       style="color: rgb(161, 163, 168) !important;">اطلاعات
-                                        قرارداد</a>
-                                    <div class="c-RD-profile__selected-nav"
-                                         style="display: none;">&nbsp;
-                                    </div>
-                                </li>
-                                <li class="c-profile-nav--menu-links js-profile-navbar uk-flex uk-flex-column"
-                                    data-content="docUpload"
-                                    style="padding-top: 5px; padding-bottom: 5px; pointer-events: all;">
-                                    <a class="c-RD-profile__menu-text" href="#docUpload"
-                                       style="color: rgb(161, 163, 168) !important;">بارگذاری
-                                        مدارک</a>
-                                    <div class="c-RD-profile__selected-nav"
-                                         style="display: none;">&nbsp;
-                                    </div>
-                                </li>
-                                <li class="c-profile-nav--menu-links js-profile-navbar uk-flex uk-flex-column"
-                                    data-content="workCalendar"
-                                    style="padding-top: 5px; padding-bottom: 5px; pointer-events: all;">
-                                    <a class="c-RD-profile__menu-text" href="#workCalendar"
-                                       style="color: rgb(161, 163, 168) !important;">تقویم
-                                        کاری</a>
-                                    <div class="c-RD-profile__selected-nav"
-                                         style="display: none;">&nbsp;
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+<div class="page-title-overlap bg-accent pt-4">
+    <div
+        class="container d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-sm-between align-items-center pt-2">
+        <div class="d-flex align-items-center pb-3">
+            <div class="img-thumbnail rounded-circle position-relative flex-shrink-0" style="width: 6.375rem;"><img
+                    class="rounded-circle" src="img/marketplace/account/avatar.png" alt="گروه ستین"></div>
+            <div class="ps-3">
+                <h3 class="text-light fs-lg mb-0">گروه ستین</h3><span
+                    class="d-block text-light fs-ms opacity-60 py-1">عضویت از تیر 1400</span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="text-sm-end me-5">
+                <div class="text-light fs-base">جمع فروش</div>
+                <h3 class="text-light">426</h3>
+            </div>
+            <div class="text-sm-end">
+                <div class="text-light fs-base">امتیاز فروشنده</div>
+                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                        class="star-rating-icon ci-star-filled active"></i><i
+                        class="star-rating-icon ci-star-filled active"></i><i
+                        class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
                 </div>
+                <div class="text-light opacity-60 fs-xs">بر اساس 98 نظر</div>
             </div>
         </div>
     </div>
