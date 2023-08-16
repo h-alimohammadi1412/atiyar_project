@@ -8,7 +8,7 @@
                 <!-- Content-->
                 <section class="col-lg-9 pt-lg-4 pb-4 mb-3">
                     <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
-                        <h2 class="h3 py-2 text-center text-sm-start">آموزش فروشندگان</h2>
+                        <h2 class="border-bottom h3 pb-4 py-2 text-center text-sm-start">آموزش فروشندگان</h2>
                         <!-- Tabs-->
                         <div class=" mt-5">
 

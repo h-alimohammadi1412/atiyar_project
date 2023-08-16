@@ -41,5 +41,15 @@ Route::get('/content/create/product',App\Http\Livewire\Seller\Product\Create::cl
 
     Route::get('/training', App\Http\Livewire\Seller\Dashboard\Training::class)
     ->name('seller.dashboard.training')->middleware('authenticate.seller');
+
     Route::get('/rules', App\Http\Livewire\Seller\Dashboard\Rules::class)
     ->name('seller.dashboard.rules')->middleware('authenticate.seller');
+
+    Route::get('/upload-document', App\Http\Livewire\Seller\Dashboard\UploadDocument::class)
+    ->name('seller.dashboard.upload-document')->middleware('authenticate.seller');
+
+    Route::get('/contract', App\Http\Livewire\Seller\Dashboard\Contract::class)
+    ->name('seller.dashboard.contract')->middleware('authenticate.seller');
+
+    Route::get('/store-information', App\Http\Livewire\Seller\Dashboard\StoreInformation::class)
+    ->name('seller.dashboard.store-information')->middleware('authenticate.seller');
