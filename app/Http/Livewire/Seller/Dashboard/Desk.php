@@ -26,7 +26,10 @@ class Desk extends Component
     public $address;
     public $docType;
     public $docImage;
-
+    protected Seller $seller;
+    public function mount(){
+        $this->seller = Seller::where('user_id',auth()->user()->id)->first();
+    }
 
     public function form_seller()
     {

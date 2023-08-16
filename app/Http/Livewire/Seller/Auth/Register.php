@@ -136,7 +136,7 @@ class Register extends AdminControllerLivewire
         ]);
         $this->helperAlert('success', 'ثبت نام با موفقیت انجام شد.');
         
-        return $this->redirect(route('seller.dashboard.profile'));
+        return $this->redirect(route('seller.dashboard.desc'));
 
     }
 
