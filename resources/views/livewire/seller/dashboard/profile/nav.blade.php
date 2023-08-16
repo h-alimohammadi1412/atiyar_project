@@ -12,7 +12,7 @@
         <div class="d-flex">
             <div class="text-sm-end me-5">
                 <div class="text-light fs-base">جمع فروش</div>
-                <h3 class="text-light">426</h3>
+                <h3 class="text-light">0</h3>
             </div>
             <div class="text-sm-end">
                 <div class="text-light fs-base">امتیاز فروشنده</div>

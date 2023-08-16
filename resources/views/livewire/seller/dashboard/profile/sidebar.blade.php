@@ -11,32 +11,32 @@
            
             <ul class="list-unstyled mb-0">
                 <li class="border-bottom mb-0">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="dashboard-settings.html">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('seller.dashboard.desk') ? 'active' : '' }} " href="{{ route('seller.dashboard.desk') }}">
                         <i class="ci-home opacity-60 me-2"></i>میزکار
                     </a>
                 </li>
                 <li class="mb-0 border-bottom">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-favorites.html">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('seller.dashboard.desk') ? 'active' : '' }} " href="{{ route('seller.dashboard.desk') }}">
                         <i class="ci-sign-in opacity-60 me-2"></i>خروج
                     </a>
                 </li>
                 <li class="border-bottom mb-0">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-purchases.html">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('seller.dashboard.profile') ? 'active' : '' }} " href="{{ route('seller.dashboard.profile') }}">
                         <i class="ci-user opacity-60 me-2"></i>پروفایل
                     </a>
                 </li>
                 <li class="mb-0 border-bottom">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-favorites.html">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('seller.dashboard.training') ? 'active' : '' }} " href="{{ route('seller.dashboard.training') }}">
                         <i class="ci-edit opacity-60 me-2"></i>آموزش فروشندگان
                     </a>
                 </li>
                 <li class="mb-0 border-bottom">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-favorites.html">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('seller.dashboard.rules') ? 'active' : '' }} " href="{{ route('seller.dashboard.rules') }}">
                         <i class="ci-security-check opacity-60 me-2"></i>قوانین فروشندگی
                     </a>
                 </li>
                 <li class="mb-0 border-bottom">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3" href="dashboard-favorites.html">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Request::routeIs('seller.dashboard.desk') ? 'active' : '' }} " href="{{ route('seller.dashboard.desk') }}">
                         <i class="ci-edit opacity-60 me-2"></i>آموزش های ویدئویی
                     </a>
                 </li>
@@ -53,8 +53,8 @@
                         <div class="px-grid-gutter pt-1 pb-4">
                             <div class="widget widget-links">
                                 <ul class="widget-list">
-                                    <li class="widget-list-item"><a class="widget-list-link" href="#">آپلود مدارک</a></li>
-                                    <li class="widget-list-item"><a class="widget-list-link" href="#">قرارداد فروشندگان</a>
+                                    <li class="widget-list-item"><a class="widget-list-link {{ Request::routeIs('seller.dashboard.upload-document') ? 'active' : '' }} " href="{{ route('seller.dashboard.upload-document') }}">آپلود مدارک</a></li>
+                                    <li class="widget-list-item"><a class="widget-list-link {{ Request::routeIs('seller.dashboard.contract') ? 'active' : '' }} " href="{{ route('seller.dashboard.contract') }}">قرارداد فروشندگان</a>
                                     </li>
                                     </li>
                                 </ul>
@@ -72,7 +72,7 @@
                         <div class="px-grid-gutter pt-1 pb-4">
                             <div class="widget widget-links">
                                 <ul class="widget-list">
-                                    <li class="widget-list-item"><a class="widget-list-link" href="#">اطلاعات فروشگاه شما</a></li>
+                                    <li class="widget-list-item"><a class="widget-list-link {{ Request::routeIs('seller.dashboard.store-information') ? 'active' : '' }} " href="{{ route('seller.dashboard.store-information') }} ">اطلاعات فروشگاه شما</a></li>
                                     </li>
                                 </ul>
                             </div>
@@ -106,7 +106,7 @@
                         <div class="px-grid-gutter pt-1 pb-4">
                             <div class="widget widget-links">
                                 <ul class="widget-list">
-                                    <li class="widget-list-item"><a class="widget-list-link" href="#">انتخاب طرح</a></li>
+                                    <li class="widget-list-item"><a class="widget-list-link {{ Request::routeIs('seller.dashboard.plans') ? 'active' : '' }} " href="{{ route('seller.dashboard.plans') }} ">انتخاب طرح</a></li>
                                     </li>
                                 </ul>
                             </div>

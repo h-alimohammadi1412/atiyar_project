@@ -53,3 +53,6 @@ Route::get('/content/create/product',App\Http\Livewire\Seller\Product\Create::cl
 
     Route::get('/store-information', App\Http\Livewire\Seller\Dashboard\StoreInformation::class)
     ->name('seller.dashboard.store-information')->middleware('authenticate.seller');
+
+    Route::get('/plans', App\Http\Livewire\Seller\Dashboard\Plans::class)
+    ->name('seller.dashboard.plans')->middleware('authenticate.seller');
