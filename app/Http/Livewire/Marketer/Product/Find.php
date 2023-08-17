@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Models\ProductSeller;
 use Livewire\Component;
 
-class Find extends Component
+/*class Find extends Component
 {
     public $search;
     protected $queryString = ['search'];
@@ -40,4 +40,4 @@ class Find extends Component
         return view('livewire.seller.product.find', compact('products'))
             ->layout('layouts.seller_dashboard');
     }
-}
+}*/

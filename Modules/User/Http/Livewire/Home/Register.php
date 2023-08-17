@@ -81,11 +81,11 @@ class Register extends AdminControllerLivewire
         $res = (new Notification)->sendSms([$this->user->mobile], "کاربر گرامی کد امنیتی شما برای تایید هویت عبارتست از :  $this->active_code .آتی یار");
         $this->show_send_code_form = true;
         $type = 'ایجاد حساب';
-        SMS::create([
+/*        SMS::create([
             'code' => $this->active_code,
             'type' => $type,
             'user_id' => $this->user_id,
-        ]);
+        ]);*/
 
     }
     public function render()

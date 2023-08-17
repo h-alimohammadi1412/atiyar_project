@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Seller\Product;
 
 use Livewire\Component;
 
-class Product extends Component
+/*class Product extends Component
 {
     public $search;
     protected $queryString = ['search'];
@@ -17,4 +17,4 @@ class Product extends Component
         return view('livewire.seller.product.product',compact('products'))
             ->layout('layouts.seller_dashboard');
     }
-}
+}*/

@@ -9,7 +9,7 @@ use App\Models\Seller;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Create extends Component
+/*class Create extends Component
 {
     use WithFileUploads;
     public $search;
@@ -151,4 +151,4 @@ class Create extends Component
         return view('livewire.seller.product.create', compact('categories')
         )->layout('layouts.seller_dashboard');
     }
-}
+}*/
