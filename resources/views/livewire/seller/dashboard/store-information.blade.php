@@ -1,5 +1,5 @@
 <div>
-    @include('livewire.seller.dashboard.profile.nav')
+    @include('livewire.seller.dashboard.profile.nav',['seller'=>$seller])
     <div class="container mb-5 pb-3">
         <div class="bg-light shadow-lg rounded-3 overflow-hidden">
             <div class="row">
@@ -23,17 +23,20 @@
                                 <span>شناسه فروشگاه : 136</span>
                             </div>
                             <div class="bg-secondary rounded-3 p-4 mb-4">
-                                <div class="d-flex align-items-center"><img class="rounded"
-                                        src="img/marketplace/account/avatar.png" width="90" alt="گروه ستین">
+                                <div class="d-flex align-items-center">
+                                    <img width="90"
+                                        src="@if ($img) {{ $img->temporaryUrl() }} @else {{ asset('img/icon-company1.jpg') }} @endif">
+                                    <input type="file" wire:model='img'>
                                     <div class="ps-3">
-                                        <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i
-                                                class="ci-loading me-2"></i>تغییر <span class="d-none d-sm-inline">لوگو
-                                                فروشگاه</span></button>
-                                        <div class="p mb-0 fs-ms text-muted">تصویر JPG ، GIF یا PNG را بارگذاری
-                                            کنید. 300 *300 مورد نیاز است.</div>
+                                        {{-- <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i
+                                                class="ci-loading me-2"></i>تغییر <span
+                                                class="d-none d-sm-inline">آواتار</span></button> --}}
+                                        {{-- <div class="p mb-0 fs-ms text-muted">تصویر JPG ، GIF یا PNG را بارگذاری
+                                            کنید. 300 *300 مورد نیاز است.</div> --}}
                                     </div>
                                 </div>
                             </div>
+                            <form wire:submit.prevent
                             <div class="row gx-4 gy-3">
                                 <div class="col-sm-6">
                                     <label class="form-label" for="dashboard-fn">نام فروشگاه (این نام معرف کسب و کار

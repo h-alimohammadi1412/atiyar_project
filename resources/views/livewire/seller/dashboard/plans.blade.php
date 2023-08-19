@@ -1,5 +1,5 @@
 <div>
-    @include('livewire.seller.dashboard.profile.nav')
+    @include('livewire.seller.dashboard.profile.nav',['seller'=>$seller])
     <div class="container mb-5 pb-3">
         <div class="bg-light shadow-lg rounded-3 overflow-hidden">
             <div class="row">

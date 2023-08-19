@@ -14,10 +14,11 @@
                         <div class="align-items-center d-flex justify-content-between mt-5">
                             <div>
                                 <a href="{{ route('seller.dashboard.profile') }}" class="">
+                                    {{-- {{ $checkProfile }} --}}
                                     <span
-                                        class="align-items-center badge bg-primary border d-flex justify-content-between rounded-circle text-body"
+                                        class="align-items-center badge @if($checkProfile == 0 ) bg-primry @else bg-success @endif border d-flex justify-content-between rounded-circle text-body"
                                         style="width: 15px;height: 15px;">
-                                        <i class="ci-close"
+                                        <i class=" @if($checkProfile == 0 ) ci-close @else ci-check @endif"
                                             style="font-size: 8px;margin-left: 16px;display: block;margin-top: 2px;margin-right: -4px;"></i>
                                     </span>
                                     <span class="text-body">تکمیل پروفایل</span>

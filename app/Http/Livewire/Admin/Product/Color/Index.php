@@ -44,7 +44,6 @@ class Index extends AdminControllerLivewire
         $this->color->value = "";
         $this->color->status = false;
         $this->createLog('رنگ', 'admin/color', $this->color->name, 'ایجاد');
-        alert()->success('رنگ با موفقیت ایجاد شد.', ' رنگ با موفقیت ایجاد شد.');
 
     }
 

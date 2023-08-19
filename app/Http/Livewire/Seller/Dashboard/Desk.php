@@ -27,10 +27,22 @@ class Desk extends Component
     public $docType;
     public $docImage;
     protected Seller $seller;
+    public $checkProfile = 0;
     public function mount(){
         $this->seller = Seller::where('user_id',auth()->user()->id)->first();
+        $this->checkProfile = $this->checkProfile();
     }
 
+    public function checkProfile(){
+        $arr =['number_cart','bank_shaba','gender','father_name','shenasname_code','national_code'];
+        $sellers = $this->seller->toArray();
+        foreach($arr as $value){
+            if(is_null($sellers[$value])){
+                return 0;
+            }
+        }
+        return 1;
+    }
     public function form_seller()
     {
         $user = auth()->user()->mobile;

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Seller extends Model
 {
@@ -16,4 +17,8 @@ class Seller extends Model
         'ghardad_end_day','ghardad_invoice','ghardad_pay','learning_status','wallet'
 
         ];
+
+        public function user() : HasOne{
+            return $this->hasOne(User::class,'id','user_id');
+        }
 }

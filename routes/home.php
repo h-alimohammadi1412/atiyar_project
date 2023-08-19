@@ -36,7 +36,7 @@ use Spatie\Sitemap\SitemapGenerator;
 //     // echo $value;
 // });
 Route::get('/test1', function (Request $request) {
-    return $request->cookie('online_payment_idvvvv');
+    phpinfo();
 });
 
 Route::get('/logout', function () {
