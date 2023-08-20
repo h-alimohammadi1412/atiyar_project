@@ -21,11 +21,11 @@
 
 
 <noscript class="">
-    <img src="https://certify.alexametrics.com/atrk.gif?account=qfWte1awQa00Uf"
+    {{-- <img src="https://certify.alexametrics.com/atrk.gif?account=qfWte1awQa00Uf"
          style="display:none"
          height="1"
          width="1"
-         alt=""/>
+         alt=""/> --}}
 </noscript>
 
 

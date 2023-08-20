@@ -12,7 +12,7 @@
             src="https://www.googletagmanager.com/gtag/js?id=G-4S04WR965Q&amp;l=dataLayer&amp;cx=c"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TJWK7Z7"></script>
-    <script type="text/javascript" async="" src="https://certify-js.alexametrics.com/atrk.js"></script>
+    {{-- <script type="text/javascript" async="" src="https://certify-js.alexametrics.com/atrk.js"></script> --}}
     <script>
         var module_hash_id_storage = 1;
         var module_no_replace_update_command_status = 1;
@@ -993,11 +993,11 @@
 
 
 <noscript>
-    <img src="https://certify.alexametrics.com/atrk.gif?account=qfWte1awQa00Uf"
+    {{-- <img src="https://certify.alexametrics.com/atrk.gif?account=qfWte1awQa00Uf"
          style="display:none"
          height="1"
          width="1"
-         alt=""/>
+         alt=""/> --}}
 </noscript>
 
 

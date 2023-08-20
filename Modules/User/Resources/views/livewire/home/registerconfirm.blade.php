@@ -41,6 +41,7 @@
                             <label class="o-form__field-container">
                                 <div class="o-form__field-frame">
                                     <input wire:model.lazy="sms.code"  type="" placeholder="" value="" class="o-form__field js-input-field c-login__otp-input" maxlength="5">
+                                    {{ $sms['code'] }}
                                 </div>
                             </label>
 
@@ -83,7 +84,6 @@
             time = document.getElementById('countdown').innerHTML;
             timeArray = time.split(':')
             seconds = timeToSeconds(timeArray);
-            console.log(seconds);
             if (seconds === 0) {
                 clearTimeout(timeoutMyOswego);
                 return;

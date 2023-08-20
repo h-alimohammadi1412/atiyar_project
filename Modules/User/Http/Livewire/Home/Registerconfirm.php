@@ -12,16 +12,17 @@ use function GuzzleHttp\Promise\rejection_for;
 class Registerconfirm extends AdminControllerLivewire
 {
     public User $user;
-    public SMS $sms;
+    public $sms=[];
 
-    public function mount()
+    public function mount($user)
     {
-        $this->sms = new Sms();
+        $this->sms['code'] = '';
+        $this->user = $user;
     }
 
 
     protected $rules = [
-        'sms.code' => 'required',
+        'sms.*' => 'required|min:5',
     ];
 
     public function updated($code)
@@ -32,47 +33,38 @@ class Registerconfirm extends AdminControllerLivewire
 
     public function userForm()
     {
-
         $this->validate();
-        $sms_code = SMS::where('code', $this->sms->code)->first();
+
+        $sms_code = user::where(['active_code', $this->sms['code'],'id'=>$this->user->id])->first();
         if ($sms_code) {
-            if ($sms_code->user_id == $this->user->id) {
                 auth()->loginUsingId($this->user->id);
                 $userIp2 = Request::ip();
-                $cart2s = \App\Models\Cart::where('ip',$userIp2)->get();
+                $cart2s = \App\Models\Cart::where('ip', $userIp2)->get();
                 if ($cart2s) {
-                    foreach ($cart2s as $cart){
+                    foreach ($cart2s as $cart) {
                         $cart->update([
-                            'user_id' =>auth()->user()->id,
+                            'user_id' => auth()->user()->id,
                         ]);
                     }
 
                 }
-                return to_route('users.welcome');
-            } else {
-                alert()->error('کد وارد شده اشتباه است!', ' کد وارد شده اشتباه است!');
-            }
-
+                return $this->redirect(route('users.welcome'));        
         } else {
             alert()->error('کد وارد شده اشتباه است!', ' کد وارد شده اشتباه است!');
         }
     }
 
-    public function resendSMS($id){
+    public function resendSMS($id)
+    {
 
-        $type = 'اسمس دوباره ثبت نام حساب';
-        $mobile = User::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
+        $secure_code = random_int(10000, 99999);
+        $message = "کد تایید شما: $secure_code";
+        $user->active_code = $secure_code;
+        $user->save();
+        // SMS::send($mobile, $message);
 
-        $code = random_int(10000, 99999);
-        $client = new KavenegarApi(env('KAVENEGAR_CLIENT_API'));
-        $client->send(env('SENDER_MOBILE'), $mobile->mobile,
-            "کد تایید شما: $code");
-        SMS::create([
-            'code' => $code,
-            'type' => $type,
-            'user_id' => $mobile->id,
-        ]);
-        alert()->success('کد تایید دوباره ارسال شد!', 'کد تایید دوباره ارسال شد!');
+        $this->emit('toast', 'success', 'کد تایید دوباره ارسال شد!');
         return $this->redirect(request()->header('Referer'));
     }
     public function render()

@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('job')->nullable();
             $table->string('money_back')->nullable();
             $table->string('newsletter')->default(0);
+            $table->integer('active_code')->nullable();
             //اطلاعات حقوقی
             $table->string('name_company')->nullable();
             $table->string('national_code_company')->nullable();
