@@ -28,9 +28,12 @@ class Desk extends Component
     public $docImage;
     protected Seller $seller;
     public $checkProfile = 0;
+    public $checkInformation = 0;
     public function mount(){
         $this->seller = Seller::where('user_id',auth()->user()->id)->first();
+
         $this->checkProfile = $this->checkProfile();
+        $this->checkInformation = $this->checkInformation();
     }
 
     public function checkProfile(){
@@ -41,6 +44,24 @@ class Desk extends Component
                 return 0;
             }
         }
+        return 1;
+    }
+    public function checkInformation(){
+        $arr =['name','state','city','Village','address','postal_code','telephone','user_name','merchant_id'];
+        // $arr2 =['name','city','Village','address','postal_code','telephone','user_name','merchant_id'];
+        $sellers = $this->seller->toArray();
+        $store = $this->seller->store->toArray();
+        foreach($arr as $value){
+            if(is_null($store[$value])){
+                return 0;
+            }
+        }
+        // foreach($arr as $value){
+        //     if(is_null($sellers[$value])){
+        //         return 0;
+        //     }
+        // }
+        
         return 1;
     }
     public function form_seller()

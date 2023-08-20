@@ -27,13 +27,13 @@ class AdminControllerLivewire extends Component
     public function loadingPage(){
         $this->readyToLoad = true;
     }
-    public function uploadImage($dir)
+    public function uploadImage($dir,$model = 'img')
     {
         $year = now()->year;
         $month = now()->month;
         $directory = $dir . "/$year/$month";
-        $name = $this->img->getClientOriginalName();
-        $this->img->storeAs($directory, $name);
+        $name = $this->$model->getClientOriginalName();
+        $this->$model->storeAs($directory, $name);
         return "$directory/$name";
     }
     public function helperAlert($method,$message){

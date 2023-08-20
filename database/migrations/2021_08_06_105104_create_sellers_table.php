@@ -19,7 +19,10 @@ class CreateSellersTable extends Migration
             $table->string('password');
             $table->string('code_seller')->nullable();
             $table->string('type_seller')->nullable();
-            $table->string('brand_name')->nullable();
+            $table->string('certificate_img')->nullable();
+            $table->string('nationalCard_img')->nullable();
+            $table->string('personalPicture_img')->nullable();
+            $table->string('license_img')->nullable();
             $table->string('name')->nullable();
             $table->string('lname')->nullable();
             $table->string('gender')->nullable();

@@ -23,48 +23,73 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="file-drop-area mb-3 mt-5 w-50 me-3">
                                 <div class="form-text fs-5 mb-2 text-body">صفحه اول شناسنامه</div>
-                                <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">برای
-                                    بارگذاری تصویر، آن را بکشید و رها کنید</span>
-                                <input class="file-drop-input" type="file">
-                                <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">یا تصویر را
-                                    انتخاب کنید</button>
+                                <div wire:loading wire:target="certificateImg">در حال پردازش...</div>
+                                @if ($certificateImg)
+                                <img class="img-fluid" width="100px" src="{{ $certificateImg->temporaryUrl() }}" alt="">
+                                @else
+                                @if ($seller->certificate_img)
+                                <img class="img-fluid" width="100px" src="/storage/{{ $seller->certificate_img }}" alt="">
+                                @endif
+                                @endif
+                                <div class="file-drop-icon ci-cloud-upload"></div>
+                                <span class="file-drop-message">برای
+                                    بارگذاری تصویر، کلیک کنید و یا آن را بکشید و رها کنید</span>
+                                <input class="file-drop-input" type="file" wire:model='certificateImg'>
 
-                                <button class="btn btn-primary d-block w-100" type="submit"><i
+                                <button class="btn btn-primary d-block w-100" wire:click='storeCertificateImg'><i
                                         class="ci-cloud-upload fs-lg me-2"></i>آپلود تصویر</button>
                             </div>
                             <div class="file-drop-area mb-3 mt-5 w-50">
                                 <div class="form-text fs-5 mb-2 text-body">اسکن کارت ملی</div>
+                                 <div wire:loading wire:target="nationalCardImg">در حال پردازش...</div>
+                                 @if ($nationalCardImg)
+                                <img class="img-fluid" width="100px" src="{{ $nationalCardImg->temporaryUrl() }}" alt="">
+                                @else
+                                @if ($seller->nationalCard_img)
+                                <img class="img-fluid" width="100px" src="/storage/{{ $seller->nationalCard_img }}" alt="">
+                                @endif
+                                @endif
                                 <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">برای
-                                    بارگذاری تصویر، آن را بکشید و رها کنید</span>
-                                <input class="file-drop-input" type="file">
-                                <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">یا تصویر را
-                                    انتخاب کنید</button>
+                                    بارگذاری تصویر، کلیک کنید و یا آن را بکشید و رها کنید</span>
+                                <input class="file-drop-input" type="file" wire:model='nationalCardImg' >
 
-                                <button class="btn btn-primary d-block w-100" type="submit"><i
+                                <button class="btn btn-primary d-block w-100" wire:click='storeNationalCardImg'><i
                                         class="ci-cloud-upload fs-lg me-2"></i>آپلود تصویر</button>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="file-drop-area mb-3 mt-5 w-50 me-3">
                                 <div class="form-text fs-5 mb-2 text-body">تصویر پرسنلی</div>
+                                <div wire:loading wire:target="personalPictureImg">در حال پردازش...</div>
+                                @if ($personalPictureImg)
+                                <img class="img-fluid" width="100px" src="{{ $personalPictureImg->temporaryUrl() }}" alt="">
+                                @else
+                                @if ($seller->personalPicture_img)
+                                <img class="img-fluid" width="100px" src="/storage/{{ $seller->personalPicture_img }}" alt="">
+                                @endif
+                                @endif
                                 <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">برای
-                                    بارگذاری تصویر، آن را بکشید و رها کنید</span>
-                                <input class="file-drop-input" type="file">
-                                <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">یا تصویر را
-                                    انتخاب کنید</button>
+                                    بارگذاری تصویر، کلیک کنید و یا آن را بکشید و رها کنید</span>
+                                <input class="file-drop-input" type="file" wire:model='personalPictureImg'>
 
-                                <button class="btn btn-primary d-block w-100" type="submit"><i
+                                <button class="btn btn-primary d-block w-100" wire:click='storePersonalPictureImg'><i
                                         class="ci-cloud-upload fs-lg me-2"></i>آپلود تصویر</button>
                             </div>
                             <div class="file-drop-area mb-3 mt-5 w-50">
                                 <div class="form-text fs-5 mb-2 text-body">تصویر مجوز اتحادیه یا شرکت</div>
+                                <div wire:loading wire:target="licenseImg">در حال پردازش...</div>
+                                @if ($licenseImg)
+                                <img class="img-fluid" width="100px" src="{{ $licenseImg->temporaryUrl() }}" alt="">
+                                @else
+                                @if ($seller->license_img)
+                                <img class="img-fluid" width="100px" src="/storage/{{ $seller->license_img }}" alt="">
+                                @endif
+                                @endif
                                 <div class="file-drop-icon ci-cloud-upload"></div><span class="file-drop-message">برای
-                                    بارگذاری تصویر، آن را بکشید و رها کنید</span>
-                                <input class="file-drop-input" type="file">
-                                <button class="file-drop-btn btn btn-primary btn-sm mb-2" type="button">یا تصویر را
-                                    انتخاب کنید</button>
+                                    بارگذاری تصویر، کلیک کنید و یا آن را بکشید و رها کنید</span>
+                                <input class="file-drop-input" type="file" wire:model='licenseImg'>
 
-                                <button class="btn btn-primary d-block w-100" type="submit"><i
+                                <button class="btn btn-primary d-block w-100" wire:click='storeLicenseImg'><i
                                         class="ci-cloud-upload fs-lg me-2"></i>آپلود تصویر</button>
                             </div>
                         </div>

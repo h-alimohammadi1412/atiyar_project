@@ -16,7 +16,7 @@
                                 <a href="{{ route('seller.dashboard.profile') }}" class="">
                                     {{-- {{ $checkProfile }} --}}
                                     <span
-                                        class="align-items-center badge @if($checkProfile == 0 ) bg-primry @else bg-success @endif border d-flex justify-content-between rounded-circle text-body"
+                                        class="align-items-center badge @if($checkProfile == 0 ) bg-primary @else bg-success @endif border d-flex justify-content-between rounded-circle text-body"
                                         style="width: 15px;height: 15px;">
                                         <i class=" @if($checkProfile == 0 ) ci-close @else ci-check @endif"
                                             style="font-size: 8px;margin-left: 16px;display: block;margin-top: 2px;margin-right: -4px;"></i>
@@ -28,9 +28,9 @@
                             <div>
                                 <a href="{{ route('seller.dashboard.store-information') }}" class="">
                                     <span
-                                        class="align-items-center badge bg-primary border d-flex justify-content-between rounded-circle text-body"
+                                        class="align-items-center badge @if($checkInformation == 0 ) bg-primary @else bg-success @endif border d-flex justify-content-between rounded-circle text-body"
                                         style="width: 15px;height: 15px;">
-                                        <i class="ci-close"
+                                        <i class="@if($checkInformation == 0 ) ci-close @else ci-check @endif"
                                             style="font-size: 8px;margin-left: 16px;display: block;margin-top: 2px;margin-right: -4px;"></i>
                                     </span>
                                     <span class="text-body">اطلاعات فروشگاه</span>

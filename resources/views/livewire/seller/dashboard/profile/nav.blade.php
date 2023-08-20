@@ -4,7 +4,7 @@
         <div class="d-flex align-items-center pb-3">
             <div class="img-thumbnail rounded-circle position-relative flex-shrink-0" style="width: 6.375rem;"><img
                     class="rounded-circle"
-                    src="@if(is_null($seller->logo)) {{ asset('img/icon-company1.jpg') }}  @else {{ $seller->logo }} @endif"
+                    src="@if(is_null($seller->store->logo)) {{ asset('img/icon-company1.jpg') }}  @else /storage/{{ $seller->store->logo }} @endif"
                     alt="گروه ستین"></div>
             <div class="ps-3">
                 <h3 class="text-light fs-lg mb-0">@if(is_null($seller->company_name)) هنوز نامی انتخاب نشده است @else {{
