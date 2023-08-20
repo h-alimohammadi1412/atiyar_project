@@ -66,15 +66,12 @@ class CreateSellersTable extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('aparat_link')->nullable();
             $table->string('call_hours')->nullable();
-            $table->string('store_phone')->nullable();
-            $table->string('postal_code')->nullable();
             $table->string('shop_address')->nullable();
             $table->string('plaque')->nullable();
             $table->string('alley')->nullable();
             $table->string('city_part')->nullable();
             $table->string('village')->nullable();
             $table->string('town')->nullable();
-            $table->string('city')->nullable();
             $table->string('province')->nullable();
             $table->string('store_username')->nullable();
             $table->string('zarinpal_merchant_id')->nullable();
