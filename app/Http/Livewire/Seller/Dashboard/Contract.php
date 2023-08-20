@@ -7,9 +7,9 @@ use Livewire\Component;
 
 class Contract extends Component
 {
-    protected Seller $seller;
+    public Seller $seller;
     public function mount(){
-        $this->seller = Seller::where('user_id',auth()->user()->id)->first();
+        $this->seller = Seller::with(['user','store'])->where('user_id',auth()->user()->id)->first();
     }
     public function render()
     {

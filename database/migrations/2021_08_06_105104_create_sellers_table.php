@@ -23,6 +23,7 @@ class CreateSellersTable extends Migration
             $table->string('nationalCard_img')->nullable();
             $table->string('personalPicture_img')->nullable();
             $table->string('license_img')->nullable();
+            $table->integer('status_contract')->default(0);
             $table->string('name')->nullable();
             $table->string('lname')->nullable();
             $table->string('gender')->nullable();

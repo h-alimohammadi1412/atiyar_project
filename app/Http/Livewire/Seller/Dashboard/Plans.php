@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Plans extends Component
 {
-    protected Seller $seller;
+    public Seller $seller;
     public function mount(){
         $this->seller = Seller::where('user_id',auth()->user()->id)->first();
     }

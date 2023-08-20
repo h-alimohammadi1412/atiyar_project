@@ -19,19 +19,19 @@
                             <p dir="RTL">نظر به اینکه سایت آتی یار به آدرس اینترنتی atiyar.ir که در این قرارداد <b>اعطا
                                     کننده</b> (اعطا کننده فروشندگی) نامیده می شود قصد ارائه خدمات خود را بصورت آنلاین به
                                 <b>صاحبین کسب و کار های دارای مجوز</b> که زین پس <b>مشتری</b> نامیده می شود را در زیر
-                                دامنه خود دارد و با توجه به اینکه آقا/خانم: <strong class="">مهدی شیخی </strong> ، نام
-                                پدر: <strong class="">مهدی تست</strong> و</p>
+                                دامنه خود دارد و با توجه به اینکه آقا/خانم: <strong class="">{{ $seller->user->name . ' '. $seller->user->family }} </strong> ، نام
+                                پدر: <strong class="">{{ $seller->father_name }}</strong> و</p>
 
-                            <p dir="RTL">به کد ملی: <strong class="">1100387222</strong> تلفن همراه: <strong
-                                    class="">09103533200</strong> ثابت: <strong class=""></strong> تاریخ تولد: <strong
-                                    class="">1401/12/25</strong></p>
+                            <p dir="RTL">به کد ملی: <strong class="">{{ $seller->national_code }}</strong> تلفن همراه: <strong
+                                    class="">{{ $seller->user->mobile }}</strong> ثابت: <strong class="">----- </strong> تاریخ تولد: <strong
+                                    class="">{{ $seller->user->birthday }}</strong></p>
 
-                            <p dir="RTL">آدرس: <strong class=""></strong> پلاک: <strong class=""></strong> کد پستی:
-                                <strong class=""></strong></p>
+                            <p dir="RTL">آدرس: <strong class="">{{ $seller->store->address }}</strong> پلاک: <strong class="">{{ $seller->store->Plaque }}</strong> کد پستی:
+                                <strong class="">{{ $seller->store->postal_code }}</strong></p>
 
                             <p dir="RTL">توانایی خود جهت فروشندگی طبق قوانین اعطا کننده و پیدا نمودن <b>مشتری</b> به
                                 ایشان اعلام نموده است، قرارداد فروشندگی ذیل با شروط و تعهدات مصرح در آن در تاریخ <strong
-                                    class="">1402/5/25</strong> بین ایشان و اعطا کننده منعقد می گردد.</p>
+                                    class="">{{ jdate(now())->format("%d / %m / %Y") }}</strong> بین ایشان و اعطا کننده منعقد می گردد.</p>
 
                             <p dir="RTL"><strong>مدت قرارداد</strong></p>
 
@@ -282,7 +282,7 @@
                                 اصفهان (واحد رسیدگی به شکایات) تنها مرجع مورد قبول برای حل اختلاف می باشد. رای کمیته در
                                 این خصوص قطعی می باشد.</p>
 
-                            <p dir="RTL">اینجانب <strong class="">مهدی شیخی </strong> پس از مطالعه دقیق مفاد این قرارداد
+                            <p dir="RTL">اینجانب <strong class="">{{ $seller->user->name . ' '. $seller->user->family }} </strong> پس از مطالعه دقیق مفاد این قرارداد
                                 موافقت خود را برای انجام امور فروشندگی&nbsp;برای فروش خدمات سایت اعطا کننده به آدرس
                                 atiyar.ir اعلام می نمایم.</p>
                             <p></p>
