@@ -157,8 +157,8 @@ Route::get('/seller/registration', App\Http\Livewire\Seller\Auth\Register::class
 
 
 // marketer register
-Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
-    ->name('marketer.register');
+// Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
+//     ->name('marketer.register');
 //marketer register
 /*Route::get('/marketer/registration', App\Http\Livewire\Marketer\Auth\Register::class)
     ->name('marketer.register');*/

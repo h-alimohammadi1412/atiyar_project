@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Seller\Dashboard;
 use App\Http\Controllers\AdminControllerLivewire;
 use App\Models\Seller;
 use App\Models\User;
-use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class Profile extends AdminControllerLivewire
@@ -56,13 +55,15 @@ class Profile extends AdminControllerLivewire
         // dd($r);
         return $r;
     }
+    public function test(){
+        dd('frfrfrfr');
+    }
     public function personalInformationForm()
     {
         $this->validate();
         $this->seller->save();
         $this->user->save();
        $this->helperAlert('success','اطلاعات با موفقیت ثبت شد.');
-       $this->redirect(route('seller.dashboard.profile'));
     }
     public function mount()
     {
