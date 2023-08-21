@@ -33,21 +33,8 @@
                         <div class="tab-content">
                             <!-- Profile-->
                             <div class="tab-pane fade show active" id="profile" role="tabpanel">
-                                <div class="bg-secondary rounded-3 p-4 mb-4">
-                                    <div class="d-flex align-items-center">
-                                        <img width="90"
-                                            src="@if ($img) {{ $img->temporaryUrl() }} @else {{ asset('img/icon-company1.jpg') }} @endif">
-                                        <input type="file" wire:model='img'>
-                                        <div class="ps-3">
-                                            {{-- <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i
-                                                    class="ci-loading me-2"></i>تغییر <span
-                                                    class="d-none d-sm-inline">آواتار</span></button> --}}
-                                            {{-- <div class="p mb-0 fs-ms text-muted">تصویر JPG ، GIF یا PNG را بارگذاری
-                                                کنید. 300 *300 مورد نیاز است.</div> --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <form wire:submit.prevent='personalInformationForm'>
+                                
+                                <form wire:submit.prevent='personalInformationForm' class="mt-5">
                                     @include('errors.error')
                                     <div class="row gx-4 gy-3">
                                         <div class="col-sm-6">

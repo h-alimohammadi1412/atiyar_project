@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('mobile')->nullable();
             $table->string('national_code')->nullable();
+            $table->string('shenasname_code')->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('birthday')->nullable();
@@ -45,6 +46,17 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
+            // فیلد آتی یار
+            $table->tinyInteger('is_foreign')->default(0);
+            $table->string('father_name')->nullable();
+            $table->text('address')->nullable();
+            $table->string('plaque')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('card_number')->nullable();
+            $table->string('sheba_number')->nullable();
+
+
         });
     }
 

@@ -62,7 +62,7 @@
                                 <div class="form-group">
 
                                     <input type="date" wire:model.lazy="seller.birth" placeholder="تاریخ تولد "
-                                        class="form-control">
+                                           class="form-control">
                                 </div>
 
                             </div>
@@ -70,11 +70,45 @@
                                 <div class="form-group">
 
                                     <select wire:model.lazy="seller.code_seller" name="code_seller" id=""
-                                        class="form-control">
+                                            class="form-control">
                                         <option value="-1">انتخاب جنسیت</option>
                                         <option value="0">آقا</option>
                                         <option value="1">خانم</option>
                                     </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <input type="text" wire:model.lazy="seller.birth_location" placeholder="محل تولد "
+                                           class="form-control">
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.telegram_link" placeholder="لینک تلگرام"
+                                           class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <input type="text" wire:model.lazy="seller.instagram_link" placeholder="لینک اینستاگرام "
+                                           class="form-control">
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.aparat_link" placeholder="لینک آپارات"
+                                           class="form-control">
                                 </div>
                             </div>
 
@@ -139,13 +173,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.bank_shaba"
-                                        placeholder="شماره شبا " class="form-control">
+                                           placeholder="شماره شبا " class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.bank_account_name"
-                                        placeholder="نام حساب بانکی " class="form-control">
+                                           placeholder="نام حساب بانکی " class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -155,22 +189,58 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.state" placeholder="استان "
-                                        class="form-control">
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.city" placeholder="شهر "
-                                        class="form-control">
+                                           class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.town" placeholder="شهرستان "
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.village" placeholder="روستا "
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.city_part" placeholder="محله "
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.alley" placeholder="کوچه "
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>                            <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" wire:model.lazy="seller.plaque" placeholder="پلاک "
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.address" placeholder="آدرس "
-                                        class="form-control">
+                                           class="form-control">
                                 </div>
                             </div>
 
@@ -180,13 +250,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.pin_code" placeholder="کدپستی "
-                                        class="form-control">
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.telephone"
-                                        placeholder="تلفن فروشنده " class="form-control">
+                                           placeholder="تلفن فروشنده " class="form-control">
                                 </div>
                             </div>
 
@@ -195,13 +265,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.location" placeholder="موقعیت "
-                                        class="form-control">
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" wire:model.lazy="seller.website" placeholder="وبسایت "
-                                        class="form-control">
+                                           class="form-control">
                                 </div>
                             </div>
 
@@ -215,7 +285,65 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-6">
+                        <hr>
+                        <h4>اطلاعات فروشگاه</h4>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.store_index" placeholder="کد فروشگاه "
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.job_name" placeholder="نام فروشگاه "
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.shop_address" placeholder="آدرس فروشگاه "
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.store_username"
+                                           placeholder="اسم فروشگاه " class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.zarinpal_merchant_id" placeholder="کد زرین پال "
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" wire:model.lazy="seller.call_hours" placeholder="ساعات تماس "
+                                           class="form-control">
+                                </div>
+                            </div>
+                        </div>
+{{--
+                        <div class="form-group">
+                            <input type="file" wire:model.lazy="seller.store_logo" class="form-control">
+                            <span class="mt-2 text-danger" wire:loading wire:target="logo">در حال آپلود ...</span>
+
+                            <div wire:ignore class="progress mt-2" id="progressbar" style="display: none">
+                                <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+                            </div>
+                        </div>
+--}}
+                    </div>
 
 
 
