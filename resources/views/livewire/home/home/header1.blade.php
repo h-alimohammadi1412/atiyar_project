@@ -38,6 +38,9 @@
                         @if (auth()->user()->admin == 1)    
                         <a class="border-bottom dropdown-item text-accent" href="{{ route('admin.index') }}">پنل ادمین</a>
                         @endif
+                        @if (auth()->user()->seller == 1)    
+                        <a class="border-bottom dropdown-item text-accent" href="{{ route('seller.dashboard.desk') }}">پنل فروشندگی</a>
+                        @endif
     
                         <a class="dropdown-item" href="{{ url('/profile') }}">پروفایل کاربری</a>
                         <a class="dropdown-item" href="{{ url('/profile/orders') }}">سفارش های من</a>
