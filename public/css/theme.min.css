@@ -19689,3 +19689,9 @@ flex-direction: unset;
     transition: color .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .15s ease;
     transition: color .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .15s ease,-webkit-box-shadow .15s ease;
 }
+.dir-ltr{
+    direction: ltr;
+}
+.dir-rtl{
+    direction: rtl;
+}
