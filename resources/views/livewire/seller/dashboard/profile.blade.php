@@ -57,22 +57,23 @@
                                         <div class="col-sm-6">
                                             <label class="form-label" for="dashboard-email">تلفن همراه <span
                                                     class="text-primary">*</span></label>
-                                            <input class="form-control" type="text" id="dashboard-fn"
+                                            <input class="form-control dir-ltr" type="text" id="dashboard-fn"
                                                 value="{{ $user->mobile }}" disabled autocomplete="off">
                                         </div>
                                         <div class="col-sm-6">
                                             <label class="form-label" for="dashboard-profile-name">پست الکترونیک
                                                 *</label>
-                                            <input class="form-control @error('email') border-primary @enderror"
+                                            <input class="form-control dir-ltr @error('email') border-primary @enderror"
                                                 type="text" id="dashboard-profile-name" @if(is_null($user->email))
                                             value="" wire:model.defer='email'
                                             @else
-                                            value="{{ $user->email }}" @endif autocomplete="off">
+                                            value="{{ $user->email }}" disabled @endif autocomplete="off">
                                         </div>
                                         <div class="col-sm-6">
-                                            <label class="form-label" for="dashboard-email">کد ملی/کد اتباع خارجی<span
+                                            <label class="form-label " for="dashboard-email">کد ملی/کد اتباع خارجی<span
                                                     class="text-primary">*</span></label>
-                                            <input class="form-control @error('national_code') border-primary @enderror"
+                                            <input
+                                                class="form-control dir-ltr inp-national_code @error('national_code') border-primary @enderror"
                                                 type="text" id="dashboard-fn" @if(is_null($seller->national_code))
                                             value=""
                                             wire:model.defer='national_code'
@@ -81,7 +82,7 @@
                                             <div class="d-sm-flex justify-content-between align-items-center mt-2">
                                                 <div class="form-check ">
                                                     <input class="form-check-input" type="checkbox" id="freelancer"
-                                                        checked="">
+                                                        wire:model.defer='foreigners'>
                                                     <label class="form-check-label" for="freelancer">اتباع خارجی
                                                         هستم</label>
                                                 </div>
@@ -91,7 +92,7 @@
                                             <label class="form-label" for="dashboard-email">شماره شناسنامه <span
                                                     class="text-primary">*</span></label>
                                             <input
-                                                class="form-control @error('shenasname_code') border-primary @enderror"
+                                                class="form-control dir-ltr inp-shenasname_code @error('shenasname_code') border-primary @enderror"
                                                 type="text" id="dashboard-fn" @if(is_null($seller->shenasname_code))
                                             value=""
                                             wire:model.defer='shenasname_code'
@@ -99,16 +100,16 @@
                                             value="{{ $seller->shenasname_code }}" @endif autocomplete="off">
                                         </div>
                                         <div class="col-sm-6">
-                                          <label class="form-label" for="dashboard-email">تاریخ تولد <span
+                                            <label class="form-label" for="dashboard-email">تاریخ تولد <span
                                                     class="text-primary">*</span></label>
 
-                                             {{--  <input class="form-control @error('birthday') border-primary @enderror"
+                                            {{-- <input class="form-control @error('birthday') border-primary @enderror"
                                                 type="text" id="dashboard-fn" @if(is_null($user->birthday)) value=""
                                             wire:model.defer='birthday'
                                             @else
                                             value="{{ $user->birthday }}" @endif autocomplete="off"> --}}
                                             <div class="align-items-center d-flex justify-content-center">
-                                                <select class="form-control me-1"  wire:model.lazy='day'>
+                                                <select class="form-control me-1" wire:model.lazy='day'>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -209,7 +210,7 @@
                                                     <option value="1352">1352</option>
                                                     <option value="1351">1351</option>
                                                     <option value="1350">1350</option>
-                                               
+
                                                 </select>
                                             </div>
 
@@ -238,7 +239,8 @@
                                         <div class="col-sm-6">
                                             <label class="form-label" for="dashboard-email">شماره کارت <span
                                                     class="text-primary ">*</span></label>
-                                            <input class="form-control @error('number_cart') border-primary @enderror"
+                                            <input
+                                                class="form-control dir-ltr inp-number_cart @error('number_cart') border-primary @enderror"
                                                 type="text" id="dashboard-fn" @if(is_null($seller->number_cart))
                                             value="" wire:model.defer='number_cart'
                                             @else
@@ -247,67 +249,93 @@
                                         <div class="col-sm-6">
                                             <label class="form-label" for="dashboard-email">شماره شبا <span
                                                     class="text-primary">*</span></label>
-                                            <input class="form-control @error('bank_shaba') border-primary @enderror"
-                                                type="text" id="dashboard-fn" @if(is_null($seller->bank_shaba))
-                                            value="" wire:model.defer='bank_shaba'
-                                            @else
-                                            value="{{ $seller->bank_shaba }}" @endif autocomplete="off">
-                                        </div>
+                                            <div class="align-items-center d-flex justify-content-around">
+                                                <input
+                                                    class="form-control dir-ltr inp-bank_shaba @error('bank_shaba') border-primary @enderror"
+                                                    type="text" id="dashboard-fn" @if(is_null($seller->bank_shaba))
+                                                value="" wire:model.defer='bank_shaba'
+                                                @else
+                                                value="{{ $seller->bank_shaba }}" @endif autocomplete="off">
+                                                <span class="bg-faded-accent border ms-2 p-2 rounded">IR</span>
 
-                                        <div class="col-12">
-                                            <hr class="mt-2 mb-4">
-                                            <div class="d-sm-flex justify-content-end align-items-center">
-                                                <button class="btn btn-primary mt-3 mt-sm-0">ذخیره
-                                                    تغییرات</button>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- Notifications-->
-                            <div class="tab-pane fade" id="notifications" role="tabpanel">
-                                <div
-                                    class="alert alert-warning mt-5 fs-sm d-flex justify-content-center align-items-center">
-                                    <i class="ci-security-close fs-2 me-3"></i>
-                                    <div>
-                                        کاربر گرامی ، سعی کنید از رمز های قوی که ترکیبی از حروف و اعداد و حداقل هشت رقمی
-                                        هستند استفاده نمایید و به صورت دوره ای رمز عبور خود را تغییر دهید
-                                    </div>
-                                </div>
-
-                                <div class="row gx-4 gy-3">
-                                    <div class="col-sm-9">
-                                        <label class="form-label" for="dashboard-fn">کلمه عبور فعلی<span
-                                                class="text-primary">*</span></label>
-                                        <input class="form-control" type="text" id="dashboard-fn" value="">
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <label class="form-label" for="dashboard-ln">کلمه عبور جدید <span
-                                                class="text-primary">*</span></label>
-                                        <input class="form-control" type="text" id="dashboard-ln" value="">
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <label class="form-label" for="dashboard-email">تأیید کلمه عبور <span
-                                                class="text-primary">*</span></label>
-                                        <input class="form-control" type="text" id="dashboard-fn" value="">
                                     </div>
 
                                     <div class="col-12">
                                         <hr class="mt-2 mb-4">
                                         <div class="d-sm-flex justify-content-end align-items-center">
-                                            <button class="btn btn-primary mt-3 mt-sm-0" type="button">تغییر رمز
-                                                عبور</button>
+                                            <button class="btn btn-primary mt-3 mt-sm-0 w-100">ذخیره
+                                                تغییرات</button>
                                         </div>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- Notifications-->
+                        <div class="tab-pane fade" id="notifications" role="tabpanel">
+                            <div
+                                class="alert alert-warning mt-5 fs-sm d-flex justify-content-center align-items-center">
+                                <i class="ci-security-close fs-2 me-3"></i>
+                                <div>
+                                    کاربر گرامی ، سعی کنید از رمز های قوی که ترکیبی از حروف و اعداد و حداقل هشت رقمی
+                                    هستند استفاده نمایید و به صورت دوره ای رمز عبور خود را تغییر دهید
+                                </div>
+                            </div>
+
+                            <div class="row gx-4 gy-3">
+                                <div class="col-sm-9">
+                                    <label class="form-label" for="dashboard-fn">کلمه عبور فعلی<span
+                                            class="text-primary">*</span></label>
+                                    <input class="form-control" type="text" id="dashboard-fn" value="">
+                                </div>
+                                <div class="col-sm-9">
+                                    <label class="form-label" for="dashboard-ln">کلمه عبور جدید <span
+                                            class="text-primary">*</span></label>
+                                    <input class="form-control" type="text" id="dashboard-ln" value="">
+                                </div>
+                                <div class="col-sm-9">
+                                    <label class="form-label" for="dashboard-email">تأیید کلمه عبور <span
+                                            class="text-primary">*</span></label>
+                                    <input class="form-control" type="text" id="dashboard-fn" value="">
+                                </div>
+
+                                <div class="col-12">
+                                    <hr class="mt-2 mb-4">
+                                    <div class="d-sm-flex justify-content-end align-items-center">
+                                        <button class="btn btn-primary mt-3 mt-sm-0 w-100" type="button">تغییر رمز
+                                            عبور</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
             </div>
+            </section>
         </div>
     </div>
-    @section('head')
-    <script language="javascript" src="{{ asset('js/FarsiType.js') }}" type="text/javascript"></script>
-    @endsection
+</div>
+@section('script')
+<script src="{{ asset('js/cleave.min.js') }}"></script>
+<script>
+    var cleave = new Cleave('.inp-national_code', {
+            blocks: [10],
+            numericOnly:true
+        });
+        var cleave1 = new Cleave('.inp-shenasname_code', {
+            blocks: [10],
+            numericOnly:true
+
+        });
+        var cleave2 = new Cleave('.inp-number_cart', {
+            delimiter: '-',
+            blocks: [4,4,4,4],
+            numericOnly:true
+        });
+        var cleave3 = new Cleave('.inp-bank_shaba', {
+            blocks: [24],
+            numericOnly:true
+        });
+</script>
+@endsection
 </div>
