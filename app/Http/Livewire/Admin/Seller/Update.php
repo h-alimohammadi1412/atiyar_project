@@ -13,6 +13,8 @@ class Update extends AdminControllerLivewire
 
     public $logo;
     protected $rules = [
+        'seller.user_id' => 'nullable',
+        'seller.password' => 'nullable',
         'seller.code_seller' => 'nullable|min:1',
         'seller.type_seller' => 'nullable',
         'seller.brand_name' => 'nullable',
@@ -39,6 +41,25 @@ class Update extends AdminControllerLivewire
         'seller.location' => 'nullable',
         'seller.learning_status' => 'nullable',
         'seller.wallet' => 'nullable',
+
+        'seller.store_index' => 'nullable',
+        'seller.store_logo' => 'nullable',
+        'seller.job_name' => 'nullable',
+        'seller.birth_location' => 'nullable',
+        'seller.telegram_link' => 'nullable',
+        'seller.instagram_link' => 'nullable',
+        'seller.aparat_link' => 'nullable',
+        'seller.call_hours' => 'nullable',
+        'seller.shop_address' => 'nullable',
+        'seller.plaque' => 'nullable',
+        'seller.alley' => 'nullable',
+        'seller.city_part' => 'nullable',
+        'seller.village' => 'nullable',
+        'seller.town' => 'nullable',
+        'seller.province' => 'nullable',
+        'seller.store_username' => 'nullable',
+        'seller.zarinpal_merchant_id' => 'nullable',
+
     ];
     public function categoryForm()
     {

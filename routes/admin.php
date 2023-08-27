@@ -166,6 +166,13 @@ route::name('seller.')->group(function () {
     Route::get('/seller/update/{seller}', Seller\Update::class)->name('update');
 });
 
+//=======================================> //marketer
+route::name('marketer.')->group(function () {
+    Route::get('/marketer', marketer\Index::class)->name('index');
+    Route::get('/marketer/create', marketer\Create::class)->name('create');
+    Route::get('/marketer/update/{marketer}', marketer\Update::class)->name('update');
+});
+
 //=======================================> //Roles
 Route::get('/role', Role\IndexRole::class)->name('role.index');
 Route::get('/role/update/{role}', Role\UpdateRole::class)->name('role.update');

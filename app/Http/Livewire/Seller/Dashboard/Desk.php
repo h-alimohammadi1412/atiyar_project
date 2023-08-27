@@ -61,7 +61,7 @@ class Desk extends Component
         //         return 0;
         //     }
         // }
-        
+
         return 1;
     }
     public function form_seller()

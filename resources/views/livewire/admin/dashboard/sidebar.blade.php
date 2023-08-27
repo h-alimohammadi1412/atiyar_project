@@ -58,6 +58,8 @@
         </li>
         <li class="item-li i-user__inforamtion {{Request::routeIs('seller.index') ? 'is-active': '' }}"><a
                 href="/admin/seller">فروشندگان</a></li>
+        <li class="item-li i-user__inforamtion {{Request::routeIs('marketer.index') ? 'is-active': '' }}"><a
+                href="/admin/marketer">بازاریابان</a></li>
         <li class="item-li i-slideshow {{Request::routeIs('role.index') ? 'is-active': '' }}"><a href="/admin/role">مقام
                 ها</a></li>
         <li class="item-li i-checkout__request {{Request::routeIs('permission.index') ? 'is-active': '' }}"><a
